@@ -41,7 +41,7 @@ class AuthenticationController extends Controller
         $newUser = new User();
 
         $newUser->name        = $socialUser->getName();
-        $newUser->email       = $socialUser->getEmail();
+        $newUser->email       = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
         $newUser->avatar      = $socialUser->getAvatar();
         $newUser->password    = '';
         $newUser->provider    = $account;
