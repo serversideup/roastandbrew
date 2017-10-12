@@ -1,51 +1,20 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## What Is Roast And Brew?
+Roast and Brew is an open source application that helps coffee enthusiasts find their next cup of coffee. It is also a learning tool. Every new feature of this application has a tutorial about how to create it. The tutorials can be found at [Server Side Up](https://www.serversideup.net). Feel free to contribute ideas, styles, needs, and thoughts at any time. This application should be built by the community and serve as an example learning tool for how to build single page applications.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Technologies Used
 
-## About Laravel
+- Laravel 5.4
+- VueJS
+- Vue Router
+- Vuex
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Tutorial Links
+1. [New Series: Building a Single Page Application with Laravel and VueJS](https://serversideup.net/building-spa-laravel-vuejs/)
+2. [Installing and Configuring Laravel For a Single Page Application](https://serversideup.net/installing-configuring-laravel-spa/)
+3. [Installing And Configuring Laravel Socialite](https://serversideup.net/installing-configuring-laravel-socialite/)
+4. [Installing And Configuring Laravel Passport](https://serversideup.net/installing-configuring-laravel-passport/)
+5. [Configuring JS and SASS for a Single Page App](https://serversideup.net/configuring-js-sass-single-page-app/)
+6. [Structuring Vue 2, Vue Router, Vuex for a Single Page Application](https://serversideup.net/structuring-vue-2-vue-router-vuex-single-page-application/)
+7. [Configuring Vue Router for a Single Page App](https://serversideup.net/configuring-vue-router-single-page-app/)
+8. [Add Laravel API End Points](https://serversideup.net/add-api-end-points-laravel/)
+9. [Build Out API Requests in Javascript](https://serversideup.net/build-api-requests-javascript/)

@@ -29,7 +29,7 @@ export const cafes = {
 		loadCafes( { commit } ){
       commit( 'setCafesLoadStatus', 1 );
 
-      CafeAPI.loadCafes()
+      CafeAPI.getCafes()
         .then( function( response ){
           commit( 'setCafes', response.data );
           commit( 'setCafesLoadStatus', 2 );
@@ -46,7 +46,7 @@ export const cafes = {
     loadCafe( { commit }, data ){
       commit( 'setCafeLoadStatus', 1 );
 
-      CafeAPI.loadCafe( data.id )
+      CafeAPI.getCafe( data.id )
         .then( function( response ){
           commit( 'setCafe', response.data );
           commit( 'setCafeLoadStatus', 2 );

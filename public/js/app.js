@@ -53224,8 +53224,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('loadCafes');
+  },
+
+
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Gets the cafes load status
+    */
+    cafesLoadStatus: function cafesLoadStatus() {
+      return this.$store.getters.getCafesLoadStatus;
+    },
+
+
+    /*
+      Gets the cafes
+    */
+    cafes: function cafes() {
+      return this.$store.getters.getCafes;
+    }
+  }
+});
 
 /***/ }),
 /* 79 */
@@ -53235,7 +53266,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "home" } }, [_vm._v("\n  Home\n")])
+  return _c("div", { attrs: { id: "home" } }, [
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.cafesLoadStatus == 1,
+            expression: "cafesLoadStatus == 1"
+          }
+        ]
+      },
+      [_vm._v("Loading")]
+    ),
+    _vm._v(" "),
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.cafesLoadStatus == 2,
+            expression: "cafesLoadStatus == 2"
+          }
+        ]
+      },
+      [_vm._v("Cafes loaded successfully!")]
+    ),
+    _vm._v(" "),
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.cafesLoadStatus == 3,
+            expression: "cafesLoadStatus == 3"
+          }
+        ]
+      },
+      [_vm._v("Cafes loaded unsuccessfully!")]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      _vm._l(_vm.cafes, function(cafe) {
+        return _c("li", [_vm._v(_vm._s(cafe.name))])
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -55792,7 +55875,7 @@ var cafes = {
 
       commit('setCafesLoadStatus', 1);
 
-      __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].loadCafes().then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafes().then(function (response) {
         commit('setCafes', response.data);
         commit('setCafesLoadStatus', 2);
       }).catch(function () {
@@ -55810,7 +55893,7 @@ var cafes = {
 
       commit('setCafeLoadStatus', 1);
 
-      __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].loadCafe(data.id).then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafe(data.id).then(function (response) {
         commit('setCafe', response.data);
         commit('setCafeLoadStatus', 2);
       }).catch(function () {
