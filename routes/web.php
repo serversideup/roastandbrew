@@ -5,6 +5,9 @@ Route::get( '/', 'Web\AppController@getApp' )
 Route::get( '/login', 'Web\AppController@getLogin' )
       ->name('login')
       ->middleware('guest');
+      
+Route::get( '/logout', 'Web\AppController@getLogout' )
+      ->name('logout');
 
 Route::get( '/login/{social}', 'Web\AuthenticationController@getSocialRedirect' )
       ->middleware('guest');

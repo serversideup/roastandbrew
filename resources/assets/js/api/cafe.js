@@ -21,7 +21,7 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( hourID, name, address, city, state, zip ){
+	postAddNewCafe: function( name, address, city, state, zip ){
 		return axios.post( ROAST_CONFIG.API_URL + '/cafes',
 			{
 				name: name,

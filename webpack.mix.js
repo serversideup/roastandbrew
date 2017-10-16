@@ -26,6 +26,11 @@ mix.js('resources/assets/js/app.js', 'public/js')
                      ]
                  }
              ]
-         }
+         },
+         resolve: {
+            alias: {
+              '@': path.resolve('resources/assets/sass')
+            }
+          }
      })
    .sass('resources/assets/sass/app.scss', 'public/css');

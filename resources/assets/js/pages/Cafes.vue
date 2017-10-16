@@ -3,8 +3,8 @@
 </style>
 
 <template>
-  <div>
-    Cafes
+  <div id="cafes">
+
   </div>
 </template>
 

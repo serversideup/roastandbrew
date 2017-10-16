@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="230px" height="52px" viewBox="0 0 230 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-1" transform="translate(-85.000000, -186.000000)">
+            <g id="Group-2" transform="translate(85.000000, 186.000000)">
+                <rect id="Rectangle-3" fill="#507CC0" x="0" y="0" width="230" height="52" rx="8"></rect>
+                <text id="Login-With-Facebook" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="16" font-weight="bold" fill="#FFFFFF">
+                    <tspan x="51" y="30">Login With Facebook</tspan>
+                </text>
+                <path d="M26.666,18.2125 C26.18,18.2125 25.694,18.806 25.694,19.616 L25.694,22.37 L30.5,22.37 L30.5,26.3665 L25.694,26.3665 L25.694,38.3005 L21.104,38.3005 L21.104,26.3665 L17,26.3665 L17,22.37 L21.104,22.37 L21.104,20.048 C21.104,16.7 23.48,14 26.666,14 L30.5,14 L30.5,18.2125 L26.666,18.2125" id="Imported-Layers" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
