@@ -8,7 +8,8 @@
  * Table of Contents:
  *
  *  1. Abstracts
- *  2. Layouts
+ *  2. Components
+ *  3. Layouts
  */
 
 /**
@@ -17,7 +18,12 @@
 @import 'abstracts/variables';
 
 /**
- * Chapter 2: Layouts
+ * Chapter 2: Components
+ */
+@import 'components/validations';
+
+/**
+ * Chapter 3: Layouts
  */
 @import 'layouts/page';
 

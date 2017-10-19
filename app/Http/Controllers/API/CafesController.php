@@ -5,7 +5,15 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cafe;
+
+use App\Utilities\GoogleMaps;
+
 use Request;
+
+/*
+	Defines the requests used by the controller.
+*/
+use App\Http\Requests\StoreCafeRequest;
 
 class CafesController extends Controller
 {
@@ -47,14 +55,24 @@ class CafesController extends Controller
   | Method:         POST
   | Description:    Adds a new cafe to the application
   */
-  public function postNewCafe(){
+  public function postNewCafe( StoreCafeRequest $request ){
+		/*
+			Get the Latitude and Longitude returned from the Google Maps Address.
+		*/
+		$coordinates = GoogleMaps::geocodeAddress( $request->get('address'),
+																							 $request->get('city'),
+																							 $request->get('state'),
+																							 $request->get('zip') );
+
     $cafe = new Cafe();
 
-    $cafe->name     = Request::get('name');
-    $cafe->address  = Request::get('address');
-    $cafe->city     = Request::get('city');
-    $cafe->state    = Request::get('state');
-    $cafe->zip      = Request::get('zip');
+    $cafe->name     	= $request->get('name');
+    $cafe->address  	= $request->get('address');
+    $cafe->city     	= $request->get('city');
+    $cafe->state    	= $request->get('state');
+    $cafe->zip      	= $request->get('zip');
+		$cafe->latitude 	= $coordinates['lat'];
+		$cafe->longitude	= $coordinates['lng'];
 
     $cafe->save();
 
