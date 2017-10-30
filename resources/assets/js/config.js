@@ -2,6 +2,7 @@
 	Defines the API route we are using.
 */
 var api_url = '';
+var google_maps_js_api = 'AIzaSyBB-yLlqyCE6s_MA30UotaCHttwUw5nKNY';
 
 switch( process.env.NODE_ENV ){
   case 'development':
@@ -14,4 +15,5 @@ switch( process.env.NODE_ENV ){
 
 export const ROAST_CONFIG = {
   API_URL: api_url,
+  GOOGLE_MAPS_JS_API: google_maps_js_api
 }

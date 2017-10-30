@@ -3,13 +3,17 @@
 </style>
 
 <template>
-  <div id="cafes">
-
+  <div id="cafes" class="page">
+    <cafe-map></cafe-map>
   </div>
 </template>
 
 <script>
-  export default {
+  import CafeMap from '../components/cafes/CafeMap.vue';
 
+  export default {
+    components: {
+      CafeMap
+    }
   }
 </script>

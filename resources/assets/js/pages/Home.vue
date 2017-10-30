@@ -3,22 +3,35 @@
 </style>
 
 <template>
-  <div id="home">
+  <div id="home" class="page">
 
-    <span v-show="cafesLoadStatus == 1">Loading</span>
-    <span v-show="cafesLoadStatus == 2">Cafes loaded successfully!</span>
-    <span v-show="cafesLoadStatus == 3">Cafes loaded unsuccessfully!</span>
+    <div class="grid-container">
+      <div class="grid-x">
+        <div class="large-12 medium-12 small-12 columns">
+          <router-link :to="{ name: 'newcafe' }">+ Add Cafe</router-link>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <loader v-show="cafesLoadStatus == 1" :width="100" :height="100"></loader>
+        <cafe-card v-for="cafe in cafes" :key="cafe.id" :cafe="cafe"></cafe-card>
+      </div>
+    </div>
 
-    <ul>
-      <li v-for="cafe in cafes">{{ cafe.name }}</li>
-    </ul>
   </div>
 </template>
 
 <script>
 
+  import CafeCard from '../components/cafes/CafeCard.vue';
+  import Loader from '../components/global/Loader.vue';
 
   export default {
+    components: {
+      CafeCard,
+      Loader
+    },
 
     /*
       Defines the computed properties on the component.

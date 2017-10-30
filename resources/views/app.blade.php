@@ -7,6 +7,7 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB-yLlqyCE6s_MA30UotaCHttwUw5nKNY"></script>
 		
 		<link href="/css/app.css" rel="stylesheet" type="text/css"/>
 

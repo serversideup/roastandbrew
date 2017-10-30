@@ -1,0 +1,26 @@
+div.notification{
+  position: fixed;
+  top: 40px;
+  color: white;
+  text-align: center;
+  width: 70%;
+  padding: 10px;
+  border: 3px solid;
+  border-radius: 5px;
+  left: 15%;
+  right: 15%;
+  opacity: .9;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  display: none;
+
+  &.success{
+    background-color: $success;
+    border-color: $dark-success;
+  }
+
+  &.failure{
+    background-color: $failure;
+    border-color: $dark-failure;
+  }
+}
