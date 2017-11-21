@@ -18,7 +18,11 @@ export const cafes = {
     cafe: {},
     cafeLoadStatus: 0,
 
-		cafeAddStatus: 0
+		cafeLiked: false,
+
+		cafeAddStatus: 0,
+		cafeLikeActionStatus: 0,
+		cafeUnlikeActionStatus: 0
 	},
 
   /*
@@ -46,11 +50,15 @@ export const cafes = {
       Loads an individual cafe from the API
     */
     loadCafe( { commit }, data ){
+			commit( 'setCafeLikedStatus', false );
       commit( 'setCafeLoadStatus', 1 );
 
       CafeAPI.getCafe( data.id )
         .then( function( response ){
           commit( 'setCafe', response.data );
+					if( response.data.user_like.length > 0 ){
+						commit('setCafeLikedStatus', true);
+					}
           commit( 'setCafeLoadStatus', 2 );
         })
         .catch( function(){
@@ -73,6 +81,38 @@ export const cafes = {
 					.catch( function(){
 						commit( 'setCafeAddedStatus', 3 );
 					});
+		},
+
+		/*
+			Likes a cafe
+		*/
+		likeCafe( { commit, state }, data ){
+			commit( 'setCafeLikeActionStatus', 1 );
+
+			CafeAPI.postLikeCafe( data.id )
+				.then( function( response ){
+					commit( 'setCafeLikedStatus', true );
+					commit( 'setCafeLikeActionStatus', 2 );
+				})
+				.catch( function(){
+					commit( 'setCafeLikeActionStatus', 3 );
+				});
+		},
+
+		/*
+			Unlikes a cafe
+		*/
+		unlikeCafe( { commit, state }, data ){
+			commit( 'setCafeUnlikeActionStatus', 1 );
+
+			CafeAPI.deleteLikeCafe( data.id )
+				.then( function( response ){
+					commit( 'setCafeLikedStatus', false );
+					commit( 'setCafeUnlikeActionStatus', 2 );
+				})
+				.catch( function(){
+					commit( 'setCafeUnlikeActionStatus', 3 );
+				});
 		}
 	},
 
@@ -113,6 +153,27 @@ export const cafes = {
 		*/
 		setCafeAddedStatus( state, status ){
 			state.cafeAddStatus = status;
+		},
+
+		/*
+			Set the cafe liked status
+		*/
+		setCafeLikedStatus( state, status ){
+			state.cafeLiked = status;
+		},
+
+		/*
+			Set the cafe like action status
+		*/
+		setCafeLikeActionStatus( state, status ){
+			state.cafeLikeActionStatus = status;
+		},
+
+		/*
+			Set the cafe unlike action status
+		*/
+		setCafeUnlikeActionStatus( state, status ){
+			state.cafeUnlikeActionStatus = status;
 		}
 	},
 
@@ -153,6 +214,27 @@ export const cafes = {
 		*/
 		getCafeAddStatus( state ){
 			return state.cafeAddStatus;
+		},
+
+		/*
+			Gets the cafe liked status
+		*/
+		getCafeLikedStatus( state ){
+			return state.cafeLiked;
+		},
+
+		/*
+			Gets the cafe liked action status
+		*/
+		getCafeLikeActionStatus( state ){
+			return state.cafeLikeActionStatus;
+		},
+
+		/*
+			Gets the cafe un-like action status
+		*/
+		getCafeUnlikeActionStatus( state ){
+			return state.cafeUnlikeActionStatus;
 		}
 	}
 }

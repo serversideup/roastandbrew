@@ -111,6 +111,9 @@
             </span>
           </div>
           <div class="large-12 medium-12 small-12 cell">
+            <tags-input v-bind:unique="key"></tags-input>
+          </div>
+          <div class="large-12 medium-12 small-12 cell">
             <a class="button remove-location" v-on:click="removeLocation( key )">Remove Location</a>
           </div>
         </div>
@@ -137,7 +140,18 @@
 </template>
 
 <script>
+  import TagsInput from '../components/global/forms/TagsInput.vue';
+
+  /*
+    Imports the Event Bus to pass events on tag updates
+  */
+  import { EventBus } from '../event-bus.js';
+
   export default {
+    components: {
+      TagsInput
+    },
+
     /*
       Defines the data used by the page
     */
@@ -164,6 +178,15 @@
           }
         }
       }
+    },
+
+    /*
+      Sync the tags to send to the server for the new cafe.
+    */
+    mounted(){
+      EventBus.$on('tags-edited', function( tagsAdded ){
+        this.locations[tagsAdded.unique].tags = tagsAdded.tags;
+      }.bind(this));
     },
 
     /*
@@ -325,7 +348,7 @@
         Adds a location to the new cafe form
       */
       addLocation(){
-        this.locations.push( { name: '', address: '', city: '', state: '', zip: '', methodsAvailable: [] } );
+        this.locations.push( { name: '', address: '', city: '', state: '', zip: '', methodsAvailable: [], tags: [] } );
         this.validations.locations.push({
           address: {
             is_valid: true,
@@ -379,6 +402,8 @@
           }
         };
 
+        EventBus.$emit('clear-tags');
+        
         this.addLocation();
       }
 

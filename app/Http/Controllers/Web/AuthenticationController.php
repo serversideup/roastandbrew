@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use Auth;
 
-use App\User;
+use App\Models\User;
 
 class AuthenticationController extends Controller
 {
