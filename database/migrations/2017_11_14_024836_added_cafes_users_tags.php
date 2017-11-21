@@ -20,7 +20,7 @@ class AddedCafesUsersTags extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tag_id')->unsigned();
             $table->foreign('tag_id')->references('id')->on('tags');
-            $table->primary(['cafe_id', 'user_id', 'tag_id']);
+            $table->primary(['cafe_id', 'user_id', 'tag_id'], 'cafes_users_tags_primary');
             $table->timestamps();
         });
     }
