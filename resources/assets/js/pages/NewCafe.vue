@@ -332,7 +332,7 @@
         /*
           If a website has been entered, ensure the URL is valid
         */
-        if( this.website.trim != '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/) ){
+        if( this.website.trim != '' && !this.website.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/ ) ){
           validNewCafeForm = false;
           this.validations.website.is_valid = false;
           this.validations.website.text = 'Please enter a valid URL for the website!';
@@ -403,7 +403,7 @@
         };
 
         EventBus.$emit('clear-tags');
-        
+
         this.addLocation();
       }
 
