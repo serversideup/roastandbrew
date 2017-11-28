@@ -5,7 +5,7 @@
     position: relative;
 
     div.tags-input{
-      display: block;
+      display: table;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
@@ -119,6 +119,11 @@
     Imports the Event Bus to pass events on tag updates
   */
   import { EventBus } from '../../../event-bus.js';
+
+  /*
+    Imports lodash for debouncing
+  */
+  import _ from 'lodash';
 
   /*
     Exports the default components.
@@ -268,7 +273,7 @@
       /*
         Searches the API route for tags with the autocomplete.
       */
-      searchTags(){
+      searchTags: _.debounce( function(e) {
         if( this.currentTag.length > 2 && !this.pauseSearch ){
           this.searchSelectedIndex = -1;
           axios.get( ROAST_CONFIG.API_URL + '/tags' , {
@@ -279,7 +284,7 @@
             this.tagSearchResults = response.data;
           }.bind(this));
         }
-      },
+      }, 300),
 
       /*
         Check for tag duplicates.
