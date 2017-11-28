@@ -1,20 +1,43 @@
 <style lang="scss">
-  div#cafe-map{
+  div#cafe-map-container{
     position: absolute;
     top: 50px;
     left: 0px;
     right: 0px;
     bottom: 50px;
+
+    div#cafe-map{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
   }
 </style>
 
 <template>
-  <div id="cafe-map">
+  <div id="cafe-map-container">
+    <div id="cafe-map">
 
+    </div>
+    <cafe-map-filter></cafe-map-filter>
   </div>
 </template>
 
 <script>
+  import { CafeIsRoasterFilter } from '../../mixins/filters/CafeIsRoasterFilter.js';
+  import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
+  import { CafeTagsFilter } from '../../mixins/filters/CafeTagsFilter.js';
+  import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
+
+  /*
+    Imports the Event Bus to pass updates.
+  */
+  import { EventBus } from '../../event-bus.js';
+
+  import CafeMapFilter from './CafeMapFilter.vue';
+
   export default {
     props: {
       'latitude': {
@@ -37,12 +60,23 @@
       }
     },
 
+    components: {
+      CafeMapFilter
+    },
+
     data(){
       return {
         markers: [],
         infoWindows: []
       }
     },
+
+    mixins: [
+      CafeIsRoasterFilter,
+      CafeBrewMethodsFilter,
+      CafeTagsFilter,
+      CafeTextFilter
+    ],
 
     computed: {
       /*
@@ -79,9 +113,73 @@
       */
       this.clearMarkers();
       this.buildMarkers();
+
+      /*
+        Listen to the filters-updated event to filter the map markers
+      */
+      EventBus.$on('filters-updated', function( filters ){
+        this.processFilters( filters );
+      }.bind(this));
     },
 
     methods: {
+      /*
+        Process filters on the map selected by the user.
+      */
+      processFilters( filters ){
+        for( var i = 0; i < this.markers.length; i++ ){
+          if( filters.text == ''
+              && filters.roaster == false
+              && filters.brew_methods.length == 0 ){
+                this.markers[i].setMap( this.map );
+              }else{
+                /*
+                  Initialize flags for the filtering
+                */
+                var textPassed = false;
+                var brewMethodsPassed = false;
+                var roasterPassed = false;
+
+
+                /*
+                  Check if the roaster passes
+                */
+                if( filters.roaster && this.processCafeIsRoasterFilter( this.markers[i].cafe ) ){
+                  roasterPassed = true;
+                }else if( !filters.roaster ){
+                  roasterPassed = true;
+                }
+
+                /*
+                  Check if text passes
+                */
+                if( filters.text != '' && this.processCafeTextFilter( this.markers[i].cafe, filters.text ) ){
+                  textPassed = true;
+                }else if( filters.text == '' ){
+                  textPassed = true;
+                }
+
+                /*
+                  Check if brew methods passes
+                */
+                if( filters.brew_methods.length != 0 && this.processCafeBrewMethodsFilter( this.markers[i].cafe, filters.brew_methods ) ){
+                  brewMethodsPassed = true;
+                }else if( filters.brew_methods.length == 0 ){
+                  brewMethodsPassed = true;
+                }
+
+                /*
+                  If everything passes, then we show the Cafe Marker
+                */
+                if( roasterPassed && textPassed && brewMethodsPassed){
+                  this.markers[i].setMap( this.map );
+                }else{
+                  this.markers[i].setMap( null );
+                }
+              }
+        }
+      },
+
       /*
         Clears the markers from the map.
       */
@@ -119,7 +217,8 @@
           var marker = new google.maps.Marker({
             position: { lat: parseFloat( this.cafes[i].latitude ), lng: parseFloat( this.cafes[i].longitude ) },
             map: this.map,
-            icon: image
+            icon: image,
+            cafe: this.cafes[i]
           });
 
           /*
