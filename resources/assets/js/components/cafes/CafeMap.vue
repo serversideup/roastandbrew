@@ -1,4 +1,6 @@
 <style lang="scss">
+  @import '~@/abstracts/_variables.scss';
+
   div#cafe-map-container{
     position: absolute;
     top: 50px;
@@ -12,6 +14,46 @@
       left: 0px;
       right: 0px;
       bottom: 0px;
+    }
+
+    div.cafe-info-window{
+      div.cafe-name{
+        display: block;
+        text-align: center;
+        color: $dark-color;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+
+      div.cafe-address{
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+        color: $grey;
+        font-family: 'Lato', sans-serif;
+
+        span.street{
+          font-size: 14px;
+          display: block;
+        }
+
+        span.city{
+          font-size: 12px;
+        }
+
+        span.state{
+          font-size: 12px;
+        }
+
+        span.zip{
+          font-size: 12px;
+          display: block;
+        }
+
+        a{
+          color: $secondary-color;
+          font-weight: bold;
+        }
+      }
     }
   }
 </style>
@@ -225,8 +267,18 @@
             Create the info window and add it to the local
             array.
           */
+          var contentString = '<div class="cafe-info-window">' +
+                                '<div class="cafe-name">'+this.cafes[i].name+'</div>' +
+                                '<div class="cafe-address">' +
+                                  '<span class="street">'+this.cafes[i].address+'</span>' +
+                                  '<span class="city">'+this.cafes[i].city+'</span> <span class="state">'+this.cafes[i].state+'</span>' +
+                                  '<span class="zip">'+this.cafes[i].zip+'</span>' +
+                                  '<a href="/#/cafes/'+this.cafes[i].id+'">Visit</a>'+
+                                '</div>'+
+                              '</div>';
+
           let infoWindow = new google.maps.InfoWindow({
-            content: this.cafes[i].name
+            content: contentString
           });
 
           this.infoWindows.push( infoWindow );
@@ -243,6 +295,8 @@
           */
           this.markers.push( marker );
         }
+
+
       }
     }
   }
