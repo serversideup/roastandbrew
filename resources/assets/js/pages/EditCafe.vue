@@ -20,6 +20,7 @@
 
     a.add-location{
       background-color: $dull-color;
+      margin-top: 20px;
     }
 
     a.remove-location{
@@ -38,11 +39,8 @@
 
 <template>
   <div class="page">
-    <div id="cafe-added-successfully" class="notification success">
-      Cafe Added Successfully!
-    </div>
-    <div id="cafe-added-unsuccessfully" class="notification failure">
-      Cafe Failed to be Added Successfully! Please Try Again!
+    <div id="cafe-edited-unsuccessfully" class="notification failure">
+      Cafe Failed to be Edited Successfully! Please Try Again!
     </div>
     <form>
       <div class="grid-container">
@@ -114,7 +112,7 @@
             <tags-input v-bind:unique="key"></tags-input>
           </div>
           <div class="large-12 medium-12 small-12 cell">
-            <a class="button remove-location" v-on:click="removeLocation( key )">Remove Location</a>
+            <a class="button remove-location" v-if="key > 0" v-on:click="removeLocation( key )">Remove Location</a>
           </div>
         </div>
       </div>
@@ -131,7 +129,7 @@
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
           <div class="large-12 medium-12 small-12 cell">
-            <a class="button save-cafe" v-on:click="submitNewCafe()">Save Cafe</a>
+            <a class="button save-cafe" v-on:click="submitEditCafe()">Save Cafe Changes</a>
           </div>
         </div>
       </div>
@@ -180,6 +178,7 @@
       }
     },
 
+
     /*
       Sync the tags to send to the server for the new cafe.
     */
@@ -194,18 +193,28 @@
     */
     created(){
       this.addLocation();
+
+      this.$store.dispatch( 'loadCafeEdit', {
+        id: this.$route.params.id
+      });
     },
 
     /*
       Loads the Vuex data we need such as brew methods
-      and add cafe status.
+      and edit cafe status.
     */
     computed: {
       brewMethods(){
         return this.$store.getters.getBrewMethods;
       },
-      addCafeStatus(){
-        return this.$store.getters.getCafeAddStatus;
+      editCafeLoadStatus(){
+        return this.$store.getters.getCafeEditLoadStatus;
+      },
+      editCafeStatus(){
+        return this.$store.getters.getCafeEditStatus;
+      },
+      editCafe(){
+        return this.$store.getters.getCafeEdit;
       }
     },
 
@@ -213,14 +222,14 @@
       Defines what we need to watch on the page.
     */
     watch: {
-      'addCafeStatus': function(){
-        if( this.addCafeStatus == 2 ){
-          this.clearForm();
-          $("#cafe-added-successfully").show().delay(5000).fadeOut();
+      'editCafeStatus': function(){
+        if( this.editCafeStatus == 2 ){
+          this.$router.push({ name: 'cafe', params: { id: this.$route.params.id }});
         }
-
-        if( this.addCafeStatus == 3 ){
-          $("#cafe-added-unsuccessfully").show().delay(5000).fadeOut();
+      },
+      'editCafeLoadStatus': function(){
+        if( this.editCafeLoadStatus == 2 ){
+          this.populateForm();
         }
       }
     },
@@ -230,11 +239,52 @@
     */
     methods: {
       /*
-        Submits a new cafe
+        Method populates the form with the data we need.
       */
-      submitNewCafe(){
-        if( this.validateNewCafe() ){
-          this.$store.dispatch( 'addCafe', {
+      populateForm(){
+        let brewMethods = [];
+        let tags = [];
+
+        /*
+          Make an array of brew method IDs
+        */
+        for( let i = 0; i < this.editCafe.brew_methods.length; i++ ){
+          brewMethods.push( this.editCafe.brew_methods[i].id );
+        }
+
+        /*
+          Make an array of tags
+        */
+        for( let i = 0; i < this.editCafe.tags.length; i++ ){
+          tags.push( this.editCafe.tags[i].tag );
+        }
+
+        /*
+          Populate the form
+        */
+        this.name                             = this.editCafe.name;
+        this.website                          = this.editCafe.website;
+        this.description                      = this.editCafe.description;
+        this.roaster                          = this.editCafe.roaster == 1 ? true : false;
+        this.locations[0].name                = this.editCafe.location_name;
+        this.locations[0].address             = this.editCafe.address;
+        this.locations[0].city                = this.editCafe.city;
+        this.locations[0].state               = this.editCafe.state;
+        this.locations[0].zip                 = this.editCafe.zip;
+
+        this.locations[0].methodsAvailable    = brewMethods;
+        this.locations[0].tags                = tags;
+
+        EventBus.$emit( 'set-initial-tags', { unique: 0, tags: tags } );
+      },
+
+      /*
+        Submits edits for a cafe
+      */
+      submitEditCafe(){
+        if( this.validateEditCafe() ){
+          this.$store.dispatch( 'editCafe', {
+            id: this.editCafe.id,
   					name: this.name,
             locations: this.locations,
             website: this.website,
@@ -245,18 +295,18 @@
       },
 
       /*
-        Validates a new cafe
+        Validates cafe edits
       */
-      validateNewCafe(){
-        let validNewCafeForm = true;
+      validateEditCafe(){
+        let validEditCafeForm = true;
 
         /*
           Ensure a name has been entered
         */
         if( this.name.trim() == '' ){
-          validNewCafeForm = false;
+          validEditCafeForm = false;
           this.validations.name.is_valid = false;
-          this.validations.name.text = 'Please enter a name for the new cafe!';
+          this.validations.name.text = 'Please enter a name for the cafe!';
         }else{
           this.validations.name.is_valid = true;
           this.validations.name.text = '';
@@ -266,7 +316,7 @@
           Ensure at least one location has been entered
         */
         if( this.locations.length == 0 ){
-          validNewCafeForm = false;
+          validEditCafeForm = false;
           this.validations.oneLocation.is_valid = false;
           this.validations.oneLocation.text = 'Please enter at least one location!';
         }else{
@@ -283,9 +333,9 @@
                Ensure an address has been entered
              */
              if( this.locations[index].address.trim() == '' ){
-               validNewCafeForm = false;
+               validEditCafeForm = false;
                this.validations.locations[index].address.is_valid = false;
-               this.validations.locations[index].address.text = 'Please enter an address for the new cafe!';
+               this.validations.locations[index].address.text = 'Please enter an address for the cafe!';
              }else{
                this.validations.locations[index].address.is_valid = true;
                this.validations.locations[index].address.text = '';
@@ -296,9 +346,9 @@
              Ensure a city has been entered
            */
            if( this.locations[index].city.trim() == '' ){
-             validNewCafeForm = false;
+             validEditCafeForm = false;
              this.validations.locations[index].city.is_valid = false;
-             this.validations.locations[index].city.text = 'Please enter a city for the new cafe!';
+             this.validations.locations[index].city.text = 'Please enter a city for the cafe!';
            }else{
              this.validations.locations[index].city.is_valid = true;
              this.validations.locations[index].city.text = '';
@@ -308,9 +358,9 @@
              Ensure a state has been entered
            */
            if( this.locations[index].state.trim() == '' ){
-             validNewCafeForm = false;
+             validEditEditForm = false;
              this.validations.locations[index].state.is_valid = false;
-             this.validations.locations[index].state.text = 'Please enter a state for the new cafe!';
+             this.validations.locations[index].state.text = 'Please enter a state for the cafe!';
            }else{
              this.validations.locations[index].state.is_valid = true;
              this.validations.locations[index].state.text = '';
@@ -320,9 +370,9 @@
              Ensure a zip has been entered
            */
            if( this.locations[index].zip.trim() == '' || !this.locations[index].zip.match(/(^\d{5}$)/) ){
-             validNewCafeForm = false;
+             validEditCafeForm = false;
              this.validations.locations[index].zip.is_valid = false;
-             this.validations.locations[index].zip.text = 'Please enter a valid zip code for the new cafe!';
+             this.validations.locations[index].zip.text = 'Please enter a valid zip code for the cafe!';
            }else{
              this.validations.locations[index].zip.is_valid = true;
              this.validations.locations[index].zip.text = '';
@@ -333,7 +383,7 @@
           If a website has been entered, ensure the URL is valid
         */
         if( this.website.trim != '' && !this.website.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/ ) ){
-          validNewCafeForm = false;
+          validEditCafeForm = false;
           this.validations.website.is_valid = false;
           this.validations.website.text = 'Please enter a valid URL for the website!';
         }else{
@@ -341,11 +391,11 @@
           this.validations.website.text = '';
         }
 
-        return validNewCafeForm;
+        return validEditCafeForm;
       },
 
       /*
-        Adds a location to the new cafe form
+        Adds a location to the edit cafe form
       */
       addLocation(){
         this.locations.push( { name: '', address: '', city: '', state: '', zip: '', methodsAvailable: [], tags: [] } );
@@ -367,14 +417,6 @@
             text: ''
           }
         });
-      },
-
-      /*
-        Removes the location from the cafe form
-      */
-      removeLocation( key ){
-        this.locations.splice( key, 1 );
-        this.validations.locations.splice( key, 1 );
       },
 
       /*
@@ -405,8 +447,15 @@
         EventBus.$emit('clear-tags');
 
         this.addLocation();
-      }
+      },
 
+      /*
+        Removes the location from the cafe form
+      */
+      removeLocation( key ){
+        this.locations.splice( key, 1 );
+        this.validations.locations.splice( key, 1 );
+      },
     }
   }
 </script>

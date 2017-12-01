@@ -14,6 +14,16 @@
       font-family: 'Josefin Sans', sans-serif;
     }
 
+    div.edit-container{
+      text-align: center;
+
+      a{
+        color: $primary-color;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+
     span.address{
       text-align: center;
       display: block;
@@ -48,7 +58,7 @@
       margin: auto;
       text-align: center;
       margin-top: 30px;
-      
+
       span.tag{
         color: $dark-color;
         font-family: 'Josefin Sans', sans-serif;
@@ -74,6 +84,10 @@
           <div class="cafe-page" v-show="cafeLoadStatus == 2">
             <h2>{{ cafe.name }}</h2>
             <h3 v-if="cafe.location_name != ''">{{ cafe.location_name }}</h3>
+
+            <div class="edit-container">
+              <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }">Edit</router-link>
+            </div>
 
             <span class="address">
               {{ cafe.address }}<br>

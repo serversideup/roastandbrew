@@ -38,6 +38,17 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
 
   /*
   |-------------------------------------------------------------------------------
+  | Gets Editing Data for an Individual Cafe
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/cafes/{id}/edit
+  | Controller:     API\CafesController@getCafeEditData
+  | Method:         GET
+  | Description:    Gets an individual cafe's edit data
+  */
+  Route::get('/cafes/{id}/edit', 'API\CafesController@getCafeEditData');
+
+  /*
+  |-------------------------------------------------------------------------------
   | Adds a New Cafe
   |-------------------------------------------------------------------------------
   | URL:            /api/v1/cafes
@@ -46,6 +57,17 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   | Description:    Adds a new cafe to the application
   */
   Route::post('/cafes', 'API\CafesController@postNewCafe');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Edits a Cafe
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/cafes/{cafeID}
+  | Controller:     API\CafesController@putEditCafe
+  | Method:         PUT
+  | Description:    Edits a cafe
+  */
+  Route::put('/cafes/{cafeID}', 'API\CafesController@putEditCafe');
 
   /*
   |-------------------------------------------------------------------------------

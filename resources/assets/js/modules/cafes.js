@@ -18,6 +18,10 @@ export const cafes = {
     cafe: {},
     cafeLoadStatus: 0,
 
+		cafeEdit: {},
+		cafeEditLoadStatus: 0,
+		cafeEditStatus: 0,
+
 		cafeLiked: false,
 
 		cafeAddStatus: 0,
@@ -66,6 +70,39 @@ export const cafes = {
           commit( 'setCafeLoadStatus', 3 );
         });
     },
+
+		/*
+			Loads a cafe to edit from the API
+		*/
+		loadCafeEdit( { commit }, data ){
+			commit( 'setCafeEditLoadStatus', 1 );
+
+			CafeAPI.getCafeEdit( data.id )
+				.then( function( response ){
+					commit( 'setCafeEdit', response.data );
+					commit( 'setCafeEditLoadStatus', 2 );
+				})
+				.catch( function(){
+					commit( 'setCafeEdit', {} );
+					commit( 'setCafeEditLoadStatus', 3 );
+				});
+		},
+
+		/*
+			Edits a cafe
+		*/
+		editCafe( { commit, state, dispatch }, data ){
+			commit( 'setCafeEditStatus', 1 );
+
+			CafeAPI.putEditCafe( data.id, data.name, data.locations, data.website, data.description, data.roaster )
+					.then( function( response ){
+						commit( 'setCafeEditStatus', 2 );
+						dispatch( 'loadCafes' );
+					})
+					.catch( function(){
+						commit( 'setCafeEditStatus', 3 );
+					});
+		},
 
 		/*
 			Adds a cafe
@@ -149,6 +186,27 @@ export const cafes = {
     },
 
 		/*
+			Sets the cafe to be edited
+		*/
+		setCafeEdit( state, cafe ){
+			state.cafeEdit = cafe;
+		},
+
+		/*
+			Sets the cafe edit status
+		*/
+		setCafeEditStatus( state, status ){
+			state.cafeEditStatus = status;
+		},
+
+		/*
+			Sets the cafe edit load status
+		*/
+		setCafeEditLoadStatus( state, status ){
+			state.cafeEditLoadStatus = status;
+		},
+
+		/*
 			Set the cafe add status
 		*/
 		setCafeAddedStatus( state, status ){
@@ -208,6 +266,27 @@ export const cafes = {
     getCafe( state ){
       return state.cafe;
     },
+
+		/*
+			Gets the cafe we are editing
+		*/
+		getCafeEdit( state ){
+			return state.cafeEdit;
+		},
+
+		/*
+			Gets the cafe edit status
+		*/
+		getCafeEditStatus( state ){
+			return state.cafeEditStatus;
+		},
+
+		/*
+			Gets the cafe edit load status
+		*/
+		getCafeEditLoadStatus( state ){
+			return state.cafeEditLoadStatus;
+		},
 
 		/*
 			Gets the cafe add status

@@ -19,6 +19,13 @@ export default {
 	},
 
 	/*
+		GET 	/api/v1/cafes/{cafeID}/edit
+	*/
+	getCafeEdit: function( cafeID ){
+		return axios.get( ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/edit' );
+	},
+
+	/*
 		POST 	/api/v1/cafes
 	*/
 	postAddNewCafe: function( name, locations, website, description, roaster ){
@@ -31,6 +38,21 @@ export default {
 				roaster: roaster
 			}
 		);
+	},
+
+	/*
+	  PUT 	/api/v1/cafes/{id}
+	*/
+	putEditCafe: function( id, name, locations, website, description, roaster ){
+	  return axios.put( ROAST_CONFIG.API_URL + '/cafes/'+id,
+	    {
+	      name: name,
+	      locations: locations,
+	      website: website,
+	      description: description,
+	      roaster: roaster
+	    }
+	  );
 	},
 
 	/*

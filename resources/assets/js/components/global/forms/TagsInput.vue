@@ -157,6 +157,12 @@
         this.searchSelectedIndex = -1;
         this.pauseSearch = false;
       }.bind(this));
+
+      EventBus.$on('set-initial-tags', function( data ){
+        if( data.unique == this.unique ){
+          this.tagsArray = data.tags;
+        }
+      }.bind(this));
     },
 
     /*

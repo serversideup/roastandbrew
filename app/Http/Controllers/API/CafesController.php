@@ -17,6 +17,7 @@ use DB;
 	Defines the requests used by the controller.
 */
 use App\Http\Requests\StoreCafeRequest;
+use App\Http\Requests\EditCafeRequest;
 
 class CafesController extends Controller
 {
@@ -57,6 +58,34 @@ class CafesController extends Controller
 
     return response()->json( $cafe );
   }
+
+	/*
+	|-------------------------------------------------------------------------------
+	| Gets Editing Data for an Individual Cafe
+	|-------------------------------------------------------------------------------
+	| URL:            /api/v1/cafes/{id}/edit
+	| Method:         GET
+	| Description:    Gets an individual cafe's edit data
+	| Parameters:
+	|   $id   -> ID of the cafe we are retrieving
+	*/
+	public function getCafeEditData( $cafeID ){
+		/*
+			Grab the cafe with the parent of the cafe
+		*/
+		$cafe = Cafe::where('id', '=', $cafeID)
+								->with('parent')
+								->with(['tags' => function( $query ){
+									$query->where('user_id', '=', Auth::user()->id);
+								}])
+								->with('brewMethods')
+								->first();
+
+		/*
+			Return the cafe queried.
+		*/
+		return response()->json($cafe);
+	}
 
   /*
   |-------------------------------------------------------------------------------
@@ -188,6 +217,141 @@ class CafesController extends Controller
   }
 
 	/*
+	|-------------------------------------------------------------------------------
+	| Edits a Cafe
+	|-------------------------------------------------------------------------------
+	| URL:            /api/v1/cafes/{cafeID}
+	| Method:         PUT
+	| Description:    Edits a cafe
+	*/
+	public function putEditCafe( $cafeID, EditCafeRequest $request ){
+		$editedCafes = array();
+
+		$locations = $request->get('locations');
+
+		/*
+			Get the cafe we are editing.
+		*/
+		$cafe = Cafe::where('id', '=', $cafeID )->first();
+
+		$address  			= $locations[0]['address'];
+		$city 					= $locations[0]['city'];
+		$state 					= $locations[0]['state'];
+		$zip 						= $locations[0]['zip'];
+		$locationName		= $locations[0]['name'];
+		$brewMethods 		= $locations[0]['methodsAvailable'];
+		$tags 					= $locations[0]['tags'];
+
+		/*
+			Get the Latitude and Longitude returned from the Google Maps Address.
+		*/
+		$coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
+
+		$cafe->name 					= $request->get('name');
+		$cafe->location_name	= $locationName != '' ? $locationName : '';
+		$cafe->address 				= $address;
+		$cafe->city 					= $city;
+		$cafe->state 					= $state;
+		$cafe->zip 						= $zip;
+		$cafe->latitude 			= $coordinates['lat'];
+		$cafe->longitude 			= $coordinates['lng'];
+		$cafe->roaster 				= $request->get('roaster') != '' ? 1 : 0;
+		$cafe->website 				= $request->get('website');
+		$cafe->description		= $request->get('description') != '' ? $request->get('description') : '';
+
+		$cafe->save();
+
+		$cafe->brewMethods()->sync( $brewMethods );
+
+		/*
+			Clear the user's tags on the cafe. These will get
+			re-added in the next step
+		*/
+		DB::statement('DELETE FROM cafes_users_tags WHERE cafe_id = "'.$cafeID.'" AND user_id = "'.Auth::user()->id.'"');
+
+		/*
+			Tag the cafe with the tags provided by the user.
+		*/
+		Tagger::tagCafe( $cafe, $tags );
+
+		array_push( $editedCafes, $cafe->toArray() );
+
+		/*
+			When editing a cafe, we want either the parent of the cafe we just edited
+			since it would have been a child cafe. Otherwise, the parent id is the ID of the
+			cafe we edited.
+		*/
+		$parentID = $cafe->parent != null ? $cafe->parent : $cafe->id;
+
+		/*
+			Now that we have the parent cafe edited, we add all of the other
+			locations. We have to see if other locations are added.
+		*/
+		if( count( $locations ) > 1 ){
+			/*
+				We off set the counter at 1 since we already used the
+				first location.
+			*/
+			for( $i = 1; $i < count( $locations ); $i++ ){
+				/*
+					Create a cafe and grab the location
+				*/
+				$cafe = new Cafe();
+
+				$address  			= $locations[$i]['address'];
+				$city 					= $locations[$i]['city'];
+				$state 					= $locations[$i]['state'];
+				$zip 						= $locations[$i]['zip'];
+				$locationName		= $locations[$i]['name'];
+				$brewMethods 		= $locations[$i]['methodsAvailable'];
+
+				/*
+					Get the Latitude and Longitude returned from the Google Maps Address.
+				*/
+				$coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
+
+				$cafe->parent 				= $parentID;
+				$cafe->name 					= $request->get('name');
+				$cafe->location_name	= $locationName != '' ? $locationName : '';
+				$cafe->address 				= $address;
+				$cafe->city 					= $city;
+				$cafe->state 					= $state;
+				$cafe->zip 						= $zip;
+				$cafe->latitude 			= $coordinates['lat'];
+				$cafe->longitude 			= $coordinates['lng'];
+				$cafe->roaster 				= $request->get('roaster') != '' ? 1 : 0;
+				$cafe->website 				= $request->get('website');
+				$cafe->description		= $request->get('description') != '' ? $request->get('description') : '';
+				$cafe->added_by 			= Auth::user()->id;
+
+				/*
+					Save cafe
+				*/
+				$cafe->save();
+
+				/*
+					Attach the brew methods
+				*/
+				$cafe->brewMethods()->sync( $brewMethods );
+
+				$tags = $locations[$i]['tags'];
+
+				/*
+					Tags the cafe
+				*/
+				Tagger::tagCafe( $cafe, $tags );
+
+				array_push( $editedCafes, $cafe->toArray() );
+			}
+		}
+
+		/*
+			Return the edited cafes as JSON
+		*/
+		return response()->json( $editedCafes, 200 );
+	}
+
+	/*
   |-------------------------------------------------------------------------------
   | Likes a Cafe
   |-------------------------------------------------------------------------------
@@ -298,7 +462,7 @@ class CafesController extends Controller
 		/*
 			Delete the specific users tag for the cafe.
 		*/
-		DB::statement('DELETE FROM cafes_users_tags WHERE cafe_id = `'.$cafeID.'` AND tag_id = `'.$tagID.'` AND user_id = `'.Auth::user()->id.'`');
+		DB::statement('DELETE FROM cafes_users_tags WHERE cafe_id = "'.$cafeID.'" AND tag_id = "'.$tagID.'" AND user_id = "'.Auth::user()->id.'"');
 
 		/*
 			Return a proper response code for successful untagging

@@ -46,7 +46,12 @@ export default new VueRouter({
 					path: 'cafes/:id',
 					name: 'cafe',
 					component: Vue.component( 'Cafe', require( './pages/Cafe.vue' ) )
-				}
+				},
+				{
+					path: 'cafes/:id/edit',
+					name: 'editcafe',
+					component: Vue.component( 'EditCafe', require( './pages/EditCafe.vue' ) )
+				},
 			]
 		}
 	]
