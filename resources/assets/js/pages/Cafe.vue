@@ -67,6 +67,17 @@
         line-height: 20px;
       }
     }
+
+    a.prompt-log-in{
+      display: block;
+      text-align: center;
+      color: $dark-color;
+      font-family: 'Lato', sans-serif;
+      font-size: 20px;
+      max-width: 50%;
+      margin: auto;
+      margin-top: 20px;
+    }
   }
 </style>
 
@@ -85,7 +96,7 @@
             <h2>{{ cafe.name }}</h2>
             <h3 v-if="cafe.location_name != ''">{{ cafe.location_name }}</h3>
 
-            <div class="edit-container">
+            <div class="edit-container" v-if="this.user != '' && this.userLoadStatus == 2">
               <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }">Edit</router-link>
             </div>
 
@@ -95,7 +106,8 @@
               {{ cafe.zip }}
             </span>
 
-            <toggle-like></toggle-like>
+            <toggle-like v-if="user != '' && userLoadStatus == 2"></toggle-like>
+            <a class="prompt-log-in" v-if="user == '' && userLoadStatus == 2" v-on:click="login()">Did you know you can "like" this cafe and save it to your profile? Just log in!</a>
 
             <div class="tags-container">
               <div class="grid-x grid-padding-x">
@@ -128,6 +140,8 @@
 </template>
 
 <script>
+  import { EventBus } from '../event-bus.js';
+
   /*
     Import the loader and cafe map for use in the component.
   */
@@ -171,6 +185,29 @@
       */
       cafe(){
         return this.$store.getters.getCafe;
+      },
+
+      /*
+        Gets the authenticated user.
+      */
+      user(){
+        return this.$store.getters.getUser;
+      },
+
+      /*
+        Gets the user's load status.
+      */
+      userLoadStatus(){
+        return this.$store.getters.getUserLoadStatus();
+      }
+    },
+
+    /*
+      Defines the methods used by the component.
+    */
+    methods: {
+      login(){
+        EventBus.$emit('prompt-login');
       }
     }
   }

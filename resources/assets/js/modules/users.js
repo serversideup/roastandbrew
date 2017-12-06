@@ -32,6 +32,15 @@ export const users = {
           commit( 'setUser', {} );
           commit( 'setUserLoadStatus', 3 );
         });
+    },
+
+    /*
+      Logs out a user and clears the status and user pieces of
+      state.
+    */
+    logoutUser( { commit } ){
+      commit( 'setUserLoadStatus', 0 );
+      commit( 'setUser', {} );
     }
   },
 
@@ -62,7 +71,9 @@ export const users = {
       Returns the user load status.
     */
     getUserLoadStatus( state ){
-      return state.userLoadStatus;
+      return function(){
+        return state.userLoadStatus;
+      }
     },
 
     /*

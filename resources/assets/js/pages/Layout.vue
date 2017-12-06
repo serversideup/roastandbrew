@@ -8,6 +8,8 @@
 
     <router-view></router-view>
 
+    <login-modal></login-modal>
+
     <app-footer></app-footer>
   </div>
 </template>
@@ -15,11 +17,13 @@
 <script>
   import Navigation from '../components/global/Navigation.vue';
   import AppFooter from '../components/global/AppFooter.vue';
+  import LoginModal from '../components/global/LoginModal.vue';
 
   export default {
     components: {
       Navigation,
-      AppFooter
+      AppFooter,
+      LoginModal
     },
 
     created(){

@@ -54,6 +54,26 @@
         margin-top: 5px;
         margin-right: 10px;
       }
+
+      span.login{
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px 0px 20px;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: bold;
+        color: $dark-color;
+        cursor: pointer;
+      }
+
+      span.logout{
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px 0px 20px;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: bold;
+        color: $dark-color;
+        cursor: pointer;
+      }
     }
 
     &:after{
@@ -80,13 +100,17 @@
     </ul>
 
     <div class="right">
-      <img class="avatar" :src="user.avatar" v-show="userLoadStatus == 2"/>
+      <img class="avatar" v-if="user != '' && userLoadStatus == 2" :src="user.avatar" v-show="userLoadStatus == 2"/>
+      <span class="logout" v-if="user != '' && userLoadStatus == 2" v-on:click="logout()">Logout</span>
+      <span class="login" v-if="user == ''" v-on:click="login()">Login</span>
     </div>
 
   </nav>
 </template>
 
 <script>
+  import { EventBus } from '../../event-bus.js';
+
   export default {
     /*
       Defines the computed properties on the component.
@@ -96,7 +120,7 @@
         Retrieves the User Load Status from Vuex
       */
       userLoadStatus(){
-        return this.$store.getters.getUserLoadStatus;
+        return this.$store.getters.getUserLoadStatus();
       },
 
       /*
@@ -104,6 +128,18 @@
       */
       user(){
         return this.$store.getters.getUser;
+      }
+    },
+
+    methods: {
+      login(){
+        EventBus.$emit('prompt-login');
+      },
+
+      logout(){
+        this.$store.dispatch('logoutUser');
+
+        window.location = '/logout';
       }
     }
   }

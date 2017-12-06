@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+/*
+  Public API Routes
+*/
+Route::group(['prefix' => 'v1'], function(){
   /*
   |-------------------------------------------------------------------------------
   | Get User
@@ -35,7 +38,34 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   | Description:    Gets an individual cafe
   */
   Route::get('/cafes/{id}', 'API\CafesController@getCafe');
+  
+  /*
+  |-------------------------------------------------------------------------------
+  | Get All Brew methods
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/brew-methods
+  | Controller:     API\BrewMethodsController@getBrewMethods
+  | Method:         GET
+  | Description:    Gets all of the brew methods in the application
+  */
+  Route::get('/brew-methods', 'API\BrewMethodsController@getBrewMethods');
 
+  /*
+  |-------------------------------------------------------------------------------
+  | Search Tags
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/tags
+  | Controller:     API\TagsController@getTags
+  | Method:         GET
+  | Description:    Searches the tags if a query is set otherwise returns all tags
+  */
+  Route::get('/tags', 'API\TagsController@getTags');
+});
+
+/*
+  Authenticated API Routes.
+*/
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   /*
   |-------------------------------------------------------------------------------
   | Gets Editing Data for an Individual Cafe
@@ -112,26 +142,4 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   | Description:    Deletes a tag from a cafe for a user
   */
   Route::delete('/cafes/{id}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
-
-  /*
-  |-------------------------------------------------------------------------------
-  | Get All Brew methods
-  |-------------------------------------------------------------------------------
-  | URL:            /api/v1/brew-methods
-  | Controller:     API\BrewMethodsController@getBrewMethods
-  | Method:         GET
-  | Description:    Gets all of the brew methods in the application
-  */
-  Route::get('/brew-methods', 'API\BrewMethodsController@getBrewMethods');
-
-  /*
-  |-------------------------------------------------------------------------------
-  | Search Tags
-  |-------------------------------------------------------------------------------
-  | URL:            /api/v1/tags
-  | Controller:     API\TagsController@getTags
-  | Method:         GET
-  | Description:    Searches the tags if a query is set otherwise returns all tags
-  */
-  Route::get('/tags', 'API\TagsController@getTags');
 });
