@@ -13,7 +13,8 @@ export const users = {
   */
   state: {
     user: {},
-    userLoadStatus: 0
+    userLoadStatus: 0,
+    userUpdateStatus: 0
   },
 
   /*
@@ -31,6 +32,22 @@ export const users = {
         .catch( function(){
           commit( 'setUser', {} );
           commit( 'setUserLoadStatus', 3 );
+        });
+    },
+
+    /*
+      Edits a user
+    */
+    editUser( { commit, state, dispatch }, data ){
+      commit( 'setUserUpdateStatus', 1 );
+
+      UserAPI.putUpdateUser( data.public_visibility, data.favorite_coffee, data.flavor_notes, data.city, data.state )
+        .then( function( response ){
+          commit( 'setUserUpdateStatus', 2 );
+          dispatch( 'loadUser' );
+        })
+        .catch( function(){
+          commit( 'setUserUpdateStatus', 3 );
         });
     },
 
@@ -60,6 +77,13 @@ export const users = {
     */
     setUser( state, user ){
       state.user = user;
+    },
+
+    /*
+      Sets the user update status
+    */
+    setUserUpdateStatus( state, status ){
+      state.userUpdateStatus = status;
     }
   },
 
@@ -81,6 +105,13 @@ export const users = {
     */
     getUser( state ){
       return state.user;
+    },
+
+    /*
+      Gets the user update status
+    */
+    getUserUpdateStatus( state, status ){
+      return state.userUpdateStatus;
     }
   }
 }

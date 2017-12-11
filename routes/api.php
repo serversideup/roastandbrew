@@ -38,7 +38,7 @@ Route::group(['prefix' => 'v1'], function(){
   | Description:    Gets an individual cafe
   */
   Route::get('/cafes/{id}', 'API\CafesController@getCafe');
-  
+
   /*
   |-------------------------------------------------------------------------------
   | Get All Brew methods
@@ -66,6 +66,17 @@ Route::group(['prefix' => 'v1'], function(){
   Authenticated API Routes.
 */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+  /*
+  |-------------------------------------------------------------------------------
+  | Updates a User's Profile
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/user
+  | Controller:     API\UsersController@putUpdateUser
+  | Method:         PUT
+  | Description:    Updates the authenticated user's profile
+  */
+  Route::put('/user', 'API\UsersController@putUpdateUser');
+
   /*
   |-------------------------------------------------------------------------------
   | Gets Editing Data for an Individual Cafe

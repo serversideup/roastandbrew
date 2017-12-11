@@ -65,6 +65,16 @@
         cursor: pointer;
       }
 
+      a.profile{
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px 0px 20px;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: bold;
+        color: $dark-color;
+        cursor: pointer;
+      }
+
       span.logout{
         height: 50px;
         line-height: 50px;
@@ -101,6 +111,9 @@
 
     <div class="right">
       <img class="avatar" v-if="user != '' && userLoadStatus == 2" :src="user.avatar" v-show="userLoadStatus == 2"/>
+      <router-link :to="{ name: 'profile'}" v-if="user != '' && userLoadStatus == 2" class="profile">
+        Profile
+      </router-link>
       <span class="logout" v-if="user != '' && userLoadStatus == 2" v-on:click="logout()">Logout</span>
       <span class="login" v-if="user == ''" v-on:click="login()">Login</span>
     </div>
