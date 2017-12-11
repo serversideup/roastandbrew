@@ -35,3 +35,8 @@ Roast and Brew is an open source application that helps coffee enthusiasts find 
 24. [Eloquent Parent Child Relationship in Laravel](https://serversideup.net/eloquent-parent-child-relationship-laravel/)
 25. [Favoriting or Liking With Laravel and VueJS](https://serversideup.net/favoriting-liking-laravel-vuejs/)
 26. [Tagging With Laravel](https://serversideup.net/tagging-with-laravel/)
+27. [Vue JS Tag input](https://serversideup.net/vue-js-tag-input/)
+28. [Implementing the Vue JS Tag Component](https://serversideup.net/implementing-tagging-component/)
+29. [SPA Tutorial Update 3](https://serversideup.net/spa-tutorial-update-3/)
+30. [Filtering with VueJS Mixins](https://serversideup.net/filtering-vuejs-mixins/)
+31. [Re-using VueJS Mixins and Filtering Google Map Data](https://serversideup.net/re-using-vuejs-mixins-filtering-google-map-data/) 
