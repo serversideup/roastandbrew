@@ -28,30 +28,58 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( name, locations, website, description, roaster ){
+	postAddNewCafe: function( name, locations, website, description, roaster, picture ){
+		/*
+			Initialize the form data
+		*/
+		let formData = new FormData();
+
+		/*
+			Add the form data we need to submit
+		*/
+		formData.append('name', name);
+		formData.append('locations', JSON.stringify( locations ) );
+		formData.append('website', website);
+		formData.append('description', description);
+		formData.append('roaster', roaster);
+		formData.append('picture', picture);
+
 		return axios.post( ROAST_CONFIG.API_URL + '/cafes',
+			formData,
 			{
-				name: name,
-				locations: locations,
-				website: website,
-				description: description,
-				roaster: roaster
-			}
+		    headers: {
+		        'Content-Type': 'multipart/form-data'
+		    }
+		  }
 		);
 	},
 
 	/*
 	  PUT 	/api/v1/cafes/{id}
 	*/
-	putEditCafe: function( id, name, locations, website, description, roaster ){
-	  return axios.put( ROAST_CONFIG.API_URL + '/cafes/'+id,
-	    {
-	      name: name,
-	      locations: locations,
-	      website: website,
-	      description: description,
-	      roaster: roaster
-	    }
+	putEditCafe: function( id, name, locations, website, description, roaster, picture ){
+		/*
+			Initialize the form data
+		*/
+		let formData = new FormData();
+
+		/*
+			Add the form data we need to submit
+		*/
+		formData.append('name', name);
+		formData.append('locations', JSON.stringify( locations ) );
+		formData.append('website', website);
+		formData.append('description', description);
+		formData.append('roaster', roaster);
+		formData.append('picture', picture);
+
+		return axios.put( ROAST_CONFIG.API_URL + '/cafes/'+id,
+			formData,
+			{
+				headers: {
+						'Content-Type': 'multipart/form-data'
+				}
+			}
 	  );
 	},
 

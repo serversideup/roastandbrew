@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cafe;
+use App\Models\CafePhoto;
 
 use App\Utilities\GoogleMaps;
 use App\Utilities\Tagger;
@@ -12,6 +13,7 @@ use App\Utilities\Tagger;
 use Request;
 use Auth;
 use DB;
+use File;
 
 /*
 	Defines the requests used by the controller.
@@ -98,20 +100,20 @@ class CafesController extends Controller
   public function postNewCafe( StoreCafeRequest $request ){
 		$addedCafes = array();
 
-		$locations = $request->get('locations');
+		$locations = json_decode( $request->get('locations') );
 
 		/*
 			Create a parent cafe and grab the first location
 		*/
 		$parentCafe = new Cafe();
 
-		$address  			= $locations[0]['address'];
-		$city 					= $locations[0]['city'];
-		$state 					= $locations[0]['state'];
-		$zip 						= $locations[0]['zip'];
-		$locationName		= $locations[0]['name'];
-		$brewMethods 		= $locations[0]['methodsAvailable'];
-		$tags 					= $locations[0]['tags'];
+		$address  			= $locations[0]->address;
+		$city 					= $locations[0]->city;
+		$state 					= $locations[0]->state;
+		$zip 						= $locations[0]->zip;
+		$locationName		= $locations[0]->name;
+		$brewMethods 		= $locations[0]->methodsAvailable;
+		$tags 					= $locations[0]->tags;
 
 		/*
 			Get the Latitude and Longitude returned from the Google Maps Address.
@@ -135,6 +137,46 @@ class CafesController extends Controller
 			Save parent cafe
 		*/
 		$parentCafe->save();
+
+		$photo = Request::file('picture');
+
+		if( count( $photo ) > 0 ){
+			if( $photo != null && $photo->isValid() ){
+
+				/*
+					Creates the cafe directory if needed
+				*/
+				if( !File::exists( app_path().'/Photos/'.$parentCafe->id.'/' ) ){
+					File::makeDirectory( app_path() .'/Photos/'.$parentCafe->id.'/' );
+				}
+
+				/*
+					Sets the destination path and moves the file there.
+				*/
+				$destinationPath = app_path().'/Photos/'.$parentCafe->id;
+
+				/*
+					Grabs the filename and file type
+				*/
+				$filename = time().'-'.$photo->getClientOriginalName();
+
+				/*
+					Moves to the directory
+				*/
+				$photo->move( $destinationPath, $filename );
+
+				/*
+					Creates a new record in the database.
+				*/
+				$cafePhoto = new CafePhoto();
+
+				$cafePhoto->cafe_id = $parentCafe->id;
+				$cafePhoto->uploaded_by = Auth::user()->id;
+				$cafePhoto->file_url = app_path() .'/Photos/'.$parentCafe->id.'/';
+
+				$cafePhoto->save();
+			}
+		}
 
 		/*
 			Attach the brew methods
@@ -163,12 +205,12 @@ class CafesController extends Controller
 				*/
 				$cafe = new Cafe();
 
-				$address  			= $locations[$i]['address'];
-				$city 					= $locations[$i]['city'];
-				$state 					= $locations[$i]['state'];
-				$zip 						= $locations[$i]['zip'];
-				$locationName		= $locations[$i]['name'];
-				$brewMethods 		= $locations[$i]['methodsAvailable'];
+				$address  			= $locations[$i]->address;
+				$city 					= $locations[$i]->city;
+				$state 					= $locations[$i]->state;
+				$zip 						= $locations[$i]->zip;
+				$locationName		= $locations[$i]->name;
+				$brewMethods 		= $locations[$i]->methodsAvailable;
 
 				/*
 					Get the Latitude and Longitude returned from the Google Maps Address.
@@ -227,20 +269,20 @@ class CafesController extends Controller
 	public function putEditCafe( $cafeID, EditCafeRequest $request ){
 		$editedCafes = array();
 
-		$locations = $request->get('locations');
+		$locations = json_decode( $request->get('locations') );
 
 		/*
 			Get the cafe we are editing.
 		*/
 		$cafe = Cafe::where('id', '=', $cafeID )->first();
 
-		$address  			= $locations[0]['address'];
-		$city 					= $locations[0]['city'];
-		$state 					= $locations[0]['state'];
-		$zip 						= $locations[0]['zip'];
-		$locationName		= $locations[0]['name'];
-		$brewMethods 		= $locations[0]['methodsAvailable'];
-		$tags 					= $locations[0]['tags'];
+		$address  			= $locations[0]->address;
+		$city 					= $locations[0]->city;
+		$state 					= $locations[0]->state;
+		$zip 						= $locations[0]->zip;
+		$locationName		= $locations[0]->name;
+		$brewMethods 		= $locations[0]->methodsAvailable;
+		$tags 					= $locations[0]->tags;
 
 		/*
 			Get the Latitude and Longitude returned from the Google Maps Address.
@@ -260,6 +302,46 @@ class CafesController extends Controller
 		$cafe->description		= $request->get('description') != '' ? $request->get('description') : '';
 
 		$cafe->save();
+
+		$photo = Request::file('picture');
+
+		if( count( $photo ) > 0 ){
+			if( $photo != null && $photo->isValid() ){
+
+				/*
+					Creates the cafe directory if needed
+				*/
+				if( !File::exists( app_path().'/Photos/'.$cafe->id.'/' ) ){
+					File::makeDirectory( app_path() .'/Photos/'.$cafe->id.'/' );
+				}
+
+				/*
+					Sets the destination path and moves the file there.
+				*/
+				$destinationPath = app_path().'/Photos/'.$cafe->id;
+
+				/*
+					Grabs the filename and file type
+				*/
+				$filename = time().'-'.$photo->getClientOriginalName();
+
+				/*
+					Moves to the directory
+				*/
+				$photo->move( $destinationPath, $filename );
+
+				/*
+					Creates a new record in the database.
+				*/
+				$cafePhoto = new CafePhoto();
+
+				$cafePhoto->cafe_id = $cafe->id;
+				$cafePhoto->uploaded_by = Auth::user()->id;
+				$cafePhoto->file_url = app_path() .'/Photos/'.$cafe->id.'/';
+
+				$cafePhoto->save();
+			}
+		}
 
 		$cafe->brewMethods()->sync( $brewMethods );
 
@@ -298,12 +380,12 @@ class CafesController extends Controller
 				*/
 				$cafe = new Cafe();
 
-				$address  			= $locations[$i]['address'];
-				$city 					= $locations[$i]['city'];
-				$state 					= $locations[$i]['state'];
-				$zip 						= $locations[$i]['zip'];
-				$locationName		= $locations[$i]['name'];
-				$brewMethods 		= $locations[$i]['methodsAvailable'];
+				$address  			= $locations[$i]->address;
+				$city 					= $locations[$i]->city;
+				$state 					= $locations[$i]->state;
+				$zip 						= $locations[$i]->zip;
+				$locationName		= $locations[$i]->name;
+				$brewMethods 		= $locations[$i]->methodsAvailable;
 
 				/*
 					Get the Latitude and Longitude returned from the Google Maps Address.

@@ -58,6 +58,11 @@
             <span class="validation" v-show="!validations.website.is_valid">{{ validations.website.text }}</span>
           </div>
           <div class="large-12 medium-12 small-12 cell">
+            <label>Photo
+              <input type="file" id="cafe-photo" ref="photo" v-on:change="handleFileUpload()"/>
+            </label>
+          </div>
+          <div class="large-12 medium-12 small-12 cell">
             <label>Description
               <textarea v-model="description"></textarea>
             </label>
@@ -160,6 +165,7 @@
         website: '',
         description: '',
         roaster: false,
+        picture: '',
         validations: {
           name: {
             is_valid: true,
@@ -289,7 +295,8 @@
             locations: this.locations,
             website: this.website,
             description: this.description,
-            roaster: this.roaster
+            roaster: this.roaster,
+            picture: this.picture
   				});
         }
       },
@@ -428,6 +435,9 @@
         this.website = '';
         this.description = '';
         this.roaster = false;
+        this.picture = '';
+        this.$refs.photo.value = '';
+
         this.validations = {
           name: {
             is_valid: true,
@@ -447,6 +457,10 @@
         EventBus.$emit('clear-tags');
 
         this.addLocation();
+      },
+
+      handleFileUpload(){
+        this.picture = this.$refs.photo.files[0];
       },
 
       /*

@@ -31,4 +31,8 @@ class Cafe extends Model
 	public function tags(){
 		return $this->belongsToMany( 'App\Models\Tag', 'cafes_users_tags', 'cafe_id', 'tag_id');
 	}
+
+	public function photos(){
+		return $this->hasMany( 'App\Models\CafePhoto', 'id', 'cafe_id' );
+	}
 }
