@@ -241,7 +241,7 @@ class CafesController extends Controller
 				*/
 				$cafe->brewMethods()->sync( $brewMethods );
 
-				$tags = $locations[$i]['tags'];
+				$tags 	= $locations[$i]->tags;
 
 				/*
 					Tags the cafe
