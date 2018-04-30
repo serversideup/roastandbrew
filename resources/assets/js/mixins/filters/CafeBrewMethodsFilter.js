@@ -15,7 +15,7 @@ export const CafeBrewMethodsFilter = {
           are in the filter.
         */
         for( var i = 0; i < cafe.brew_methods.length; i++ ){
-          cafeBrewMethods.push( cafe.brew_methods[i].method );
+          cafeBrewMethods.push( cafe.brew_methods[i].id );
         }
 
         /*

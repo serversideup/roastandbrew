@@ -9,7 +9,7 @@ export const CafeTextFilter = {
           If the name, location name, address, or city match the text that
           has been added, return true otherwise return false.
         */
-        if( cafe.name.toLowerCase().match( '[^,]*'+text.toLowerCase()+'[,$]*' )
+        if( cafe.company.name.toLowerCase().match( '[^,]*'+text.toLowerCase()+'[,$]*' )
           || cafe.location_name.toLowerCase().match( '[^,]*'+text.toLowerCase()+'[,$]*' )
           || cafe.address.toLowerCase().match( '[^,]*'+text.toLowerCase()+'[,$]*' )
           || cafe.city.toLowerCase().match( '[^,]*'+text.toLowerCase()+'[,$]*' )

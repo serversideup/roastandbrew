@@ -24,6 +24,7 @@ export const cafes = {
 
 		cafeLiked: false,
 
+		cafeAdded: {},
 		cafeAddStatus: 0,
 		cafeLikeActionStatus: 0,
 		cafeUnlikeActionStatus: 0
@@ -60,7 +61,7 @@ export const cafes = {
       CafeAPI.getCafe( data.id )
         .then( function( response ){
           commit( 'setCafe', response.data );
-					if( response.data.user_like.length > 0 ){
+					if( response.data.user_like_count > 0 ){
 						commit('setCafeLikedStatus', true);
 					}
           commit( 'setCafeLoadStatus', 2 );
@@ -109,10 +110,10 @@ export const cafes = {
 		*/
 		addCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeAddedStatus', 1 );
-
-			CafeAPI.postAddNewCafe( data.name, data.locations, data.website, data.description, data.roaster, data.picture )
+			CafeAPI.postAddNewCafe( data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.brew_methods )
 					.then( function( response ){
 						commit( 'setCafeAddedStatus', 2 );
+						commit( 'setCafeAdded', response.data );
 						dispatch( 'loadCafes' );
 					})
 					.catch( function(){
@@ -123,13 +124,16 @@ export const cafes = {
 		/*
 			Likes a cafe
 		*/
-		likeCafe( { commit, state }, data ){
+		likeCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeLikeActionStatus', 1 );
 
 			CafeAPI.postLikeCafe( data.id )
 				.then( function( response ){
 					commit( 'setCafeLikedStatus', true );
 					commit( 'setCafeLikeActionStatus', 2 );
+					dispatch( 'loadCafe', { id: data.id } );
+
+					commit( 'updateCafeLikedStatus', { id: data.id, count: 1 });
 				})
 				.catch( function(){
 					commit( 'setCafeLikeActionStatus', 3 );
@@ -139,17 +143,25 @@ export const cafes = {
 		/*
 			Unlikes a cafe
 		*/
-		unlikeCafe( { commit, state }, data ){
+		unlikeCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeUnlikeActionStatus', 1 );
 
 			CafeAPI.deleteLikeCafe( data.id )
 				.then( function( response ){
 					commit( 'setCafeLikedStatus', false );
 					commit( 'setCafeUnlikeActionStatus', 2 );
+					dispatch( 'loadCafe', { id: data.id } );
+
+					commit( 'updateCafeLikedStatus', { id: data.id, count: 0 });
 				})
 				.catch( function(){
 					commit( 'setCafeUnlikeActionStatus', 3 );
 				});
+		},
+
+		clearLikeAndUnlikeStatus( { commit }, data ){
+			commit( 'setCafeLikeActionStatus', 0 );
+			commit( 'setCafeUnlikeActionStatus', 0 );
 		}
 	},
 
@@ -207,6 +219,13 @@ export const cafes = {
 		},
 
 		/*
+			Set the added cafe.
+		*/
+		setCafeAdded( state, cafe ){
+			state.cafeAdded = cafe;
+		},
+
+		/*
 			Set the cafe add status
 		*/
 		setCafeAddedStatus( state, status ){
@@ -232,6 +251,17 @@ export const cafes = {
 		*/
 		setCafeUnlikeActionStatus( state, status ){
 			state.cafeUnlikeActionStatus = status;
+		},
+
+		/*
+			Update a loaded cafe's like status.
+		*/
+		updateCafeLikedStatus( state, data ){
+			for( var i = 0; i < state.cafes.length; i++ ){
+				if( state.cafes[i].id == data.id ){
+					state.cafes[i].user_like_count = data.count;
+				}
+			}
 		}
 	},
 
@@ -286,6 +316,13 @@ export const cafes = {
 		*/
 		getCafeEditLoadStatus( state ){
 			return state.cafeEditLoadStatus;
+		},
+
+		/*
+			Gets the added cafe.
+		*/
+		getAddedCafe( state ){
+			return state.cafeAdded;
 		},
 
 		/*

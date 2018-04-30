@@ -39,7 +39,7 @@ function requireAuth (to, from, next) {
 			if( store.getters.getUser != '' ){
       	next();
 			}else{
-				next('/home');
+				next('/cafes');
 			}
     }
 	}
@@ -78,30 +78,27 @@ export default new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: { name: 'home' },
+			redirect: { name: 'cafes' },
 			name: 'layout',
 			component: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
 			children: [
 				{
-					path: 'home',
-					name: 'home',
-					component: Vue.component( 'Home', require( './pages/Home.vue' ) )
-				},
-				{
 					path: 'cafes',
 					name: 'cafes',
-					component: Vue.component( 'Cafes', require( './pages/Cafes.vue' ) ),
-				},
-				{
-					path: 'cafes/new',
-					name: 'newcafe',
-					component: Vue.component( 'NewCafe', require( './pages/NewCafe.vue' ) ),
-					beforeEnter: requireAuth
-				},
-				{
-					path: 'cafes/:id',
-					name: 'cafe',
-					component: Vue.component( 'Cafe', require( './pages/Cafe.vue' ) )
+					component: Vue.component( 'Home', require( './pages/Home.vue' ) ),
+					children: [
+						{
+							path: 'new',
+							name: 'newcafe',
+							component: Vue.component( 'NewCafe', require( './pages/NewCafe.vue' ) ),
+							beforeEnter: requireAuth
+						},
+						{
+							path: ':id',
+							name: 'cafe',
+							component: Vue.component( 'Cafe', require( './pages/Cafe.vue' ) )
+						},
+					]
 				},
 				{
 					path: 'cafes/:id/edit',
@@ -113,6 +110,12 @@ export default new VueRouter({
 					path: 'profile',
 					name: 'profile',
 					component: Vue.component( 'Profile', require( './pages/Profile.vue' ) ),
+					beforeEnter: requireAuth
+				},
+				{
+					path: 'users',
+					name: 'users',
+					component: Vue.component( 'Users', require( './pages/Users.vue' ) ),
 					beforeEnter: requireAuth
 				}
 			]

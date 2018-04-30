@@ -25,6 +25,24 @@ class UsersController extends Controller
 
   /*
   |-------------------------------------------------------------------------------
+  | Get Users
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/users
+  | Method:         GET
+  | Description:    Gets the users searched by the authenticated user.
+  */
+  public function getUsers(){
+    $query = Request::get('search');
+
+    $users = User::where('name', 'LIKE', '%'.$query.'%')
+                 ->orWhere('email', 'LIKE', '%'.$query.'%')
+                 ->get();
+
+
+    return response()->json( $users );
+  }
+  /*
+  |-------------------------------------------------------------------------------
   | Updates a User's Profile
   |-------------------------------------------------------------------------------
   | URL:            /api/v1/user

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="18px" viewBox="0 0 26 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>User &amp; Menu</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="00.00-Home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(-1397.000000, -28.000000)" id="Header" stroke="#342C0C" stroke-width="2">
+            <g>
+                <g id="User-&amp;-Menu" transform="translate(1398.000000, 29.000000)">
+                    <g id="menu">
+                        <path d="M0,8 L24,8" id="Shape"></path>
+                        <path d="M0,0 L24,0" id="Shape"></path>
+                        <path d="M0,16 L24,16" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

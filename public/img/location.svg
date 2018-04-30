@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="20px" viewBox="0 0 17 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>map-pin</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="01.01-Map-LocationDetail" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="01.01.01-Map-LocationDetail-Cafe" transform="translate(-951.000000, -285.000000)" stroke="#8E8E8E" stroke-width="2">
+            <g id="Detail-Location" transform="translate(929.000000, 125.000000)">
+                <g id="Likes-Copy" transform="translate(23.000000, 158.000000)">
+                    <g id="map-pin" transform="translate(0.000000, 3.000000)">
+                        <path d="M15,7.3636363 C15,13.0909091 7.5,18 7.5,18 C7.5,18 0,13.0909091 0,7.3636363 C6.17226307e-08,3.29681225 3.35786442,-1.8167286e-16 7.5,0 C11.6421356,1.8167286e-16 14.9999999,3.29681225 15,7.3636363 Z" id="Shape"></path>
+                        <circle id="Oval" cx="7.5" cy="7.5" r="2.5"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

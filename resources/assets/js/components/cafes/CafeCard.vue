@@ -4,7 +4,7 @@
   div.cafe-card{
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-    padding: 5px;
+    padding: 15px 5px;
     margin-top: 20px;
     cursor: pointer;
     -webkit-transform: scaleX(1) scaleY(1);
@@ -14,8 +14,10 @@
     span.title{
       display: block;
       text-align: center;
-      color: $dark-color;
-      font-family: 'Josefin Sans', sans-serif;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: 'Lato', sans-serif;
     }
 
     span.address{
@@ -31,15 +33,15 @@
       }
 
       span.city{
-        font-size: 12px;
+        font-size: 14px;
       }
 
       span.state{
-        font-size: 12px;
+        font-size: 14px;
       }
 
       span.zip{
-        font-size: 12px;
+        font-size: 14px;
         display: block;
       }
     }
@@ -53,10 +55,10 @@
 </style>
 
 <template>
-  <div class="large-3 medium-3 small-6 cell" v-show="show">
+  <div class="large-6 medium-6 small-6 cell" v-show="show">
     <router-link :to="{ name: 'cafe', params: { id: cafe.id} }">
       <div class="cafe-card">
-        <span class="title">{{ cafe.name }}</span>
+        <span class="title">{{ cafe.company.name }}</span>
         <span class="address">
           <span class="street">{{ cafe.address }}</span>
           <span class="city">{{ cafe.city }}</span> <span class="state">{{ cafe.state }}</span>
@@ -68,10 +70,10 @@
 </template>
 
 <script>
-  import { CafeIsRoasterFilter } from '../../mixins/filters/CafeIsRoasterFilter.js';
+  import { CafeTypeFilter } from '../../mixins/filters/CafeTypeFilter.js';
   import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
-  import { CafeTagsFilter } from '../../mixins/filters/CafeTagsFilter.js';
   import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
+  import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
 
   /*
     Imports the Event Bus to listen to filter updates
@@ -88,10 +90,10 @@
     },
 
     mixins: [
-      CafeIsRoasterFilter,
+      CafeTypeFilter,
       CafeBrewMethodsFilter,
-      CafeTagsFilter,
-      CafeTextFilter
+      CafeTextFilter,
+      CafeUserLikeFilter
     ],
 
     mounted(){
@@ -106,27 +108,24 @@
           If no filters are selected, show the card
         */
         if( filters.text == ''
-          && filters.tags.length == 0
-          && filters.roaster == false
-          && filters.brew_methods.length == 0 ){
+          && filters.type == 'all'
+          && filters.brewMethods.length == 0
+          && !filters.liked ){
             this.show = true;
         }else{
           /*
             Initialize flags for the filtering
           */
           var textPassed = false;
-          var tagsPassed = false;
           var brewMethodsPassed = false;
-          var roasterPassed = false;
-
+          var typePassed = false;
+          var likedPassed = false;
 
           /*
             Check if the roaster passes
           */
-          if( filters.roaster && this.processCafeIsRoasterFilter( this.cafe ) ){
-            roasterPassed = true;
-          }else if( !filters.roaster ){
-            roasterPassed = true;
+          if( this.processCafeTypeFilter( this.cafe, filters.type) ){
+            typePassed = true;
           }
 
           /*
@@ -141,25 +140,25 @@
           /*
             Check if brew methods passes
           */
-          if( filters.brew_methods.length != 0 && this.processCafeBrewMethodsFilter( this.cafe, filters.brew_methods ) ){
+          if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.cafe, filters.brewMethods ) ){
             brewMethodsPassed = true;
-          }else if( filters.brew_methods.length == 0 ){
+          }else if( filters.brewMethods.length == 0 ){
             brewMethodsPassed = true;
           }
 
           /*
-            Check if tags passes
+            Check if liked passes
           */
-          if( filters.tags.length != 0 && this.processCafeTagsFilter( this.cafe, filters.tags ) ){
-            tagsPassed = true;
-          }else if( filters.tags.length == 0 ){
-            tagsPassed = true;
+          if( filters.liked && this.processCafeUserLikeFilter( this.cafe ) ){
+            likedPassed = true;
+          }else if( !filters.liked ){
+            likedPassed = true;
           }
 
           /*
             If everything passes, then we show the Cafe Card
           */
-          if( roasterPassed && textPassed && brewMethodsPassed && tagsPassed ){
+          if( typePassed && textPassed && brewMethodsPassed && likedPassed ){
             this.show = true;
           }else{
             this.show = false;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="20px" viewBox="0 0 23 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="01.01-Map-LocationDetail" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="01.01.01-Map-LocationDetail-Cafe" transform="translate(-948.000000, -254.000000)" fill="#E8635F" stroke="#E8635F" stroke-width="2">
+            <g id="Detail-Location" transform="translate(929.000000, 125.000000)">
+                <g id="Likes" transform="translate(20.000000, 128.000000)">
+                    <path d="M19.0459935,3.59133055 C18.0275856,2.57244446 16.646041,2 15.2054566,2 C13.7648721,2 12.3833275,2.57244446 11.3649196,3.59133055 L10.318398,4.63785219 L9.27187634,3.59133055 C7.15080634,1.47026062 3.71187246,1.47026064 1.59080249,3.59133061 C-0.530267475,5.71240058 -0.530267501,9.15133446 1.59080244,11.2724045 L2.63732407,12.3189261 L10.318398,20 L17.9994719,12.3189261 L19.0459935,11.2724045 C20.0648796,10.2539965 20.6373241,8.87245196 20.6373241,7.43186751 C20.6373241,5.99128306 20.0648796,4.60973847 19.0459935,3.59133055 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

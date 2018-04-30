@@ -19,6 +19,17 @@ Route::group(['prefix' => 'v1'], function(){
 
   /*
   |-------------------------------------------------------------------------------
+  | Get Users
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/users
+  | Controller:     API\UsersController@getUsers
+  | Method:         GET
+  | Description:    Gets the users searched by the authenticated user.
+  */
+  Route::get('/users', 'API\UsersController@getUsers');
+
+  /*
+  |-------------------------------------------------------------------------------
   | Get All Cafes
   |-------------------------------------------------------------------------------
   | URL:            /api/v1/cafes
@@ -66,6 +77,8 @@ Route::group(['prefix' => 'v1'], function(){
   Authenticated API Routes.
 */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+  Route::get('/companies/search', 'API\CompaniesController@getCompanySearch');
+
   /*
   |-------------------------------------------------------------------------------
   | Updates a User's Profile

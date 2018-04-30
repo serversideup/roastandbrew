@@ -1,141 +1,216 @@
 <style lang="scss">
   @import '~@/abstracts/_variables.scss';
 
-  div.cafe-page{
-    h2{
-      text-align: center;
-      color: $primary-color;
-      font-family: 'Josefin Sans', sans-serif;
+  div#cafe-page{
+    position: absolute;
+    right: 30px;
+    top: 125px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(3,27,78,0.10);
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+    padding-top: 10px;
+
+    img.close-icon{
+      float: right;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    h3{
-      text-align: center;
-      color: $secondary-color;
-      font-family: 'Josefin Sans', sans-serif;
+    h2.cafe-title{
+      color: #342C0C;
+      font-size: 36px;
+      line-height: 44px;
+      font-family: "Lato", sans-serif;
+      font-weight: bolder;
     }
 
-    div.edit-container{
-      text-align: center;
+    span.location-number{
+      display: inline-block;
+      color: #8E8E8E;
+      font-size: 18px;
 
-      a{
-        color: $primary-color;
-        font-weight: bold;
-        font-size: 20px;
-      }
-    }
-
-    span.address{
-      text-align: center;
-      display: block;
-      font-family: 'Lato', sans-serif;
-      color: #A0A0A0;
-      font-size: 20px;
-      line-height: 30px;
-      margin-top: 50px;
-    }
-
-    a.website{
-      text-align: center;
-      color: $dull-color;
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 50px;
-      display: block;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-
-    div.brew-methods-container{
-      max-width: 700px;
-      margin: auto;
-
-      div.cell{
+      span.location-image-container{
+        width: 35px;
         text-align: center;
-      }
-    }
-
-    div.tags-container{
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
-      margin-top: 30px;
-
-      span.tag{
-        color: $dark-color;
-        font-family: 'Josefin Sans', sans-serif;
-        margin-right: 20px;
         display: inline-block;
-        line-height: 20px;
       }
     }
 
-    a.prompt-log-in{
-      display: block;
-      text-align: center;
-      color: $dark-color;
-      font-family: 'Lato', sans-serif;
-      font-size: 20px;
-      max-width: 50%;
-      margin: auto;
+    label.cafe-label{
+      font-family: "Lato", sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: black;
       margin-top: 20px;
+      margin-bottom: 10px;
     }
+
+    div.location-type{
+      color: white;
+      font-family: "Lato", sans-serif;
+      font-size: 16px;
+      width: 105px;
+      height: 45px;
+      text-align: center;
+      line-height: 45px;
+      border-radius: 3px;
+
+      img{
+        margin-right: 5px;
+      }
+
+      &.roaster{
+        background-color: $secondary-color;
+      }
+
+      &.cafe{
+        background-color: black;
+
+        img{
+          margin-top: -6px;
+        }
+      }
+    }
+
+    div.brew-method{
+      font-size: 16px;
+      color: #666666;
+      font-family: "Lato", sans-serif;
+      border-radius: 4px;
+      background-color: #F9F9FA;
+      width: 150px;
+      height: 57px;
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      padding: 5px;
+      cursor: pointer;
+      position: relative;
+
+      div.brew-method-container{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        img.brew-method-icon{
+          display: inline-block;
+          margin-right: 10px;
+          margin-left: 5px;
+        }
+
+        span.brew-method-name{
+          display: inline-block;
+          width: calc( 100% - 40px);
+          vertical-align: middle;
+        }
+      }
+    }
+
+    div.address-container{
+      color: #666666;
+      font-size: 18px;
+      line-height: 23px;
+      font-family: "Lato", sans-serif;
+      margin-bottom: 5px;
+
+      span.address{
+        display: block;
+      }
+
+      span.city-state{
+        display: block;
+      }
+
+      span.zip{
+        display: block;
+      }
+    }
+
+    a.cafe-website{
+      font-family: "Lato", sans-serif;
+      color: #543729;
+      font-size: 18px;
+    }
+  }
+
+  /* Small only */
+  @media screen and (max-width: 39.9375em) {
+    div#cafe-page{
+      position: fixed;
+      right: 0px;
+      left: 0px;
+      top: 0px;
+      bottom: 0px;
+      z-index: 99999;
+    }
+  }
+
+  /* Medium only */
+  @media screen and (min-width: 40em) and (max-width: 63.9375em) {
+
+  }
+
+  /* Large only */
+  @media screen and (min-width: 64em) and (max-width: 74.9375em) {
+
   }
 </style>
 
 <template>
-  <div id="cafe" class="page">
-
-    <div class="grid-container">
-      <div class="grid-x grid-padding-x">
-
-        <div class="large-12 medium-12 small-12 cell">
-          <loader v-show="cafeLoadStatus == 1"
-                  :width="100"
-                  :height="100"></loader>
-
-          <div class="cafe-page" v-show="cafeLoadStatus == 2">
-            <h2>{{ cafe.name }}</h2>
-            <h3 v-if="cafe.location_name != ''">{{ cafe.location_name }}</h3>
-
-            <div class="edit-container" v-if="this.user != '' && this.userLoadStatus == 2">
-              <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }">Edit</router-link>
-            </div>
-
-            <span class="address">
-              {{ cafe.address }}<br>
-              {{ cafe.city }}, {{ cafe.state }}<br>
-              {{ cafe.zip }}
-            </span>
-
-            <toggle-like v-if="user != '' && userLoadStatus == 2"></toggle-like>
-            <a class="prompt-log-in" v-if="user == '' && userLoadStatus == 2" v-on:click="login()">Did you know you can "like" this cafe and save it to your profile? Just log in!</a>
-
-            <div class="tags-container">
-              <div class="grid-x grid-padding-x">
-                <div class="large-12 medium-12 small-12 cell">
-                  <span class="tag" v-for="tag in cafe.tags">#{{ tag.tag }}</span>
-                </div>
-              </div>
-            </div>
-
-            <a class="website" v-bind:href="cafe.website" target="_blank">{{ cafe.website }}</a>
-
-            <div class="brew-methods-container">
-              <div class="grid-x grid-padding-x">
-                <div class="large-3 medium-4 small-12 cell" v-for="brewMethod in cafe.brew_methods">
-                  {{ brewMethod.method }}
-                </div>
-              </div>
-            </div>
-
-            <br>
-
-            <individual-cafe-map></individual-cafe-map>
-          </div>
-        </div>
-
+  <div id="cafe-page" v-if="cafeLoadStatus == 2 || ( cafeLoadStatus != 2 && ( cafeLikeActionStatus == 1 || cafeLikeActionStatus == 2 || cafeUnlikeActionStatus == 1 || cafeUnlikeActionStatus == 2 ) )">
+    <router-link :to="{ name: 'cafes' }">
+      <img class="close-icon" src="/img/close-icon.svg"/>
+    </router-link>
+    <h2 class="cafe-title">{{ cafe.company.name }}</h2>
+    <div class="grid-x">
+      <div class="large-12 medium-12 small-12 cell">
+        <toggle-like></toggle-like>
       </div>
     </div>
+    <div class="grid-x" v-if="cafe.company.cafes_count > 1">
+      <div class="large-12 medium-12 small-12 cell">
+        <span class="location-number">
+          <span class="location-image-container">
+            <img src="/img/location.svg"/>
+          </span> {{ cafe.company.cafes_count }} other locations
+        </span>
+      </div>
+    </div>
+    <div class="grid-x">
+      <div class="large-12 medium-12 small-12 cell">
+        <label class="cafe-label">Location Type</label>
+        <div class="location-type roaster" v-if="cafe.company.roaster == 1">
+          <img src="/img/roaster-logo.svg"/> Roaster
+        </div>
+        <div class="location-type cafe" v-if="cafe.company.roaster == 0">
+          <img src="/img/cafe-logo.svg"/> Cafe
+        </div>
+      </div>
+    </div>
+    <div class="grid-x">
+      <div class="large-12 medium-12 small-12 cell">
+        <label class="cafe-label">Brew Methods</label>
+        <div class="brew-method" v-for="method in cafe.brew_methods">
+          <div class="brew-method-container">
+            <img v-bind:src="method.icon" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-x">
+      <div class="large-12 medium-12 small-12 cell">
+        <label class="cafe-label">Location And Information</label>
+        <div class="address-container">
+          <span class="address">{{ cafe.address }}</span>
+          <span class="city-state">{{ cafe.city }}, {{ cafe.state }}</span>
+          <span class="zip">{{ cafe.zip }}</span>
+        </div>
 
+        <a class="cafe-website" target="_blank" v-bind:href="cafe.company.website">{{ cafe.company.website }}</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -169,6 +244,16 @@
       });
     },
 
+    watch: {
+      '$route.params.id': function(){
+        this.$store.dispatch( 'clearLikeAndUnlikeStatus' );
+        this.$store.dispatch( 'loadCafe', {
+          id: this.$route.params.id
+        });
+			},
+    },
+
+
     /*
       Defines the computed variables on the cafe.
     */
@@ -178,6 +263,14 @@
       */
       cafeLoadStatus(){
         return this.$store.getters.getCafeLoadStatus;
+      },
+
+      cafeLikeActionStatus(){
+        return this.$store.getters.getCafeLikeActionStatus;
+      },
+
+      cafeUnlikeActionStatus(){
+        return this.$store.getters.getCafeUnlikeActionStatus;
       },
 
       /*

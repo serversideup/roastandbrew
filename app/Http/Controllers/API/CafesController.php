@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Company;
 use App\Models\Cafe;
 use App\Models\CafePhoto;
 
@@ -36,6 +37,8 @@ class CafesController extends Controller
 									->with(['tags' => function( $query ){
 										$query->select('tag');
 									}])
+									->with('company')
+									->withCount('userLike')
 									->get();
 
     return response()->json( $cafes );
@@ -54,9 +57,14 @@ class CafesController extends Controller
   public function getCafe( $id ){
     $cafe = Cafe::where('id', '=', $id)
 								->with('brewMethods')
-								->with('userLike')
+								->withCount('userLike')
 								->with('tags')
+								->with(['company' => function( $query ){
+									$query->withCount('cafes');
+								}])
+								->withCount('likes')
 								->first();
+
 
     return response()->json( $cafe );
   }
@@ -98,164 +106,59 @@ class CafesController extends Controller
   | Description:    Adds a new cafe to the application
   */
   public function postNewCafe( StoreCafeRequest $request ){
-		$addedCafes = array();
+		$companyID = $request->get('company_id');
 
-		$locations = json_decode( $request->get('locations') );
+		if( $companyID != '' ){
+			$company = Company::where('id', '=', $companyID)->first();
+		}else{
+			$company = new Company();
 
-		/*
-			Create a parent cafe and grab the first location
-		*/
-		$parentCafe = new Cafe();
+			$company->name 				= $request->get('company_name');
+			$company->roaster			= $request->get('company_type') == 'roaster' ? 1 : 0;
+			$company->website 		= $request->get('website');
+			$company->logo 				= '';
+			$company->description = '';
+			$company->added_by 		= Auth::user()->id;
 
-		$address  			= $locations[0]->address;
-		$city 					= $locations[0]->city;
-		$state 					= $locations[0]->state;
-		$zip 						= $locations[0]->zip;
-		$locationName		= $locations[0]->name;
-		$brewMethods 		= $locations[0]->methodsAvailable;
-		$tags 					= $locations[0]->tags;
+			$company->save();
+		}
 
-		/*
-			Get the Latitude and Longitude returned from the Google Maps Address.
-		*/
+		$address 			= $request->get('address');
+		$city 				= $request->get('city');
+		$state 				= $request->get('state');
+		$zip 					= $request->get('zip');
+		$locationName = $request->get('location_name');
+		$brewMethods 	= json_decode( $request->get('brew_methods') );
+
 		$coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
 
-		$parentCafe->name 					= $request->get('name');
-		$parentCafe->location_name	= $locationName != '' ? $locationName : '';
-		$parentCafe->address 				= $address;
-		$parentCafe->city 					= $city;
-		$parentCafe->state 					= $state;
-		$parentCafe->zip 						= $zip;
-		$parentCafe->latitude 			= $coordinates['lat'];
-		$parentCafe->longitude 			= $coordinates['lng'];
-		$parentCafe->roaster 				= $request->get('roaster') != '' ? 1 : 0;
-		$parentCafe->website 				= $request->get('website');
-		$parentCafe->description		= $request->get('description') != '' ? $request->get('description') : '';
-		$parentCafe->added_by 			= Auth::user()->id;
+		$cafe = new Cafe();
 
-		/*
-			Save parent cafe
-		*/
-		$parentCafe->save();
+		$cafe->company 					= $company->id;
+		$cafe->location_name 		= $locationName != null ? $locationName : '';
+		$cafe->address 					= $address;
+		$cafe->city 						= $city;
+		$cafe->state 						= $state;
+		$cafe->zip 							= $zip;
+		$cafe->latitude 				= $coordinates['lat'];
+		$cafe->longitude 				= $coordinates['lng'];
+		$cafe->added_by 				= Auth::user()->id;
 
-		$photo = Request::file('picture');
-
-		if( count( $photo ) > 0 ){
-			if( $photo != null && $photo->isValid() ){
-
-				/*
-					Creates the cafe directory if needed
-				*/
-				if( !File::exists( app_path().'/Photos/'.$parentCafe->id.'/' ) ){
-					File::makeDirectory( app_path() .'/Photos/'.$parentCafe->id.'/' );
-				}
-
-				/*
-					Sets the destination path and moves the file there.
-				*/
-				$destinationPath = app_path().'/Photos/'.$parentCafe->id;
-
-				/*
-					Grabs the filename and file type
-				*/
-				$filename = time().'-'.$photo->getClientOriginalName();
-
-				/*
-					Moves to the directory
-				*/
-				$photo->move( $destinationPath, $filename );
-
-				/*
-					Creates a new record in the database.
-				*/
-				$cafePhoto = new CafePhoto();
-
-				$cafePhoto->cafe_id = $parentCafe->id;
-				$cafePhoto->uploaded_by = Auth::user()->id;
-				$cafePhoto->file_url = app_path() .'/Photos/'.$parentCafe->id.'/';
-
-				$cafePhoto->save();
-			}
-		}
+		$cafe->save();
 
 		/*
 			Attach the brew methods
 		*/
-		$parentCafe->brewMethods()->sync( $brewMethods );
+		$cafe->brewMethods()->sync( $brewMethods );
 
-		/*
-			Tags the cafe
-		*/
-		Tagger::tagCafe( $parentCafe, $tags );
-
-		array_push( $addedCafes, $parentCafe->toArray() );
-
-		/*
-			Now that we have the parent cafe, we add all of the other
-			locations. We have to see if other locations are added.
-		*/
-		if( count( $locations ) > 1 ){
-			/*
-				We off set the counter at 1 since we already used the
-				first location.
-			*/
-			for( $i = 1; $i < count( $locations ); $i++ ){
-				/*
-					Create a cafe and grab the location
-				*/
-				$cafe = new Cafe();
-
-				$address  			= $locations[$i]->address;
-				$city 					= $locations[$i]->city;
-				$state 					= $locations[$i]->state;
-				$zip 						= $locations[$i]->zip;
-				$locationName		= $locations[$i]->name;
-				$brewMethods 		= $locations[$i]->methodsAvailable;
-
-				/*
-					Get the Latitude and Longitude returned from the Google Maps Address.
-				*/
-				$coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
-
-				$cafe->parent 				= $parentCafe->id;
-				$cafe->name 					= $request->get('name');
-				$cafe->location_name	= $locationName != '' ? $locationName : '';
-				$cafe->address 				= $address;
-				$cafe->city 					= $city;
-				$cafe->state 					= $state;
-				$cafe->zip 						= $zip;
-				$cafe->latitude 			= $coordinates['lat'];
-				$cafe->longitude 			= $coordinates['lng'];
-				$cafe->roaster 				= $request->get('roaster') != '' ? 1 : 0;
-				$cafe->website 				= $request->get('website');
-				$cafe->description		= $request->get('description') != '' ? $request->get('description') : '';
-				$cafe->added_by 			= Auth::user()->id;
-
-				/*
-					Save cafe
-				*/
-				$cafe->save();
-
-				/*
-					Attach the brew methods
-				*/
-				$cafe->brewMethods()->sync( $brewMethods );
-
-				$tags 	= $locations[$i]->tags;
-
-				/*
-					Tags the cafe
-				*/
-				Tagger::tagCafe( $cafe, $tags );
-
-				array_push( $addedCafes, $cafe->toArray() );
-			}
-		}
+		$company = Company::where('id', '=', $company->id)
+											->with('cafes')
+											->first();
 
 		/*
 			Return the added cafes as JSON
 		*/
-    return response()->json($addedCafes, 201);
+    return response()->json( $company, 201);
   }
 
 	/*

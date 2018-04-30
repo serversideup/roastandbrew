@@ -10,6 +10,7 @@
  *  1. Abstracts
  *  2. Components
  *  3. Layouts
+ *  4. Animations
  */
 
 /**
@@ -28,5 +29,14 @@
  * Chapter 3: Layouts
  */
 @import 'layouts/page';
+
+/**
+ * Chapter 4: Animations
+ */
+@import 'animations/slide-in-left';
+@import 'animations/slide-in-right';
+@import 'animations/scale-in-center';
+@import 'animations/slide-out-back';
+@import 'animations/slide-in-top';
 
 @import "node_modules/foundation-sites/assets/foundation.scss";

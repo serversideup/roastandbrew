@@ -24,12 +24,11 @@ class StoreCafeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                    => 'required',
-            'location.*.address'      => 'required',
-            'location.*.city'         => 'required',
-            'location.*.state'        => 'required',
-            'location.*.zip'          => 'required|regex:/\b\d{5}\b/',
-            'location.*.brew_methods' => 'sometimes|array',
+            'company_name'            => 'required',
+            'address'                 => 'required',
+            'city'                    => 'required',
+            'state'                   => 'required',
+            'zip'                     => 'required',
             'website'                 => 'sometimes|url'
         ];
     }
@@ -42,15 +41,13 @@ class StoreCafeRequest extends FormRequest
     public function messages()
     {
         return [
-          'name.required'             => 'A name for the cafe is required.',
-          'location.*.address'        => [ 'required' => 'Each location needs to have an address.' ],
-          'location.*.city'           => [ 'required' => 'Each location needs to have a city.' ],
-          'location.*.state'          => [ 'required' => 'Each location needs to have a state.' ],
-          'location.*.zip'            => [
-                                            'required' => 'Each location needs to have a zip.',
-                                            'regex'    => 'The zip code for your location is invalid.'
+          'company_name.required'     => 'A name for the cafe is required.',
+          'address'                   => [ 'required' => 'The location needs to have an address.' ],
+          'city'                      => [ 'required' => 'The location needs to have a city.' ],
+          'state'                     => [ 'required' => 'The location needs to have a state.' ],
+          'zip'                       => [
+                                            'required' => 'The location needs to have a zip.'
                                          ],
-          'location.*.brew_methods'   => [ 'array' => 'The brew methods must be an array of ids' ],
           'website.url'               => 'The website must be a proper URL.'
         ];
     }

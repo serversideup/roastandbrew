@@ -3,10 +3,10 @@
 
   div#cafe-map-container{
     position: absolute;
-    top: 50px;
+    top: 75px;
     left: 0px;
     right: 0px;
-    bottom: 50px;
+    bottom: 0px;
 
     div#cafe-map{
       position: absolute;
@@ -63,22 +63,20 @@
     <div id="cafe-map">
 
     </div>
-    <cafe-map-filter></cafe-map-filter>
   </div>
 </template>
 
 <script>
-  import { CafeIsRoasterFilter } from '../../mixins/filters/CafeIsRoasterFilter.js';
+  import { CafeTypeFilter } from '../../mixins/filters/CafeTypeFilter.js';
   import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
   import { CafeTagsFilter } from '../../mixins/filters/CafeTagsFilter.js';
   import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
+  import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
 
   /*
     Imports the Event Bus to pass updates.
   */
   import { EventBus } from '../../event-bus.js';
-
-  import CafeMapFilter from './CafeMapFilter.vue';
 
   export default {
     props: {
@@ -97,13 +95,9 @@
       'zoom': {
         type: Number,
         default: function(){
-          return 4
+          return 5
         }
       }
-    },
-
-    components: {
-      CafeMapFilter
     },
 
     data(){
@@ -114,10 +108,11 @@
     },
 
     mixins: [
-      CafeIsRoasterFilter,
+      CafeTypeFilter,
       CafeBrewMethodsFilter,
       CafeTagsFilter,
-      CafeTextFilter
+      CafeTextFilter,
+      CafeUserLikeFilter
     ],
 
     computed: {
@@ -171,8 +166,9 @@
       processFilters( filters ){
         for( var i = 0; i < this.markers.length; i++ ){
           if( filters.text == ''
-              && filters.roaster == false
-              && filters.brew_methods.length == 0 ){
+            && filters.type == 'all'
+            && filters.brewMethods.length == 0
+            && !filters.liked  ){
                 this.markers[i].setMap( this.map );
               }else{
                 /*
@@ -180,16 +176,15 @@
                 */
                 var textPassed = false;
                 var brewMethodsPassed = false;
-                var roasterPassed = false;
+                var typePassed = false;
+                var likedPassed = false;
 
 
                 /*
                   Check if the roaster passes
                 */
-                if( filters.roaster && this.processCafeIsRoasterFilter( this.markers[i].cafe ) ){
-                  roasterPassed = true;
-                }else if( !filters.roaster ){
-                  roasterPassed = true;
+                if( this.processCafeTypeFilter( this.markers[i].cafe, filters.type) ){
+                  typePassed = true;
                 }
 
                 /*
@@ -204,16 +199,25 @@
                 /*
                   Check if brew methods passes
                 */
-                if( filters.brew_methods.length != 0 && this.processCafeBrewMethodsFilter( this.markers[i].cafe, filters.brew_methods ) ){
+                if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.markers[i].cafe, filters.brewMethods ) ){
                   brewMethodsPassed = true;
-                }else if( filters.brew_methods.length == 0 ){
+                }else if( filters.brewMethods.length == 0 ){
                   brewMethodsPassed = true;
+                }
+
+                /*
+                  Check if liked passes
+                */
+                if( filters.liked && this.processCafeUserLikeFilter( this.markers[i].cafe ) ){
+                  likedPassed = true;
+                }else if( !filters.liked ){
+                  likedPassed = true;
                 }
 
                 /*
                   If everything passes, then we show the Cafe Marker
                 */
-                if( roasterPassed && textPassed && brewMethodsPassed){
+                if( typePassed && textPassed && brewMethodsPassed && likedPassed ){
                   this.markers[i].setMap( this.map );
                 }else{
                   this.markers[i].setMap( null );
@@ -254,7 +258,12 @@
             latitude and longitude to the latitude and longitude
             of the cafe. Also set the map to be the local map.
           */
-          var image = '/img/coffee-marker.png';
+          if( this.cafes[i].company.roaster == 1 ){
+            var image = '/img/roaster-marker.svg';
+          }else{
+            var image = '/img/cafe-marker.svg';
+          }
+
 
           var marker = new google.maps.Marker({
             position: { lat: parseFloat( this.cafes[i].latitude ), lng: parseFloat( this.cafes[i].longitude ) },
@@ -263,31 +272,14 @@
             cafe: this.cafes[i]
           });
 
-          /*
-            Create the info window and add it to the local
-            array.
-          */
-          var contentString = '<div class="cafe-info-window">' +
-                                '<div class="cafe-name">'+this.cafes[i].name+'</div>' +
-                                '<div class="cafe-address">' +
-                                  '<span class="street">'+this.cafes[i].address+'</span>' +
-                                  '<span class="city">'+this.cafes[i].city+'</span> <span class="state">'+this.cafes[i].state+'</span>' +
-                                  '<span class="zip">'+this.cafes[i].zip+'</span>' +
-                                  '<a href="/#/cafes/'+this.cafes[i].id+'">Visit</a>'+
-                                '</div>'+
-                              '</div>';
-
-          let infoWindow = new google.maps.InfoWindow({
-            content: contentString
-          });
-
-          this.infoWindows.push( infoWindow );
 
           /*
             Add the event listener to open the info window for the marker.
           */
+          let router = this.$router;
+
           marker.addListener('click', function() {
-            infoWindow.open(this.map, this);
+            router.push( { name: 'cafe', params: { id: this.cafe.id } } );
           });
 
           /*
@@ -295,8 +287,6 @@
           */
           this.markers.push( marker );
         }
-
-
       }
     }
   }

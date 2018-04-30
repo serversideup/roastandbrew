@@ -28,7 +28,7 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( name, locations, website, description, roaster, picture ){
+	postAddNewCafe: function( companyName, companyID, companyType, website, locationName, address, city, state, zip, brewMethods ){
 		/*
 			Initialize the form data
 		*/
@@ -37,12 +37,16 @@ export default {
 		/*
 			Add the form data we need to submit
 		*/
-		formData.append('name', name);
-		formData.append('locations', JSON.stringify( locations ) );
+		formData.append('company_name', companyName);
+		formData.append('company_id', companyID);
+		formData.append('company_type', companyType);
 		formData.append('website', website);
-		formData.append('description', description);
-		formData.append('roaster', roaster);
-		formData.append('picture', picture);
+		formData.append('location_name', locationName);
+		formData.append('address', address);
+		formData.append('city', city);
+		formData.append('state', state);
+		formData.append('zip', zip);
+		formData.append('brew_methods', JSON.stringify( brewMethods ) );
 
 		return axios.post( ROAST_CONFIG.API_URL + '/cafes',
 			formData,
