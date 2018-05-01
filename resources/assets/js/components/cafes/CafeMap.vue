@@ -157,6 +157,12 @@
       EventBus.$on('filters-updated', function( filters ){
         this.processFilters( filters );
       }.bind(this));
+
+      EventBus.$on('location-selected', function( cafe ){
+        var latLng = new google.maps.LatLng( cafe.lat, cafe.lng );
+        this.map.setZoom( 10 );
+        this.map.panTo(latLng);
+      }.bind(this));
     },
 
     methods: {

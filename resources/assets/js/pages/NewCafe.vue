@@ -108,7 +108,13 @@
         background-color: $secondary-color;
 
         div.brew-method-container{
+          img.brew-method-icon{
+            display: none;
+          }
 
+          img.brew-method-icon-active{
+            display: inline-block;
+          }
         }
       }
 
@@ -119,6 +125,12 @@
 
         img.brew-method-icon{
           display: inline-block;
+          margin-right: 10px;
+          margin-left: 5px;
+        }
+
+        img.brew-method-icon-active{
+          display: none;
           margin-right: 10px;
           margin-left: 5px;
         }
@@ -274,7 +286,7 @@
           <div class="large-8 medium-9 small-12 cell centered">
             <div class="brew-method" v-on:click="toggleSelectedBrewMethod( method.id )" v-for="method in brewMethods" v-bind:class="{'active': brewMethodsSelected.indexOf( method.id ) >= 0 }">
               <div class="brew-method-container">
-                <img v-bind:src="method.icon" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/><img v-bind:src="method.icon+'-active.svg'" class="brew-method-icon-active"/> <span class="brew-method-name">{{ method.method }}</span>
               </div>
             </div>
           </div>
@@ -290,7 +302,8 @@
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Street Address</label>
-            <input type="text" class="form-input" v-model="address" v-bind:class="{'invalid' : !validations.address.is_valid }"/>
+            <input type="text" id="street-address" placeholder="Street Address" class="form-input" v-bind:class="{'invalid' : !validations.address.is_valid }"/>
+            <input type="hidden" v-model="address"/>
             <div class="validation" v-show="!validations.address.is_valid">{{ validations.address.text }}</div>
           </div>
         </div>
@@ -420,6 +433,8 @@
         city: '',
         state: '',
         zip: '',
+        lat: '',
+        lng: '',
         brewMethodsSelected: [],
 
 
@@ -477,6 +492,44 @@
       }
     },
 
+    mounted(){
+      this.autocomplete = document.getElementById('street-address');
+      let googleMapsAutocomplete = new google.maps.places.Autocomplete( this.autocomplete );
+
+      googleMapsAutocomplete.addListener( 'place_changed', function(){
+        let place = googleMapsAutocomplete.getPlace();
+
+        let addressBuilderStreetNumber = '';
+        let addressBuilderRoute = '';
+
+        for (var i = 0; i < place.address_components.length; i++) {
+          let type = place.address_components[i].types[0];
+          switch( type ){
+            case 'street_number':
+              addressBuilderStreetNumber = place.address_components[i].short_name;
+            break;
+            case 'route':
+              addressBuilderRoute = place.address_components[i].short_name;
+            break;
+            case 'locality':
+              this.city = place.address_components[i].long_name;
+            break;
+            case 'administrative_area_level_1':
+              this.state = place.address_components[i].short_name;
+            break;
+            case 'postal_code':
+              this.zip = place.address_components[i].short_name;
+            break;
+          }
+        }
+
+        this.address = addressBuilderStreetNumber+' '+addressBuilderRoute;
+        this.lat = place.geometry.location.lat();
+        this.lng = place.geometry.location.lng();
+
+      }.bind(this));
+    },
+
     /*
       Defines the methods used by the page
     */
@@ -530,6 +583,8 @@
             city: this.city,
             state: this.state,
             zip: this.zip,
+            lat: this.lat,
+            lng: this.lng,
             brew_methods: this.brewMethodsSelected
   				});
         }

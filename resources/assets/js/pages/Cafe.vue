@@ -133,6 +133,15 @@
       color: #543729;
       font-size: 18px;
     }
+
+    a.suggest-cafe-edit{
+      font-family: "Lato", sans-serif;
+      color: #054E7A;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: underline;
+    }
   }
 
   /* Small only */
@@ -194,7 +203,7 @@
         <label class="cafe-label">Brew Methods</label>
         <div class="brew-method" v-for="method in cafe.brew_methods">
           <div class="brew-method-container">
-            <img v-bind:src="method.icon" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+            <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
           </div>
         </div>
       </div>
@@ -209,6 +218,10 @@
         </div>
 
         <a class="cafe-website" target="_blank" v-bind:href="cafe.company.website">{{ cafe.company.website }}</a>
+        <br>
+        <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }" v-show="userLoadStatus == 2 && user != ''" class="suggest-cafe-edit">
+          Suggest an edit
+        </router-link>
       </div>
     </div>
   </div>

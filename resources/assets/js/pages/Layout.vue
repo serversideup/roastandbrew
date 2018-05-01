@@ -1,9 +1,30 @@
-<style>
+<style lang="scss">
+  @import '~@/abstracts/_variables.scss';
 
+  div#app-layout{
+    div.show-filters{
+      height: 90px;
+      width: 23px;
+      position: absolute;
+      left: 0px;
+      background-color: white;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      line-height: 90px;
+      top: 50%;
+      cursor: pointer;
+      margin-top: -45px;
+      z-index: 9;
+      text-align: center;
+    }
+  }
 </style>
 
 <template>
   <div id="app-layout">
+    <div class="show-filters" v-show="!showFilters" v-on:click="toggleShowFilters()">
+      <img src="/img/grey-right.svg"/>
+    </div>
     <success-notification></success-notification>
 
     <navigation></navigation>
@@ -46,6 +67,10 @@
     },
 
     computed: {
+      showFilters(){
+        return this.$store.getters.getShowFilters;
+      },
+
       addedCafe(){
         return this.$store.getters.getAddedCafe;
       },
@@ -62,6 +87,12 @@
             notification: this.addedCafe.name+' has been added!'
           });
         }
+      }
+    },
+
+    methods: {
+      toggleShowFilters(){
+        this.$store.dispatch( 'toggleShowFilters', { showFilters : !this.showFilters } );
       }
     }
   }

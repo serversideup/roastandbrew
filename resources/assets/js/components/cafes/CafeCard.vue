@@ -55,8 +55,8 @@
 </style>
 
 <template>
-  <div class="large-6 medium-6 small-6 cell" v-show="show">
-    <router-link :to="{ name: 'cafe', params: { id: cafe.id} }">
+  <div class="large-6 medium-6 small-6 cell cafe-card-container" v-show="show">
+    <router-link :to="{ name: 'cafe', params: { id: cafe.id} }" v-on:click.native="panToLocation( cafe )">
       <div class="cafe-card">
         <span class="title">{{ cafe.company.name }}</span>
         <span class="address">
@@ -164,6 +164,10 @@
             this.show = false;
           }
         }
+      },
+
+      panToLocation( cafe ){
+        EventBus.$emit('location-selected', { lat: parseFloat( cafe.latitude ), lng: parseFloat( cafe.longitude ) });
       }
     }
   }

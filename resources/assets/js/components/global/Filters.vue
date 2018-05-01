@@ -11,6 +11,7 @@
     width: 100%;
     padding-top: 50px;
     box-shadow: 0 2px 4px 0 rgba(3,27,78,0.10);
+    z-index: 99;
 
     span.clear-filters{
       font-size: 16px;
@@ -109,7 +110,13 @@
         background-color: $secondary-color;
 
         div.brew-method-container{
+          img.brew-method-icon{
+            display: none;
+          }
 
+          img.brew-method-icon-active{
+            display: inline-block;
+          }
         }
       }
 
@@ -120,6 +127,12 @@
 
         img.brew-method-icon{
           display: inline-block;
+          margin-right: 10px;
+          margin-left: 5px;
+        }
+
+        img.brew-method-icon-active{
+          display: none;
           margin-right: 10px;
           margin-left: 5px;
         }
@@ -140,9 +153,32 @@
     }
 
     div.cafe-grid-container{
-      height: calc( 100% - 538px );
       overflow: auto;
       padding-bottom: 10px;
+    }
+
+    div.close-filters{
+      height: 90px;
+      width: 23px;
+      position: absolute;
+      right: -20px;
+      background-color: white;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      line-height: 90px;
+      top: 50%;
+      cursor: pointer;
+      margin-top: -82px;
+      text-align: center;
+    }
+
+    span.no-results{
+      display: block;
+      text-align: center;
+      margin-top: 50px;
+      color: #666666;
+      text-transform: uppercase;
+      font-weight: 600;
     }
   }
 
@@ -158,6 +194,10 @@
 
       div.cafe-grid-container{
         height: inherit;
+      }
+
+      div.close-filters{
+        display: none;
       }
     }
   }
@@ -175,8 +215,11 @@
 
 <template>
   <transition name="slide-in-left">
-    <div class="filters-container" v-show="showFilters">
-      <div class="grid-x grid-padding-x">
+    <div class="filters-container" id="filters-container" v-show="showFilters">
+      <div class="close-filters" v-on:click="toggleShowFilters()">
+        <img src="/img/grey-left.svg"/>
+      </div>
+      <div class="grid-x grid-padding-x" id="text-container">
         <div class="large-12 medium-12 small-12 cell">
           <span class="clear-filters" v-show="showFilters" v-on:click="clearFilters()">
             <img src="/img/clear-filters-icon.svg"/> Clear filters
@@ -185,48 +228,55 @@
         </div>
       </div>
 
-      <div class="grid-x grid-padding-x">
-        <div class="large-12 medium-12 small-12 cell">
-          <label class="filter-label">Location Types</label>
-        </div>
-      </div>
-
-      <div class="grid-x grid-padding-x">
-        <div class="large-12 medium-12 small-12 cell">
-          <div class="location-filter all-locations" v-bind:class="{ 'active': activeLocationFilter == 'all' }" v-on:click="setActiveLocationFilter('all')">
-            All Locations
-          </div><div class="location-filter roasters" v-bind:class="{ 'active': activeLocationFilter == 'roasters' }" v-on:click="setActiveLocationFilter('roasters')">
-            Roasters
-          </div><div class="location-filter cafes" v-bind:class="{ 'active': activeLocationFilter == 'cafes' }" v-on:click="setActiveLocationFilter('cafes')">
-            Cafes
+      <div id="location-type-container">
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell">
+            <label class="filter-label">Location Types</label>
           </div>
         </div>
-      </div>
 
-      <div class="grid-x grid-padding-x" v-show="user != '' && userLoadStatus == 2">
-        <div class="large-12 medium-12 small-12 cell">
-          <input type="checkbox" v-model="onlyLiked"/> <span class="liked-location-label">Show only locations that I like</span>
-        </div>
-      </div>
-
-      <div class="grid-x grid-padding-x">
-        <div class="large-12 medium-12 small-12 cell">
-          <label class="filter-label">Brew Methods</label>
-        </div>
-      </div>
-
-      <div class="grid-x grid-padding-x">
-        <div class="large-12 medium-12 small-12 cell" >
-          <div class="brew-method" v-on:click="toggleBrewMethodFilter( method.id )" v-for="method in brewMethods" v-bind:class="{'active': brewMethodsFilter.indexOf( method.id ) >= 0 }">
-            <div class="brew-method-container">
-              <img v-bind:src="method.icon" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell">
+            <div class="location-filter all-locations" v-bind:class="{ 'active': activeLocationFilter == 'all' }" v-on:click="setActiveLocationFilter('all')">
+              All Locations
+            </div><div class="location-filter roasters" v-bind:class="{ 'active': activeLocationFilter == 'roasters' }" v-on:click="setActiveLocationFilter('roasters')">
+              Roasters
+            </div><div class="location-filter cafes" v-bind:class="{ 'active': activeLocationFilter == 'cafes' }" v-on:click="setActiveLocationFilter('cafes')">
+              Cafes
             </div>
           </div>
         </div>
       </div>
 
-      <div class="grid-x grid-padding-x cafe-grid-container">
+      <div class="grid-x grid-padding-x" id="only-liked-container" v-show="user != '' && userLoadStatus == 2">
+        <div class="large-12 medium-12 small-12 cell">
+          <input type="checkbox" v-model="onlyLiked"/> <span class="liked-location-label">Show only locations that I like</span>
+        </div>
+      </div>
+
+      <div id="brew-methods-container">
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell">
+            <label class="filter-label">Brew Methods</label>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell" >
+            <div class="brew-method" v-on:click="toggleBrewMethodFilter( method.id )" v-for="method in brewMethods" v-if="method.cafes_count > 0" v-bind:class="{'active': brewMethodsFilter.indexOf( method.id ) >= 0 }">
+              <div class="brew-method-container">
+                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/><img v-bind:src="method.icon+'-active.svg'" class="brew-method-icon-active"/> <span class="brew-method-name">{{ method.method }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x cafe-grid-container" id="cafe-grid">
         <cafe-card v-for="cafe in cafes" :key="cafe.id" :cafe="cafe"></cafe-card>
+        <div class="large-12 medium-12 small-12 cell">
+          <span class="no-results" v-if="shownCount == 0">No Results</span>
+        </div>
       </div>
 
     </div>
@@ -250,7 +300,8 @@
         textSearch: '',
         activeLocationFilter: 'all',
         onlyLiked: false,
-        brewMethodsFilter: []
+        brewMethodsFilter: [],
+        shownCount: 1
       }
     },
 
@@ -269,12 +320,17 @@
 
       brewMethodsFilter(){
         this.updateFilterDisplay();
+      },
+
+      showFilters(){
+        this.computeHeight();
       }
     },
 
     components: {
       CafeCard
     },
+
 
     mounted(){
       EventBus.$on('show-filters', function(){
@@ -328,6 +384,24 @@
           liked: this.onlyLiked,
           brewMethods: this.brewMethodsFilter
         });
+
+        this.computeShown();
+      },
+
+      computeShown(){
+        this.shownCount = $('.cafe-card-container').filter(function() {
+              return $(this).css('display') !== 'none';
+          }).length;
+      },
+
+      computeHeight(){
+        let filtersHeight = $('#filters-container').height();
+
+        $('#cafe-grid').css('height', ( filtersHeight - 460 ) + 'px' );
+      },
+
+      toggleShowFilters(){
+        this.$store.dispatch( 'toggleShowFilters', { showFilters : !this.showFilters } );
       },
 
       clearFilters(){
