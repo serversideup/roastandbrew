@@ -22,7 +22,7 @@
 
 <template>
   <router-link :to="{ name: 'newcafe' }">
-    <div id="add-cafe-button">
+    <div id="add-cafe-button" v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2">
       &plus;
     </div>
   </router-link>
@@ -30,6 +30,20 @@
 
 <script>
   export default {
+    computed: {
+      /*
+        Retrieves the User from Vuex
+      */
+      user(){
+        return this.$store.getters.getUser;
+      },
 
+      /*
+        Retrieves the User Load Status from Vuex
+      */
+      userLoadStatus(){
+        return this.$store.getters.getUserLoadStatus();
+      }
+    }
   }
 </script>
