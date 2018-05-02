@@ -102,8 +102,7 @@
 
     data(){
       return {
-        markers: [],
-        infoWindows: []
+
       }
     },
 
@@ -136,11 +135,9 @@
     },
 
     mounted(){
-      /*
-        We don't want the map to be reactive, so we initialize it locally,
-        but don't store it in our data array.
-      */
-      this.map = new google.maps.Map(document.getElementById('cafe-map'), {
+      this.$markers = [];
+
+      this.$map = new google.maps.Map(document.getElementById('cafe-map'), {
         center: {lat: this.latitude, lng: this.longitude},
         zoom: this.zoom
       });
@@ -160,8 +157,8 @@
 
       EventBus.$on('location-selected', function( cafe ){
         var latLng = new google.maps.LatLng( cafe.lat, cafe.lng );
-        this.map.setZoom( 10 );
-        this.map.panTo(latLng);
+        this.$map.setZoom( 13 );
+        this.$map.panTo(latLng);
       }.bind(this));
     },
 
@@ -170,12 +167,13 @@
         Process filters on the map selected by the user.
       */
       processFilters( filters ){
-        for( var i = 0; i < this.markers.length; i++ ){
+        for( var i = 0; i < this.$markers.length; i++ ){
           if( filters.text == ''
             && filters.type == 'all'
             && filters.brewMethods.length == 0
             && !filters.liked  ){
-                this.markers[i].setMap( this.map );
+
+                this.$markers[i].setMap( this.$map );
               }else{
                 /*
                   Initialize flags for the filtering
@@ -189,14 +187,14 @@
                 /*
                   Check if the roaster passes
                 */
-                if( this.processCafeTypeFilter( this.markers[i].cafe, filters.type) ){
+                if( this.processCafeTypeFilter( this.$markers[i].cafe, filters.type) ){
                   typePassed = true;
                 }
 
                 /*
                   Check if text passes
                 */
-                if( filters.text != '' && this.processCafeTextFilter( this.markers[i].cafe, filters.text ) ){
+                if( filters.text != '' && this.processCafeTextFilter( this.$markers[i].cafe, filters.text ) ){
                   textPassed = true;
                 }else if( filters.text == '' ){
                   textPassed = true;
@@ -205,7 +203,7 @@
                 /*
                   Check if brew methods passes
                 */
-                if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.markers[i].cafe, filters.brewMethods ) ){
+                if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.$markers[i].cafe, filters.brewMethods ) ){
                   brewMethodsPassed = true;
                 }else if( filters.brewMethods.length == 0 ){
                   brewMethodsPassed = true;
@@ -214,7 +212,7 @@
                 /*
                   Check if liked passes
                 */
-                if( filters.liked && this.processCafeUserLikeFilter( this.markers[i].cafe ) ){
+                if( filters.liked && this.processCafeUserLikeFilter( this.$markers[i].cafe ) ){
                   likedPassed = true;
                 }else if( !filters.liked ){
                   likedPassed = true;
@@ -224,9 +222,9 @@
                   If everything passes, then we show the Cafe Marker
                 */
                 if( typePassed && textPassed && brewMethodsPassed && likedPassed ){
-                  this.markers[i].setMap( this.map );
+                  this.$markers[i].setMap( this.$map );
                 }else{
-                  this.markers[i].setMap( null );
+                  this.$markers[i].setMap( null );
                 }
               }
         }
@@ -240,8 +238,8 @@
           Iterate over all of the markers and set the map
           to null so they disappear.
         */
-        for( var i = 0; i < this.markers.length; i++ ){
-          this.markers[i].setMap( null );
+        for( var i = 0; i < this.$markers.length; i++ ){
+          this.$markers[i].setMap( null );
         }
       },
 
@@ -252,7 +250,7 @@
         /*
           Initialize the markers to an empty array.
         */
-        this.markers = [];
+        this.$markers = [];
 
         /*
           Iterate over all of the cafes
@@ -271,27 +269,25 @@
           }
 
 
-          var marker = new google.maps.Marker({
-            position: { lat: parseFloat( this.cafes[i].latitude ), lng: parseFloat( this.cafes[i].longitude ) },
-            map: this.map,
-            icon: image,
-            cafe: this.cafes[i]
-          });
+          if( this.cafes[i].latitude != null ){
+            var marker = new google.maps.Marker({
+              position: { lat: parseFloat( this.cafes[i].latitude ), lng: parseFloat( this.cafes[i].longitude ) },
+              map: this.$map,
+              icon: image,
+              cafe: this.cafes[i]
+            });
 
+            let router = this.$router;
 
-          /*
-            Add the event listener to open the info window for the marker.
-          */
-          let router = this.$router;
+            marker.addListener('click', function() {
+              router.push( { name: 'cafe', params: { id: this.cafe.id } } );
+            });
 
-          marker.addListener('click', function() {
-            router.push( { name: 'cafe', params: { id: this.cafe.id } } );
-          });
-
-          /*
-            Push the new marker on to the array.
-          */
-          this.markers.push( marker );
+            /*
+              Push the new marker on to the array.
+            */
+            this.$markers.push( marker );
+          }
         }
       }
     }

@@ -385,7 +385,7 @@
         </div>
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
-            <a class="edit-location-button" v-on:click="submitEditCafe()">Edit Cafe</a>
+            <a class="edit-location-button" v-on:click="submitEditCafe()">Update Cafe</a>
           </div>
         </div>
       </div>
@@ -606,10 +606,10 @@
         this.lng            = this.editCafe.longitude;
 
         for( let i = 0; i < this.editCafe.brew_methods.length; i++ ){
-          this.brewMethods.push( this.editCafe.brew_methods[i].id );
+          this.brewMethodsSelected.push( this.editCafe.brew_methods[i].id );
         }
 
-        this.addressSearch = this.address+' '+this.city+', '+this.state+' '+this.zip;
+        this.addressSearch = this.address;
 
         this.showAutocomplete = false;
       },

@@ -66,7 +66,7 @@
       }
 
       &.cafe{
-        background-color: black;
+        background-color: #3D281E;
 
         img{
           margin-top: -6px;
@@ -264,6 +264,12 @@
           id: this.$route.params.id
         });
 			},
+
+      'cafeLoadStatus': function(){
+        if( this.cafeLoadStatus == 2 ){
+          EventBus.$emit('location-selected', { lat: parseFloat( this.cafe.latitude ), lng: parseFloat( this.cafe.longitude ) });
+        }
+      }
     },
 
 

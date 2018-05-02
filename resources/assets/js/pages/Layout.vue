@@ -50,7 +50,7 @@
   import Filters from '../components/global/Filters.vue';
   import PopOut from '../components/global/PopOut.vue';
   import SuccessNotification from '../components/global/SuccessNotification.vue';
-
+  
   export default {
     components: {
       Navigation,

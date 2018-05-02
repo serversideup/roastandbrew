@@ -76,6 +76,11 @@
           </router-link>
         </div>
         <div class="side-bar-link">
+          <a href="https://github.com/serversideup/roastandbrew/issues/new" target="_blank">
+            Report a Bug
+          </a>
+        </div>
+        <div class="side-bar-link">
           <a href="https://serversideup.net/series/api-driven-development-laravel-vuejs/" target="_blank">
             About This Project
           </a>
