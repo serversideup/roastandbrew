@@ -157,7 +157,7 @@
 
       EventBus.$on('location-selected', function( cafe ){
         var latLng = new google.maps.LatLng( cafe.lat, cafe.lng );
-        this.$map.setZoom( 13 );
+        this.$map.setZoom( 16 );
         this.$map.panTo(latLng);
       }.bind(this));
     },

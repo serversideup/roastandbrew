@@ -210,6 +210,14 @@
       font-family: "Lato", sans-serif;
       background-color: #A7BE4D;
       line-height: 50px;
+      margin-bottom: 10px;
+    }
+
+    a.delete-location{
+      color: #D0021B;
+      font-size: 14px;
+      text-decoration: underline;
+      display: inline-block;
       margin-bottom: 50px;
     }
   }
@@ -388,6 +396,11 @@
             <a class="edit-location-button" v-on:click="submitEditCafe()">Update Cafe</a>
           </div>
         </div>
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <a class="delete-location" v-on:click="deleteCafe()">Delete Cafe</a>
+          </div>
+        </div>
       </div>
     </div>
   </transition>
@@ -530,6 +543,9 @@
       },
       editCafe(){
         return this.$store.getters.getCafeEdit;
+      },
+      deleteCafeStatus(){
+        return this.$store.getters.getCafeDeletedStatus;
       }
     },
 
@@ -545,6 +561,15 @@
       'editCafeLoadStatus': function(){
         if( this.editCafeLoadStatus == 2 ){
           this.populateForm();
+        }
+      },
+      'deleteCafeStatus': function(){
+        if( this.deleteCafeStatus == 2 ){
+          this.$router.push({ name: 'cafes' });
+
+          EventBus.$emit('show-success', {
+            notification: 'Cafe deleted successfully!'
+          });
         }
       }
     },
@@ -736,6 +761,17 @@
         }
 
         return validNewCafeForm;
+      },
+
+      /*
+        Deletes a cafe
+      */
+      deleteCafe(){
+        if( confirm( 'Are you sure you want to delete this cafe?' ) ){
+          this.$store.dispatch( 'deleteCafe', {
+            cafe_id: this.editCafe.id
+          } );
+        }
       },
 
       /*

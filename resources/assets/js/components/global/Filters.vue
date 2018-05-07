@@ -385,7 +385,9 @@
           brewMethods: this.brewMethodsFilter
         });
 
-        this.computeShown();
+        this.$nextTick(function(){
+          this.computeShown();
+        });
       },
 
       computeShown(){

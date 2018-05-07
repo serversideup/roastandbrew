@@ -27,7 +27,9 @@ export const cafes = {
 		cafeAdded: {},
 		cafeAddStatus: 0,
 		cafeLikeActionStatus: 0,
-		cafeUnlikeActionStatus: 0
+		cafeUnlikeActionStatus: 0,
+
+		cafeDeletedStatus: 0,
 	},
 
   /*
@@ -162,6 +164,20 @@ export const cafes = {
 		clearLikeAndUnlikeStatus( { commit }, data ){
 			commit( 'setCafeLikeActionStatus', 0 );
 			commit( 'setCafeUnlikeActionStatus', 0 );
+		},
+
+		deleteCafe( { commit, state, dispatch }, data ){
+			commit( 'setCafeDeleteStatus', 1 );
+
+			CafeAPI.deleteCafe( data.cafe_id )
+				.then( function( response ){
+					commit( 'setCafeDeleteStatus', 2 );
+
+					dispatch( 'loadCafes' );
+				})
+				.catch( function(){
+					commit( 'setCafeDeleteStatus', 3 );
+				});
 		}
 	},
 
@@ -262,6 +278,10 @@ export const cafes = {
 					state.cafes[i].user_like_count = data.count;
 				}
 			}
+		},
+
+		setCafeDeleteStatus( state, status ){
+			state.cafeDeletedStatus = status;
 		}
 	},
 
@@ -351,6 +371,10 @@ export const cafes = {
 		*/
 		getCafeUnlikeActionStatus( state ){
 			return state.cafeUnlikeActionStatus;
+		},
+
+		getCafeDeletedStatus( state ){
+			return state.cafeDeletedStatus;
 		}
 	}
 }

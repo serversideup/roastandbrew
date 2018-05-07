@@ -487,7 +487,7 @@
       'addCafeStatus': function(){
         if( this.addCafeStatus == 2 ){
           this.clearForm();
-          this.$router.push({ path: 'cafes' });
+          this.$router.push({ name: 'cafes' });
         }
       }
     },
@@ -608,6 +608,7 @@
         this.companyID = company.id;
         this.newCompany = false;
         this.companyResults = [];
+        this.website = company.website;
       },
 
       /*
@@ -629,15 +630,18 @@
         }
 
         /*
-          If a website has been entered, ensure the URL is valid
+          If a website has been entered, ensure the URL is valid. We only check if the
+          company is new.
         */
-        if( this.website.trim != '' && !this.website.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/ ) ){
-          validNewCafeForm = false;
-          this.validations.website.is_valid = false;
-          this.validations.website.text = 'Please enter a valid URL for the website.';
-        }else{
-          this.validations.website.is_valid = true;
-          this.validations.website.text = '';
+        if( this.newCompany ){
+          if( this.website.trim != '' && !this.website.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/ ) ){
+            validNewCafeForm = false;
+            this.validations.website.is_valid = false;
+            this.validations.website.text = 'Please enter a valid URL for the website.';
+          }else{
+            this.validations.website.is_valid = true;
+            this.validations.website.text = '';
+          }
         }
 
         /*

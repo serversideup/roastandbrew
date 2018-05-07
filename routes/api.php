@@ -166,4 +166,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   | Description:    Deletes a tag from a cafe for a user
   */
   Route::delete('/cafes/{id}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
+
+  Route::delete('/cafes/{id}', 'API\CafesController@deleteCafe');
 });

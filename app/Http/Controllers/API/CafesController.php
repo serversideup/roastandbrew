@@ -39,6 +39,7 @@ class CafesController extends Controller
 									}])
 									->with('company')
 									->withCount('userLike')
+									->where('deleted', '=', 0)
 									->get();
 
     return response()->json( $cafes );
@@ -63,6 +64,7 @@ class CafesController extends Controller
 									$query->withCount('cafes');
 								}])
 								->withCount('likes')
+								->where('deleted', '=', 0)
 								->first();
 
 
@@ -89,6 +91,7 @@ class CafesController extends Controller
 								->with(['company' => function( $query ){
 									$query->withCount('cafes');
 								}])
+								->where('deleted', '=', 0)
 								->first();
 
 		/*
@@ -150,6 +153,7 @@ class CafesController extends Controller
 		$cafe->latitude 				= $lat;
 		$cafe->longitude 				= $lng;
 		$cafe->added_by 				= Auth::user()->id;
+		$cafe->deleted 					= 0;
 
 		$cafe->save();
 
@@ -364,5 +368,15 @@ class CafesController extends Controller
 			Return a proper response code for successful untagging
 		*/
 		return response(null, 204);
+	}
+
+	public function deleteCafe( $cafeID ){
+		$cafe = Cafe::where('id', '=', $cafeID)->first();
+
+		$cafe->deleted = 1;
+
+		$cafe->save();
+
+		return response()->json('', 204);
 	}
 }
