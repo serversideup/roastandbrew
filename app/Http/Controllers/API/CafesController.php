@@ -68,7 +68,12 @@ class CafesController extends Controller
 								->first();
 
 
-    return response()->json( $cafe );
+		if( $cafe != null ){
+			return response()->json( $cafe );
+		}else{
+			abort(404);
+		}
+
   }
 
 	/*

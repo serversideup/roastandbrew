@@ -26,6 +26,7 @@
       <img src="/img/grey-right.svg"/>
     </div>
     <success-notification></success-notification>
+    <error-notification></error-notification>
 
     <navigation></navigation>
 
@@ -50,14 +51,16 @@
   import Filters from '../components/global/Filters.vue';
   import PopOut from '../components/global/PopOut.vue';
   import SuccessNotification from '../components/global/SuccessNotification.vue';
-  
+  import ErrorNotification from '../components/global/ErrorNotification.vue';
+
   export default {
     components: {
       Navigation,
       LoginModal,
       Filters,
       PopOut,
-      SuccessNotification
+      SuccessNotification,
+      ErrorNotification
     },
 
     created(){

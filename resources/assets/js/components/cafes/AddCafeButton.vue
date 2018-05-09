@@ -21,14 +21,14 @@
 </style>
 
 <template>
-  <router-link :to="{ name: 'newcafe' }">
-    <div id="add-cafe-button" v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2">
-      &plus;
-    </div>
-  </router-link>
+  <div id="add-cafe-button" v-on:click="checkAuth()">
+    &plus;
+  </div>
 </template>
 
 <script>
+  import { EventBus } from '../../event-bus.js';
+
   export default {
     computed: {
       /*
@@ -43,6 +43,16 @@
       */
       userLoadStatus(){
         return this.$store.getters.getUserLoadStatus();
+      }
+    },
+
+    methods: {
+      checkAuth(){
+        if( this.user == '' && this.userLoadStatus == 2 ){
+          EventBus.$emit('prompt-login');
+        }else{
+          this.$router.push({ name: 'newcafe'});
+        }
       }
     }
   }

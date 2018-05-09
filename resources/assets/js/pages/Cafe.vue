@@ -222,6 +222,9 @@
         <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }" v-show="userLoadStatus == 2 && user != ''" class="suggest-cafe-edit">
           Suggest an edit
         </router-link>
+        <a class="suggest-cafe-edit" v-if="userLoadStatus == 2 && user == ''" v-on:click="loginToEdit()">
+          Sign in to make an edit
+        </a>
       </div>
     </div>
   </div>
@@ -268,6 +271,11 @@
       'cafeLoadStatus': function(){
         if( this.cafeLoadStatus == 2 ){
           EventBus.$emit('location-selected', { lat: parseFloat( this.cafe.latitude ), lng: parseFloat( this.cafe.longitude ) });
+        }
+
+        if( this.cafeLoadStatus == 3 ){
+          EventBus.$emit('show-error', { notification: 'Cafe Not Found!'} );
+          this.$router.push({ name: 'cafes' });
         }
       }
     },
@@ -318,7 +326,7 @@
       Defines the methods used by the component.
     */
     methods: {
-      login(){
+      loginToEdit(){
         EventBus.$emit('prompt-login');
       }
     }
