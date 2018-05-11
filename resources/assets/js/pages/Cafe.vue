@@ -98,6 +98,8 @@
           display: inline-block;
           margin-right: 10px;
           margin-left: 5px;
+          width: 20px;
+          max-height: 30px;
         }
 
         span.brew-method-name{

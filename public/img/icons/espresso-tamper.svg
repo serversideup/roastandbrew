@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="224px" height="290px" viewBox="0 0 224 290" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>espresso-tamper</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="espresso-tamper" fill-rule="nonzero">
+            <rect id="Rectangle-path" fill="#FFFFFF" x="5.9" y="243.5" width="212.2" height="40.8"></rect>
+            <polygon id="Shape" fill="#FFFFFF" points="159.3 199.3 112 199.3 64.7 199.3 5.9 243.5 112 243.5 218.1 243.5"></polygon>
+            <path d="M176.7,5.7 L114.4,5.7 L109.6,5.7 L47.3,5.7 C30.3,5.7 16.5,19.5 16.5,36.5 C16.5,44.7 19.8,52.5 25.6,58.3 L55.2,87.8 L64.6,199.3 L112,199.3 L159.3,199.3 L168.8,87.8 L198.4,58.3 C204.2,52.5 207.5,44.7 207.5,36.5 C207.5,19.4 193.7,5.7 176.7,5.7 Z" id="Shape" fill="#9D705C"></path>
+            <path d="M223.6,289.8 L0.4,289.8 L0.4,238 L223.5,238 L223.5,289.8 L223.6,289.8 Z M11.4,278.9 L212.7,278.9 L212.7,249 L11.4,249 L11.4,278.9 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M218.1,249 L5.9,249 L2.6,239.2 L61.4,194.9 L64.7,193.8 L159.3,193.8 L162.6,194.9 L221.4,239.2 L218.1,249 Z M22.3,238 L201.8,238 L157.5,204.7 L66.5,204.7 L22.3,238 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M164.4,204.7 L59.7,204.7 L50,90.2 L21.8,62.1 C15,55.3 11.1,46 11.1,36.4 C11.1,16.4 27.4,0.1 47.4,0.1 L176.7,0.1 C196.7,0.1 213,16.4 213,36.4 C213,46 209.1,55.3 202.3,62.1 L174.1,90.2 L164.4,204.7 Z M69.7,193.8 L154.3,193.8 L163.5,85.3 L194.6,54.3 C199.3,49.6 202,43 202,36.4 C202,22.4 190.6,11.1 176.7,11.1 L47.4,11.1 C33.4,11.1 22.1,22.5 22.1,36.4 C22.1,43.1 24.8,49.6 29.5,54.3 L60.6,85.3 L69.7,193.8 Z" id="Shape" fill="#3A3033"></path>
+            <rect id="Rectangle-path" fill="#3A3033" x="55.3" y="82.3" width="77.8" height="10.9"></rect>
+        </g>
+    </g>
+</svg>

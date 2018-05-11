@@ -108,16 +108,6 @@
       &.active{
         color: white;
         background-color: $secondary-color;
-
-        div.brew-method-container{
-          img.brew-method-icon{
-            display: none;
-          }
-
-          img.brew-method-icon-active{
-            display: inline-block;
-          }
-        }
       }
 
       div.brew-method-container{
@@ -129,12 +119,8 @@
           display: inline-block;
           margin-right: 10px;
           margin-left: 5px;
-        }
-
-        img.brew-method-icon-active{
-          display: none;
-          margin-right: 10px;
-          margin-left: 5px;
+          width: 20px;
+          max-height: 30px;
         }
 
         span.brew-method-name{
@@ -265,7 +251,7 @@
           <div class="large-12 medium-12 small-12 cell" >
             <div class="brew-method" v-on:click="toggleBrewMethodFilter( method.id )" v-for="method in brewMethods" v-if="method.cafes_count > 0" v-bind:class="{'active': brewMethodsFilter.indexOf( method.id ) >= 0 }">
               <div class="brew-method-container">
-                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/><img v-bind:src="method.icon+'-active.svg'" class="brew-method-icon-active"/> <span class="brew-method-name">{{ method.method }}</span>
+                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
               </div>
             </div>
           </div>
