@@ -15,7 +15,7 @@
     "es6-promise": "^4.1.1",
     "foundation-sites": "^6.4.3",
     "jquery": "^3.1.1",
-    "laravel-mix": "^1.7.2",
+    "laravel-mix": "^2.1.11",
     "lodash": "^4.17.4",
     "vue": "^2.5.16",
     "vue-router": "^2.7.0",
