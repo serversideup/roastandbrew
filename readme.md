@@ -27,7 +27,7 @@ If you are interested in seeing how this application was built, you can [read th
 
 ## Reporting Issues
 
-If you are experiencing any issues or if you have a feature request, please [open up a new GitHub Issue](https://github.com/serversideup/roastandbrew/issues/new)
+If you are experiencing any issues or if you have a feature request, please [open up a new GitHub Issue](https://github.com/serversideup/roastandbrew/issues/new/choose)
 
 
 ## Technologies Used
