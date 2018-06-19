@@ -117,7 +117,8 @@ export default new VueRouter({
 					name: 'users',
 					component: Vue.component( 'Users', require( './pages/Users.vue' ) ),
 					beforeEnter: requireAuth
-				}
+				},
+				{ path: '_=_', redirect: '/' }
 			]
 		}
 	]
