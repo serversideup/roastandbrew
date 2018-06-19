@@ -76,7 +76,11 @@
           </router-link>
         </div>
         <div class="side-bar-link">
-          <a href="https://github.com/serversideup/roastandbrew/issues/new" target="_blank">
+          <a v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2" v-on:click="logout()">Sign Out</a>
+          <a v-if="user == ''" v-on:click="login()">Sign In</a>
+        </div>
+        <div class="side-bar-link">
+          <a href="https://github.com/serversideup/roastandbrew/issues/new/choose" target="_blank">
             Report a Bug
           </a>
         </div>
@@ -86,13 +90,15 @@
           </a>
         </div>
         <div class="side-bar-link">
-          <a v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2" v-on:click="logout()">Sign Out</a>
-          <a v-if="user == ''" v-on:click="login()">Sign In</a>
+          <a href="https://github.com/serversideup/roastandbrew" target="_blank">
+            View on Github
+          </a>
         </div>
+
 
         <div class="ssu-container">
           <span class="ssu-built-on">Learn how this app was built on</span>
-          <a href="https://serversideup.net/series/api-driven-development-laravel-vuejs/" target="_blank">
+          <a href="https://serversideup.net/courses/api-driven-development-laravel-vuejs/" target="_blank">
             <img src="/img/ssu-logo.png"/>
           </a>
         </div>
