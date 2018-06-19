@@ -7,7 +7,7 @@
 	<a href="https://david-dm.org/serversideup/roastandbrew" target="_blank">
 		<img src="https://david-dm.org/serversideup/roastandbrew.svg" alt="david-dm">
 	</a>
-	<a href="https://raw.githubusercontent.com/serversideup/roaroastandbrew/LICENSE" target="_blank">
+	<a href="https://github.com/serversideup/roastandbrew/blob/master/LICENSE" target="_blank">
 		<img src="https://521dimensions.com/img/open-source/roastandbrew/license.svg" alt="MIT License">
 	</a>
 </p>
