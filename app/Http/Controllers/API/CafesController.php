@@ -159,6 +159,8 @@ class CafesController extends Controller
 		$cafe->longitude 				= $lng;
 		$cafe->added_by 				= Auth::user()->id;
 		$cafe->deleted 					= 0;
+		$cafe->tea 							= 0;
+		$cafe->matcha 					= 0;
 
 		$cafe->save();
 
