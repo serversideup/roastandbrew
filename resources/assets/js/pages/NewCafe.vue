@@ -129,6 +129,47 @@
       }
     }
 
+    div.drink-option{
+      font-size: 16px;
+      color: #666666;
+      font-family: "Lato", sans-serif;
+      border-radius: 4px;
+      background-color: #F9F9FA;
+      width: 150px;
+      height: 57px;
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      padding: 5px;
+      cursor: pointer;
+      position: relative;
+
+      &.active{
+        color: white;
+        background-color: $secondary-color;
+      }
+
+      div.drink-option-container{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        img.drink-option-icon{
+          display: inline-block;
+          margin-right: 10px;
+          margin-left: 5px;
+          width: 20px;
+          max-height: 30px;
+        }
+
+        span.drink-option-name{
+          display: inline-block;
+          width: calc( 100% - 40px);
+          vertical-align: middle;
+        }
+      }
+    }
+
     div.company-selection-container{
       position: relative;
 
@@ -280,6 +321,27 @@
 
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Drink Options Available</label>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <div class="drink-option" v-on:click="matcha == 0 ? matcha = 1 : matcha = 0" v-bind:class="{'active': matcha == 1 }">
+              <div class="drink-option-container">
+                <img v-bind:src="'/img/icons/matcha-latte.svg'" class="drink-option-icon"/> <span class="drink-option-name">Matcha</span>
+              </div>
+            </div>
+            <div class="drink-option" v-on:click="tea == 0 ? tea = 1 : tea = 0" v-bind:class="{'active': tea == 1 }">
+              <div class="drink-option-container">
+                <img v-bind:src="'/img/icons/tea-bag.svg'" class="drink-option-icon"/> <span class="drink-option-name">Tea Options</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Location Name</label>
             <input type="text" class="form-input" v-model="locationName"/>
           </div>
@@ -422,7 +484,8 @@
         lat: '',
         lng: '',
         brewMethodsSelected: [],
-
+        matcha: 0,
+        tea: 0,
 
         validations: {
           companyName: {
@@ -571,7 +634,9 @@
             zip: this.zip,
             lat: this.lat,
             lng: this.lng,
-            brew_methods: this.brewMethodsSelected
+            brew_methods: this.brewMethodsSelected,
+            matcha: this.matcha,
+            tea: this.tea
   				});
         }
       },
@@ -697,6 +762,8 @@
         this.state                = '';
         this.zip                  = '';
         this.brewMethodsSelected  = [];
+        this.matcha               = 0;
+        this.tea                  = 0;
 
 
         this.validations = {

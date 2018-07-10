@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="290px" height="256px" viewBox="0 0 290 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>tea bag</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tea-bag" fill-rule="nonzero">
+            <polygon id="Shape" fill="#FFFFFF" points="22.1 83.1 40 83.1 57.8 83.1 74.3 59.5 74.3 5.7 40 5.7 5.6 5.7 5.6 59.5"></polygon>
+            <polygon id="Shape" fill="#FFFFFF" points="219.7 98.3 219.7 98.3 183.4 98.3 207.5 134.6 219.7 134.6 231.9 134.6 256.1 98.3"></polygon>
+            <polygon id="Shape" fill="#FFFFFF" points="183.4 98.3 155.1 134.6 207.5 134.6"></polygon>
+            <polygon id="Shape" fill="#FFFFFF" points="256.1 98.3 284.4 134.6 231.9 134.6"></polygon>
+            <rect id="Rectangle-path" fill="#FFFFFF" x="155.1" y="134.6" width="129.2" height="111.6"></rect>
+            <rect id="Rectangle-path" fill="#9D705C" x="155.1" y="200.1" width="129.2" height="46.2"></rect>
+            <path d="M60.7,88.6 L19.3,88.6 L0.2,61.2 L0.2,0.2 L79.8,0.2 L79.8,61.2 L60.7,88.6 Z M25,77.7 L55,77.7 L68.9,57.8 L68.9,11.2 L11.1,11.2 L11.1,57.8 L25,77.7 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M231.9,140.1 L207.5,140.1 L202.9,137.7 L178.7,101.4 L183.3,92.9 L256,92.9 L260.6,101.4 L236.4,137.7 L231.9,140.1 Z M210.5,129.2 L229,129.2 L245.9,103.8 L193.6,103.8 L210.5,129.2 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M207.5,140.1 L155.1,140.1 L150.8,131.3 L179,95 L187.9,95.3 L212.1,131.6 L207.5,140.1 Z M166.3,129.2 L197.3,129.2 L183,107.6 L166.3,129.2 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M284.4,140.1 L232,140.1 L227.4,131.6 L251.6,95.3 L260.5,95 L288.7,131.3 L284.4,140.1 Z M242.1,129.2 L273.1,129.2 L256.4,107.7 L242.1,129.2 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M284.4,251.7 L155.1,251.7 L149.6,246.2 L149.6,134.6 L155.1,129.1 L284.3,129.1 L289.8,134.6 L289.8,246.2 L284.4,251.7 Z M160.6,240.8 L278.9,240.8 L278.9,140.1 L160.6,140.1 L160.6,240.8 Z" id="Shape" fill="#3A3033"></path>
+            <rect id="Rectangle-path" fill="#3A3033" x="207.5" y="108.5" width="24.4" height="10.9"></rect>
+            <path d="M84.4,255.7 C56.9,255.7 34.5,233.3 34.5,205.8 L34.5,63.7 L45.4,63.7 L45.4,205.8 C45.4,227.3 62.9,244.7 84.3,244.7 C105.8,244.7 123.2,227.2 123.2,205.8 L123.2,50.1 C123.2,22.6 145.6,0.2 173.1,0.2 L175.3,0.2 C202.8,0.2 225.2,22.6 225.2,50.1 L225.2,113.9 L214.3,113.9 L214.3,50.1 C214.3,28.6 196.8,11.2 175.4,11.2 L173.2,11.2 C151.7,11.2 134.3,28.7 134.3,50.1 L134.3,205.8 C134.2,233.4 111.9,255.7 84.4,255.7 Z" id="Shape" fill="#3A3033"></path>
+        </g>
+    </g>
+</svg>

@@ -118,6 +118,9 @@ export default new VueRouter({
 					component: Vue.component( 'Users', require( './pages/Users.vue' ) ),
 					beforeEnter: requireAuth
 				},
+				/*
+					Catch Alls
+				*/
 				{ path: '_=_', redirect: '/' }
 			]
 		}

@@ -28,7 +28,7 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods ){
+	postAddNewCafe: function( companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -49,6 +49,8 @@ export default {
 		formData.append('lat', lat);
 		formData.append('lng', lng);
 		formData.append('brew_methods', JSON.stringify( brewMethods ) );
+		formData.append('matcha', matcha);
+		formData.append('tea', tea);
 
 		return axios.post( ROAST_CONFIG.API_URL + '/cafes',
 			formData,
@@ -63,7 +65,7 @@ export default {
 	/*
 	  PUT 	/api/v1/cafes/{id}
 	*/
-	putEditCafe: function( id, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods ){
+	putEditCafe: function( id, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -84,6 +86,8 @@ export default {
 		formData.append('lat', lat);
 		formData.append('lng', lng);
 		formData.append('brew_methods', JSON.stringify( brewMethods ) );
+		formData.append('matcha', matcha);
+		formData.append('tea', tea);
 		formData.append('_method', 'PUT');
 
 		return axios.post( ROAST_CONFIG.API_URL + '/cafes/'+id,

@@ -158,6 +158,8 @@ class CafesController extends Controller
 		$cafe->latitude 				= $lat;
 		$cafe->longitude 				= $lng;
 		$cafe->added_by 				= Auth::user()->id;
+		$cafe->tea 							= $request->has('tea') ? $request->get('tea') : 0;
+		$cafe->matcha 					= $request->has('matcha') ? $request->get('matcha') : 0;
 		$cafe->deleted 					= 0;
 
 		$cafe->save();
@@ -191,9 +193,18 @@ class CafesController extends Controller
 		if( $companyID != '' ){
 	    $company = Company::where('id', '=', $companyID)->first();
 
-			$company->name 				= $request->get('company_name');
-	    $company->roaster			= $request->get('company_type') == 'roaster' ? 1 : 0;
-	    $company->website 		= $request->get('website');
+			if( $request->has('company_name') ){
+				$company->name 				= $request->get('company_name');
+			}
+
+			if( $request->has('company_type') ){
+	    	$company->roaster			= $request->get('company_type') == 'roaster' ? 1 : 0;
+			}
+
+			if( $request->has('website') ){
+				$company->website 		= $request->get('website');
+			}
+
 	    $company->logo 				= '';
 	    $company->description = '';
 
@@ -201,9 +212,20 @@ class CafesController extends Controller
 	  }else{
 	    $company = new Company();
 
-	    $company->name 				= $request->get('company_name');
-	    $company->roaster			= $request->get('company_type') == 'roaster' ? 1 : 0;
-	    $company->website 		= $request->get('website');
+			if( $request->has('company_name') ){
+	    	$company->name 				= $request->get('company_name');
+			}
+
+			if( $request->has('company_type') ){
+	    	$company->roaster			= $request->get('company_type') == 'roaster' ? 1 : 0;
+			}else{
+				$company->roaster 		= 0;
+			}
+
+			if( $request->has('website') ){
+				$company->website 		= $request->get('website');
+			}
+
 	    $company->logo 				= '';
 	    $company->description = '';
 	    $company->added_by 		= Auth::user()->id;
@@ -211,12 +233,41 @@ class CafesController extends Controller
 	    $company->save();
 	  }
 
-		$address 			= $request->get('address');
-	  $city 				= $request->get('city');
-	  $state 				= $request->get('state');
-	  $zip 					= $request->get('zip');
-	  $locationName = $request->get('location_name');
-	  $brewMethods 	= json_decode( $request->get('brew_methods') );
+		$cafe = Cafe::where('id', '=', $cafeID)->first();
+
+		if( $request->has('address') ){
+			$address = $request->get('address');
+		}else{
+			$address = $cafe->address;
+		}
+
+		if( $request->has('city') ){
+			$city = $request->get('city');
+		}else{
+			$city = $cafe->city;
+		}
+
+		if( $request->has('state') ){
+			$state = $request->get('state');
+		}else{
+			$state = $cafe->state;
+		}
+
+		if( $request->has('zip') ){
+			$zip = $request->get('zip');
+		}else{
+			$zip = $cafe->zip;
+		}
+
+		if( $request->has('location_name') ){
+			$locationName = $request->get('location_name');
+		}else{
+			$locationName = $cafe->location_name;
+		}
+
+		if( $request->has('brew_methods') ){
+	  	$brewMethods 	= json_decode( $request->get('brew_methods') );
+		}
 
 	  $lat = Request::get('lat') != '' ? Request::get('lat') : 0;
 	  $lng = Request::get('lng') != '' ? Request::get('lng') : 0;
@@ -227,7 +278,6 @@ class CafesController extends Controller
 	    $lng = $coordinates['lng'];
 	  }
 
-		$cafe = Cafe::where('id', '=', $cafeID)->first();
 
 		$cafe->company 					= $company->id;
 	  $cafe->location_name 		= $locationName != null ? $locationName : '';
@@ -239,12 +289,22 @@ class CafesController extends Controller
 	  $cafe->longitude 				= $lng;
 	  $cafe->added_by 				= Auth::user()->id;
 
+		if( $request->has('matcha') ){
+			$cafe->matcha = $request->get('matcha');
+		}
+
+		if( $request->has('tea') ){
+			$cafe->tea = $request->get('tea');
+		}
+
 	  $cafe->save();
 
-		/*
-	    Attach the brew methods
-	  */
-	  $cafe->brewMethods()->sync( $brewMethods );
+		if( $request->has('brew_methods') ){
+			/*
+		    Attach the brew methods
+		  */
+		  $cafe->brewMethods()->sync( $brewMethods );
+		}
 
 	  $company = Company::where('id', '=', $company->id)
 	                    ->with('cafes')
