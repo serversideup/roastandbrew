@@ -161,6 +161,8 @@ class CafesController extends Controller
 		$cafe->tea 							= $request->has('tea') ? $request->get('tea') : 0;
 		$cafe->matcha 					= $request->has('matcha') ? $request->get('matcha') : 0;
 		$cafe->deleted 					= 0;
+		$cafe->tea 							= 0;
+		$cafe->matcha 					= 0;
 
 		$cafe->save();
 
