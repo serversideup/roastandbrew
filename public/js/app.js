@@ -1710,7 +1710,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeBrewMethodsFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTextFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeUserLikeFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasTeaFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
 //
 //
 //
@@ -1782,6 +1784,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -1803,10 +1807,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */]],
 
   mounted: function mounted() {
-    __WEBPACK_IMPORTED_MODULE_4__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
+    __WEBPACK_IMPORTED_MODULE_6__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
       this.processFilters(filters);
     }.bind(this));
   },
@@ -1817,7 +1821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       /*
         If no filters are selected, show the card
       */
-      if (filters.text == '' && filters.type == 'all' && filters.brewMethods.length == 0 && !filters.liked) {
+      if (filters.text == '' && filters.type == 'all' && filters.brewMethods.length == 0 && !filters.liked && !filters.matcha && !filters.tea) {
         this.show = true;
       } else {
         /*
@@ -1827,6 +1831,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var brewMethodsPassed = false;
         var typePassed = false;
         var likedPassed = false;
+        var matchaPassed = false;
+        var teaPassed = false;
 
         /*
           Check if the roaster passes
@@ -1863,9 +1869,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         /*
+          Checks if the cafe passes matcha filter
+        */
+        if (filters.matcha && this.processCafeHasMatchaFilter(this.cafe)) {
+          matchaPassed = true;
+        } else if (!filters.matcha) {
+          matchaPassed = true;
+        }
+
+        /*
+          Checks if the cafe passes the tea filter
+        */
+        if (filters.tea && this.processCafeHasTeaFilter(this.cafe)) {
+          teaPassed = true;
+        } else if (!filters.tea) {
+          teaPassed = true;
+        }
+
+        /*
           If everything passes, then we show the Cafe Card
         */
-        if (typePassed && textPassed && brewMethodsPassed && likedPassed) {
+        if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed) {
           this.show = true;
         } else {
           this.show = false;
@@ -1873,7 +1897,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     panToLocation: function panToLocation(cafe) {
-      __WEBPACK_IMPORTED_MODULE_4__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(cafe.latitude), lng: parseFloat(cafe.longitude) });
+      __WEBPACK_IMPORTED_MODULE_6__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(cafe.latitude), lng: parseFloat(cafe.longitude) });
     }
   }
 });
@@ -1890,7 +1914,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTagsFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTextFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeUserLikeFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasTeaFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
 //
 //
 //
@@ -1959,6 +1985,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -1998,7 +2026,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */]],
 
   computed: {
     /*
@@ -2037,11 +2065,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     /*
       Listen to the filters-updated event to filter the map markers
     */
-    __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
+    __WEBPACK_IMPORTED_MODULE_7__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
       this.processFilters(filters);
     }.bind(this));
 
-    __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on('location-selected', function (cafe) {
+    __WEBPACK_IMPORTED_MODULE_7__event_bus_js__["a" /* EventBus */].$on('location-selected', function (cafe) {
       var latLng = new google.maps.LatLng(cafe.lat, cafe.lng);
       this.$map.setZoom(17);
       this.$map.panTo(latLng);
@@ -2055,8 +2083,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     processFilters: function processFilters(filters) {
       for (var i = 0; i < this.$markers.length; i++) {
-        if (filters.text == '' && filters.type == 'all' && filters.brewMethods.length == 0 && !filters.liked) {
-
+        if (filters.text == '' && filters.type == 'all' && filters.brewMethods.length == 0 && !filters.liked && !filters.matcha && !filters.tea) {
           this.$markers[i].setMap(this.$map);
         } else {
           /*
@@ -2066,6 +2093,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var brewMethodsPassed = false;
           var typePassed = false;
           var likedPassed = false;
+          var matchaPassed = false;
+          var teaPassed = false;
 
           /*
             Check if the roaster passes
@@ -2102,9 +2131,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
 
           /*
+            Checks if the cafe passes matcha filter
+          */
+          if (filters.matcha && this.processCafeHasMatchaFilter(this.$markers[i].cafe)) {
+            matchaPassed = true;
+          } else if (!filters.matcha) {
+            matchaPassed = true;
+          }
+
+          /*
+            Checks if the cafe passes the tea filter
+          */
+          if (filters.tea && this.processCafeHasTeaFilter(this.$markers[i].cafe)) {
+            teaPassed = true;
+          } else if (!filters.tea) {
+            teaPassed = true;
+          }
+
+          /*
             If everything passes, then we show the Cafe Marker
           */
-          if (typePassed && textPassed && brewMethodsPassed && likedPassed) {
+          if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed) {
             this.$markers[i].setMap(this.$map);
           } else {
             this.$markers[i].setMap(null);
@@ -2774,6 +2821,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*
   Imports the event bus
@@ -2791,7 +2902,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       activeLocationFilter: 'all',
       onlyLiked: false,
       brewMethodsFilter: [],
-      shownCount: 1
+      shownCount: 1,
+      hasMatcha: false,
+      hasTea: false
     };
   },
 
@@ -2807,6 +2920,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.updateFilterDisplay();
     },
     brewMethodsFilter: function brewMethodsFilter() {
+      this.updateFilterDisplay();
+    },
+    hasMatcha: function hasMatcha() {
+      this.updateFilterDisplay();
+    },
+    hasTea: function hasTea() {
       this.updateFilterDisplay();
     },
     showFilters: function showFilters() {
@@ -2863,7 +2982,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         text: this.textSearch,
         type: this.activeLocationFilter,
         liked: this.onlyLiked,
-        brewMethods: this.brewMethodsFilter
+        brewMethods: this.brewMethodsFilter,
+        matcha: this.hasMatcha,
+        tea: this.hasTea
       });
 
       this.$nextTick(function () {
@@ -2883,11 +3004,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     toggleShowFilters: function toggleShowFilters() {
       this.$store.dispatch('toggleShowFilters', { showFilters: !this.showFilters });
     },
+    toggleMatchaFilter: function toggleMatchaFilter() {
+      this.hasMatcha = !this.hasMatcha;
+    },
+    toggleTeaFilter: function toggleTeaFilter() {
+      this.hasTea = !this.hasTea;
+    },
     clearFilters: function clearFilters() {
       this.textSearch = '';
       this.activeLocationFilter = 'all';
       this.onlyLiked = false;
       this.brewMethodsFilter = [];
+      this.hasMatcha = false;
+      this.hasTea = false;
     }
   }
 });
@@ -6354,7 +6483,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv.filters-container {\n  background-color: white;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  top: 75px;\n  max-width: 550px;\n  width: 100%;\n  padding-top: 50px;\n  -webkit-box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n          box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n  z-index: 99;\n}\ndiv.filters-container span.clear-filters {\n    font-size: 16px;\n    color: #054E7A;\n    font-family: \"Lato\", sans-serif;\n    cursor: pointer;\n    display: block;\n    float: left;\n    margin-bottom: 20px;\n    display: none;\n}\ndiv.filters-container span.clear-filters img {\n      margin-right: 10px;\n      float: left;\n      margin-top: 6px;\n}\ndiv.filters-container input[type=\"text\"].search {\n    -webkit-box-shadow: none;\n            box-shadow: none;\n    border-radius: 3px;\n    color: #BABABA;\n    font-size: 16px;\n    font-family: \"Lato\", sans-serif;\n    background-image: url(\"/img/search-icon.svg\");\n    background-repeat: no-repeat;\n    background-position: 6px;\n    padding-left: 35px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n}\ndiv.filters-container label.filter-label {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 20px;\n    margin-bottom: 10px;\n}\ndiv.filters-container div.location-filter {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    color: #E8635F;\n    border-bottom: 1px solid #E8635F;\n    border-top: 1px solid #E8635F;\n    border-left: 1px solid #E8635F;\n    border-right: 1px solid #E8635F;\n    width: 33%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n}\ndiv.filters-container div.location-filter.active {\n      color: white;\n      background-color: #E8635F;\n}\ndiv.filters-container div.location-filter.all-locations {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n}\ndiv.filters-container div.location-filter.roasters {\n      border-left: none;\n      border-right: none;\n}\ndiv.filters-container div.location-filter.cafes {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv.filters-container div.brew-method {\n    font-size: 16px;\n    color: #666666;\n    font-family: \"Lato\", sans-serif;\n    border-radius: 4px;\n    background-color: #F9F9FA;\n    width: 150px;\n    height: 57px;\n    float: left;\n    margin-right: 10px;\n    margin-bottom: 10px;\n    padding: 5px;\n    cursor: pointer;\n    position: relative;\n}\ndiv.filters-container div.brew-method.active {\n      color: white;\n      background-color: #E8635F;\n}\ndiv.filters-container div.brew-method div.brew-method-container {\n      position: absolute;\n      top: 50%;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%);\n}\ndiv.filters-container div.brew-method div.brew-method-container img.brew-method-icon {\n        display: inline-block;\n        margin-right: 10px;\n        margin-left: 5px;\n        width: 20px;\n        max-height: 30px;\n}\ndiv.filters-container div.brew-method div.brew-method-container span.brew-method-name {\n        display: inline-block;\n        width: calc( 100% - 40px);\n        vertical-align: middle;\n}\ndiv.filters-container span.liked-location-label {\n    color: #666666;\n    font-size: 16px;\n    font-family: \"Lato\", sans-serif;\n    margin-left: 10px;\n}\ndiv.filters-container div.cafe-grid-container {\n    overflow: auto;\n    padding-bottom: 10px;\n}\ndiv.filters-container div.close-filters {\n    height: 90px;\n    width: 23px;\n    position: absolute;\n    right: -20px;\n    background-color: white;\n    border-top-right-radius: 3px;\n    border-bottom-right-radius: 3px;\n    line-height: 90px;\n    top: 50%;\n    cursor: pointer;\n    margin-top: -82px;\n    text-align: center;\n}\ndiv.filters-container span.no-results {\n    display: block;\n    text-align: center;\n    margin-top: 50px;\n    color: #666666;\n    text-transform: uppercase;\n    font-weight: 600;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv.filters-container {\n    padding-top: 25px;\n    overflow-y: auto;\n}\ndiv.filters-container span.clear-filters {\n      display: block;\n}\ndiv.filters-container div.cafe-grid-container {\n      height: inherit;\n}\ndiv.filters-container div.close-filters {\n      display: none;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
+exports.push([module.i, "\ndiv.filters-container {\n  background-color: white;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  top: 75px;\n  max-width: 550px;\n  width: 100%;\n  padding-top: 50px;\n  -webkit-box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n          box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n  z-index: 99;\n}\ndiv.filters-container span.clear-filters {\n    font-size: 16px;\n    color: #054E7A;\n    font-family: \"Lato\", sans-serif;\n    cursor: pointer;\n    display: block;\n    float: left;\n    margin-bottom: 20px;\n    display: none;\n}\ndiv.filters-container span.clear-filters img {\n      margin-right: 10px;\n      float: left;\n      margin-top: 6px;\n}\ndiv.filters-container input[type=\"text\"].search {\n    -webkit-box-shadow: none;\n            box-shadow: none;\n    border-radius: 3px;\n    color: #BABABA;\n    font-size: 16px;\n    font-family: \"Lato\", sans-serif;\n    background-image: url(\"/img/search-icon.svg\");\n    background-repeat: no-repeat;\n    background-position: 6px;\n    padding-left: 35px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n}\ndiv.filters-container label.filter-label {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 20px;\n    margin-bottom: 10px;\n}\ndiv.filters-container div.location-filter {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    color: #E8635F;\n    border-bottom: 1px solid #E8635F;\n    border-top: 1px solid #E8635F;\n    border-left: 1px solid #E8635F;\n    border-right: 1px solid #E8635F;\n    width: 33%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n}\ndiv.filters-container div.location-filter.active {\n      color: white;\n      background-color: #E8635F;\n}\ndiv.filters-container div.location-filter.all-locations {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n}\ndiv.filters-container div.location-filter.roasters {\n      border-left: none;\n      border-right: none;\n}\ndiv.filters-container div.location-filter.cafes {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv.filters-container div.brew-method {\n    font-size: 16px;\n    color: #666666;\n    font-family: \"Lato\", sans-serif;\n    border-radius: 4px;\n    background-color: #F9F9FA;\n    width: 150px;\n    height: 57px;\n    float: left;\n    margin-right: 10px;\n    margin-bottom: 10px;\n    padding: 5px;\n    cursor: pointer;\n    position: relative;\n}\ndiv.filters-container div.brew-method.active {\n      color: white;\n      background-color: #E8635F;\n}\ndiv.filters-container div.brew-method div.brew-method-container {\n      position: absolute;\n      top: 50%;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%);\n}\ndiv.filters-container div.brew-method div.brew-method-container img.brew-method-icon {\n        display: inline-block;\n        margin-right: 10px;\n        margin-left: 5px;\n        width: 20px;\n        max-height: 30px;\n}\ndiv.filters-container div.brew-method div.brew-method-container span.brew-method-name {\n        display: inline-block;\n        width: calc( 100% - 40px);\n        vertical-align: middle;\n}\ndiv.filters-container div.drink-option {\n    font-size: 16px;\n    color: #666666;\n    font-family: \"Lato\", sans-serif;\n    border-radius: 4px;\n    background-color: #F9F9FA;\n    width: 150px;\n    height: 57px;\n    float: left;\n    margin-right: 10px;\n    margin-bottom: 10px;\n    padding: 5px;\n    cursor: pointer;\n    position: relative;\n}\ndiv.filters-container div.drink-option.active {\n      color: white;\n      background-color: #E8635F;\n}\ndiv.filters-container div.drink-option div.drink-option-container {\n      position: absolute;\n      top: 50%;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%);\n}\ndiv.filters-container div.drink-option div.drink-option-container img.drink-option-icon {\n        display: inline-block;\n        margin-right: 10px;\n        margin-left: 5px;\n        width: 20px;\n        max-height: 30px;\n}\ndiv.filters-container div.drink-option div.drink-option-container span.drink-option-name {\n        display: inline-block;\n        width: calc( 100% - 40px);\n        vertical-align: middle;\n}\ndiv.filters-container span.liked-location-label {\n    color: #666666;\n    font-size: 16px;\n    font-family: \"Lato\", sans-serif;\n    margin-left: 10px;\n}\ndiv.filters-container div.cafe-grid-container {\n    overflow: auto;\n    padding-bottom: 10px;\n}\ndiv.filters-container div.close-filters {\n    height: 90px;\n    width: 23px;\n    position: absolute;\n    right: -20px;\n    background-color: white;\n    border-top-right-radius: 3px;\n    border-bottom-right-radius: 3px;\n    line-height: 90px;\n    top: 50%;\n    cursor: pointer;\n    margin-top: -82px;\n    text-align: center;\n}\ndiv.filters-container span.no-results {\n    display: block;\n    text-align: center;\n    margin-top: 50px;\n    color: #666666;\n    text-transform: uppercase;\n    font-weight: 600;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv.filters-container {\n    padding-top: 25px;\n    overflow-y: auto;\n}\ndiv.filters-container span.clear-filters {\n      display: block;\n}\ndiv.filters-container div.cafe-grid-container {\n      height: inherit;\n}\ndiv.filters-container div.close-filters {\n      display: none;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
 
 // exports
 
@@ -50020,6 +50149,70 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c("div", { attrs: { id: "drink-options-container" } }, [
+          _c("div", { staticClass: "grid-x grid-padding-x" }, [
+            _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+              _c("label", { staticClass: "filter-label" }, [
+                _vm._v("Drink Options")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x grid-padding-x" }, [
+            _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "drink-option",
+                  class: { active: _vm.hasMatcha },
+                  on: {
+                    click: function($event) {
+                      _vm.toggleMatchaFilter()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "drink-option-container" }, [
+                    _c("img", {
+                      staticClass: "drink-option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "drink-option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "drink-option",
+                  class: { active: _vm.hasTea },
+                  on: {
+                    click: function($event) {
+                      _vm.toggleTeaFilter()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "drink-option-container" }, [
+                    _c("img", {
+                      staticClass: "drink-option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "drink-option-name" }, [
+                      _vm._v("Tea")
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           {
@@ -67645,6 +67838,50 @@ var CafeBrewMethodsFilter = {
         return false;
       } else {
         return true;
+      }
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CafeHasMatchaFilter; });
+var CafeHasMatchaFilter = {
+  methods: {
+    processCafeHasMatchaFilter: function processCafeHasMatchaFilter(cafe) {
+      /*
+        Checks to see if the cafe has matcha
+      */
+      if (cafe.matcha == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/mixins/filters/CafeHasTeaFilter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CafeHasTeaFilter; });
+var CafeHasTeaFilter = {
+  methods: {
+    processCafeHasTeaFilter: function processCafeHasTeaFilter(cafe) {
+      /*
+        Checks to see if the cafe has tea
+      */
+      if (cafe.tea == 1) {
+        return true;
+      } else {
+        return false;
       }
     }
   }

@@ -131,6 +131,47 @@
       }
     }
 
+    div.drink-option{
+      font-size: 16px;
+      color: #666666;
+      font-family: "Lato", sans-serif;
+      border-radius: 4px;
+      background-color: #F9F9FA;
+      width: 150px;
+      height: 57px;
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      padding: 5px;
+      cursor: pointer;
+      position: relative;
+
+      &.active{
+        color: white;
+        background-color: $secondary-color;
+      }
+
+      div.drink-option-container{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        img.drink-option-icon{
+          display: inline-block;
+          margin-right: 10px;
+          margin-left: 5px;
+          width: 20px;
+          max-height: 30px;
+        }
+
+        span.drink-option-name{
+          display: inline-block;
+          width: calc( 100% - 40px);
+          vertical-align: middle;
+        }
+      }
+    }
+
     span.liked-location-label{
       color: #666666;
       font-size: 16px;
@@ -258,6 +299,29 @@
         </div>
       </div>
 
+      <div id="drink-options-container">
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell">
+            <label class="filter-label">Drink Options</label>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 medium-12 small-12 cell">
+            <div class="drink-option" v-on:click="toggleMatchaFilter()" v-bind:class="{'active':hasMatcha}">
+              <div class="drink-option-container">
+                <img src="/img/icons/matcha-latte.svg" class="drink-option-icon"/> <span class="drink-option-name">Matcha</span>
+              </div>
+            </div>
+            <div class="drink-option" v-on:click="toggleTeaFilter()" v-bind:class="{'active':hasTea}">
+              <div class="drink-option-container">
+                <img src="/img/icons/tea-bag.svg" class="drink-option-icon"/> <span class="drink-option-name">Tea</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="grid-x grid-padding-x cafe-grid-container" id="cafe-grid">
         <cafe-card v-for="cafe in cafes" :key="cafe.id" :cafe="cafe"></cafe-card>
         <div class="large-12 medium-12 small-12 cell">
@@ -287,7 +351,9 @@
         activeLocationFilter: 'all',
         onlyLiked: false,
         brewMethodsFilter: [],
-        shownCount: 1
+        shownCount: 1,
+        hasMatcha: false,
+        hasTea: false
       }
     },
 
@@ -305,6 +371,14 @@
       },
 
       brewMethodsFilter(){
+        this.updateFilterDisplay();
+      },
+
+      hasMatcha(){
+        this.updateFilterDisplay();
+      },
+
+      hasTea(){
         this.updateFilterDisplay();
       },
 
@@ -368,7 +442,9 @@
           text: this.textSearch,
           type: this.activeLocationFilter,
           liked: this.onlyLiked,
-          brewMethods: this.brewMethodsFilter
+          brewMethods: this.brewMethodsFilter,
+          matcha: this.hasMatcha,
+          tea: this.hasTea
         });
 
         this.$nextTick(function(){
@@ -392,11 +468,21 @@
         this.$store.dispatch( 'toggleShowFilters', { showFilters : !this.showFilters } );
       },
 
+      toggleMatchaFilter(){
+        this.hasMatcha = !this.hasMatcha;
+      },
+
+      toggleTeaFilter(){
+        this.hasTea = !this.hasTea;
+      },
+
       clearFilters(){
         this.textSearch = '';
         this.activeLocationFilter = 'all';
         this.onlyLiked = false;
         this.brewMethodsFilter = [];
+        this.hasMatcha = false;
+        this.hasTea = false;
       }
     }
   }

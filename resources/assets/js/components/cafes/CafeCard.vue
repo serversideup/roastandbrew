@@ -74,6 +74,8 @@
   import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
   import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
   import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
+  import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
+  import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
 
   /*
     Imports the Event Bus to listen to filter updates
@@ -93,7 +95,9 @@
       CafeTypeFilter,
       CafeBrewMethodsFilter,
       CafeTextFilter,
-      CafeUserLikeFilter
+      CafeUserLikeFilter,
+      CafeHasMatchaFilter,
+      CafeHasTeaFilter
     ],
 
     mounted(){
@@ -110,7 +114,9 @@
         if( filters.text == ''
           && filters.type == 'all'
           && filters.brewMethods.length == 0
-          && !filters.liked ){
+          && !filters.liked
+          && !filters.matcha
+          && !filters.tea ){
             this.show = true;
         }else{
           /*
@@ -120,6 +126,8 @@
           var brewMethodsPassed = false;
           var typePassed = false;
           var likedPassed = false;
+          var matchaPassed = false;
+          var teaPassed = false;
 
           /*
             Check if the roaster passes
@@ -156,9 +164,27 @@
           }
 
           /*
+            Checks if the cafe passes matcha filter
+          */
+          if( filters.matcha && this.processCafeHasMatchaFilter( this.cafe ) ){
+            matchaPassed = true;
+          }else if( !filters.matcha ){
+            matchaPassed = true;
+          }
+
+          /*
+            Checks if the cafe passes the tea filter
+          */
+          if( filters.tea && this.processCafeHasTeaFilter( this.cafe ) ){
+            teaPassed = true;
+          }else if( !filters.tea ){
+            teaPassed = true;
+          }
+
+          /*
             If everything passes, then we show the Cafe Card
           */
-          if( typePassed && textPassed && brewMethodsPassed && likedPassed ){
+          if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed ){
             this.show = true;
           }else{
             this.show = false;
