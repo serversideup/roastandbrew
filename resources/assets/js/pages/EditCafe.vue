@@ -573,7 +573,7 @@
     */
     created(){
       this.$store.dispatch( 'loadCafeEdit', {
-        id: this.$route.params.id
+        slug: this.$route.params.slug
       });
     },
 
@@ -605,7 +605,7 @@
     watch: {
       'editCafeStatus': function(){
         if( this.editCafeStatus == 2 ){
-          this.$router.push({ name: 'cafe', params: { id: this.$route.params.id }});
+          this.$router.push({ name: 'cafe', params: { slug: this.$route.params.slug }});
         }
       },
       'editCafeLoadStatus': function(){
@@ -681,7 +681,7 @@
         this.lng            = this.editCafe.longitude;
         this.matcha         = this.editCafe.matcha;
         this.tea            = this.editCafe.tea;
-                   
+
         for( let i = 0; i < this.editCafe.brew_methods.length; i++ ){
           this.brewMethodsSelected.push( this.editCafe.brew_methods[i].id );
         }
@@ -697,7 +697,7 @@
       submitEditCafe(){
         if( this.validateEditCafe() ){
           this.$store.dispatch( 'editCafe', {
-            id: this.editCafe.id,
+            slug: this.editCafe.slug,
             company_name: this.companyName,
             company_id: this.companyID,
             company_type: this.companyType,
@@ -823,7 +823,7 @@
       deleteCafe(){
         if( confirm( 'Are you sure you want to delete this cafe?' ) ){
           this.$store.dispatch( 'deleteCafe', {
-            cafe_id: this.editCafe.id
+            slug: this.editCafe.slug
           } );
         }
       },

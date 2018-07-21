@@ -3,18 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+use Cviebrock\EloquentSluggable\Sluggable;
+
 use Request;
 
 class Cafe extends Model
 {
 	protected $table = 'cafes';
 
+	use Sluggable;
+
+  public function sluggable()
+  {
+      return [
+          'slug' => [
+              'source' => ['company.name', 'location_name', 'address', 'city', 'state']
+          ]
+      ];
+  }
+
 	public function brewMethods(){
 		return $this->belongsToMany( 'App\Models\BrewMethod', 'cafes_brew_methods', 'cafe_id', 'brew_method_id' );
 	}
 
 	public function company(){
-		return $this->hasOne( 'App\Models\Company', 'id', 'company' );
+		return $this->belongsTo( 'App\Models\Company', 'company_id', 'id' );
 	}
 
 	public function likes(){

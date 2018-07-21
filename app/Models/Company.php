@@ -8,8 +8,10 @@ class Company extends Model
 {
 	protected $table = 'companies';
 
+	protected $fillable = ['name'];
+
   public function cafes(){
-  	return $this->hasMany( 'App\Models\Cafe', 'company', 'id' );
+  	return $this->hasMany( 'App\Models\Cafe', 'company_id', 'id' );
   }
 
   public function addedBy(){

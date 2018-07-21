@@ -2217,7 +2217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var router = _this.$router;
 
             marker.addListener('click', function () {
-              router.push({ name: 'cafe', params: { id: this.cafe.id } });
+              router.push({ name: 'cafe', params: { slug: this.cafe.slug } });
             });
 
             /*
@@ -2450,14 +2450,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    likeCafe: function likeCafe(cafeID) {
+    likeCafe: function likeCafe(slug) {
       this.$store.dispatch('likeCafe', {
-        id: this.cafe.id
+        slug: this.cafe.slug
       });
     },
-    unlikeCafe: function unlikeCafe(cafeID) {
+    unlikeCafe: function unlikeCafe(slug) {
       this.$store.dispatch('unlikeCafe', {
-        id: this.cafe.id
+        slug: this.cafe.slug
       });
     }
   }
@@ -4029,16 +4029,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   */
   created: function created() {
     this.$store.dispatch('loadCafe', {
-      id: this.$route.params.id
+      slug: this.$route.params.slug
     });
   },
 
 
   watch: {
-    '$route.params.id': function $routeParamsId() {
+    '$route.params.slug': function $routeParamsSlug() {
       this.$store.dispatch('clearLikeAndUnlikeStatus');
       this.$store.dispatch('loadCafe', {
-        id: this.$route.params.id
+        slug: this.$route.params.slug
       });
     },
 
@@ -4692,7 +4692,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   */
   created: function created() {
     this.$store.dispatch('loadCafeEdit', {
-      id: this.$route.params.id
+      slug: this.$route.params.slug
     });
   },
 
@@ -4725,7 +4725,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   watch: {
     'editCafeStatus': function editCafeStatus() {
       if (this.editCafeStatus == 2) {
-        this.$router.push({ name: 'cafe', params: { id: this.$route.params.id } });
+        this.$router.push({ name: 'cafe', params: { slug: this.$route.params.slug } });
       }
     },
     'editCafeLoadStatus': function editCafeLoadStatus() {
@@ -4820,7 +4820,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     submitEditCafe: function submitEditCafe() {
       if (this.validateEditCafe()) {
         this.$store.dispatch('editCafe', {
-          id: this.editCafe.id,
+          slug: this.editCafe.slug,
           company_name: this.companyName,
           company_id: this.companyID,
           company_type: this.companyType,
@@ -4950,7 +4950,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     deleteCafe: function deleteCafe() {
       if (confirm('Are you sure you want to delete this cafe?')) {
         this.$store.dispatch('deleteCafe', {
-          cafe_id: this.editCafe.id
+          slug: this.editCafe.slug
         });
       }
     },
@@ -50441,7 +50441,7 @@ var render = function() {
                     ],
                     staticClass: "suggest-cafe-edit",
                     attrs: {
-                      to: { name: "editcafe", params: { id: _vm.cafe.id } }
+                      to: { name: "editcafe", params: { slug: _vm.cafe.slug } }
                     }
                   },
                   [_vm._v("\n        Suggest an edit\n      ")]
@@ -50573,7 +50573,7 @@ var render = function() {
               staticClass: "like like-toggle",
               on: {
                 click: function($event) {
-                  _vm.likeCafe(_vm.cafe.id)
+                  _vm.likeCafe(_vm.cafe.slug)
                 }
               }
             },
@@ -50591,7 +50591,7 @@ var render = function() {
               staticClass: "un-like like-toggle",
               on: {
                 click: function($event) {
-                  _vm.unlikeCafe(_vm.cafe.id)
+                  _vm.unlikeCafe(_vm.cafe.slug)
                 }
               }
             },
@@ -51473,7 +51473,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          attrs: { to: { name: "cafe", params: { id: _vm.cafe.id } } },
+          attrs: { to: { name: "cafe", params: { slug: _vm.cafe.slug } } },
           nativeOn: {
             click: function($event) {
               _vm.panToLocation(_vm.cafe)
@@ -66937,17 +66937,17 @@ module.exports = function(module) {
 	},
 
 	/*
- 	GET 	/api/v1/cafes/{cafeID}
+ 	GET 	/api/v1/cafes/{slug}
  */
-	getCafe: function getCafe(cafeID) {
-		return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + cafeID);
+	getCafe: function getCafe(slug) {
+		return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug);
 	},
 
 	/*
- 	GET 	/api/v1/cafes/{cafeID}/edit
+ 	GET 	/api/v1/cafes/{slug}/edit
  */
-	getCafeEdit: function getCafeEdit(cafeID) {
-		return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + cafeID + '/edit');
+	getCafeEdit: function getCafeEdit(slug) {
+		return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug + '/edit');
 	},
 
 	/*
@@ -66985,9 +66985,9 @@ module.exports = function(module) {
 	},
 
 	/*
-   PUT 	/api/v1/cafes/{id}
+   PUT 	/api/v1/cafes/{slug}
  */
-	putEditCafe: function putEditCafe(id, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea) {
+	putEditCafe: function putEditCafe(slug, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea) {
 		/*
   	Initialize the form data
   */
@@ -67012,25 +67012,25 @@ module.exports = function(module) {
 		formData.append('tea', tea);
 		formData.append('_method', 'PUT');
 
-		return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + id, formData);
+		return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug, formData);
 	},
 
 	/*
- 	POST 	/api/v1/cafes/{cafeID}/like
+ 	POST 	/api/v1/cafes/{slug}/like
  */
-	postLikeCafe: function postLikeCafe(cafeID) {
-		return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + cafeID + '/like');
+	postLikeCafe: function postLikeCafe(slug) {
+		return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug + '/like');
 	},
 
 	/*
- 	DELETE /api/v1/cafes/{cafeID}/like
+ 	DELETE /api/v1/cafes/{slug}/like
  */
-	deleteLikeCafe: function deleteLikeCafe(cafeID) {
-		return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + cafeID + '/like');
+	deleteLikeCafe: function deleteLikeCafe(slug) {
+		return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug + '/like');
 	},
 
-	deleteCafe: function deleteCafe(cafeID) {
-		return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + cafeID);
+	deleteCafe: function deleteCafe(slug) {
+		return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug);
 	}
 });
 
@@ -68156,7 +68156,7 @@ var cafes = {
 			commit('setCafeLikedStatus', false);
 			commit('setCafeLoadStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafe(data.id).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafe(data.slug).then(function (response) {
 				commit('setCafe', response.data);
 				if (response.data.user_like_count > 0) {
 					commit('setCafeLikedStatus', true);
@@ -68176,7 +68176,7 @@ var cafes = {
 
 			commit('setCafeEditLoadStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafeEdit(data.id).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafeEdit(data.slug).then(function (response) {
 				commit('setCafeEdit', response.data);
 				commit('setCafeEditLoadStatus', 2);
 			}).catch(function () {
@@ -68195,7 +68195,7 @@ var cafes = {
 
 			commit('setCafeEditStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].putEditCafe(data.id, data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].putEditCafe(data.slug, data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea).then(function (response) {
 				commit('setCafeEditStatus', 2);
 				dispatch('loadCafes');
 			}).catch(function () {
@@ -68231,12 +68231,12 @@ var cafes = {
 
 			commit('setCafeLikeActionStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postLikeCafe(data.id).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postLikeCafe(data.slug).then(function (response) {
 				commit('setCafeLikedStatus', true);
 				commit('setCafeLikeActionStatus', 2);
-				dispatch('loadCafe', { id: data.id });
+				dispatch('loadCafe', { slug: data.slug });
 
-				commit('updateCafeLikedStatus', { id: data.id, count: 1 });
+				commit('updateCafeLikedStatus', { slug: data.slug, count: 1 });
 			}).catch(function () {
 				commit('setCafeLikeActionStatus', 3);
 			});
@@ -68252,12 +68252,12 @@ var cafes = {
 
 			commit('setCafeUnlikeActionStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteLikeCafe(data.id).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteLikeCafe(data.slug).then(function (response) {
 				commit('setCafeLikedStatus', false);
 				commit('setCafeUnlikeActionStatus', 2);
-				dispatch('loadCafe', { id: data.id });
+				dispatch('loadCafe', { slug: data.slug });
 
-				commit('updateCafeLikedStatus', { id: data.id, count: 0 });
+				commit('updateCafeLikedStatus', { slug: data.slug, count: 0 });
 			}).catch(function () {
 				commit('setCafeUnlikeActionStatus', 3);
 			});
@@ -68275,7 +68275,7 @@ var cafes = {
 
 			commit('setCafeDeleteStatus', 1);
 
-			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteCafe(data.cafe_id).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteCafe(data.slug).then(function (response) {
 				commit('setCafeDeleteStatus', 2);
 
 				dispatch('loadCafes');
@@ -68378,7 +68378,7 @@ var cafes = {
   */
 		updateCafeLikedStatus: function updateCafeLikedStatus(state, data) {
 			for (var i = 0; i < state.cafes.length; i++) {
-				if (state.cafes[i].id == data.id) {
+				if (state.cafes[i].slug == data.slug) {
 					state.cafes[i].user_like_count = data.count;
 				}
 			}
@@ -69131,12 +69131,12 @@ function requireAuth(to, from, next) {
 				component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('NewCafe', __webpack_require__("./resources/assets/js/pages/NewCafe.vue")),
 				beforeEnter: requireAuth
 			}, {
-				path: ':id',
+				path: ':slug',
 				name: 'cafe',
 				component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafe', __webpack_require__("./resources/assets/js/pages/Cafe.vue"))
 			}]
 		}, {
-			path: 'cafes/:id/edit',
+			path: 'cafes/:slug/edit',
 			name: 'editcafe',
 			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EditCafe', __webpack_require__("./resources/assets/js/pages/EditCafe.vue")),
 			beforeEnter: requireAuth

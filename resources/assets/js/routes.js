@@ -94,14 +94,14 @@ export default new VueRouter({
 							beforeEnter: requireAuth
 						},
 						{
-							path: ':id',
+							path: ':slug',
 							name: 'cafe',
 							component: Vue.component( 'Cafe', require( './pages/Cafe.vue' ) )
 						},
 					]
 				},
 				{
-					path: 'cafes/:id/edit',
+					path: 'cafes/:slug/edit',
 					name: 'editcafe',
 					component: Vue.component( 'EditCafe', require( './pages/EditCafe.vue' ) ),
 					beforeEnter: requireAuth

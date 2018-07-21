@@ -305,7 +305,7 @@
             let router = this.$router;
 
             marker.addListener('click', function() {
-              router.push( { name: 'cafe', params: { id: this.cafe.id } } );
+              router.push( { name: 'cafe', params: { slug: this.cafe.slug } } );
             });
 
             /*

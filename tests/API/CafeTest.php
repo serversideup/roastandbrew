@@ -23,7 +23,7 @@ class CafeTest extends TestCase
       ]);
 
       $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
@@ -43,17 +43,17 @@ class CafeTest extends TestCase
       ]);
 
       $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
-      $cafeID = $cafes[0]->id;
+      $cafeSlug = $cafes[0]->slug;
 
 
       $response = $this->actingAs($user, 'api')
-                       ->get('/api/v1/cafes/'.$cafeID)
+                       ->get('/api/v1/cafes/'.$cafeSlug)
                        ->assertJSON([
-                         'id' => $cafeID
+                         'slug' => $cafeSlug
                        ]);
     }
 
@@ -68,17 +68,17 @@ class CafeTest extends TestCase
       ]);
 
       $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
-      $cafeID = $cafes[0]->id;
+      $cafeSlug = $cafes[0]->slug;
 
 
       $response = $this->actingAs($user, 'api')
-                       ->get('/api/v1/cafes/'.$cafeID)
+                       ->get('/api/v1/cafes/'.$cafeSlug)
                        ->assertJSON([
-                         'id' => $cafeID,
+                         'slug' => $cafeSlug,
                          'deleted' => 0
                        ]);
     }
@@ -254,7 +254,7 @@ class CafeTest extends TestCase
       ]);
 
       $cafes = factory(\App\Models\Cafe::class)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
@@ -263,10 +263,10 @@ class CafeTest extends TestCase
           'icon' => ''
       ]);
 
-      $cafeID = $cafes->id;
+      $cafeSlug = $cafes->slug;
 
       $response = $this->actingAs($user, 'api')
-                        ->json('PUT', '/api/v1/cafes/'.$cafeID, [
+                        ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                           'company_id'   => $company->id,
                           'company_name' => 'EDITED name',
                           'added_by'     => $user->id,
@@ -293,7 +293,7 @@ class CafeTest extends TestCase
        ]);
 
        $cafes = factory(\App\Models\Cafe::class)->create([
-         'company' => $company->id,
+         'company_id' => $company->id,
          'added_by' => $user->id
        ]);
 
@@ -302,15 +302,15 @@ class CafeTest extends TestCase
            'icon' => ''
        ]);
 
-       $cafeID = $cafes->id;
+       $cafeSlug = $cafes->slug;
 
        $this->assertDatabaseHas('cafes', [
-         'id' => $cafeID,
+         'slug' => $cafeSlug,
          'matcha' => 0
        ]);
 
        $response = $this->actingAs($user, 'api')
-                         ->json('PUT', '/api/v1/cafes/'.$cafeID, [
+                         ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                            'matcha' => 1,
                            'company_name' => 'EDITED name',
                            'website'      => 'https://rubycoffeeroasters.com/',
@@ -337,7 +337,7 @@ class CafeTest extends TestCase
         ]);
 
         $cafes = factory(\App\Models\Cafe::class)->create([
-          'company' => $company->id,
+          'company_id' => $company->id,
           'added_by' => $user->id
         ]);
 
@@ -346,15 +346,15 @@ class CafeTest extends TestCase
             'icon' => ''
         ]);
 
-        $cafeID = $cafes->id;
+        $cafeSlug = $cafes->slug;
 
         $this->assertDatabaseHas('cafes', [
-          'id' => $cafeID,
+          'slug' => $cafeSlug,
           'tea' => 0
         ]);
 
         $response = $this->actingAs($user, 'api')
-                          ->json('PUT', '/api/v1/cafes/'.$cafeID, [
+                          ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                             'tea' => 1,
                             'company_name' => 'EDITED name',
                             'website'      => 'https://rubycoffeeroasters.com/',
@@ -381,12 +381,12 @@ class CafeTest extends TestCase
       ]);
 
       $cafe = factory(\App\Models\Cafe::class)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
       $response = $this->actingAs($user, 'api')
-                        ->json('POST', '/api/v1/cafes/'.$cafe->id.'/like')
+                        ->json('POST', '/api/v1/cafes/'.$cafe->slug.'/like')
                         ->assertJSON([
                           'cafe_liked' => 'true',
                         ]);
@@ -408,12 +408,12 @@ class CafeTest extends TestCase
       ]);
 
       $cafe = factory(\App\Models\Cafe::class)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
       $this->actingAs($user, 'api')
-            ->json('POST', '/api/v1/cafes/'.$cafe->id.'/like')
+            ->json('POST', '/api/v1/cafes/'.$cafe->slug.'/like')
             ->assertJSON([
               'cafe_liked' => 'true',
             ]);
@@ -424,7 +424,7 @@ class CafeTest extends TestCase
             ]);
 
       $this->actingAs($user, 'api')
-            ->json('DELETE', '/api/v1/cafes/'.$cafe->id.'/like');
+            ->json('DELETE', '/api/v1/cafes/'.$cafe->slug.'/like');
 
       $this->assertDatabaseMissing('users_cafes_likes', [
                 'user_id' => $user->id,
@@ -444,12 +444,12 @@ class CafeTest extends TestCase
       ]);
 
       $cafe = factory(\App\Models\Cafe::class)->create([
-        'company' => $company->id,
+        'company_id' => $company->id,
         'added_by' => $user->id
       ]);
 
       $this->actingAs( $user, 'api' )
-           ->json('DELETE', '/api/v1/cafes/'.$cafe->id);
+           ->json('DELETE', '/api/v1/cafes/'.$cafe->slug);
 
      $this->assertDatabaseHas('cafes', [
                'id' => $cafe->id,

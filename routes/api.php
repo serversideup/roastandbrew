@@ -43,12 +43,12 @@ Route::group(['prefix' => 'v1'], function(){
   |-------------------------------------------------------------------------------
   | Get An Individual Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}
+  | URL:            /api/v1/cafes/{slug}
   | Controller:     API\CafesController@getCafe
   | Method:         GET
   | Description:    Gets an individual cafe
   */
-  Route::get('/cafes/{id}', 'API\CafesController@getCafe');
+  Route::get('/cafes/{slug}', 'API\CafesController@getCafe');
 
   /*
   |-------------------------------------------------------------------------------
@@ -94,12 +94,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   |-------------------------------------------------------------------------------
   | Gets Editing Data for an Individual Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}/edit
+  | URL:            /api/v1/cafes/{slug}/edit
   | Controller:     API\CafesController@getCafeEditData
   | Method:         GET
   | Description:    Gets an individual cafe's edit data
   */
-  Route::get('/cafes/{id}/edit', 'API\CafesController@getCafeEditData');
+  Route::get('/cafes/{slug}/edit', 'API\CafesController@getCafeEditData');
 
   /*
   |-------------------------------------------------------------------------------
@@ -116,56 +116,56 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   |-------------------------------------------------------------------------------
   | Edits a Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{cafeID}
+  | URL:            /api/v1/cafes/{slug}
   | Controller:     API\CafesController@putEditCafe
   | Method:         PUT
   | Description:    Edits a cafe
   */
-  Route::put('/cafes/{cafeID}', 'API\CafesController@putEditCafe');
+  Route::put('/cafes/{slug}', 'API\CafesController@putEditCafe');
 
   /*
   |-------------------------------------------------------------------------------
   | Likes a Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}/like
+  | URL:            /api/v1/cafes/{slug}/like
   | Controller:     API\CafesController@postLikeCafe
   | Method:         POST
   | Description:    Likes a cafe for the authenticated user.
   */
-  Route::post('/cafes/{id}/like', 'API\CafesController@postLikeCafe');
+  Route::post('/cafes/{slug}/like', 'API\CafesController@postLikeCafe');
 
   /*
   |-------------------------------------------------------------------------------
   | Un-Likes a Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}/like
+  | URL:            /api/v1/cafes/{slug}/like
   | Controller:     API\CafesController@deleteLikeCafe
   | Method:         DELETE
   | Description:    Un-Likes a cafe for the authenticated user.
   */
-  Route::delete('/cafes/{id}/like', 'API\CafesController@deleteLikeCafe');
+  Route::delete('/cafes/{slug}/like', 'API\CafesController@deleteLikeCafe');
 
   /*
   |-------------------------------------------------------------------------------
   | Adds Tags To A Cafe
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}/tags
+  | URL:            /api/v1/cafes/{slug}/tags
   | Controller:     API\CafesController@postAddTags
   | Method:         POST
   | Description:    Adds tags to a cafe for a user
   */
-  Route::post('/cafes/{id}/tags', 'API\CafesController@postAddTags');
+  Route::post('/cafes/{slug}/tags', 'API\CafesController@postAddTags');
 
   /*
   |-------------------------------------------------------------------------------
   | Deletes A Cafe Tag
   |-------------------------------------------------------------------------------
-  | URL:            /api/v1/cafes/{id}/tags/{tagID}
+  | URL:            /api/v1/cafes/{slug}/tags/{tagID}
   | Controller:     API\CafesController@deleteCafeTag
   | Method:         DELETE
   | Description:    Deletes a tag from a cafe for a user
   */
-  Route::delete('/cafes/{id}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
+  Route::delete('/cafes/{slug}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
 
-  Route::delete('/cafes/{id}', 'API\CafesController@deleteCafe');
+  Route::delete('/cafes/{slug}', 'API\CafesController@deleteCafe');
 });

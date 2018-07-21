@@ -12,17 +12,17 @@ export default {
 	},
 
 	/*
-		GET 	/api/v1/cafes/{cafeID}
+		GET 	/api/v1/cafes/{slug}
 	*/
-	getCafe: function( cafeID ){
-		return axios.get( ROAST_CONFIG.API_URL + '/cafes/' + cafeID );
+	getCafe: function( slug ){
+		return axios.get( ROAST_CONFIG.API_URL + '/cafes/' + slug );
 	},
 
 	/*
-		GET 	/api/v1/cafes/{cafeID}/edit
+		GET 	/api/v1/cafes/{slug}/edit
 	*/
-	getCafeEdit: function( cafeID ){
-		return axios.get( ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/edit' );
+	getCafeEdit: function( slug ){
+		return axios.get( ROAST_CONFIG.API_URL + '/cafes/' + slug + '/edit' );
 	},
 
 	/*
@@ -63,9 +63,9 @@ export default {
 	},
 
 	/*
-	  PUT 	/api/v1/cafes/{id}
+	  PUT 	/api/v1/cafes/{slug}
 	*/
-	putEditCafe: function( id, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
+	putEditCafe: function( slug, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -90,26 +90,26 @@ export default {
 		formData.append('tea', tea);
 		formData.append('_method', 'PUT');
 
-		return axios.post( ROAST_CONFIG.API_URL + '/cafes/'+id,
+		return axios.post( ROAST_CONFIG.API_URL + '/cafes/'+slug,
 			formData
 	  );
 	},
 
 	/*
-		POST 	/api/v1/cafes/{cafeID}/like
+		POST 	/api/v1/cafes/{slug}/like
 	*/
-	postLikeCafe: function( cafeID ){
-		return axios.post( ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/like' );
+	postLikeCafe: function( slug ){
+		return axios.post( ROAST_CONFIG.API_URL + '/cafes/' + slug + '/like' );
 	},
 
 	/*
-		DELETE /api/v1/cafes/{cafeID}/like
+		DELETE /api/v1/cafes/{slug}/like
 	*/
-	deleteLikeCafe: function( cafeID ){
-		return axios.delete( ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/like' );
+	deleteLikeCafe: function( slug ){
+		return axios.delete( ROAST_CONFIG.API_URL + '/cafes/' + slug + '/like' );
 	},
 
-	deleteCafe: function( cafeID ){
-		return axios.delete( ROAST_CONFIG.API_URL + '/cafes/' + cafeID );
+	deleteCafe: function( slug ){
+		return axios.delete( ROAST_CONFIG.API_URL + '/cafes/' + slug );
 	}
 }

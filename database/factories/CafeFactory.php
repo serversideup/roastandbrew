@@ -6,6 +6,7 @@ $factory->define(App\Models\Cafe::class, function (Faker $faker) {
     return [
       'location_name' => 'Test',
       'address' => $faker->streetAddress,
+      'slug' => $faker->slug,
       'city' => $faker->city,
       'state' => $faker->stateAbbr,
       'zip' => $faker->postcode,

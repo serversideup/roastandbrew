@@ -277,7 +277,7 @@
 
         <a class="cafe-website" target="_blank" v-bind:href="cafe.company.website">{{ cafe.company.website }}</a>
         <br>
-        <router-link :to="{ name: 'editcafe', params: { id: cafe.id } }" v-show="userLoadStatus == 2 && user != ''" class="suggest-cafe-edit">
+        <router-link :to="{ name: 'editcafe', params: { slug: cafe.slug } }" v-show="userLoadStatus == 2 && user != ''" class="suggest-cafe-edit">
           Suggest an edit
         </router-link>
         <a class="suggest-cafe-edit" v-if="userLoadStatus == 2 && user == ''" v-on:click="loginToEdit()">
@@ -314,15 +314,15 @@
     */
     created(){
       this.$store.dispatch( 'loadCafe', {
-        id: this.$route.params.id
+        slug: this.$route.params.slug
       });
     },
 
     watch: {
-      '$route.params.id': function(){
+      '$route.params.slug': function(){
         this.$store.dispatch( 'clearLikeAndUnlikeStatus' );
         this.$store.dispatch( 'loadCafe', {
-          id: this.$route.params.id
+          slug: this.$route.params.slug
         });
 			},
 
