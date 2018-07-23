@@ -30,6 +30,8 @@ export const cafes = {
 		cafeUnlikeActionStatus: 0,
 
 		cafeDeletedStatus: 0,
+
+		cafesView: 'map'
 	},
 
   /*
@@ -178,6 +180,10 @@ export const cafes = {
 				.catch( function(){
 					commit( 'setCafeDeleteStatus', 3 );
 				});
+		},
+
+		changeCafesView( { commit, state, dispatch }, view ){
+			commit( 'setCafesView', view );
 		}
 	},
 
@@ -282,6 +288,10 @@ export const cafes = {
 
 		setCafeDeleteStatus( state, status ){
 			state.cafeDeletedStatus = status;
+		},
+
+		setCafesView( state, view ){
+			state.cafesView = view
 		}
 	},
 
@@ -375,6 +385,10 @@ export const cafes = {
 
 		getCafeDeletedStatus( state ){
 			return state.cafeDeletedStatus;
+		},
+
+		getCafesView( state ){
+			return state.cafesView;
 		}
 	}
 }

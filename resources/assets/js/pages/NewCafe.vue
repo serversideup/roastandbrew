@@ -88,88 +88,6 @@
       }
     }
 
-    div.brew-method{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      &.active{
-        color: white;
-        background-color: $secondary-color;
-      }
-
-      div.brew-method-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.brew-method-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.brew-method-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
-    div.drink-option{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      &.active{
-        color: white;
-        background-color: $secondary-color;
-      }
-
-      div.drink-option-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.drink-option-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.drink-option-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
     div.company-selection-container{
       position: relative;
 
@@ -311,9 +229,9 @@
 
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
-            <div class="brew-method" v-on:click="toggleSelectedBrewMethod( method.id )" v-for="method in brewMethods" v-bind:class="{'active': brewMethodsSelected.indexOf( method.id ) >= 0 }">
-              <div class="brew-method-container">
-                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+            <div class="brew-method option" v-on:click="toggleSelectedBrewMethod( method.id )" v-for="method in brewMethods" v-bind:class="{'active': brewMethodsSelected.indexOf( method.id ) >= 0 }">
+              <div class="option-container">
+                <img v-bind:src="method.icon+'.svg'" class="option-icon"/> <span class="option-name">{{ method.method }}</span>
               </div>
             </div>
           </div>
@@ -327,14 +245,14 @@
 
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
-            <div class="drink-option" v-on:click="matcha == 0 ? matcha = 1 : matcha = 0" v-bind:class="{'active': matcha == 1 }">
-              <div class="drink-option-container">
-                <img v-bind:src="'/img/icons/matcha-latte.svg'" class="drink-option-icon"/> <span class="drink-option-name">Matcha</span>
+            <div class="drink-option option" v-on:click="matcha == 0 ? matcha = 1 : matcha = 0" v-bind:class="{'active': matcha == 1 }">
+              <div class="option-container">
+                <img v-bind:src="'/img/icons/matcha-latte.svg'" class="option-icon"/> <span class="option-name">Matcha</span>
               </div>
             </div>
-            <div class="drink-option" v-on:click="tea == 0 ? tea = 1 : tea = 0" v-bind:class="{'active': tea == 1 }">
-              <div class="drink-option-container">
-                <img v-bind:src="'/img/icons/tea-bag.svg'" class="drink-option-icon"/> <span class="drink-option-name">Tea Options</span>
+            <div class="drink-option option" v-on:click="tea == 0 ? tea = 1 : tea = 0" v-bind:class="{'active': tea == 1 }">
+              <div class="option-container">
+                <img v-bind:src="'/img/icons/tea-bag.svg'" class="option-icon"/> <span class="option-name">Tea Options</span>
               </div>
             </div>
           </div>

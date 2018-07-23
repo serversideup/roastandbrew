@@ -55,7 +55,7 @@
 </style>
 
 <template>
-  <div class="large-6 medium-6 small-6 cell cafe-card-container" v-show="show">
+  <div class="large-3 medium-4 small-6 cell cafe-card-container" v-show="show">
     <router-link :to="{ name: 'cafe', params: { slug: cafe.slug} }" v-on:click.native="panToLocation( cafe )">
       <div class="cafe-card">
         <span class="title">{{ cafe.company.name }}</span>

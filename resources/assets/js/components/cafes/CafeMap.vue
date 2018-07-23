@@ -143,7 +143,9 @@
 
       this.$map = new google.maps.Map(document.getElementById('cafe-map'), {
         center: {lat: this.latitude, lng: this.longitude},
-        zoom: this.zoom
+        zoom: this.zoom,
+        fullscreenControl: false,
+        mapTypeControl: false
       });
 
       /*

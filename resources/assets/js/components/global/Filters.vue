@@ -90,98 +90,11 @@
       }
     }
 
-    div.brew-method{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      &.active{
-        color: white;
-        background-color: $secondary-color;
-      }
-
-      div.brew-method-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.brew-method-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.brew-method-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
-    div.drink-option{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      &.active{
-        color: white;
-        background-color: $secondary-color;
-      }
-
-      div.drink-option-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.drink-option-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.drink-option-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
     span.liked-location-label{
       color: #666666;
       font-size: 16px;
       font-family: "Lato", sans-serif;
       margin-left: 10px;
-    }
-
-    div.cafe-grid-container{
-      overflow: auto;
-      padding-bottom: 10px;
     }
 
     div.close-filters{
@@ -217,10 +130,6 @@
 
       span.clear-filters{
         display: block;
-      }
-
-      div.cafe-grid-container{
-        height: inherit;
       }
 
       div.close-filters{
@@ -290,9 +199,9 @@
 
         <div class="grid-x grid-padding-x">
           <div class="large-12 medium-12 small-12 cell" >
-            <div class="brew-method" v-on:click="toggleBrewMethodFilter( method.id )" v-for="method in brewMethods" v-if="method.cafes_count > 0" v-bind:class="{'active': brewMethodsFilter.indexOf( method.id ) >= 0 }">
-              <div class="brew-method-container">
-                <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+            <div class="brew-method option" v-on:click="toggleBrewMethodFilter( method.id )" v-for="method in brewMethods" v-if="method.cafes_count > 0" v-bind:class="{'active': brewMethodsFilter.indexOf( method.id ) >= 0 }">
+              <div class="option-container">
+                <img v-bind:src="method.icon+'.svg'" class="option-icon"/> <span class="option-name">{{ method.method }}</span>
               </div>
             </div>
           </div>
@@ -308,24 +217,17 @@
 
         <div class="grid-x grid-padding-x">
           <div class="large-12 medium-12 small-12 cell">
-            <div class="drink-option" v-on:click="toggleMatchaFilter()" v-bind:class="{'active':hasMatcha}">
-              <div class="drink-option-container">
-                <img src="/img/icons/matcha-latte.svg" class="drink-option-icon"/> <span class="drink-option-name">Matcha</span>
+            <div class="drink-option option" v-on:click="toggleMatchaFilter()" v-bind:class="{'active':hasMatcha}">
+              <div class="option-container">
+                <img src="/img/icons/matcha-latte.svg" class="option-icon"/> <span class="option-name">Matcha</span>
               </div>
             </div>
-            <div class="drink-option" v-on:click="toggleTeaFilter()" v-bind:class="{'active':hasTea}">
-              <div class="drink-option-container">
-                <img src="/img/icons/tea-bag.svg" class="drink-option-icon"/> <span class="drink-option-name">Tea</span>
+            <div class="drink-option option" v-on:click="toggleTeaFilter()" v-bind:class="{'active':hasTea}">
+              <div class="option-container">
+                <img src="/img/icons/tea-bag.svg" class="option-icon"/> <span class="option-name">Tea</span>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="grid-x grid-padding-x cafe-grid-container" id="cafe-grid">
-        <cafe-card v-for="cafe in cafes" :key="cafe.id" :cafe="cafe"></cafe-card>
-        <div class="large-12 medium-12 small-12 cell">
-          <span class="no-results" v-if="shownCount == 0">No Results</span>
         </div>
       </div>
 
@@ -351,7 +253,6 @@
         activeLocationFilter: 'all',
         onlyLiked: false,
         brewMethodsFilter: [],
-        shownCount: 1,
         hasMatcha: false,
         hasTea: false
       }
@@ -380,10 +281,6 @@
 
       hasTea(){
         this.updateFilterDisplay();
-      },
-
-      showFilters(){
-        this.computeHeight();
       }
     },
 
@@ -446,22 +343,6 @@
           matcha: this.hasMatcha,
           tea: this.hasTea
         });
-
-        this.$nextTick(function(){
-          this.computeShown();
-        });
-      },
-
-      computeShown(){
-        this.shownCount = $('.cafe-card-container').filter(function() {
-              return $(this).css('display') !== 'none';
-          }).length;
-      },
-
-      computeHeight(){
-        let filtersHeight = $('#filters-container').height();
-
-        $('#cafe-grid').css('height', ( filtersHeight - 460 ) + 'px' );
       },
 
       toggleShowFilters(){

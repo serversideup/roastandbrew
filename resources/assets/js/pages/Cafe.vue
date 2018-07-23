@@ -74,83 +74,6 @@
       }
     }
 
-    div.brew-method{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      div.brew-method-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.brew-method-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.brew-method-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
-    div.drink-option{
-      font-size: 16px;
-      color: #666666;
-      font-family: "Lato", sans-serif;
-      border-radius: 4px;
-      background-color: #F9F9FA;
-      width: 150px;
-      height: 57px;
-      float: left;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px;
-      cursor: pointer;
-      position: relative;
-
-      &.active{
-        color: white;
-        background-color: $secondary-color;
-      }
-
-      div.drink-option-container{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        img.drink-option-icon{
-          display: inline-block;
-          margin-right: 10px;
-          margin-left: 5px;
-          width: 20px;
-          max-height: 30px;
-        }
-
-        span.drink-option-name{
-          display: inline-block;
-          width: calc( 100% - 40px);
-          vertical-align: middle;
-        }
-      }
-    }
-
     div.address-container{
       color: #666666;
       font-size: 18px;
@@ -244,9 +167,9 @@
     <div class="grid-x">
       <div class="large-12 medium-12 small-12 cell">
         <label class="cafe-label">Brew Methods</label>
-        <div class="brew-method" v-for="method in cafe.brew_methods">
-          <div class="brew-method-container">
-            <img v-bind:src="method.icon+'.svg'" class="brew-method-icon"/> <span class="brew-method-name">{{ method.method }}</span>
+        <div class="brew-method option" v-for="method in cafe.brew_methods">
+          <div class="option-container">
+            <img v-bind:src="method.icon+'.svg'" class="option-icon"/> <span class="option-name">{{ method.method }}</span>
           </div>
         </div>
       </div>
@@ -254,14 +177,14 @@
     <div class="grid-x" v-if="cafe.matcha == 1 || cafe.tea == 1">
       <div class="large-12 medium-12 small-12 cell">
         <label class="cafe-label">Drink Options</label>
-        <div class="drink-option" v-if="cafe.matcha == 1">
-          <div class="drink-option-container">
-            <img v-bind:src="'/img/icons/matcha-latte.svg'" class="drink-option-icon"/> <span class="drink-option-name">Matcha</span>
+        <div class="drink-option option" v-if="cafe.matcha == 1">
+          <div class="option-container">
+            <img v-bind:src="'/img/icons/matcha-latte.svg'" class="option-icon"/> <span class="option-name">Matcha</span>
           </div>
         </div>
-        <div class="drink-option" v-if="cafe.tea == 1">
-          <div class="drink-option-container">
-            <img v-bind:src="'/img/icons/tea-bag.svg'" class="drink-option-icon"/> <span class="drink-option-name">Tea</span>
+        <div class="drink-option option" v-if="cafe.tea == 1">
+          <div class="option-container">
+            <img v-bind:src="'/img/icons/tea-bag.svg'" class="option-icon"/> <span class="option-name">Tea</span>
           </div>
         </div>
       </div>
@@ -313,6 +236,7 @@
       route parameter.
     */
     created(){
+      this.$store.dispatch( 'changeCafesView', 'map' );
       this.$store.dispatch( 'loadCafe', {
         slug: this.$route.params.slug
       });
