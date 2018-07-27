@@ -17,4 +17,8 @@ class Company extends Model
   public function addedBy(){
     return $this->belongsTo('App\Models\User', 'added_by', 'id');
   }
+
+	public function ownedBy(){
+		return $this->belongsToMany( 'App\Models\User', 'companies_owners', 'company_id', 'user_id' );
+	}
 }

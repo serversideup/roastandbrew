@@ -21,15 +21,19 @@ export const cafes = {
 		cafeEdit: {},
 		cafeEditLoadStatus: 0,
 		cafeEditStatus: 0,
+		cafeEditText: '',
 
 		cafeLiked: false,
 
 		cafeAdded: {},
 		cafeAddStatus: 0,
+		cafeAddText: '',
+
 		cafeLikeActionStatus: 0,
 		cafeUnlikeActionStatus: 0,
 
 		cafeDeletedStatus: 0,
+		cafeDeleteText: '',
 
 		cafesView: 'map'
 	},
@@ -101,7 +105,14 @@ export const cafes = {
 
 			CafeAPI.putEditCafe( data.slug, data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
+						if( typeof response.data.cafe_updates_pending !== 'undefined' ){
+							commit( 'setCafeEditText', response.data.cafe_updates_pending +' updates are pending!');
+						}else{
+							commit( 'setCafeEditText', response.company.name+' has been successfully updated!');
+						}
+
 						commit( 'setCafeEditStatus', 2 );
+
 						dispatch( 'loadCafes' );
 					})
 					.catch( function(){
@@ -116,6 +127,12 @@ export const cafes = {
 			commit( 'setCafeAddedStatus', 1 );
 			CafeAPI.postAddNewCafe( data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
+						if( typeof response.data.cafe_add_pending !== 'undefined' ){
+							commit( 'setCafeAddedText', response.data.cafe_add_pending +' is pending approval!');
+						}else{
+							commit( 'setCafeAddedText', response.data.name +' has been added!');
+						}
+
 						commit( 'setCafeAddedStatus', 2 );
 						commit( 'setCafeAdded', response.data );
 						dispatch( 'loadCafes' );
@@ -173,8 +190,13 @@ export const cafes = {
 
 			CafeAPI.deleteCafe( data.slug )
 				.then( function( response ){
-					commit( 'setCafeDeleteStatus', 2 );
+					if( typeof response.data.cafe_delete_pending !== 'undefined' ){
+						commit( 'setCafeDeletedText', response.data.cafe_delete_pending +' is pending deletion!');
+					}else{
+						commit( 'setCafeDeletedText', 'Cafe has been successfully deleted!');
+					}
 
+					commit( 'setCafeDeleteStatus', 2 );
 					dispatch( 'loadCafes' );
 				})
 				.catch( function(){
@@ -234,6 +256,13 @@ export const cafes = {
 		},
 
 		/*
+			Sets the cafe edit text
+		*/
+		setCafeEditText( state, text ){
+			state.cafeEditText = text;
+		},
+
+		/*
 			Sets the cafe edit load status
 		*/
 		setCafeEditLoadStatus( state, status ){
@@ -252,6 +281,13 @@ export const cafes = {
 		*/
 		setCafeAddedStatus( state, status ){
 			state.cafeAddStatus = status;
+		},
+
+		/*
+			Set the cafe add text
+		*/
+		setCafeAddedText( state, text ){
+			state.cafeAddText = text;
 		},
 
 		/*
@@ -288,6 +324,10 @@ export const cafes = {
 
 		setCafeDeleteStatus( state, status ){
 			state.cafeDeletedStatus = status;
+		},
+
+		setCafeDeletedText( state, text ){
+			state.cafeDeleteText = text;
 		},
 
 		setCafesView( state, view ){
@@ -342,6 +382,13 @@ export const cafes = {
 		},
 
 		/*
+			Gets the cafe edit text
+		*/
+		getCafeEditText( state ){
+			return state.cafeEditText;
+		},
+
+		/*
 			Gets the cafe edit load status
 		*/
 		getCafeEditLoadStatus( state ){
@@ -360,6 +407,13 @@ export const cafes = {
 		*/
 		getCafeAddStatus( state ){
 			return state.cafeAddStatus;
+		},
+
+		/*
+			Gets the cafe add text
+		*/
+		getCafeAddText( state ){
+			return state.cafeAddText;
 		},
 
 		/*
@@ -385,6 +439,10 @@ export const cafes = {
 
 		getCafeDeletedStatus( state ){
 			return state.cafeDeletedStatus;
+		},
+
+		getCafeDeletedText( state ){
+			return state.cafeDeleteText;
 		},
 
 		getCafesView( state ){

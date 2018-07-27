@@ -49,4 +49,8 @@ class Cafe extends Model
 	public function photos(){
 		return $this->hasMany( 'App\Models\CafePhoto', 'id', 'cafe_id' );
 	}
+
+	public function actions(){
+		return $this->hasMany( 'App\Models\CafeAction', 'id', 'cafe_id' );
+	}
 }

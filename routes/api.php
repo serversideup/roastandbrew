@@ -167,5 +167,14 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
   */
   Route::delete('/cafes/{slug}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
 
+  /*
+  |-------------------------------------------------------------------------------
+  | Deletes A Cafe
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/cafes/{slug}
+  | Controller:     API\CafesController@deleteCafe
+  | Method:         DELETE
+  | Description:    Deletes a cafe
+  */
   Route::delete('/cafes/{slug}', 'API\CafesController@deleteCafe');
 });

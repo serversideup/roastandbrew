@@ -444,6 +444,9 @@
       },
       addCafeStatus(){
         return this.$store.getters.getCafeAddStatus;
+      },
+      addCafeText(){
+        return this.$store.getters.getCafeAddText;
       }
     },
 
@@ -453,6 +456,10 @@
     watch: {
       'addCafeStatus': function(){
         if( this.addCafeStatus == 2 ){
+          EventBus.$emit('show-success', {
+            notification: this.addCafeText
+          });
+
           this.clearForm();
           this.$router.push({ name: 'cafes' });
         }

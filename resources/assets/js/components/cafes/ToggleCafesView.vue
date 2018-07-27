@@ -3,7 +3,7 @@
 
   div#toggle-cafes-view{
     position: absolute;
-    z-index: 999999;
+    z-index: 9;
     right: 15px;
     top: 90px;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);

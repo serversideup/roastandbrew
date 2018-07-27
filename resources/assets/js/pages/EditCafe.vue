@@ -512,8 +512,14 @@
       editCafe(){
         return this.$store.getters.getCafeEdit;
       },
+      editCafeText(){
+        return this.$store.getters.getCafeEditText;
+      },
       deleteCafeStatus(){
         return this.$store.getters.getCafeDeletedStatus;
+      },
+      deleteCafeText(){
+        return this.$store.getters.getCafeDeletedText;
       }
     },
 
@@ -523,6 +529,10 @@
     watch: {
       'editCafeStatus': function(){
         if( this.editCafeStatus == 2 ){
+          EventBus.$emit('show-success', {
+            notification: this.editCafeText
+          });
+
           this.$router.push({ name: 'cafe', params: { slug: this.$route.params.slug }});
         }
       },
@@ -536,7 +546,7 @@
           this.$router.push({ name: 'cafes' });
 
           EventBus.$emit('show-success', {
-            notification: 'Cafe deleted successfully!'
+            notification: this.deleteCafeText
           });
         }
       }
