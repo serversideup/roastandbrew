@@ -249,7 +249,7 @@ class CafesController extends Controller
 			/*
 				Return the flag that the cafe addition is pending
 			*/
-			return response()->json( ['cafe_add_pending' => $request->get('company_name') ] );
+			return response()->json( ['cafe_add_pending' => $request->get('company_name') ], 202 );
 		}
   }
 
@@ -539,7 +539,7 @@ class CafesController extends Controller
 			/*
 				Return a flag for cafe updates pending
 			*/
-			return response()->json( ['cafe_updates_pending' => $request->get('company_name') ] );
+			return response()->json( ['cafe_updates_pending' => $request->get('company_name') ], 202 );
 		}
 	}
 
@@ -724,7 +724,7 @@ class CafesController extends Controller
 			/*
 				Return the cafe delete pending
 			*/
-			return response()->json( ['cafe_delete_pending' => $cafe->company->name ] );
+			return response()->json( ['cafe_delete_pending' => $cafe->company->name ], 202 );
 		}
 	}
 }
