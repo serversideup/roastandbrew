@@ -1,13 +1,24 @@
 <?php
-
+/*
+  Defines the namespace for the policy
+*/
 namespace App\Policies;
 
+/*
+  Defines the models used by the policy.
+*/
 use App\Models\User;
 use App\Models\Cafe;
 use App\Models\Company;
 
+/*
+  Handles authorization.
+*/
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Defines the cafe policy
+ */
 class CafePolicy
 {
     use HandlesAuthorization;
@@ -28,6 +39,7 @@ class CafePolicy
      *
      * @param \App\Models\User  $user
      * @param \App\Models\Company $company
+     * @return bool
      */
     public function create( User $user, Company $company ){
       if( $user->permission == 2 || $user->permission == 3 ){
@@ -45,6 +57,7 @@ class CafePolicy
      *
      * @param \App\Models\User  $user
      * @param \App\Models\Cafe  $cafe
+     * @return bool
      */
     public function update( User $user, Cafe $cafe ){
       if( $user->permission == 2 || $user->permission == 3 ){
@@ -62,6 +75,7 @@ class CafePolicy
      *
      * @param \App\Models\User  $user
      * @param \App\Models\Cafe  $cafe
+     * @return bool
      */
     public function delete( User $user, Cafe $cafe ){
       if( $user->permission == 2 || $user->permission == 3 ){

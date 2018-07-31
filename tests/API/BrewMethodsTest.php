@@ -26,32 +26,4 @@ class BrewMethodsTest extends TestCase
           'method' => 'Hario V60 Dripper'
       ]);
     }
-
-    /*
-    public function testBrewMethodCount(){
-
-      $user = factory(\App\Models\User::class)->create();
-
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      $method2 = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Chemex',
-          'icon' => ''
-      ]);
-
-      $cafes = factory(\App\Models\Cafe::class, 10)
-                  ->create();
-
-      foreach( $cafes as $cafe ){
-        $cafe->sync( $method );
-      }
-
-      $this->actingAs($user, 'api')
-           ->get('/api/v1/brew-methods');
-    }
-    */
-
 }

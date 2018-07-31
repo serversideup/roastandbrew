@@ -1,16 +1,37 @@
 <?php
-
+/*
+  Defines the namespace used by the controller.
+*/
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
+/*
+  Uses the controller interface.
+*/
 use App\Http\Controllers\Controller;
+
+/*
+  Defines the facades used by the controller.
+*/
+use Illuminate\Http\Request;
 use Socialite;
 use Auth;
 
+/*
+  Defines the models used by the controller.
+*/
 use App\Models\User;
 
+/**
+ * Handles all of the authentication in the system.
+ */
 class AuthenticationController extends Controller
 {
+    /**
+     * Initializes the social login defined by the user. Can be
+     * Facebook, Google +, or Twitter.
+     *
+     * @param string $account   The account the user is logging in with.
+     */
     public function getSocialRedirect( $account ){
       try{
         return Socialite::with( $account )->redirect();
@@ -19,6 +40,11 @@ class AuthenticationController extends Controller
       }
     }
 
+    /**
+     * Handles the call back from the social network.
+     *
+     * @param string $account   The social account that is handling the log in.
+     */
     public function getSocialCallback( $account ){
       /*
         Grabs the user who authenticated via social account.

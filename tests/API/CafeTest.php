@@ -46,7 +46,7 @@ class CafeTest extends TestCase
                         ->get('/api/v1/cafes');
 
       /*
-        Asser that the response has 3 cafes when we get
+        Asset that the response has 3 cafes when we get
         all of them.
       */
       $response->assertJsonCount(3);

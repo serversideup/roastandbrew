@@ -1,14 +1,32 @@
 <?php
-
+/*
+  Defines a namespace for the controller.
+*/
 namespace App\Http\Controllers\API;
 
+/*
+  Uses the controller interface.
+*/
 use App\Http\Controllers\Controller;
 
+/*
+  Defines the requests used by the controller.
+*/
 use App\Http\Requests\EditUserRequest;
 
+/*
+  Defines the models used by the controller.
+*/
 use App\Models\User;
+
+/*
+  Defines the facades used by the controller.
+*/
 use Auth;
 
+/**
+ * The user controller handles all API requests that manage user data.
+ */
 class UsersController extends Controller
 {
   /*
