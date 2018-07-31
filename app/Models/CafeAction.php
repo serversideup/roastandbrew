@@ -27,6 +27,13 @@ class CafeAction extends Model
   }
 
 	/**
+	 * An action belongs to a company.
+	 */
+	 public function company(){
+		 return $this->belongsTo( 'App\Models\Company', 'company_id', 'id' );
+	 }
+
+	/**
 	 * An action is performed by a user
 	 */
   public function by(){

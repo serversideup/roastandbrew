@@ -230,7 +230,7 @@ class CafesController extends Controller
 			*/
 			CafeActionService::createApprovedAction( $cafe->id, $cafe->company_id, 'cafe-updated', $content );
 
-			$updatedCafe = CafeService::editCafe( $cafe->id, $request->all(), Auth::user()->id );
+			$updatedCafe = CafeService::editCafe( $cafe->id, $request->all() );
 
 			/*
 				Load the company and return it.

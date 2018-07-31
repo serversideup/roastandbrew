@@ -44,31 +44,16 @@ class ActionsController extends Controller
     */
     if( Auth::user()->permission >= 2 ){
       $actions = CafeAction::with('cafe')
+                            ->with('company')
                             ->where('status', '=', 0)
                             ->get();
     }else{
       /*
-        Build an array of cafes owned by the owner
-      */
-      $cafeIDs = array();
-
-      /*
-        Iterate over all of the companies owned and grab the
-        cafe IDs for all of the cafes.
-      */
-      foreach( Auth::user()->companiesOwned as $company ){
-        $cafes = Cafe::where('company_id', '=', $company->id)->get();
-
-        foreach( $cafes as $cafe ){
-          array_push( $cafeIDs, $cafe->id );
-        }
-      }
-
-      /*
         Geta all of the un processed actions owned by the user.
       */
       $actions = CafeAction::with('cafe')
-                           ->whereIn('cafe_id', $cafeIDs)
+                           ->with('company')
+                           ->whereIn('company_id', Auth::user()->companiesOwned()->pluck('id')->toArray())
                            ->where('status', '=', 0)
                            ->get();
     }
@@ -118,7 +103,7 @@ class ActionsController extends Controller
         /*
           Apply updates to the cafe
         */
-        CafeService::editCafe( $action->cafe_id, $updatedCafeActionData, $action->user_id );
+        CafeService::editCafe( $action->cafe_id, $updatedCafeActionData );
 
         /*
           Approve the action
