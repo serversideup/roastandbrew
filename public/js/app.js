@@ -1633,6 +1633,951 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/AdminHeader.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Retrieves the User Load Status from Vuex
+    */
+    userLoadStatus: function userLoadStatus() {
+      return this.$store.getters.getUserLoadStatus();
+    },
+
+
+    /*
+      Retrieves the User from Vuex
+    */
+    user: function user() {
+      return this.$store.getters.getUser;
+    }
+  },
+
+  /*
+    Defines the methods used by the component.
+  */
+  methods: {
+    /*
+      Toggles the showing of the pop out side nav
+    */
+    setShowPopOut: function setShowPopOut() {
+      this.$store.dispatch('toggleShowPopOut', { showPopOut: true });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/Navigation.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/Action.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ActionCafeAdded_vue__ = __webpack_require__("./resources/assets/js/components/admin/actions/ActionCafeAdded.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ActionCafeAdded_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ActionCafeAdded_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ActionCafeEdited_vue__ = __webpack_require__("./resources/assets/js/components/admin/actions/ActionCafeEdited.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ActionCafeEdited_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ActionCafeEdited_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ActionCafeDeleted_vue__ = __webpack_require__("./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ActionCafeDeleted_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ActionCafeDeleted_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the three types of cafe actions to display.
+*/
+
+
+
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Accepts an action as a property.
+  */
+  props: ['action'],
+
+  /*
+    Makes sure that the components used are recognized.
+  */
+  components: {
+    ActionCafeAdded: __WEBPACK_IMPORTED_MODULE_0__ActionCafeAdded_vue___default.a,
+    ActionCafeEdited: __WEBPACK_IMPORTED_MODULE_1__ActionCafeEdited_vue___default.a,
+    ActionCafeDeleted: __WEBPACK_IMPORTED_MODULE_2__ActionCafeDeleted_vue___default.a
+  },
+
+  /*
+    Defines the data used by the component.
+  */
+  data: function data() {
+    return {
+      showDetails: false
+    };
+  },
+
+
+  /*
+    Defines the computed data used by the component.
+  */
+  computed: {
+    /*
+      Pretty prints the type of cafe.
+    */
+    type: function type() {
+      switch (this.action.type) {
+        case 'cafe-added':
+          return 'New Cafe';
+          break;
+        case 'cafe-updated':
+          return 'Updated Cafe';
+          break;
+        case 'cafe-deleted':
+          return 'Cafe Deleted';
+          break;
+      }
+    },
+
+
+    /*
+      Gets the approved status from the Vuex store.
+    */
+    actionApproveStatus: function actionApproveStatus() {
+      return this.$store.getters.getActionApproveStatus;
+    },
+
+
+    /*
+      Gets the denied status from the Vuex store.
+    */
+    actionDeniedStatus: function actionDeniedStatus() {
+      return this.$store.getters.getActionDeniedStatus;
+    }
+  },
+
+  /*
+    Defines the watchers on the component.
+  */
+  watch: {
+    /*
+      Watches the approved status. When it's set to 2, we
+      emit a success notification for the success.
+    */
+    'actionApprovedStatus': function actionApprovedStatus() {
+      if (this.actionApproveStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Action approved successfully!'
+        });
+      }
+    },
+
+    /*
+      Watches the denied status. When it's set to 2, we
+      emit a success notification for the denial.
+    */
+    'actionDeniedStatus': function actionDeniedStatus() {
+      if (this.actionDeniedStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Action denied successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Define the methods used by the component.
+  */
+  methods: {
+    /*
+      Approves the action.
+    */
+    approveAction: function approveAction() {
+      this.$store.dispatch('approveAction', {
+        id: this.action.id
+      });
+    },
+
+
+    /*
+      Denies the action.
+    */
+    denyAction: function denyAction() {
+      this.$store.dispatch('denyAction', {
+        id: this.action.id
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Accepts an action as a property.
+  */
+  props: ['action'],
+
+  /*
+    Defines the data used by the component.
+  */
+  data: function data() {
+    return {
+      content: ''
+    };
+  },
+
+
+  /*
+    When created, parses the action content to the local
+    data content variable.
+  */
+  created: function created() {
+    this.content = JSON.parse(this.action.content);
+  },
+
+
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Loads the brew methods from the component.
+    */
+    brewMethods: function brewMethods() {
+      return this.$store.getters.getBrewMethods;
+    },
+
+
+    /*
+      Defines the brew methods used by the action.
+    */
+    actionBrewMethods: function actionBrewMethods() {
+      /*
+        Initializes the action brew methods
+      */
+      var actionBrewMethods = [];
+
+      /*
+        Parses the brew methods array from the content.
+      */
+      var contentBrewMethods = JSON.parse(this.content.brew_methods);
+
+      /*
+        Iterate over the brew methods on the content and match with the
+        brew methods defined.
+      */
+      for (var i = 0; i < contentBrewMethods.length; i++) {
+        for (var k = 0; k < this.brewMethods.length; k++) {
+          /*
+            If the brew method IDs match, add the brew method to the action brew
+            methods.
+          */
+          if (parseInt(contentBrewMethods[i]) == parseInt(this.brewMethods[k].id)) {
+            actionBrewMethods.push(this.brewMethods[k]);
+          }
+        }
+      }
+
+      /*
+        Returns the action brew methods.
+      */
+      return actionBrewMethods;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Accepts an action as a property.
+  */
+  props: ['action'],
+
+  /*
+    Defines the data used by the component.
+  */
+  data: function data() {
+    return {
+      content: ''
+    };
+  },
+
+
+  /*
+    When created, parses the action content to the local
+    data content variable.
+  */
+  created: function created() {
+    this.content = JSON.parse(this.action.content);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Accepts an action as a property.
+  */
+  props: ['action'],
+
+  /*
+    Defines the data used by the component.
+  */
+  data: function data() {
+    return {
+      content: ''
+    };
+  },
+
+
+  /*
+    When created, parses the action content to the local
+    data content variable.
+  */
+  created: function created() {
+    this.content = JSON.parse(this.action.content);
+  },
+
+
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Loads the brew methods from the component.
+    */
+    brewMethods: function brewMethods() {
+      return this.$store.getters.getBrewMethods;
+    },
+
+
+    /*
+      Defines the brew methods used by the action.
+    */
+    actionBrewMethods: function actionBrewMethods() {
+      /*
+        Initializes the action brew methods
+      */
+      var actionBrewMethods = [];
+
+      /*
+        Parses the brew methods array from the content.
+      */
+      var contentBrewMethods = JSON.parse(this.content.after.brew_methods);
+
+      /*
+        Iterate over the brew methods on the content and match with the
+        brew methods defined.
+      */
+      for (var i = 0; i < contentBrewMethods.length; i++) {
+        for (var k = 0; k < this.brewMethods.length; k++) {
+
+          /*
+            If the brew method IDs match, add the brew method to the action brew
+            methods.
+          */
+          if (parseInt(contentBrewMethods[i]) == parseInt(this.brewMethods[k].id)) {
+            actionBrewMethods.push(this.brewMethods[k]);
+          }
+        }
+      }
+
+      /*
+        Returns the action brew methods.
+      */
+      return actionBrewMethods;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1668,9 +2613,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the event bus
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the computed properties on the component.
+  */
   computed: {
     /*
       Retrieves the User from Vuex
@@ -1688,7 +2639,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Checks to see if a use ris authenticated or not.
+      This item can be viewed by non-authenticated users.
+      If the user isn't authenticated, we prompt them to log in,
+      otherwise we take them to the new cafe page.
+    */
     checkAuth: function checkAuth() {
       if (this.user == '' && this.userLoadStatus == 2) {
         __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('prompt-login');
@@ -1785,6 +2745,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the mixins used by the component.
+*/
 
 
 
@@ -1798,8 +2761,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    The component accepts one cafe as a property
+  */
   props: ['cafe'],
 
+  /*
+    Define the data used by the component.
+  */
   data: function data() {
     return {
       show: true
@@ -1807,16 +2776,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Define the mixins used by the component.
+  */
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */]],
 
+  /*
+    Listen to the mounted lifecycle hook.
+  */
   mounted: function mounted() {
+    /*
+      When the filters are updated, we process the filters.
+    */
     __WEBPACK_IMPORTED_MODULE_6__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
       this.processFilters(filters);
     }.bind(this));
   },
 
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Process the selected filters from the user.
+    */
     processFilters: function processFilters(filters) {
       /*
         If no filters are selected, show the card
@@ -1896,6 +2880,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
     },
+
+
+    /*
+      Pans to the location of the cafe on the map when selected.
+    */
     panToLocation: function panToLocation(cafe) {
       __WEBPACK_IMPORTED_MODULE_6__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(cafe.latitude), lng: parseFloat(cafe.longitude) });
     }
@@ -1909,16 +2898,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTypeFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeBrewMethodsFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTagsFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeTextFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeUserLikeFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasTeaFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_cafes_CafeCard_vue__ = __webpack_require__("./resources/assets/js/components/cafes/CafeCard.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_cafes_CafeCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_cafes_CafeCard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeCard_vue__ = __webpack_require__("./resources/assets/js/components/cafes/CafeCard.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeCard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
 //
 //
 //
@@ -1957,14 +2939,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
-
-
-
-
-
-
-
+/*
+  Imports the cafe card component.
+*/
 
 
 /*
@@ -1973,6 +2950,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+  /*
+    Defines the data used by the component.
+  */
   data: function data() {
     return {
       shownCount: 1
@@ -1980,19 +2961,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Regisers the components with the component.
+  */
   components: {
-    CafeCard: __WEBPACK_IMPORTED_MODULE_7__components_cafes_CafeCard_vue___default.a
+    CafeCard: __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeCard_vue___default.a
   },
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */]],
-
+  /*
+    Defines the mounted life cycle hook.
+  */
   mounted: function mounted() {
-    __WEBPACK_IMPORTED_MODULE_8__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
+    /*
+      When the filters are updated, compute count of cafes shown.
+    */
+    __WEBPACK_IMPORTED_MODULE_1__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
       this.computeShown();
     }.bind(this));
   },
 
 
+  /*
+    Defines the computed properties on the component.
+  */
   computed: {
     /*
       Gets the cafes
@@ -2002,14 +2993,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Computes the count of cafes that are shown.
+    */
     computeShown: function computeShown() {
       this.shownCount = $('.cafe-card-container').filter(function () {
         return $(this).css('display') !== 'none';
       }).length;
     }
   }
-
 });
 
 /***/ }),
@@ -2096,6 +3092,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the mixins used by the component.
+*/
 
 
 
@@ -2110,6 +3109,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the properties used by the component.
+  */
   props: {
     'latitude': {
       type: Number,
@@ -2131,13 +3133,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the data used by the component.
+  */
   data: function data() {
     return {};
   },
 
 
+  /*
+    Defines the mixins used by the component.
+  */
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */]],
 
+  /*
+    Defines the computed properties used by the component.
+  */
   computed: {
     /*
       Gets the cafes
@@ -2147,6 +3158,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the watched variables on the component.
+  */
   watch: {
     /*
       Watches the cafes. When they are updated, clear the markers
@@ -2158,9 +3172,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Handles the mounted lifecycle hook.
+  */
   mounted: function mounted() {
+    /*
+      Initializes the local markers array. This is not a reactive variable.
+    */
     this.$markers = [];
 
+    /*
+      Initializes the local map variable. This is not reactive variable
+    */
     this.$map = new google.maps.Map(document.getElementById('cafe-map'), {
       center: { lat: this.latitude, lng: this.longitude },
       zoom: this.zoom,
@@ -2181,6 +3204,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.processFilters(filters);
     }.bind(this));
 
+    /*
+      Listen to the location-selected event to zoom into the appropriate
+      cafe.
+    */
     __WEBPACK_IMPORTED_MODULE_7__event_bus_js__["a" /* EventBus */].$on('location-selected', function (cafe) {
       var latLng = new google.maps.LatLng(cafe.lat, cafe.lng);
       this.$map.setZoom(17);
@@ -2189,6 +3216,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
     /*
       Process filters on the map selected by the user.
@@ -2314,10 +3344,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var image = '/img/cafe-marker.svg';
         }
 
+        /*
+          If the cafe has a lat and lng, create a marker object and
+          show it on the map.
+        */
         if (this.cafes[i].latitude != null) {
           var marker;
 
           (function () {
+            /*
+              Create a new marker object.
+            */
             marker = new google.maps.Marker({
               position: { lat: parseFloat(_this.cafes[i].latitude), lng: parseFloat(_this.cafes[i].longitude) },
               map: _this.$map,
@@ -2325,6 +3362,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               cafe: _this.cafes[i]
             });
 
+            /*
+              Localize the global router variable so when clicked, we go
+              to the cafe.
+            */
 
             var router = _this.$router;
 
@@ -2496,13 +3537,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the computed properties on the component.
+  */
   computed: {
+    /*
+      Gets the current views the cafes are in.
+    */
     cafesView: function cafesView() {
       return this.$store.getters.getCafesView;
     }
   },
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Changes the view of the cafes
+    */
     displayView: function displayView(type) {
       this.$store.dispatch('changeCafesView', type);
     }
@@ -2568,13 +3621,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the loader component.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Registers all components with the component.
+  */
   components: {
     Loader: __WEBPACK_IMPORTED_MODULE_0__global_Loader_vue___default.a
   },
 
+  /*
+    Defines the computed properties on the component.
+  */
   computed: {
     /*
       Retrieves the User Load Status from Vuex
@@ -2632,12 +3694,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Like the cafe. Accepts a cafe slug as a parameter.
+    */
     likeCafe: function likeCafe(slug) {
       this.$store.dispatch('likeCafe', {
         slug: this.cafe.slug
       });
     },
+
+
+    /*
+      Unlike the cafe. Accepts a cafe slug as a parameter.
+    */
     unlikeCafe: function unlikeCafe(slug) {
       this.$store.dispatch('unlikeCafe', {
         slug: this.cafe.slug
@@ -2704,18 +3777,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the component.
+  */
   data: function data() {
     return {
       errorMessage: '',
       show: false
     };
   },
+
+
+  /*
+    When mounted, bind the show error event.
+  */
   mounted: function mounted() {
     __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('show-error', function (data) {
       this.errorMessage = data.notification;
 
       this.show = true;
 
+      /*
+        Hide the error notification after 3 seconds.
+      */
       setTimeout(function () {
         this.show = false;
       }.bind(this), 3000);
@@ -2976,11 +4060,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 */
 
 
+/*
+  Imports the cafe card component.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   /*
-   */
+    Defines the data used by the component.
+  */
   data: function data() {
     return {
       textSearch: '',
@@ -2993,71 +4081,161 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Defines the watchers used by the component.
+  */
   watch: {
+    /*
+      Watch the text search variable
+    */
     textSearch: function textSearch() {
       this.updateFilterDisplay();
     },
+
+
+    /*
+      Watch the active location filter
+    */
     activeLocationFilter: function activeLocationFilter() {
       this.updateFilterDisplay();
     },
+
+
+    /*
+      Watch the only liked filter.
+    */
     onlyLiked: function onlyLiked() {
       this.updateFilterDisplay();
     },
+
+
+    /*
+      Watch the brew methods filter.
+    */
     brewMethodsFilter: function brewMethodsFilter() {
       this.updateFilterDisplay();
     },
+
+
+    /*
+      Watch the has matcha filter.
+    */
     hasMatcha: function hasMatcha() {
       this.updateFilterDisplay();
     },
+
+
+    /*
+      Watch the has tea filter.
+    */
     hasTea: function hasTea() {
       this.updateFilterDisplay();
     }
   },
 
+  /*
+    Registers the components with the component.
+  */
   components: {
     CafeCard: __WEBPACK_IMPORTED_MODULE_1__components_cafes_CafeCard_vue___default.a
   },
 
+  /*
+    Defines the mounted lifecycle hook.
+  */
   mounted: function mounted() {
+    /*
+      When the user wants to show the filters, we show the filter
+      sidebar.
+    */
     __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('show-filters', function () {
       this.show = true;
     }.bind(this));
 
+    /*
+      When the user clears the filters, we clear all set filters.
+    */
     __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('clear-filters', function () {
       this.clearFilters();
     }.bind(this));
   },
 
 
+  /*
+    Defines the computed properties on the component.
+  */
   computed: {
+    /*
+      Gets the show filters data from the state.
+    */
     showFilters: function showFilters() {
       return this.$store.getters.getShowFilters;
     },
+
+
+    /*
+      Gets the brew methods from the state.
+    */
     brewMethods: function brewMethods() {
       return this.$store.getters.getBrewMethods;
     },
+
+
+    /*
+      Gets the cafes from the state.
+    */
     cafes: function cafes() {
       return this.$store.getters.getCafes;
     },
+
+
+    /*
+      Gets the user from the state.
+    */
     user: function user() {
       return this.$store.getters.getUser;
     },
+
+
+    /*
+      Gets the user load status from the state.
+    */
     userLoadStatus: function userLoadStatus() {
       return this.$store.getters.getUserLoadStatus();
     }
   },
 
+  /*
+    Defines the methods on the compnent.
+  */
   methods: {
+    /*
+      Sets the active location filter.
+    */
     setActiveLocationFilter: function setActiveLocationFilter(filter) {
       this.activeLocationFilter = filter;
     },
+
+
+    /*
+      Toggle the brew method filter.
+    */
     toggleBrewMethodFilter: function toggleBrewMethodFilter(id) {
+      /*
+        If the filter is in the selected filter, we remove it, otherwise
+        we add it.
+      */
       if (this.brewMethodsFilter.indexOf(id) >= 0) {
         this.brewMethodsFilter.splice(this.brewMethodsFilter.indexOf(id), 1);
       } else {
         this.brewMethodsFilter.push(id);
       }
     },
+
+
+    /*
+      Update filtered cafes when the filters have changed.
+    */
     updateFilterDisplay: function updateFilterDisplay() {
       __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('filters-updated', {
         text: this.textSearch,
@@ -3068,15 +4246,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         tea: this.hasTea
       });
     },
+
+
+    /*
+      Toggle the show and hide of filter sidebar.
+    */
     toggleShowFilters: function toggleShowFilters() {
       this.$store.dispatch('toggleShowFilters', { showFilters: !this.showFilters });
     },
+
+
+    /*
+      Toggle the matcha filter.
+    */
     toggleMatchaFilter: function toggleMatchaFilter() {
       this.hasMatcha = !this.hasMatcha;
     },
+
+
+    /*
+      Toggle the tea filter.
+    */
     toggleTeaFilter: function toggleTeaFilter() {
       this.hasTea = !this.hasTea;
     },
+
+
+    /*
+      Clear all of the filters.
+    */
     clearFilters: function clearFilters() {
       this.textSearch = '';
       this.activeLocationFilter = 'all';
@@ -3127,6 +4325,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Accepts a width, height and display style as property
+  */
   props: {
     'width': Number,
     'height': Number,
@@ -3269,15 +4470,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the event bus.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the component.
+  */
   data: function data() {
     return {
       show: false
     };
   },
+
+
+  /*
+    Sets up the component on the mounted lifecycle hook.
+  */
   mounted: function mounted() {
+    /*
+      When prompted for login, show the component.
+    */
     __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('prompt-login', function () {
       this.show = true;
     }.bind(this));
@@ -3482,6 +4697,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the event bus.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3503,26 +4721,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     user: function user() {
       return this.$store.getters.getUser;
     },
+
+
+    /*
+      Gets the boolean on whether to show or hide the filters.
+    */
     showFilters: function showFilters() {
       return this.$store.getters.getShowFilters;
     }
   },
 
+  /*
+    Defines the methods for the component
+  */
   methods: {
+    /*
+      Prompts the login form.
+    */
     login: function login() {
       __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('prompt-login');
     },
+
+
+    /*
+      Logs the user out.
+    */
     logout: function logout() {
       this.$store.dispatch('logoutUser');
 
       window.location = '/logout';
     },
+
+
+    /*
+      Toggles the showing and hiding of filters.
+    */
     toggleShowFilters: function toggleShowFilters() {
       this.$store.dispatch('toggleShowFilters', { showFilters: !this.showFilters });
     },
+
+
+    /*
+      Toggles the showing and hiding of the popout menu.
+    */
     setShowPopOut: function setShowPopOut() {
       this.$store.dispatch('toggleShowPopOut', { showPopOut: true });
     },
+
+
+    /*
+      Clears the filters.
+    */
     clearFilters: function clearFilters() {
       __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('clear-filters');
     }
@@ -3646,14 +4895,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+/*
+  Imports the event bus.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the computed properties.
+  */
   computed: {
+    /*
+      Gets whether or not the popout should be shown or not.
+    */
     showPopOut: function showPopOut() {
       return this.$store.getters.getShowPopOut;
     },
+
+
+    /*
+      Determines if we should show the popout.
+    */
     showRightNav: function showRightNav() {
       return this.showPopOut;
     },
@@ -3675,14 +4947,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    Defines the methods used by the component.
+  */
   methods: {
+    /*
+      Toggles the hiding if the navigation.
+    */
     hideNav: function hideNav() {
       this.$store.dispatch('toggleShowPopOut', { showPopOut: false });
     },
+
+
+    /*
+      hides the popout and shows the log in form.
+    */
     login: function login() {
       this.$store.dispatch('toggleShowPopOut', { showPopOut: false });
       __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('prompt-login');
     },
+
+
+    /*
+      Logs the user out.
+    */
     logout: function logout() {
       this.$store.dispatch('logoutUser');
       window.location = '/logout';
@@ -3747,22 +5035,328 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the component.
+  */
   data: function data() {
     return {
       successMessage: '',
       show: false
     };
   },
+
+
+  /*
+    Sets up the component when mounted.
+  */
   mounted: function mounted() {
+    /*
+      On show success, show the notification.
+    */
     __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('show-success', function (data) {
       this.successMessage = data.notification;
 
       this.show = true;
 
+      /*
+        After 3 seconds hide the notification.
+      */
       setTimeout(function () {
         this.show = false;
       }.bind(this), 3000);
     }.bind(this));
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/layouts/Admin.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHeader_vue__ = __webpack_require__("./resources/assets/js/components/admin/AdminHeader.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHeader_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_admin_Navigation_vue__ = __webpack_require__("./resources/assets/js/components/admin/Navigation.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_admin_Navigation_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_admin_Navigation_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_PopOut_vue__ = __webpack_require__("./resources/assets/js/components/global/PopOut.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_PopOut_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_global_PopOut_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_SuccessNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/SuccessNotification.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_SuccessNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_global_SuccessNotification_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/ErrorNotification.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_admin_actions_js__ = __webpack_require__("./resources/assets/js/modules/admin/actions.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the layout components used by the page.
+*/
+
+
+
+/*
+  Imports the components used by the page.
+*/
+
+
+
+
+/*
+  Import admin Vuex modules
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Registers the components with the page.
+  */
+  components: {
+    AdminHeader: __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHeader_vue___default.a,
+    Navigation: __WEBPACK_IMPORTED_MODULE_1__components_admin_Navigation_vue___default.a,
+    PopOut: __WEBPACK_IMPORTED_MODULE_2__components_global_PopOut_vue___default.a,
+    SuccessNotification: __WEBPACK_IMPORTED_MODULE_3__components_global_SuccessNotification_vue___default.a,
+    ErrorNotification: __WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue___default.a
+  },
+
+  /*
+    Sets up the page on the created lifecycle hook.
+  */
+  created: function created() {
+    /*
+      Loads the brew methods on the admin side.
+    */
+    this.$store.dispatch('loadBrewMethods');
+
+    /*
+      Checks to see if the admin Vuex module is active. If not,
+      register the admin module.
+    */
+    if (!this.$store._modules.get(['admin'])) {
+      this.$store.registerModule('admin', {});
+    }
+
+    /*
+      Checks to see if the admin actions module is active. If not,
+      register the admin actions module.
+    */
+    if (!this.$store._modules.get(['admin', 'actions'])) {
+      this.$store.registerModule(['admin', 'actions'], __WEBPACK_IMPORTED_MODULE_5__modules_admin_actions_js__["a" /* actions */]);
+    }
+  },
+
+
+  /*
+    Defines the computed properties on the page.
+  */
+  computed: {
+    /*
+      Grabs the user from the Vuex store.
+    */
+    user: function user() {
+      return this.$store.getters.getUser;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/layouts/Layout.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue__ = __webpack_require__("./resources/assets/js/components/global/Navigation.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue__ = __webpack_require__("./resources/assets/js/components/global/LoginModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue__ = __webpack_require__("./resources/assets/js/components/global/Filters.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue__ = __webpack_require__("./resources/assets/js/components/global/PopOut.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/SuccessNotification.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/ErrorNotification.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the Event Bus to pass events on tag updates
+*/
+
+
+/*
+  Define the components used in the Layout
+*/
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Register the components with the layout.
+  */
+  components: {
+    Navigation: __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue___default.a,
+    LoginModal: __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue___default.a,
+    Filters: __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue___default.a,
+    PopOut: __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue___default.a,
+    SuccessNotification: __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue___default.a,
+    ErrorNotification: __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue___default.a
+  },
+
+  /*
+    When created, set up the layout.
+  */
+  created: function created() {
+    /*
+      Load the necessary data in the layout.
+    */
+    this.$store.dispatch('loadCafes');
+    this.$store.dispatch('loadUser');
+    this.$store.dispatch('loadBrewMethods');
+
+    /*
+      If the admin module is set, unregister it. We don't need
+      it here.
+    */
+    if (this.$store._modules.get(['admin'])) {
+      this.$store.unregisterModule('admin', {});
+    }
+  },
+
+
+  /*
+    Define the computed properties in the layout.
+  */
+  computed: {
+    /*
+      Determine if we should show the filters or not.
+    */
+    showFilters: function showFilters() {
+      return this.$store.getters.getShowFilters;
+    },
+
+
+    /*
+      Get the cafe that was added.
+    */
+    addedCafe: function addedCafe() {
+      return this.$store.getters.getAddedCafe;
+    },
+
+
+    /*
+      Get the cafe added status.
+    */
+    addCafeStatus: function addCafeStatus() {
+      return this.$store.getters.getCafeAddStatus;
+    }
+  },
+
+  /*
+    Define what to watch in the module.
+  */
+  watch: {
+    /*
+      When the cafe added status changes, emit the success
+      if the cafe was added successfully!
+    */
+    'addCafeStatus': function addCafeStatus() {
+      if (this.addCafeStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: this.addedCafe.name + ' has been added!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the layout.
+  */
+  methods: {
+    /*
+      Toggle the showing and hiding of the filters.
+    */
+    toggleShowFilters: function toggleShowFilters() {
+      this.$store.dispatch('toggleShowFilters', { showFilters: !this.showFilters });
+    }
   }
 });
 
@@ -3994,6 +5588,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the event bus
+*/
 
 
 /*
@@ -4025,7 +5622,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Defines what to watch in the component.
+  */
   watch: {
+    /*
+      When the route changes, we clear the like and unlike
+      status and load the new cafe.
+    */
     '$route.params.slug': function $routeParamsSlug() {
       this.$store.dispatch('clearLikeAndUnlikeStatus');
       this.$store.dispatch('loadCafe', {
@@ -4033,11 +5637,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
 
+    /*
+      Watch for when the cafe has been loaded successfully.
+    */
     'cafeLoadStatus': function cafeLoadStatus() {
+      /*
+        If the cafe has been loaded successfully, zoom to the location.
+      */
       if (this.cafeLoadStatus == 2) {
         __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(this.cafe.latitude), lng: parseFloat(this.cafe.longitude) });
       }
 
+      /*
+        If the cafe has been loaded unsuccessfully, show an error and go
+        back to the cafes page.
+      */
       if (this.cafeLoadStatus == 3) {
         __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-error', { notification: 'Cafe Not Found!' });
         this.$router.push({ name: 'cafes' });
@@ -4055,9 +5669,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     cafeLoadStatus: function cafeLoadStatus() {
       return this.$store.getters.getCafeLoadStatus;
     },
+
+
+    /*
+      Gets the like cafe action status.
+    */
     cafeLikeActionStatus: function cafeLikeActionStatus() {
       return this.$store.getters.getCafeLikeActionStatus;
     },
+
+
+    /*
+      Gets the unlike cafe action status
+    */
     cafeUnlikeActionStatus: function cafeUnlikeActionStatus() {
       return this.$store.getters.getCafeUnlikeActionStatus;
     },
@@ -4559,17 +6183,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Sync the tags to send to the server for the new cafe.
   */
   mounted: function mounted() {
+    /*
+      Gets the autocomplete element and sets it up with Google places autocomplete.
+    */
     this.autocomplete = document.getElementById('street-address');
     var googleMapsAutocomplete = new google.maps.places.Autocomplete(this.autocomplete);
 
+    /*
+      Listen to when the place has changed.
+    */
     googleMapsAutocomplete.addListener('place_changed', function () {
+      /*
+        Get the place selected.
+      */
       var place = googleMapsAutocomplete.getPlace();
 
       var addressBuilderStreetNumber = '';
       var addressBuilderRoute = '';
 
+      /*
+        Find the address we need in the address components.
+      */
       for (var i = 0; i < place.address_components.length; i++) {
         var type = place.address_components[i].types[0];
+
+        /*
+          Switch the type of the address components and assign it to the
+          corresponding variable.
+        */
         switch (type) {
           case 'street_number':
             addressBuilderStreetNumber = place.address_components[i].short_name;
@@ -4589,7 +6230,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
 
+      /*
+        Builds the local address format.
+      */
       this.address = addressBuilderStreetNumber + ' ' + addressBuilderRoute;
+
+      /*
+        Gets the latitude and longitude of the address.
+      */
       this.lat = place.geometry.location.lat();
       this.lng = place.geometry.location.lng();
     }.bind(this));
@@ -4956,12 +6604,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the components used by the home page.
+*/
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Register the components to be used by the home page.
+  */
   components: {
     CafeMap: __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeMap_vue___default.a,
     CafeList: __WEBPACK_IMPORTED_MODULE_1__components_cafes_CafeList_vue___default.a,
@@ -4969,130 +6623,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     ToggleCafesView: __WEBPACK_IMPORTED_MODULE_3__components_cafes_ToggleCafesView_vue___default.a
   },
 
+  /*
+    Define the computed properties.
+  */
   computed: {
+    /*
+      Import the cafe view from the Vuex module.
+    */
     cafesView: function cafesView() {
       return this.$store.getters.getCafesView;
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/Layout.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue__ = __webpack_require__("./resources/assets/js/components/global/Navigation.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue__ = __webpack_require__("./resources/assets/js/components/global/LoginModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue__ = __webpack_require__("./resources/assets/js/components/global/Filters.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue__ = __webpack_require__("./resources/assets/js/components/global/PopOut.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/SuccessNotification.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/ErrorNotification.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/*
-  Imports the Event Bus to pass events on tag updates
-*/
-
-
-
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Navigation: __WEBPACK_IMPORTED_MODULE_1__components_global_Navigation_vue___default.a,
-    LoginModal: __WEBPACK_IMPORTED_MODULE_2__components_global_LoginModal_vue___default.a,
-    Filters: __WEBPACK_IMPORTED_MODULE_3__components_global_Filters_vue___default.a,
-    PopOut: __WEBPACK_IMPORTED_MODULE_4__components_global_PopOut_vue___default.a,
-    SuccessNotification: __WEBPACK_IMPORTED_MODULE_5__components_global_SuccessNotification_vue___default.a,
-    ErrorNotification: __WEBPACK_IMPORTED_MODULE_6__components_global_ErrorNotification_vue___default.a
-  },
-
-  created: function created() {
-    this.$store.dispatch('loadCafes');
-    this.$store.dispatch('loadUser');
-    this.$store.dispatch('loadBrewMethods');
-  },
-
-
-  computed: {
-    showFilters: function showFilters() {
-      return this.$store.getters.getShowFilters;
-    },
-    addedCafe: function addedCafe() {
-      return this.$store.getters.getAddedCafe;
-    },
-    addCafeStatus: function addCafeStatus() {
-      return this.$store.getters.getCafeAddStatus;
-    }
-  },
-
-  watch: {
-    'addCafeStatus': function addCafeStatus() {
-      if (this.addCafeStatus == 2) {
-        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
-          notification: this.addedCafe.name + ' has been added!'
-        });
-      }
-    }
-  },
-
-  methods: {
-    toggleShowFilters: function toggleShowFilters() {
-      this.$store.dispatch('toggleShowFilters', { showFilters: !this.showFilters });
     }
   }
 });
@@ -5550,12 +7089,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     and add cafe status.
   */
   computed: {
+    /*
+      Imports the brew methods from the Vuex data store.
+    */
     brewMethods: function brewMethods() {
       return this.$store.getters.getBrewMethods;
     },
+
+
+    /*
+      Imports the cafe add status from the Vuex data store.
+    */
     addCafeStatus: function addCafeStatus() {
       return this.$store.getters.getCafeAddStatus;
     },
+
+
+    /*
+      Imports the add cafe text from the Vuex data store.
+    */
     addCafeText: function addCafeText() {
       return this.$store.getters.getCafeAddText;
     }
@@ -5565,30 +7117,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Defines what we need to watch on the page.
   */
   watch: {
+    /*
+      Watches the add cafe status.
+    */
     'addCafeStatus': function addCafeStatus() {
+      /*
+        If the status is equal to 2 show the success.
+      */
       if (this.addCafeStatus == 2) {
+        /*
+          Show the success notification.
+        */
         __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
           notification: this.addCafeText
         });
 
+        /*
+          Clear the form.
+        */
         this.clearForm();
+
+        /*
+          Go back to the cafes screen.
+        */
         this.$router.push({ name: 'cafes' });
       }
     }
   },
 
+  /*
+    Define the mounted lifecycle hook.
+  */
   mounted: function mounted() {
+    /*
+      Gets the autocomplete element and sets it up with Google places autocomplete.
+    */
     this.autocomplete = document.getElementById('street-address');
     var googleMapsAutocomplete = new google.maps.places.Autocomplete(this.autocomplete);
 
+    /*
+      Listen to when the place has changed.
+    */
     googleMapsAutocomplete.addListener('place_changed', function () {
+      /*
+        Get the place selected.
+      */
       var place = googleMapsAutocomplete.getPlace();
 
       var addressBuilderStreetNumber = '';
       var addressBuilderRoute = '';
 
+      /*
+        Find the address we need in the address components.
+      */
       for (var i = 0; i < place.address_components.length; i++) {
         var type = place.address_components[i].types[0];
+
+        /*
+          Switch the type of the address components and assign it to the
+          corresponding variable.
+        */
         switch (type) {
           case 'street_number':
             addressBuilderStreetNumber = place.address_components[i].short_name;
@@ -5608,7 +7196,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
 
+      /*
+        Builds the local address format.
+      */
       this.address = addressBuilderStreetNumber + ' ' + addressBuilderRoute;
+
+      /*
+        Gets the latitude and longitude of the address.
+      */
       this.lat = place.geometry.location.lat();
       this.lng = place.geometry.location.lng();
     }.bind(this));
@@ -5643,6 +7238,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       Searches the API route for companies
     */
     searchCompanies: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.debounce(function (e) {
+      /*
+        Ensures something is entered before searching companies.
+      */
       if (this.companyName.length > 1) {
         this.showAutocomplete = true;
         axios.get(__WEBPACK_IMPORTED_MODULE_2__config_js__["a" /* ROAST_CONFIG */].API_URL + '/companies/search', {
@@ -6022,15 +7620,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/*
+  Imports the event bus
+*/
 
 
+/*
+  Imports the components used by the page.
+*/
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the components used in the page.
+  */
   components: {
     Loader: __WEBPACK_IMPORTED_MODULE_1__components_global_Loader_vue___default.a
   },
 
+  /*
+    Defines the data used by the page.
+  */
   data: function data() {
     return {
       favorite_coffee: '',
@@ -6042,13 +7652,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Defines the data to watch in the page.
+  */
   watch: {
+    /*
+      When the user load status changes, and is successful,
+      set the fields accordingly.
+    */
     'userLoadStatus': function userLoadStatus() {
       if (this.userLoadStatus == 2) {
         this.setFields();
       }
     },
 
+    /*
+      When the user is successfully updated, show the
+      notification.
+    */
     'userUpdateStatus': function userUpdateStatus() {
       if (this.userUpdateStatus == 2) {
         __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
@@ -6058,6 +7679,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
 
+  /*
+    On the created lifecycle hook if the user has been loaded,
+    set the user fields to be edited.
+  */
   created: function created() {
     if (this.userLoadStatus == 2) {
       this.setFields();
@@ -6065,6 +7690,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  /*
+    Defines the computed fields used in the page.
+  */
   computed: {
     /*
       Gets the authenticated user.
@@ -6094,6 +7722,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Defines the methods used by the component.
   */
   methods: {
+    /*
+      Sets the editable fields.
+    */
     setFields: function setFields() {
       this.profile_visibility = this.user.profile_visibility;
       this.favorite_coffee = this.user.favorite_coffee;
@@ -6101,7 +7732,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.city = this.user.city;
       this.state = this.user.state;
     },
+
+
+    /*
+      Updates the user's profile.
+    */
     updateProfile: function updateProfile() {
+      /*
+        if the profile is valid, dispatch the edits to be
+        stored in the API.
+      */
       if (this.validateProfile()) {
         this.$store.dispatch('editUser', {
           profile_visibility: this.profile_visibility,
@@ -6112,6 +7752,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
+
+
+    /*
+      Validates the profile
+    */
     validateProfile: function validateProfile() {
       return true;
     }
@@ -6120,14 +7765,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/Users.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Actions.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_actions_Action_vue__ = __webpack_require__("./resources/assets/js/components/admin/actions/Action.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_actions_Action_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_actions_Action_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6152,51 +7832,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /*
-  Imports the Roast API URL from the config.
-*/
-
-
-/*
-  Imports lodash for debouncing
+  Imports the action component.
 */
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      usersSearch: '',
-      userSearchResults: []
-    };
+  /*
+    Register the component with the page.
+  */
+  components: {
+    Action: __WEBPACK_IMPORTED_MODULE_0__components_admin_actions_Action_vue___default.a
+  },
+
+  /*
+    Load all of the admin actions on the created lifecycle hook.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminActions');
   },
 
 
-  methods: {
+  /*
+    Define the computed properties on the page.
+  */
+  computed: {
     /*
-      Searches the API route for user autocomplete.
+      Gets the actions from the Vuex data store.
     */
-    searchUsers: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.debounce(function (e) {
-      /*
-        Ensure more than two characters have been entered.
-      */
-      if (this.usersSearch.length > 2) {
-        /*
-          Call the users endpoint with a search parameter that
-          matches what the user has entered.
-        */
-        axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/users', {
-          params: {
-            search: this.usersSearch
-          }
-        }).then(function (response) {
-          /*
-            Set the user search results to the data returned from the call.
-          */
-          this.userSearchResults = response.data;
-        }.bind(this));
-      }
-    }, 300)
+    actions: function actions() {
+      return this.$store.getters.getActions;
+    }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Companies.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -6209,6 +7896,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv.pop-out {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  top: 0;\n  background-color: rgba(55, 44, 12, 0.29);\n  z-index: 9999;\n}\ndiv.pop-out div.pop-out-side-bar {\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    top: 0;\n    width: 250px;\n    background-color: white;\n    -webkit-box-shadow: -2px 0 4px 0 rgba(3, 27, 78, 0.1);\n            box-shadow: -2px 0 4px 0 rgba(3, 27, 78, 0.1);\n    padding: 30px;\n}\ndiv.pop-out div.pop-out-side-bar div.side-bar-link {\n      border-bottom: 1px solid #BABABA;\n      font-size: 16px;\n      font-weight: bold;\n      font-family: \"Lato\", sans-serif;\n      text-transform: uppercase;\n      padding-top: 25px;\n      padding-bottom: 25px;\n}\ndiv.pop-out div.pop-out-side-bar div.side-bar-link a {\n        color: black;\n}\ndiv.pop-out div.pop-out-side-bar img.close-menu-icon {\n      float: right;\n      cursor: pointer;\n}\ndiv.pop-out div.pop-out-side-bar div.ssu-container {\n      position: absolute;\n      bottom: 30px;\n}\ndiv.pop-out div.pop-out-side-bar div.ssu-container span.ssu-built-on {\n        color: black;\n        font-size: 14px;\n        font-family: \"Lato\", sans-serif;\n        display: block;\n        margin-bottom: 10px;\n}\ndiv.pop-out div.pop-out-side-bar div.ssu-container img {\n        margin: auto;\n        max-width: 190px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n", ""]);
 
 // exports
 
@@ -6254,6 +7956,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv#individual-cafe-map {\n  width: 700px;\n  height: 500px;\n  margin: auto;\n  margin-bottom: 200px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Layout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#app-layout div.show-filters {\n  height: 90px;\n  width: 23px;\n  position: absolute;\n  left: 0px;\n  background-color: white;\n  border-top-right-radius: 3px;\n  border-bottom-right-radius: 3px;\n  line-height: 90px;\n  top: 50%;\n  cursor: pointer;\n  margin-top: -45px;\n  z-index: 9;\n  text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -6320,6 +8037,21 @@ exports.push([module.i, "\ndiv#cafe-list-container {\n  position: absolute;\n  t
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/Action.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.action {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  padding-bottom: 15px;\n  padding-top: 15px;\n}\ndiv.action span.approve-action {\n    font-weight: bold;\n    cursor: pointer;\n    display: inline-block;\n    margin-right: 20px;\n}\ndiv.action span.deny-action {\n    color: #E8635F;\n    font-weight: bold;\n    cursor: pointer;\n    display: inline-block;\n}\ndiv.action img.more-info {\n    cursor: pointer;\n    float: right;\n    margin-top: 10px;\n    margin-right: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-405821f0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6344,6 +8076,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -6380,21 +8127,6 @@ exports.push([module.i, "\ndiv#cafe-page {\n  position: absolute;\n  right: 30px
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Users.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\ndiv#users div.center {\n  margin: auto;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52d7667b\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/ToggleLike.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6410,6 +8142,21 @@ exports.push([module.i, "\nspan.toggle-like span.like-toggle {\n  display: inlin
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/AdminHeader.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nheader {\n  background-color: #FFFFFF;\n  height: 75px;\n  z-index: 9999;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n}\nheader img.logo {\n    margin: auto;\n    margin-top: 22.5px;\n    margin-bottom: 22.5px;\n    display: block;\n}\nheader img.hamburger {\n    float: right;\n    margin-right: 18px;\n    margin-top: 30px;\n    cursor: pointer;\n}\nheader img.avatar {\n    float: right;\n    margin-right: 20px;\n    width: 40px;\n    height: 40px;\n    border-radius: 20px;\n    margin-top: 18px;\n}\nheader:after {\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\nnav.top-navigation span.login {\n    display: none;\n}\nnav.top-navigation img.hamburger {\n    margin-top: 26px;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/global/Loader.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6419,6 +8166,51 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv.loader {\n  margin: auto;\n  vertical-align: middle;\n}\nsvg path,\nsvg rect {\n  fill: #E8635F;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Admin.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-layout div#page-container {\n  margin-top: 75px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Actions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-actions div.actions-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\ndiv#admin-actions div.no-actions-available {\n  text-align: center;\n  font-family: \"Lato\", sans-serif;\n  font-size: 20px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.action-cafe-edited span.change {\n  color: red;\n}\n", ""]);
 
 // exports
 
@@ -6485,7 +8277,7 @@ exports.push([module.i, "\ndiv#toggle-cafes-view {\n  position: absolute;\n  z-i
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Layout.vue":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
@@ -6493,7 +8285,22 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv#app-layout div.show-filters {\n  height: 90px;\n  width: 23px;\n  position: absolute;\n  left: 0px;\n  background-color: white;\n  border-top-right-radius: 3px;\n  border-bottom-right-radius: 3px;\n  line-height: 90px;\n  top: 50%;\n  cursor: pointer;\n  margin-top: -45px;\n  z-index: 9;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/Navigation.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nnav.admin-navigation div.admin-link {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Lato\", sans-serif;\n  text-transform: uppercase;\n  padding-top: 15px;\n  padding-bottom: 15px;\n}\nnav.admin-navigation div.admin-link a {\n    color: black;\n}\nnav.admin-navigation div.admin-link a.router-link-active {\n      color: #E8635F;\n}\n", ""]);
 
 // exports
 
@@ -47538,6 +49345,26 @@ var render = function() {
               }
             }),
             _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "side-bar-link" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: { to: { name: "cafes" } },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.hideNav()
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Cafes\n        ")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _vm.user != "" && _vm.userLoadStatus == 2
               ? _c(
                   "div",
@@ -47576,6 +49403,30 @@ var render = function() {
                         }
                       },
                       [_vm._v("\n          My Profile\n        ")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.user != "" &&
+            _vm.userLoadStatus == 2 &&
+            _vm.user.permission >= 1
+              ? _c(
+                  "div",
+                  { staticClass: "side-bar-link" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: { to: { name: "admin" } },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.hideNav()
+                          }
+                        }
+                      },
+                      [_vm._v("\n          Admin\n        ")]
                     )
                   ],
                   1
@@ -47692,6 +49543,178 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-03743e42", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-04edff6d\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "action-cafe-deleted action-cafe-detail" }, [
+    _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Company")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.company_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Website")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.website))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Location Name")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.location_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Address")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.address))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("City")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.city))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("State")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.state))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Zip")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.zip))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
+              _c("label", [_vm._v("Brew Methods")]),
+              _vm._v(" "),
+              _vm._l(_vm.action.cafe.brew_methods, function(method) {
+                return _c("div", { staticClass: "brew-method option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: method.icon + ".svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v(_vm._s(method.method))
+                    ])
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.action.cafe.tea == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Tea")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [_vm._v("Tea")])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.action.cafe.matcha == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Matcha")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 cell" }, [
+        _c("span", { staticClass: "action-information" }, [
+          _vm._v(
+            "Cafe Deleted by " +
+              _vm._s(_vm.action.by.name) +
+              " on " +
+              _vm._s(_vm.action.created_at)
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-04edff6d", module.exports)
   }
 }
 
@@ -49524,6 +51547,67 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1ad0fc42\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Layout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "app-layout" } },
+    [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.showFilters,
+              expression: "!showFilters"
+            }
+          ],
+          staticClass: "show-filters",
+          on: {
+            click: function($event) {
+              _vm.toggleShowFilters()
+            }
+          }
+        },
+        [_c("img", { attrs: { src: "/img/grey-right.svg" } })]
+      ),
+      _vm._v(" "),
+      _c("success-notification"),
+      _vm._v(" "),
+      _c("error-notification"),
+      _vm._v(" "),
+      _c("navigation"),
+      _vm._v(" "),
+      _c("router-view"),
+      _vm._v(" "),
+      _c("login-modal"),
+      _vm._v(" "),
+      _c("filters"),
+      _vm._v(" "),
+      _c("pop-out")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1ad0fc42", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1dd0d03f\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/cafes/CafeMap.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49761,6 +51845,152 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3997dcff\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/Action.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "action" }, [
+    _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v(
+          "\n      " +
+            _vm._s(_vm.action.company != null ? _vm.action.company.name : "") +
+            "\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v(
+          "\n      " +
+            _vm._s(
+              _vm.action.cafe != null ? _vm.action.cafe.location_name : ""
+            ) +
+            "\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n      " + _vm._s(_vm.type) + "\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _c(
+          "span",
+          {
+            staticClass: "approve-action",
+            on: {
+              click: function($event) {
+                _vm.approveAction()
+              }
+            }
+          },
+          [_vm._v("Approve")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "deny-action",
+            on: {
+              click: function($event) {
+                _vm.denyAction()
+              }
+            }
+          },
+          [_vm._v("Deny")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            on: {
+              click: function($event) {
+                _vm.showDetails = !_vm.showDetails
+              }
+            }
+          },
+          [
+            _c("img", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.showDetails,
+                  expression: "!showDetails"
+                }
+              ],
+              staticClass: "more-info",
+              attrs: { src: "/img/more-info-closed.svg" }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.showDetails,
+                  expression: "showDetails"
+                }
+              ],
+              staticClass: "more-info",
+              attrs: { src: "/img/more-info-open.svg" }
+            })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.showDetails,
+            expression: "showDetails"
+          }
+        ],
+        staticClass: "grid-x"
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "large-12 medium-12 cell" },
+          [
+            _vm.action.type == "cafe-added"
+              ? _c("action-cafe-added", { attrs: { action: _vm.action } })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.action.type == "cafe-updated"
+              ? _c("action-cafe-edited", { attrs: { action: _vm.action } })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.action.type == "cafe-deleted"
+              ? _c("action-cafe-deleted", { attrs: { action: _vm.action } })
+              : _vm._e()
+          ],
+          1
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3997dcff", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-405821f0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49842,6 +52072,178 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-440dff1c", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-44b7f858\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "action-cafe-added action-cafe-detail" }, [
+    _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Company")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.company_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Website")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.website))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Location Name")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.location_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Address")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.address))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("City")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.city))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("State")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.state))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Zip")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.content.zip))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
+              _c("label", [_vm._v("Brew Methods")]),
+              _vm._v(" "),
+              _vm._l(_vm.actionBrewMethods, function(method) {
+                return _c("div", { staticClass: "brew-method option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: method.icon + ".svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v(_vm._s(method.method))
+                    ])
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.content.tea == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Tea")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [_vm._v("Tea")])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.content.matcha == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Matcha")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 cell" }, [
+        _c("span", { staticClass: "action-information" }, [
+          _vm._v(
+            "Cafe Added by " +
+              _vm._s(_vm.action.by.name) +
+              " on " +
+              _vm._s(_vm.action.created_at)
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-44b7f858", module.exports)
   }
 }
 
@@ -50420,57 +52822,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-514dfbca\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/Users.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "page", attrs: { id: "users" } }, [
-    _c("div", { staticClass: "grid-x" }, [
-      _c("div", { staticClass: "large-8 medium-9 small-12 columns center" }, [
-        _c("h2", { attrs: { id: "find-coffee-enthusiasts" } }, [
-          _vm._v("Find Fellow Coffee Enthusiasts")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.usersSearch,
-              expression: "usersSearch"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.usersSearch },
-          on: {
-            keyup: _vm.searchUsers,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.usersSearch = $event.target.value
-            }
-          }
-        })
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-514dfbca", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-52d7667b\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/cafes/ToggleLike.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50580,6 +52931,84 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-557bb4d5\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/AdminHeader.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("header", { staticClass: "admin-header" }, [
+    _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-4 medium-4 small-4 cell" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "large-4 medium-4 small-4 cell" },
+        [
+          _c("router-link", { attrs: { to: { name: "cafes" } } }, [
+            _c("img", { staticClass: "logo", attrs: { src: "/img/logo.svg" } })
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-4 medium-4 small-4 cell" }, [
+        _c("img", {
+          staticClass: "hamburger",
+          attrs: { src: "/img/hamburger.svg" },
+          on: {
+            click: function($event) {
+              _vm.setShowPopOut()
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.user != "" && _vm.userLoadStatus == 2
+          ? _c("img", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.userLoadStatus == 2,
+                  expression: "userLoadStatus == 2"
+                }
+              ],
+              staticClass: "avatar",
+              attrs: { src: _vm.user.avatar }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user == ""
+          ? _c(
+              "span",
+              {
+                staticClass: "login",
+                on: {
+                  click: function($event) {
+                    _vm.login()
+                  }
+                }
+              },
+              [_vm._v("Sign In")]
+            )
+          : _vm._e()
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-557bb4d5", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5795fc18\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/global/Loader.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50656,6 +53085,537 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5795fc18", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-648b12e7\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Admin.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "admin-layout" } },
+    [
+      _c("admin-header"),
+      _vm._v(" "),
+      _c("success-notification"),
+      _vm._v(" "),
+      _c("error-notification"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "grid-container", attrs: { id: "page-container" } },
+        [
+          _c("div", { staticClass: "grid-x grid-padding-x" }, [
+            _c(
+              "div",
+              { staticClass: "large-3 medium-4 cell" },
+              [_c("navigation")],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "large-9 medium-8 cell" },
+              [_c("router-view")],
+              1
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("pop-out")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-648b12e7", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-64d9d8d0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Actions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-actions" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.actions, function(action) {
+          return _c("action", { key: action.id, attrs: { action: action } })
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.actions.length == 0,
+                expression: "actions.length == 0"
+              }
+            ],
+            staticClass: "large-12 medium-12 cell no-actions-available"
+          },
+          [_vm._v("\n      All outstanding actions have been processed!\n    ")]
+        )
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c("h3", { staticClass: "page-header" }, [_vm._v("Actions")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x actions-header" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Company\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Cafe\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Type\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Actions\n      ")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-64d9d8d0", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-651aa4f6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "action-cafe-edited action-cafe-detail" }, [
+    _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Company")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.company.name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Website")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.company.website))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Location Name")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.location_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Address")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.address))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("City")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.city))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("State")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.state))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Zip")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "action-content" }, [
+              _vm._v(_vm._s(_vm.action.cafe.zip))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
+              _c("label", [_vm._v("Brew Methods")]),
+              _vm._v(" "),
+              _vm._l(_vm.action.cafe.brew_methods, function(method) {
+                return _c("div", { staticClass: "brew-method option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: method.icon + ".svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v(_vm._s(method.method))
+                    ])
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.action.cafe.tea == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Tea")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [_vm._v("Tea")])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.action.cafe.matcha == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Matcha")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Company")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change:
+                    _vm.content.after.company_name != _vm.action.company.name
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.company_name))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Website")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change:
+                    _vm.content.after.website != _vm.action.company.website
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.website))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Location Name")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change:
+                    _vm.content.after.location_name !=
+                    _vm.action.cafe.location_name
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.location_name))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Address")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change: _vm.content.after.address != _vm.action.cafe.address
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.address))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("City")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change: _vm.content.after.city != _vm.action.cafe.city
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.city))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("State")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: {
+                  change: _vm.content.after.state != _vm.action.cafe.state
+                }
+              },
+              [_vm._v(_vm._s(_vm.content.after.state))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", [_vm._v("Zip")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "action-content",
+                class: { change: _vm.content.after.zip != _vm.action.cafe.zip }
+              },
+              [_vm._v(_vm._s(_vm.content.after.zip))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
+              _c("label", [_vm._v("Brew Methods")]),
+              _vm._v(" "),
+              _vm._l(_vm.actionBrewMethods, function(method) {
+                return _c("div", { staticClass: "brew-method option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: method.icon + ".svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v(_vm._s(method.method))
+                    ])
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.content.after.tea == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Tea")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [_vm._v("Tea")])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.content.after.matcha == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", [_vm._v("Matcha")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "drink-option option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 cell" }, [
+        _c("span", { staticClass: "action-information" }, [
+          _vm._v(
+            "Cafe Updated by " +
+              _vm._s(_vm.action.by.name) +
+              " on " +
+              _vm._s(_vm.action.created_at)
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c("span", { staticClass: "action-detail-header" }, [_vm._v("Current")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c("span", { staticClass: "action-detail-header" }, [
+          _vm._v("Proposed Update")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-651aa4f6", module.exports)
   }
 }
 
@@ -51384,54 +54344,14 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-d32a9ab2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/Layout.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-c8946024\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "app-layout" } },
-    [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.showFilters,
-              expression: "!showFilters"
-            }
-          ],
-          staticClass: "show-filters",
-          on: {
-            click: function($event) {
-              _vm.toggleShowFilters()
-            }
-          }
-        },
-        [_c("img", { attrs: { src: "/img/grey-right.svg" } })]
-      ),
-      _vm._v(" "),
-      _c("success-notification"),
-      _vm._v(" "),
-      _c("error-notification"),
-      _vm._v(" "),
-      _c("navigation"),
-      _vm._v(" "),
-      _c("router-view"),
-      _vm._v(" "),
-      _c("login-modal"),
-      _vm._v(" "),
-      _c("filters"),
-      _vm._v(" "),
-      _c("pop-out")
-    ],
-    1
-  )
+  return _c("div", { attrs: { id: "companies" } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51439,7 +54359,58 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d32a9ab2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c8946024", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cb990dea\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/Navigation.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("nav", { staticClass: "admin-navigation" }, [
+    _c(
+      "div",
+      { staticClass: "admin-link" },
+      [
+        _c("router-link", { attrs: { to: { name: "admin-actions" } } }, [
+          _vm._v("\n      Actions\n    ")
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "admin-link" },
+      [
+        _c("router-link", { attrs: { to: { name: "admin-companies" } } }, [
+          _vm._v("\n      Companies\n    ")
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "admin-link" }, [_vm._v("\n    Users\n  ")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "admin-link" }, [
+      _vm._v("\n    Brew Methods\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "admin-link" }, [_vm._v("\n    Products\n  ")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cb990dea", module.exports)
   }
 }
 
@@ -54169,6 +57140,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("95176b14", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeDeleted.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeDeleted.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10b7d3a0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/NewCafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54240,6 +57238,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12aa39e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./IndividualCafeMap.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12aa39e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./IndividualCafeMap.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Layout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Layout.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("a9b05d74", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Layout.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Layout.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54358,6 +57383,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/Action.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/Action.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("2155319b", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Action.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Action.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-405821f0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54402,6 +57454,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-440dff1c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-440dff1c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("59b202ce", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeAdded.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeAdded.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54466,33 +57545,6 @@ if(false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Users.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Users.vue");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("492cb8b8", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52d7667b\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/ToggleLike.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54520,6 +57572,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/AdminHeader.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/AdminHeader.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("38948248", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminHeader.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminHeader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/global/Loader.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54537,6 +57616,87 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Admin.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Admin.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("68bafbe0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Admin.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Admin.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Actions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Actions.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("68b3363a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Actions.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Actions.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("f96df010", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeEdited.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeEdited.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54655,23 +57815,50 @@ if(false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Layout.vue":
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Layout.vue");
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Companies.vue");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("7078d96a", content, false, {});
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("772fcb90", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Layout.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Layout.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Companies.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Companies.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/Navigation.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/Navigation.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("a7d70076", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navigation.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navigation.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -66942,6 +70129,41 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/api/admin/actions.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/admin/actions
+  */
+  getActions: function getActions() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/actions');
+  },
+
+  /*
+    PUT   /admin/v1/admin/actions/{actionID}/approve
+  */
+  putApproveAction: function putApproveAction(id) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/actions/' + id + '/approve');
+  },
+
+  /*
+    PUT   /admin/v1/admin/actions/{actionID}/deny
+  */
+  putDenyAction: function putDenyAction(id) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/actions/' + id + '/deny');
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/api/brewMethod.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -67147,7 +70369,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
  */
-
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
@@ -67156,22 +70377,346 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+/*
+  Imports the routes and store and vue to use with the Vue module.
+*/
 
 
 
 
+/*
+  Create a new Vue instance and mount the app element.
+*/
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   router: __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */],
   store: __WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */]
 }).$mount('#app');
 
+/*
+  Send google analytics the current path.
+*/
 ga('set', 'page', __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */].currentRoute.path);
 ga('send', 'pageview');
 
+/*
+  After each page navigation, send the path to Google analytics.
+*/
 __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */].afterEach(function (to, from) {
   ga('set', 'page', to.path);
   ga('send', 'pageview');
 });
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/AdminHeader.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-557bb4d5\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/AdminHeader.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/AdminHeader.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-557bb4d5\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/AdminHeader.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/AdminHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-557bb4d5", Component.options)
+  } else {
+    hotAPI.reload("data-v-557bb4d5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/Navigation.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/Navigation.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/Navigation.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cb990dea\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/Navigation.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/Navigation.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cb990dea", Component.options)
+  } else {
+    hotAPI.reload("data-v-cb990dea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/actions/Action.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3997dcff\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/Action.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/Action.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3997dcff\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/Action.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/actions/Action.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3997dcff", Component.options)
+  } else {
+    hotAPI.reload("data-v-3997dcff", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/actions/ActionCafeAdded.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44b7f858\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-44b7f858\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeAdded.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/actions/ActionCafeAdded.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44b7f858", Component.options)
+  } else {
+    hotAPI.reload("data-v-44b7f858", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-04edff6d\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeDeleted.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/actions/ActionCafeDeleted.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-04edff6d", Component.options)
+  } else {
+    hotAPI.reload("data-v-04edff6d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/actions/ActionCafeEdited.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-651aa4f6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-651aa4f6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/actions/ActionCafeEdited.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/actions/ActionCafeEdited.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-651aa4f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-651aa4f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
@@ -67914,6 +71459,9 @@ module.exports = Component.exports
 var api_url = '';
 var google_maps_js_api = 'AIzaSyBB-yLlqyCE6s_MA30UotaCHttwUw5nKNY';
 
+/*
+  Depending on the environment, define the API URL.
+*/
 switch ("development") {
   case 'development':
     api_url = 'https://roast.dev/api/v1';
@@ -67923,6 +71471,9 @@ switch ("development") {
     break;
 }
 
+/*
+  Export the roast URL configuration.
+*/
 var ROAST_CONFIG = {
   API_URL: api_url,
   GOOGLE_MAPS_JS_API: google_maps_js_api
@@ -67937,8 +71488,115 @@ var ROAST_CONFIG = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventBus; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/*
+  The event bus handles the communication between components.
+*/
 
 var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+/***/ }),
+
+/***/ "./resources/assets/js/layouts/Admin.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Admin.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/layouts/Admin.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-648b12e7\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Admin.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/layouts/Admin.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-648b12e7", Component.options)
+  } else {
+    hotAPI.reload("data-v-648b12e7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/layouts/Layout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ad0fc42\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Layout.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/layouts/Layout.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1ad0fc42\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Layout.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/layouts/Layout.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1ad0fc42", Component.options)
+  } else {
+    hotAPI.reload("data-v-1ad0fc42", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
@@ -68127,8 +71785,18 @@ var CafeTextFilter = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CafeTypeFilter; });
 var CafeTypeFilter = {
   methods: {
+    /*
+      Determines if the cafe should show based off of type.
+    */
     processCafeTypeFilter: function processCafeTypeFilter(cafe, type) {
+      /*
+        Switch the active type.
+      */
       switch (type) {
+        /*
+          If the cafe is a roaster and the roaster filter is
+          selected, show the cafe.
+        */
         case 'roasters':
           if (cafe.company.roaster == 1) {
             return true;
@@ -68136,6 +71804,11 @@ var CafeTypeFilter = {
             return false;
           }
           break;
+
+        /*
+          If the cafe is not a roaster and general cafe is selected,
+          show the cafe.
+        */
         case 'cafes':
           if (cafe.company.roaster == 0) {
             return true;
@@ -68143,6 +71816,10 @@ var CafeTypeFilter = {
             return false;
           }
           break;
+
+        /*
+          If all is selected, show the cafe.
+        */
         case 'all':
           return true;
           break;
@@ -68175,6 +71852,174 @@ var CafeUserLikeFilter = {
 
 /***/ }),
 
+/***/ "./resources/assets/js/modules/admin/actions.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return actions; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_actions_js__ = __webpack_require__("./resources/assets/js/api/admin/actions.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/actions.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin actions
+*/
+
+
+var actions = {
+  /*
+    Defines the state being monitored for the module.
+  */
+  state: {
+    actions: [],
+    actionsLoadStatus: 0,
+
+    actionApproveStatus: 0,
+    actionDeniedStatus: 0
+  },
+
+  /*
+    Define the actions that mutate the state.
+  */
+  actions: {
+    /*
+      Loads the admin actions.
+    */
+    loadAdminActions: function loadAdminActions(_ref) {
+      var commit = _ref.commit;
+
+      commit('setActionsLoadStatus', 1);
+
+      /*
+        Calls the API to load the admin actions.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_actions_js__["a" /* default */].getActions().then(function (response) {
+        /*
+          Commit a successful response with the actions.
+        */
+        commit('setActions', response.data);
+        commit('setActionsLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setActions', []);
+        commit('setActionsLoadStatus', 3);
+      });
+    },
+
+    /*
+      Approves an action.
+    */
+    approveAction: function approveAction(_ref2, data) {
+      var commit = _ref2.commit,
+          state = _ref2.state,
+          dispatch = _ref2.dispatch;
+
+      commit('setActionApproveStatus', 1);
+
+      /*
+        Calls the API to approve an action.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_actions_js__["a" /* default */].putApproveAction(data.id).then(function (response) {
+        commit('setActionApproveStatus', 2);
+        dispatch('loadAdminActions');
+      }).catch(function () {
+        commit('setActionApproveStatus', 3);
+      });
+    },
+
+    /*
+      Denies an action.
+    */
+    denyAction: function denyAction(_ref3, data) {
+      var commit = _ref3.commit,
+          state = _ref3.state,
+          dispatch = _ref3.dispatch;
+
+      commit('setActionDeniedStatus', 1);
+
+      /*
+        Calls the API to deny an action.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_actions_js__["a" /* default */].putDenyAction(data.id).then(function (response) {
+        commit('setActionDeniedStatus', 2);
+        dispatch('loadAdminActions');
+      }).catch(function () {
+        commit('setActionDeniedStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex modeule
+  */
+  mutations: {
+    /*
+      Sets the action load status.
+    */
+    setActionsLoadStatus: function setActionsLoadStatus(state, status) {
+      state.actionsLoadStatus = status;
+    },
+
+    /*
+      Sets the actions.
+    */
+    setActions: function setActions(state, actions) {
+      state.actions = actions;
+    },
+
+    /*
+      Sets the action approve status
+    */
+    setActionApproveStatus: function setActionApproveStatus(state, status) {
+      state.actionApproveStatus = status;
+    },
+
+    /*
+      Sets the action denied status
+    */
+    setActionDeniedStatus: function setActionDeniedStatus(state, status) {
+      state.actionDeniedStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters on the Vuex module.
+  */
+  getters: {
+    /*
+      Returns the actions
+    */
+    getActions: function getActions(state) {
+      return state.actions;
+    },
+
+    /*
+      Returns the actions load status
+    */
+    getActionsLoadStatus: function getActionsLoadStatus(state) {
+      return state.actionsLoadStatus;
+    },
+
+    /*
+      Returns the actions approve status
+    */
+    getActionApproveStatus: function getActionApproveStatus(state) {
+      return state.actionApproveStatus;
+    },
+
+    /*
+      Returns the actions denied status
+    */
+    getActionDeniedStatus: function getActionDeniedStatus(state) {
+      return state.actionDeniedStatus;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/assets/js/modules/brewMethods.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -68198,35 +72043,70 @@ var brewMethods = {
     brewMethodsLoadStatus: 0
   },
 
+  /*
+    Defines the actions used by the Vuex module.
+  */
   actions: {
+    /*
+      Loads all of the brew methods.
+    */
     loadBrewMethods: function loadBrewMethods(_ref) {
       var commit = _ref.commit;
 
       commit('setBrewMethodsLoadStatus', 1);
 
+      /*
+        Calls the API to load the brew methods.
+      */
       __WEBPACK_IMPORTED_MODULE_0__api_brewMethod_js__["a" /* default */].getBrewMethods().then(function (response) {
+        /*
+          Sets the brew methods on a successful response.
+        */
         commit('setBrewMethods', response.data);
         commit('setBrewMethodsLoadStatus', 2);
       }).catch(function () {
+        /*
+          Clears the brew methods on failure.
+        */
         commit('setBrewMethods', []);
         commit('setBrewMethodsLoadStatus', 3);
       });
     }
   },
 
+  /*
+    Defines the mutations used by the module.
+  */
   mutations: {
+    /*
+      Sets the brew method load status.
+    */
     setBrewMethodsLoadStatus: function setBrewMethodsLoadStatus(state, status) {
       state.brewMethodsLoadStatus = status;
     },
+
+    /*
+      Sets the brew methods.
+    */
     setBrewMethods: function setBrewMethods(state, brewMethods) {
       state.brewMethods = brewMethods;
     }
   },
 
+  /*
+    Defines the getters used by the module.
+  */
   getters: {
+    /*
+      Returns the brew methods.
+    */
     getBrewMethods: function getBrewMethods(state) {
       return state.brewMethods;
     },
+
+    /*
+      Returns the brew methods load status.
+    */
     getBrewMethodsLoadStatus: function getBrewMethodsLoadStatus(state) {
       return state.brewMethodsLoadStatus;
     }
@@ -68351,16 +72231,27 @@ var cafes = {
 			commit('setCafeEditStatus', 1);
 
 			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].putEditCafe(data.slug, data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea).then(function (response) {
+				/*
+    		If the cafe is pending because the user didn't have permission,
+    		set the text as pending to alert the user. Otherwise let them know
+    		that the edits have been approved.
+    */
 				if (typeof response.data.cafe_updates_pending !== 'undefined') {
 					commit('setCafeEditText', response.data.cafe_updates_pending + ' updates are pending!');
 				} else {
-					commit('setCafeEditText', response.company.name + ' has been successfully updated!');
+					commit('setCafeEditText', response.data.name + ' has been successfully updated!');
 				}
 
+				/*
+    	Set Cafe Edited Status
+    */
 				commit('setCafeEditStatus', 2);
 
+				/*
+    	Load the cafes
+    */
 				dispatch('loadCafes');
-			}).catch(function () {
+			}).catch(function (error) {
 				commit('setCafeEditStatus', 3);
 			});
 		},
@@ -68375,6 +72266,11 @@ var cafes = {
 
 			commit('setCafeAddedStatus', 1);
 			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postAddNewCafe(data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea).then(function (response) {
+
+				/*
+    	If the addition is pending, let the user know, otherwise let them know
+    	the cafe has been added successfully.
+    */
 				if (typeof response.data.cafe_add_pending !== 'undefined') {
 					commit('setCafeAddedText', response.data.cafe_add_pending + ' is pending approval!');
 				} else {
@@ -68383,6 +72279,10 @@ var cafes = {
 
 				commit('setCafeAddedStatus', 2);
 				commit('setCafeAdded', response.data);
+
+				/*
+    	Load the cafes.
+    */
 				dispatch('loadCafes');
 			}).catch(function () {
 				commit('setCafeAddedStatus', 3);
@@ -68402,6 +72302,10 @@ var cafes = {
 			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postLikeCafe(data.slug).then(function (response) {
 				commit('setCafeLikedStatus', true);
 				commit('setCafeLikeActionStatus', 2);
+
+				/*
+    	Reload the cafe and update the liked status.
+    */
 				dispatch('loadCafe', { slug: data.slug });
 
 				commit('updateCafeLikedStatus', { slug: data.slug, count: 1 });
@@ -68423,6 +72327,10 @@ var cafes = {
 			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteLikeCafe(data.slug).then(function (response) {
 				commit('setCafeLikedStatus', false);
 				commit('setCafeUnlikeActionStatus', 2);
+
+				/*
+    	Reloads the cafe and update the liked status.
+    */
 				dispatch('loadCafe', { slug: data.slug });
 
 				commit('updateCafeLikedStatus', { slug: data.slug, count: 0 });
@@ -68430,12 +72338,20 @@ var cafes = {
 				commit('setCafeUnlikeActionStatus', 3);
 			});
 		},
+
+		/*
+  	Clear the liked and unliked status for the cafes.
+  */
 		clearLikeAndUnlikeStatus: function clearLikeAndUnlikeStatus(_ref8, data) {
 			var commit = _ref8.commit;
 
 			commit('setCafeLikeActionStatus', 0);
 			commit('setCafeUnlikeActionStatus', 0);
 		},
+
+		/*
+  	Deletes a cafe.
+  */
 		deleteCafe: function deleteCafe(_ref9, data) {
 			var commit = _ref9.commit,
 			    state = _ref9.state,
@@ -68444,6 +72360,11 @@ var cafes = {
 			commit('setCafeDeleteStatus', 1);
 
 			__WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].deleteCafe(data.slug).then(function (response) {
+
+				/*
+    	If the user has no permission to delete the cafe, let them know and state
+    	the deletion is pending, otherwise let them know it was successful.
+    */
 				if (typeof response.data.cafe_delete_pending !== 'undefined') {
 					commit('setCafeDeletedText', response.data.cafe_delete_pending + ' is pending deletion!');
 				} else {
@@ -68451,11 +72372,19 @@ var cafes = {
 				}
 
 				commit('setCafeDeleteStatus', 2);
+
+				/*
+    	Load the cafes
+    */
 				dispatch('loadCafes');
 			}).catch(function () {
 				commit('setCafeDeleteStatus', 3);
 			});
 		},
+
+		/*
+  	Change the view of the cafes whether it's list or map.
+  */
 		changeCafesView: function changeCafesView(_ref10, view) {
 			var commit = _ref10.commit,
 			    state = _ref10.state,
@@ -68577,12 +72506,24 @@ var cafes = {
 				}
 			}
 		},
+
+		/*
+  	Sets the deleted cafe status.
+  */
 		setCafeDeleteStatus: function setCafeDeleteStatus(state, status) {
 			state.cafeDeletedStatus = status;
 		},
+
+		/*
+  	Sets the deleted cafe text.
+  */
 		setCafeDeletedText: function setCafeDeletedText(state, text) {
 			state.cafeDeleteText = text;
 		},
+
+		/*
+  	Sets the cafe view.
+  */
 		setCafesView: function setCafesView(state, view) {
 			state.cafesView = view;
 		}
@@ -68689,12 +72630,24 @@ var cafes = {
 		getCafeUnlikeActionStatus: function getCafeUnlikeActionStatus(state) {
 			return state.cafeUnlikeActionStatus;
 		},
+
+		/*
+  	Returns the cafe deleted status.
+  */
 		getCafeDeletedStatus: function getCafeDeletedStatus(state) {
 			return state.cafeDeletedStatus;
 		},
+
+		/*
+  	Returns the cafe deleted text.
+  */
 		getCafeDeletedText: function getCafeDeletedText(state) {
 			return state.cafeDeleteText;
 		},
+
+		/*
+  	Returns the cafe view
+  */
 		getCafesView: function getCafesView(state) {
 			return state.cafesView;
 		}
@@ -68723,12 +72676,22 @@ var display = {
     showPopOut: false
   },
 
+  /*
+    Defines the actions that can be performed on the state.
+  */
   actions: {
+    /*
+      Toggles the showing and hiding of filters.
+    */
     toggleShowFilters: function toggleShowFilters(_ref, data) {
       var commit = _ref.commit;
 
       commit('setShowFilters', data.showFilters);
     },
+
+    /*
+      Toggles the showing and hiding of the popout.
+    */
     toggleShowPopOut: function toggleShowPopOut(_ref2, data) {
       var commit = _ref2.commit;
 
@@ -68736,19 +72699,39 @@ var display = {
     }
   },
 
+  /*
+    Defines the mutations used by the state.
+  */
   mutations: {
+    /*
+      Sets the state to show or hide the filters.
+    */
     setShowFilters: function setShowFilters(state, show) {
       state.showFilters = show;
     },
+
+    /*
+      Sets the state to show or hide the pop out.
+    */
     setShowPopOut: function setShowPopOut(state, show) {
       state.showPopOut = show;
     }
   },
 
+  /*
+    Defines the getters on the Vuex module.
+  */
   getters: {
+    /*
+      Returns whether or not the filters are shown or hidden.
+    */
     getShowFilters: function getShowFilters(state) {
       return state.showFilters;
     },
+
+    /*
+      Returns whether or not the pop out is shown or hidden.
+    */
     getShowPopOut: function getShowPopOut(state) {
       return state.showPopOut;
     }
@@ -69043,58 +73026,6 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/pages/Layout.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d32a9ab2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Layout.vue")
-}
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/Layout.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-d32a9ab2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/Layout.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/pages/Layout.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d32a9ab2", Component.options)
-  } else {
-    hotAPI.reload("data-v-d32a9ab2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
 /***/ "./resources/assets/js/pages/NewCafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -69199,19 +73130,19 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/pages/Users.vue":
+/***/ "./resources/assets/js/pages/admin/Actions.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-514dfbca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/Users.vue")
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64d9d8d0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Actions.vue")
 }
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/Users.vue")
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Actions.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-514dfbca\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/Users.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-64d9d8d0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Actions.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69228,7 +73159,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/pages/Users.vue"
+Component.options.__file = "resources/assets/js/pages/admin/Actions.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69237,9 +73168,61 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-514dfbca", Component.options)
+    hotAPI.createRecord("data-v-64d9d8d0", Component.options)
   } else {
-    hotAPI.reload("data-v-514dfbca", Component.options)
+    hotAPI.reload("data-v-64d9d8d0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/Companies.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Companies.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Companies.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-c8946024\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Companies.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/Companies.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c8946024", Component.options)
+  } else {
+    hotAPI.reload("data-v-c8946024", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69298,7 +73281,51 @@ function requireAuth(to, from, next) {
    	send the user back to the home page.
    */
 			if (__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */].getters.getUser != '') {
-				next();
+				switch (to.meta.permission) {
+					/*
+     	If the route that requires authentication is a user, then we continue.
+     	All users can access these routes
+     */
+					case 'user':
+						next();
+						break;
+					/*
+     	If the route that requires authentication is an owner and the permission
+     	the user has is greater than or equal to 1 (an owner or higher), we allow
+     	access. Otherwise we redirect back to the cafes.
+     */
+					case 'owner':
+						if (__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */].getters.getUser.permission >= 1) {
+							next();
+						} else {
+							next('/cafes');
+						}
+						break;
+					/*
+     	If the route that requires authentication is an admin and the permission
+     	the user has is greater than or equal to 2 (an owner or higher), we allow
+     	access. Otherwise we redirect back to the cafes.
+     */
+					case 'admin':
+						if (__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */].getters.getUser.permission >= 2) {
+							next();
+						} else {
+							next('/cafes');
+						}
+						break;
+					/*
+     	If the route that requires authentication is a super admin and the permission
+     	the user has is equal to 3 (a super admin), we allow
+     	access. Otherwise we redirect back to the cafes.
+     */
+					case 'super-admin':
+						if (__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */].getters.getUser.permission == 3) {
+							next();
+						} else {
+							next('/cafes');
+						}
+						break;
+				}
 			} else {
 				next('/cafes');
 			}
@@ -69340,7 +73367,7 @@ function requireAuth(to, from, next) {
 		path: '/',
 		redirect: { name: 'cafes' },
 		name: 'layout',
-		component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Layout', __webpack_require__("./resources/assets/js/pages/Layout.vue")),
+		component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Layout', __webpack_require__("./resources/assets/js/layouts/Layout.vue")),
 		children: [{
 			path: 'cafes',
 			name: 'cafes',
@@ -69349,7 +73376,10 @@ function requireAuth(to, from, next) {
 				path: 'new',
 				name: 'newcafe',
 				component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('NewCafe', __webpack_require__("./resources/assets/js/pages/NewCafe.vue")),
-				beforeEnter: requireAuth
+				beforeEnter: requireAuth,
+				meta: {
+					permission: 'user'
+				}
 			}, {
 				path: ':slug',
 				name: 'cafe',
@@ -69359,17 +73389,46 @@ function requireAuth(to, from, next) {
 			path: 'cafes/:slug/edit',
 			name: 'editcafe',
 			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EditCafe', __webpack_require__("./resources/assets/js/pages/EditCafe.vue")),
-			beforeEnter: requireAuth
+			beforeEnter: requireAuth,
+			meta: {
+				permission: 'user'
+			}
 		}, {
 			path: 'profile',
 			name: 'profile',
 			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Profile', __webpack_require__("./resources/assets/js/pages/Profile.vue")),
-			beforeEnter: requireAuth
+			beforeEnter: requireAuth,
+			meta: {
+				permission: 'user'
+			}
+		},
+		/*
+  	Catch Alls
+  */
+		{ path: '_=_', redirect: '/' }]
+	}, {
+		path: '/admin',
+		name: 'admin',
+		redirect: { name: 'admin-actions' },
+		component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Admin', __webpack_require__("./resources/assets/js/layouts/Admin.vue")),
+		beforeEnter: requireAuth,
+		meta: {
+			permission: 'owner'
+		},
+		children: [{
+			path: 'actions',
+			name: 'admin-actions',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminActions', __webpack_require__("./resources/assets/js/pages/admin/Actions.vue")),
+			meta: {
+				permission: 'owner'
+			}
 		}, {
-			path: 'users',
-			name: 'users',
-			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Users', __webpack_require__("./resources/assets/js/pages/Users.vue")),
-			beforeEnter: requireAuth
+			path: 'companies',
+			name: 'admin-companies',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminCompanies', __webpack_require__("./resources/assets/js/pages/admin/Companies.vue")),
+			meta: {
+				permission: 'owner'
+			}
 		},
 		/*
   	Catch Alls

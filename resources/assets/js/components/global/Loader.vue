@@ -30,6 +30,9 @@
 
 <script>
   export default {
+    /*
+      Accepts a width, height and display style as property
+    */
     props: {
       'width': Number,
       'height': Number,

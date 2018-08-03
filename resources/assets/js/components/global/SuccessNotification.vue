@@ -47,6 +47,9 @@
   import { EventBus } from '../../event-bus.js';
 
   export default {
+    /*
+      Defines the data used by the component.
+    */
     data(){
       return {
         successMessage: '',
@@ -54,12 +57,21 @@
       }
     },
 
+    /*
+      Sets up the component when mounted.
+    */
     mounted(){
+      /*
+        On show success, show the notification.
+      */
       EventBus.$on('show-success', function( data ){
         this.successMessage = data.notification;
 
         this.show = true;
 
+        /*
+          After 3 seconds hide the notification.
+        */
         setTimeout( function(){
           this.show = false;
         }.bind(this), 3000);

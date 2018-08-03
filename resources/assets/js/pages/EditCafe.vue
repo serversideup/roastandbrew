@@ -449,17 +449,34 @@
       Sync the tags to send to the server for the new cafe.
     */
     mounted(){
+      /*
+        Gets the autocomplete element and sets it up with Google places autocomplete.
+      */
       this.autocomplete = document.getElementById('street-address');
       let googleMapsAutocomplete = new google.maps.places.Autocomplete( this.autocomplete );
 
+      /*
+        Listen to when the place has changed.
+      */
       googleMapsAutocomplete.addListener( 'place_changed', function(){
+        /*
+          Get the place selected.
+        */
         let place = googleMapsAutocomplete.getPlace();
 
         let addressBuilderStreetNumber = '';
         let addressBuilderRoute = '';
 
+        /*
+          Find the address we need in the address components.
+        */
         for (var i = 0; i < place.address_components.length; i++) {
           let type = place.address_components[i].types[0];
+
+          /*
+            Switch the type of the address components and assign it to the
+            corresponding variable.
+          */
           switch( type ){
             case 'street_number':
               addressBuilderStreetNumber = place.address_components[i].short_name;
@@ -479,7 +496,14 @@
           }
         }
 
+        /*
+          Builds the local address format.
+        */
         this.address = addressBuilderStreetNumber+' '+addressBuilderRoute;
+
+        /*
+          Gets the latitude and longitude of the address.
+        */
         this.lat = place.geometry.location.lat();
         this.lng = place.geometry.location.lng();
 

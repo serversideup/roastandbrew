@@ -32,6 +32,9 @@
   import _ from 'lodash';
 
   export default {
+    /*
+      Defines the data used by the component.
+    */
     data(){
       return {
         usersSearch: '',
@@ -39,6 +42,9 @@
       }
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
       /*
         Searches the API route for user autocomplete.

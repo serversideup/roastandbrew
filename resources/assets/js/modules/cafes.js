@@ -105,17 +105,28 @@ export const cafes = {
 
 			CafeAPI.putEditCafe( data.slug, data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
+						/*
+								If the cafe is pending because the user didn't have permission,
+								set the text as pending to alert the user. Otherwise let them know
+								that the edits have been approved.
+						*/
 						if( typeof response.data.cafe_updates_pending !== 'undefined' ){
 							commit( 'setCafeEditText', response.data.cafe_updates_pending +' updates are pending!');
 						}else{
-							commit( 'setCafeEditText', response.company.name+' has been successfully updated!');
+							commit( 'setCafeEditText', response.data.name+' has been successfully updated!');
 						}
 
+						/*
+							Set Cafe Edited Status
+						*/
 						commit( 'setCafeEditStatus', 2 );
 
+						/*
+							Load the cafes
+						*/
 						dispatch( 'loadCafes' );
 					})
-					.catch( function(){
+					.catch( function( error ){
 						commit( 'setCafeEditStatus', 3 );
 					});
 		},
@@ -127,6 +138,11 @@ export const cafes = {
 			commit( 'setCafeAddedStatus', 1 );
 			CafeAPI.postAddNewCafe( data.company_name, data.company_id, data.company_type, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
+
+						/*
+							If the addition is pending, let the user know, otherwise let them know
+							the cafe has been added successfully.
+						*/
 						if( typeof response.data.cafe_add_pending !== 'undefined' ){
 							commit( 'setCafeAddedText', response.data.cafe_add_pending +' is pending approval!');
 						}else{
@@ -135,6 +151,10 @@ export const cafes = {
 
 						commit( 'setCafeAddedStatus', 2 );
 						commit( 'setCafeAdded', response.data );
+
+						/*
+							Load the cafes.
+						*/
 						dispatch( 'loadCafes' );
 					})
 					.catch( function(){
@@ -152,6 +172,10 @@ export const cafes = {
 				.then( function( response ){
 					commit( 'setCafeLikedStatus', true );
 					commit( 'setCafeLikeActionStatus', 2 );
+
+					/*
+						Reload the cafe and update the liked status.
+					*/
 					dispatch( 'loadCafe', { slug: data.slug } );
 
 					commit( 'updateCafeLikedStatus', { slug: data.slug, count: 1 });
@@ -171,6 +195,10 @@ export const cafes = {
 				.then( function( response ){
 					commit( 'setCafeLikedStatus', false );
 					commit( 'setCafeUnlikeActionStatus', 2 );
+
+					/*
+						Reloads the cafe and update the liked status.
+					*/
 					dispatch( 'loadCafe', { slug: data.slug } );
 
 					commit( 'updateCafeLikedStatus', { slug: data.slug, count: 0 });
@@ -180,16 +208,27 @@ export const cafes = {
 				});
 		},
 
+		/*
+			Clear the liked and unliked status for the cafes.
+		*/
 		clearLikeAndUnlikeStatus( { commit }, data ){
 			commit( 'setCafeLikeActionStatus', 0 );
 			commit( 'setCafeUnlikeActionStatus', 0 );
 		},
 
+		/*
+			Deletes a cafe.
+		*/
 		deleteCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeDeleteStatus', 1 );
 
 			CafeAPI.deleteCafe( data.slug )
 				.then( function( response ){
+
+					/*
+						If the user has no permission to delete the cafe, let them know and state
+						the deletion is pending, otherwise let them know it was successful.
+					*/
 					if( typeof response.data.cafe_delete_pending !== 'undefined' ){
 						commit( 'setCafeDeletedText', response.data.cafe_delete_pending +' is pending deletion!');
 					}else{
@@ -197,6 +236,10 @@ export const cafes = {
 					}
 
 					commit( 'setCafeDeleteStatus', 2 );
+
+					/*
+						Load the cafes
+					*/
 					dispatch( 'loadCafes' );
 				})
 				.catch( function(){
@@ -204,6 +247,9 @@ export const cafes = {
 				});
 		},
 
+		/*
+			Change the view of the cafes whether it's list or map.
+		*/
 		changeCafesView( { commit, state, dispatch }, view ){
 			commit( 'setCafesView', view );
 		}
@@ -322,14 +368,23 @@ export const cafes = {
 			}
 		},
 
+		/*
+			Sets the deleted cafe status.
+		*/
 		setCafeDeleteStatus( state, status ){
 			state.cafeDeletedStatus = status;
 		},
 
+		/*
+			Sets the deleted cafe text.
+		*/
 		setCafeDeletedText( state, text ){
 			state.cafeDeleteText = text;
 		},
 
+		/*
+			Sets the cafe view.
+		*/
 		setCafesView( state, view ){
 			state.cafesView = view
 		}
@@ -437,14 +492,23 @@ export const cafes = {
 			return state.cafeUnlikeActionStatus;
 		},
 
+		/*
+			Returns the cafe deleted status.
+		*/
 		getCafeDeletedStatus( state ){
 			return state.cafeDeletedStatus;
 		},
 
+		/*
+			Returns the cafe deleted text.
+		*/
 		getCafeDeletedText( state ){
 			return state.cafeDeleteText;
 		},
 
+		/*
+			Returns the cafe view
+		*/
 		getCafesView( state ){
 			return state.cafesView;
 		}

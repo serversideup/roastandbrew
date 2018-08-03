@@ -439,12 +439,23 @@
       and add cafe status.
     */
     computed: {
+      /*
+        Imports the brew methods from the Vuex data store.
+      */
       brewMethods(){
         return this.$store.getters.getBrewMethods;
       },
+
+      /*
+        Imports the cafe add status from the Vuex data store.
+      */
       addCafeStatus(){
         return this.$store.getters.getCafeAddStatus;
       },
+
+      /*
+        Imports the add cafe text from the Vuex data store.
+      */
       addCafeText(){
         return this.$store.getters.getCafeAddText;
       }
@@ -454,30 +465,66 @@
       Defines what we need to watch on the page.
     */
     watch: {
+      /*
+        Watches the add cafe status.
+      */
       'addCafeStatus': function(){
+        /*
+          If the status is equal to 2 show the success.
+        */
         if( this.addCafeStatus == 2 ){
+          /*
+            Show the success notification.
+          */
           EventBus.$emit('show-success', {
             notification: this.addCafeText
           });
 
+          /*
+            Clear the form.
+          */
           this.clearForm();
+
+          /*
+            Go back to the cafes screen.
+          */
           this.$router.push({ name: 'cafes' });
         }
       }
     },
 
+    /*
+      Define the mounted lifecycle hook.
+    */
     mounted(){
+      /*
+        Gets the autocomplete element and sets it up with Google places autocomplete.
+      */
       this.autocomplete = document.getElementById('street-address');
       let googleMapsAutocomplete = new google.maps.places.Autocomplete( this.autocomplete );
 
+      /*
+        Listen to when the place has changed.
+      */
       googleMapsAutocomplete.addListener( 'place_changed', function(){
+        /*
+          Get the place selected.
+        */
         let place = googleMapsAutocomplete.getPlace();
 
         let addressBuilderStreetNumber = '';
         let addressBuilderRoute = '';
 
+        /*
+          Find the address we need in the address components.
+        */
         for (var i = 0; i < place.address_components.length; i++) {
           let type = place.address_components[i].types[0];
+
+          /*
+            Switch the type of the address components and assign it to the
+            corresponding variable.
+          */
           switch( type ){
             case 'street_number':
               addressBuilderStreetNumber = place.address_components[i].short_name;
@@ -497,7 +544,14 @@
           }
         }
 
+        /*
+          Builds the local address format.
+        */
         this.address = addressBuilderStreetNumber+' '+addressBuilderRoute;
+
+        /*
+          Gets the latitude and longitude of the address.
+        */
         this.lat = place.geometry.location.lat();
         this.lng = place.geometry.location.lng();
 
@@ -530,6 +584,9 @@
         Searches the API route for companies
       */
       searchCompanies: _.debounce( function(e) {
+        /*
+          Ensures something is entered before searching companies.
+        */
         if( this.companyName.length > 1){
           this.showAutocomplete = true;
           axios.get( ROAST_CONFIG.API_URL + '/companies/search' , {

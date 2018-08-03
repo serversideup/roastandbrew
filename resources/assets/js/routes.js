@@ -37,7 +37,51 @@ function requireAuth (to, from, next) {
 				send the user back to the home page.
 			*/
 			if( store.getters.getUser != '' ){
-      	next();
+				switch( to.meta.permission ){
+					/*
+						If the route that requires authentication is a user, then we continue.
+						All users can access these routes
+					*/
+					case 'user':
+						next();
+					break;
+					/*
+						If the route that requires authentication is an owner and the permission
+						the user has is greater than or equal to 1 (an owner or higher), we allow
+						access. Otherwise we redirect back to the cafes.
+					*/
+					case 'owner':
+						if( store.getters.getUser.permission >= 1 ){
+							next();
+						}else{
+							next('/cafes');
+						}
+					break;
+					/*
+						If the route that requires authentication is an admin and the permission
+						the user has is greater than or equal to 2 (an owner or higher), we allow
+						access. Otherwise we redirect back to the cafes.
+					*/
+					case 'admin':
+						if( store.getters.getUser.permission >= 2 ){
+							next();
+						}else{
+							next('/cafes');
+						}
+					break;
+					/*
+						If the route that requires authentication is a super admin and the permission
+						the user has is equal to 3 (a super admin), we allow
+						access. Otherwise we redirect back to the cafes.
+					*/
+					case 'super-admin':
+						if( store.getters.getUser.permission == 3 ){
+							next();
+						}else{
+							next('/cafes');
+						}
+					break;
+				}
 			}else{
 				next('/cafes');
 			}
@@ -80,7 +124,7 @@ export default new VueRouter({
 			path: '/',
 			redirect: { name: 'cafes' },
 			name: 'layout',
-			component: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
+			component: Vue.component( 'Layout', require( './layouts/Layout.vue' ) ),
 			children: [
 				{
 					path: 'cafes',
@@ -91,7 +135,10 @@ export default new VueRouter({
 							path: 'new',
 							name: 'newcafe',
 							component: Vue.component( 'NewCafe', require( './pages/NewCafe.vue' ) ),
-							beforeEnter: requireAuth
+							beforeEnter: requireAuth,
+							meta: {
+								permission: 'user'
+							}
 						},
 						{
 							path: ':slug',
@@ -104,25 +151,57 @@ export default new VueRouter({
 					path: 'cafes/:slug/edit',
 					name: 'editcafe',
 					component: Vue.component( 'EditCafe', require( './pages/EditCafe.vue' ) ),
-					beforeEnter: requireAuth
+					beforeEnter: requireAuth,
+					meta: {
+						permission: 'user'
+					}
 				},
 				{
 					path: 'profile',
 					name: 'profile',
 					component: Vue.component( 'Profile', require( './pages/Profile.vue' ) ),
-					beforeEnter: requireAuth
-				},
-				{
-					path: 'users',
-					name: 'users',
-					component: Vue.component( 'Users', require( './pages/Users.vue' ) ),
-					beforeEnter: requireAuth
+					beforeEnter: requireAuth,
+					meta: {
+						permission: 'user'
+					}
 				},
 				/*
 					Catch Alls
 				*/
 				{ path: '_=_', redirect: '/' }
 			]
-		}
+		},
+		{
+			path: '/admin',
+			name: 'admin',
+			redirect: { name: 'admin-actions' },
+			component: Vue.component( 'Admin', require('./layouts/Admin.vue' ) ),
+			beforeEnter: requireAuth,
+			meta: {
+				permission: 'owner'
+			},
+			children: [
+				{
+					path: 'actions',
+					name: 'admin-actions',
+					component: Vue.component( 'AdminActions', require( './pages/admin/Actions.vue' ) ),
+					meta: {
+						permission: 'owner'
+					}
+				},
+				{
+					path: 'companies',
+					name: 'admin-companies',
+					component: Vue.component( 'AdminCompanies', require( './pages/admin/Companies.vue' ) ),
+					meta: {
+						permission: 'owner'
+					}
+				},
+				/*
+					Catch Alls
+				*/
+				{ path: '_=_', redirect: '/' }
+			]
+		},
 	]
 });

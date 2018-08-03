@@ -36,14 +36,9 @@
 </template>
 
 <script>
-  import { CafeTypeFilter } from '../../mixins/filters/CafeTypeFilter.js';
-  import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
-  import { CafeTagsFilter } from '../../mixins/filters/CafeTagsFilter.js';
-  import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
-  import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
-  import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
-  import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
-
+  /*
+    Imports the cafe card component.
+  */
   import CafeCard from '../../components/cafes/CafeCard.vue';
 
   /*
@@ -53,32 +48,37 @@
 
   export default {
 
+    /*
+      Defines the data used by the component.
+    */
     data(){
       return {
         shownCount: 1
       }
     },
 
+    /*
+      Regisers the components with the component.
+    */
     components: {
       CafeCard
     },
 
-    mixins: [
-      CafeTypeFilter,
-      CafeBrewMethodsFilter,
-      CafeTagsFilter,
-      CafeTextFilter,
-      CafeUserLikeFilter,
-      CafeHasMatchaFilter,
-      CafeHasTeaFilter
-    ],
-
+    /*
+      Defines the mounted life cycle hook.
+    */
     mounted(){
+      /*
+        When the filters are updated, compute count of cafes shown.
+      */
       EventBus.$on('filters-updated', function( filters ){
         this.computeShown();
       }.bind(this));
     },
 
+    /*
+      Defines the computed properties on the component.
+    */
     computed: {
       /*
         Gets the cafes
@@ -88,13 +88,18 @@
       }
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
+      /*
+        Computes the count of cafes that are shown.
+      */
       computeShown(){
         this.shownCount = $('.cafe-card-container').filter(function() {
               return $(this).css('display') !== 'none';
           }).length;
       }
     }
-
   }
 </script>

@@ -173,15 +173,27 @@
 </template>
 
 <script>
+  /*
+    Imports the event bus
+  */
   import { EventBus } from '../event-bus.js';
 
+  /*
+    Imports the components used by the page.
+  */
   import Loader from '../components/global/Loader.vue';
 
   export default {
+    /*
+      Defines the components used in the page.
+    */
     components: {
       Loader
     },
 
+    /*
+      Defines the data used by the page.
+    */
     data(){
       return {
         favorite_coffee: '',
@@ -192,13 +204,24 @@
       }
     },
 
+    /*
+      Defines the data to watch in the page.
+    */
     watch: {
+      /*
+        When the user load status changes, and is successful,
+        set the fields accordingly.
+      */
       'userLoadStatus': function(){
         if( this.userLoadStatus == 2 ){
           this.setFields();
         }
       },
 
+      /*
+        When the user is successfully updated, show the
+        notification.
+      */
       'userUpdateStatus': function(){
         if( this.userUpdateStatus == 2 ){
           EventBus.$emit('show-success', {
@@ -208,12 +231,19 @@
       }
     },
 
+    /*
+      On the created lifecycle hook if the user has been loaded,
+      set the user fields to be edited.
+    */
     created(){
       if( this.userLoadStatus == 2 ){
         this.setFields();
       }
     },
 
+    /*
+      Defines the computed fields used in the page.
+    */
     computed: {
       /*
         Gets the authenticated user.
@@ -241,6 +271,9 @@
       Defines the methods used by the component.
     */
     methods: {
+      /*
+        Sets the editable fields.
+      */
       setFields(){
         this.profile_visibility = this.user.profile_visibility;
         this.favorite_coffee = this.user.favorite_coffee;
@@ -249,7 +282,14 @@
         this.state = this.user.state;
       },
 
+      /*
+        Updates the user's profile.
+      */
       updateProfile(){
+        /*
+          if the profile is valid, dispatch the edits to be
+          stored in the API.
+        */
         if( this.validateProfile() ){
           this.$store.dispatch( 'editUser', {
   					profile_visibility: this.profile_visibility,
@@ -261,6 +301,9 @@
         }
       },
 
+      /*
+        Validates the profile
+      */
       validateProfile(){
         return true;
       }

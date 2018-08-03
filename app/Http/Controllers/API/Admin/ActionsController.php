@@ -43,18 +43,24 @@ class ActionsController extends Controller
       processed.
     */
     if( Auth::user()->permission >= 2 ){
-      $actions = CafeAction::with('cafe')
+      $actions = CafeAction::with(['cafe' => function( $query ){
+                                $query->with('brewMethods');
+                            }])
                             ->with('company')
                             ->where('status', '=', 0)
+                            ->with('by')
                             ->get();
     }else{
       /*
         Geta all of the un processed actions owned by the user.
       */
-      $actions = CafeAction::with('cafe')
+      $actions = CafeAction::with(['cafe' => function( $query ){
+                                $query->with('brewMethods');
+                            }])
                            ->with('company')
                            ->whereIn('company_id', Auth::user()->companiesOwned()->pluck('id')->toArray())
                            ->where('status', '=', 0)
+                           ->with('by')
                            ->get();
     }
 

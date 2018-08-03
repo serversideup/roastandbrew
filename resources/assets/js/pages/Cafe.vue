@@ -212,6 +212,9 @@
 </template>
 
 <script>
+  /*
+    Imports the event bus
+  */
   import { EventBus } from '../event-bus.js';
 
   /*
@@ -242,7 +245,14 @@
       });
     },
 
+    /*
+      Defines what to watch in the component.
+    */
     watch: {
+      /*
+        When the route changes, we clear the like and unlike
+        status and load the new cafe.
+      */
       '$route.params.slug': function(){
         this.$store.dispatch( 'clearLikeAndUnlikeStatus' );
         this.$store.dispatch( 'loadCafe', {
@@ -250,11 +260,21 @@
         });
 			},
 
+      /*
+        Watch for when the cafe has been loaded successfully.
+      */
       'cafeLoadStatus': function(){
+        /*
+          If the cafe has been loaded successfully, zoom to the location.
+        */
         if( this.cafeLoadStatus == 2 ){
           EventBus.$emit('location-selected', { lat: parseFloat( this.cafe.latitude ), lng: parseFloat( this.cafe.longitude ) });
         }
 
+        /*
+          If the cafe has been loaded unsuccessfully, show an error and go
+          back to the cafes page.
+        */
         if( this.cafeLoadStatus == 3 ){
           EventBus.$emit('show-error', { notification: 'Cafe Not Found!'} );
           this.$router.push({ name: 'cafes' });
@@ -274,10 +294,16 @@
         return this.$store.getters.getCafeLoadStatus;
       },
 
+      /*
+        Gets the like cafe action status.
+      */
       cafeLikeActionStatus(){
         return this.$store.getters.getCafeLikeActionStatus;
       },
 
+      /*
+        Gets the unlike cafe action status
+      */
       cafeUnlikeActionStatus(){
         return this.$store.getters.getCafeUnlikeActionStatus;
       },

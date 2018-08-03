@@ -48,13 +48,22 @@
   </span>
 </template>
 <script>
+  /*
+    Imports the loader component.
+  */
   import Loader from '../global/Loader.vue';
 
   export default {
+    /*
+      Registers all components with the component.
+    */
     components: {
       Loader
     },
 
+    /*
+      Defines the computed properties on the component.
+    */
     computed: {
       /*
         Retrieves the User Load Status from Vuex
@@ -106,13 +115,22 @@
       }
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
+      /*
+        Like the cafe. Accepts a cafe slug as a parameter.
+      */
       likeCafe( slug ){
         this.$store.dispatch( 'likeCafe', {
           slug: this.cafe.slug
         });
       },
 
+      /*
+        Unlike the cafe. Accepts a cafe slug as a parameter.
+      */
       unlikeCafe( slug ){
         this.$store.dispatch( 'unlikeCafe', {
           slug: this.cafe.slug

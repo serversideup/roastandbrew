@@ -49,13 +49,25 @@
 
 <script>
   export default {
+    /*
+      Defines the computed properties on the component.
+    */
     computed: {
+      /*
+        Gets the current views the cafes are in.
+      */
       cafesView(){
         return this.$store.getters.getCafesView;
       }
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
+      /*
+        Changes the view of the cafes
+      */
       displayView( type ){
         this.$store.dispatch( 'changeCafesView', type );
       }

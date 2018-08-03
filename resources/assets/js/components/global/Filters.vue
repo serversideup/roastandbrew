@@ -241,11 +241,14 @@
   */
   import { EventBus } from '../../event-bus.js';
 
+  /*
+    Imports the cafe card component.
+  */
   import CafeCard from '../../components/cafes/CafeCard.vue';
 
   export default {
     /*
-
+      Defines the data used by the component.
     */
     data(){
       return {
@@ -258,75 +261,139 @@
       }
     },
 
+    /*
+      Defines the watchers used by the component.
+    */
     watch: {
+      /*
+        Watch the text search variable
+      */
       textSearch(){
         this.updateFilterDisplay();
       },
 
+      /*
+        Watch the active location filter
+      */
       activeLocationFilter(){
         this.updateFilterDisplay();
       },
 
+      /*
+        Watch the only liked filter.
+      */
       onlyLiked(){
         this.updateFilterDisplay();
       },
 
+      /*
+        Watch the brew methods filter.
+      */
       brewMethodsFilter(){
         this.updateFilterDisplay();
       },
 
+      /*
+        Watch the has matcha filter.
+      */
       hasMatcha(){
         this.updateFilterDisplay();
       },
 
+      /*
+        Watch the has tea filter.
+      */
       hasTea(){
         this.updateFilterDisplay();
       }
     },
 
+    /*
+      Registers the components with the component.
+    */
     components: {
       CafeCard
     },
 
-
+    /*
+      Defines the mounted lifecycle hook.
+    */
     mounted(){
+      /*
+        When the user wants to show the filters, we show the filter
+        sidebar.
+      */
       EventBus.$on('show-filters', function(){
         this.show = true;
       }.bind(this));
 
+      /*
+        When the user clears the filters, we clear all set filters.
+      */
       EventBus.$on('clear-filters', function(){
         this.clearFilters();
       }.bind(this));
     },
 
+    /*
+      Defines the computed properties on the component.
+    */
     computed: {
+      /*
+        Gets the show filters data from the state.
+      */
       showFilters(){
         return this.$store.getters.getShowFilters;
       },
 
+      /*
+        Gets the brew methods from the state.
+      */
       brewMethods(){
         return this.$store.getters.getBrewMethods;
       },
 
+      /*
+        Gets the cafes from the state.
+      */
       cafes(){
         return this.$store.getters.getCafes;
       },
 
+      /*
+        Gets the user from the state.
+      */
       user(){
         return this.$store.getters.getUser;
       },
 
+      /*
+        Gets the user load status from the state.
+      */
       userLoadStatus(){
         return this.$store.getters.getUserLoadStatus();
       }
     },
 
+    /*
+      Defines the methods on the compnent.
+    */
     methods: {
+      /*
+        Sets the active location filter.
+      */
       setActiveLocationFilter( filter ){
         this.activeLocationFilter = filter;
       },
 
+      /*
+        Toggle the brew method filter.
+      */
       toggleBrewMethodFilter( id ){
+        /*
+          If the filter is in the selected filter, we remove it, otherwise
+          we add it.
+        */
         if( this.brewMethodsFilter.indexOf( id ) >= 0 ){
           this.brewMethodsFilter.splice( this.brewMethodsFilter.indexOf( id ), 1 );
         }else{
@@ -334,6 +401,9 @@
         }
       },
 
+      /*
+        Update filtered cafes when the filters have changed.
+      */
       updateFilterDisplay(){
         EventBus.$emit('filters-updated', {
           text: this.textSearch,
@@ -345,18 +415,30 @@
         });
       },
 
+      /*
+        Toggle the show and hide of filter sidebar.
+      */
       toggleShowFilters(){
         this.$store.dispatch( 'toggleShowFilters', { showFilters : !this.showFilters } );
       },
 
+      /*
+        Toggle the matcha filter.
+      */
       toggleMatchaFilter(){
         this.hasMatcha = !this.hasMatcha;
       },
 
+      /*
+        Toggle the tea filter.
+      */
       toggleTeaFilter(){
         this.hasTea = !this.hasTea;
       },
 
+      /*
+        Clear all of the filters.
+      */
       clearFilters(){
         this.textSearch = '';
         this.activeLocationFilter = 'all';

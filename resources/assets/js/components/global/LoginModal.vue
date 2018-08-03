@@ -123,16 +123,28 @@
 </template>
 
 <script>
+  /*
+    Imports the event bus.
+  */
   import { EventBus } from '../../event-bus.js';
 
   export default {
+    /*
+      Defines the data used by the component.
+    */
     data(){
       return {
         show: false
       }
     },
 
+    /*
+      Sets up the component on the mounted lifecycle hook.
+    */
     mounted(){
+      /*
+        When prompted for login, show the component.
+      */
       EventBus.$on('prompt-login', function(){
         this.show = true;
       }.bind(this));

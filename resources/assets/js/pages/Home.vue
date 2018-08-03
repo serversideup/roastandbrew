@@ -15,12 +15,18 @@
 </template>
 
 <script>
+  /*
+    Imports the components used by the home page.
+  */
   import CafeMap from '../components/cafes/CafeMap.vue';
   import CafeList from '../components/cafes/CafeList.vue';
   import AddCafeButton from '../components/cafes/AddCafeButton.vue';
   import ToggleCafesView from '../components/cafes/ToggleCafesView.vue';
 
   export default {
+    /*
+      Register the components to be used by the home page.
+    */
     components: {
       CafeMap,
       CafeList,
@@ -28,7 +34,13 @@
       ToggleCafesView
     },
 
+    /*
+      Define the computed properties.
+    */
     computed: {
+      /*
+        Import the cafe view from the Vuex module.
+      */
       cafesView(){
         return this.$store.getters.getCafesView;
       }

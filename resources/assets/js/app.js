@@ -21,7 +21,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
  */
-
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
@@ -30,18 +29,30 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+/*
+  Imports the routes and store and vue to use with the Vue module.
+*/
 import Vue            from 'vue';
 import router 		    from './routes.js'
 import store          from './store.js'
 
+/*
+  Create a new Vue instance and mount the app element.
+*/
 new Vue({
 	router,
   store
 }).$mount('#app')
 
+/*
+  Send google analytics the current path.
+*/
 ga('set', 'page', router.currentRoute.path);
 ga('send', 'pageview');
 
+/*
+  After each page navigation, send the path to Google analytics.
+*/
 router.afterEach(( to, from ) => {
   ga('set', 'page', to.path);
   ga('send', 'pageview');

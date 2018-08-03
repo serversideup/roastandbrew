@@ -205,7 +205,7 @@ class CafesController extends Controller
 		/*
 			Grab the cafe to be edited.
 		*/
-		$cafe = Cafe::where('slug', '=', $slug)->first();
+		$cafe = Cafe::where('slug', '=', $slug)->with('brewMethods')->first();
 
 		/*
 			Confirms user can edit the cafe through the Cafes Policy

@@ -106,6 +106,50 @@ div.option div.option-container span.option-name {
   vertical-align: middle;
 }
 
+h3.page-header {
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 30px;
+}
+
+div.action-cafe-detail {
+  border-radius: 3px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+div.action-cafe-detail span.action-detail-header {
+  display: block;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+div.action-cafe-detail label {
+  font-family: "Lato", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+div.action-cafe-detail span.action-content {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: black;
+  display: block;
+}
+
+div.action-cafe-detail span.action-information {
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  font-family: "Lato", sans-serif;
+}
+
 /**
  * Chapter 3: Layouts
  */

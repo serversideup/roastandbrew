@@ -27,9 +27,15 @@
 </template>
 
 <script>
+  /*
+    Imports the event bus
+  */
   import { EventBus } from '../../event-bus.js';
 
   export default {
+    /*
+      Defines the computed properties on the component.
+    */
     computed: {
       /*
         Retrieves the User from Vuex
@@ -46,7 +52,16 @@
       }
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
+      /*
+        Checks to see if a use ris authenticated or not.
+        This item can be viewed by non-authenticated users.
+        If the user isn't authenticated, we prompt them to log in,
+        otherwise we take them to the new cafe page.
+      */
       checkAuth(){
         if( this.user == '' && this.userLoadStatus == 2 ){
           EventBus.$emit('prompt-login');

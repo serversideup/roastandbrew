@@ -70,6 +70,9 @@
 </template>
 
 <script>
+  /*
+    Imports the mixins used by the component.
+  */
   import { CafeTypeFilter } from '../../mixins/filters/CafeTypeFilter.js';
   import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
   import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
@@ -83,14 +86,23 @@
   import { EventBus } from '../../event-bus.js';
 
   export default {
+    /*
+      The component accepts one cafe as a property
+    */
     props: ['cafe'],
 
+    /*
+      Define the data used by the component.
+    */
     data(){
       return {
         show: true
       }
     },
 
+    /*
+      Define the mixins used by the component.
+    */
     mixins: [
       CafeTypeFilter,
       CafeBrewMethodsFilter,
@@ -100,13 +112,25 @@
       CafeHasTeaFilter
     ],
 
+    /*
+      Listen to the mounted lifecycle hook.
+    */
     mounted(){
+      /*
+        When the filters are updated, we process the filters.
+      */
       EventBus.$on('filters-updated', function( filters ){
         this.processFilters( filters );
       }.bind(this));
     },
 
+    /*
+      Defines the methods used by the component.
+    */
     methods: {
+      /*
+        Process the selected filters from the user.
+      */
       processFilters( filters ){
         /*
           If no filters are selected, show the card
@@ -192,6 +216,9 @@
         }
       },
 
+      /*
+        Pans to the location of the cafe on the map when selected.
+      */
       panToLocation( cafe ){
         EventBus.$emit('location-selected', { lat: parseFloat( cafe.latitude ), lng: parseFloat( cafe.longitude ) });
       }

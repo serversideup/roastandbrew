@@ -188,6 +188,9 @@
 </template>
 
 <script>
+  /*
+    Imports the event bus.
+  */
   import { EventBus } from '../../event-bus.js';
 
   export default {
@@ -209,30 +212,51 @@
         return this.$store.getters.getUser;
       },
 
+      /*
+        Gets the boolean on whether to show or hide the filters.
+      */
       showFilters(){
         return this.$store.getters.getShowFilters;
       }
     },
 
+    /*
+      Defines the methods for the component
+    */
     methods: {
+      /*
+        Prompts the login form.
+      */
       login(){
         EventBus.$emit('prompt-login');
       },
 
+      /*
+        Logs the user out.
+      */
       logout(){
         this.$store.dispatch('logoutUser');
 
         window.location = '/logout';
       },
 
+      /*
+        Toggles the showing and hiding of filters.
+      */
       toggleShowFilters(){
         this.$store.dispatch( 'toggleShowFilters', { showFilters : !this.showFilters } );
       },
 
+      /*
+        Toggles the showing and hiding of the popout menu.
+      */
       setShowPopOut(){
         this.$store.dispatch( 'toggleShowPopOut', { showPopOut: true } );
       },
 
+      /*
+        Clears the filters.
+      */
       clearFilters(){
         EventBus.$emit('clear-filters');
       }

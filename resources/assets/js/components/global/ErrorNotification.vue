@@ -48,6 +48,9 @@
   import { EventBus } from '../../event-bus.js';
 
   export default {
+    /*
+      Defines the data used by the component.
+    */
     data(){
       return {
         errorMessage: '',
@@ -55,12 +58,18 @@
       }
     },
 
+    /*
+      When mounted, bind the show error event.
+    */
     mounted(){
       EventBus.$on('show-error', function( data ){
         this.errorMessage = data.notification;
 
         this.show = true;
 
+        /*
+          Hide the error notification after 3 seconds.
+        */
         setTimeout( function(){
           this.show = false;
         }.bind(this), 3000);
