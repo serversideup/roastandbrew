@@ -1814,8 +1814,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    user: function user() {
+      return this.$store.getters.getUser;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2574,6 +2581,182 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return actionBrewMethods;
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/companies/Cafe.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['cafe']
+
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/companies/Company.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['company', 'search'],
+
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Determines if we show the company based on the search
+      or not.
+    */
+    searchValidated: function searchValidated() {
+      /*
+        If the search is empty, we show the company.
+      */
+      if (this.search == '') {
+        return true;
+      }
+
+      /*
+        If the search is not empty, but the company name contains the
+        search, we show the company.
+      */
+      if (this.search != '' && this.company.name.toLowerCase().search(this.search.toLowerCase()) > -1) {
+        return true;
+      }
+
+      /*
+        If neither scenario is valid, we hide the company.
+      */
+      return false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/users/User.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the props used by the component.
+  */
+  props: ['user']
 });
 
 /***/ }),
@@ -5086,6 +5269,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue__ = __webpack_require__("./resources/assets/js/components/global/ErrorNotification.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_ErrorNotification_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_admin_actions_js__ = __webpack_require__("./resources/assets/js/modules/admin/actions.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_admin_companies_js__ = __webpack_require__("./resources/assets/js/modules/admin/companies.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_admin_cafes_js__ = __webpack_require__("./resources/assets/js/modules/admin/cafes.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_admin_users_js__ = __webpack_require__("./resources/assets/js/modules/admin/users.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_admin_brewMethods_js__ = __webpack_require__("./resources/assets/js/modules/admin/brewMethods.js");
 //
 //
 //
@@ -5137,6 +5324,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 */
 
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   /*
     Registers the components with the page.
@@ -5172,6 +5363,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     if (!this.$store._modules.get(['admin', 'actions'])) {
       this.$store.registerModule(['admin', 'actions'], __WEBPACK_IMPORTED_MODULE_5__modules_admin_actions_js__["a" /* actions */]);
+    }
+
+    /*
+      Checks to see if the admin companies module is active. If not,
+      register the admin companies module.
+    */
+    if (!this.$store._modules.get(['admin', 'companies'])) {
+      this.$store.registerModule(['admin', 'companies'], __WEBPACK_IMPORTED_MODULE_6__modules_admin_companies_js__["a" /* companies */]);
+    }
+
+    /*
+      Checks to see if the admin cafes module is active. If not,
+      register the admin cafes module.
+    */
+    if (!this.$store._modules.get(['admin', 'cafes'])) {
+      this.$store.registerModule(['admin', 'cafes'], __WEBPACK_IMPORTED_MODULE_7__modules_admin_cafes_js__["a" /* cafes */]);
+    }
+
+    /*
+      Checks to see if the user has permissions and if the
+      Vuex users module is loaded.
+    */
+    if (!this.$store._modules.get(['admin', 'users']) && this.user.permission >= 2) {
+      this.$store.registerModule(['admin', 'users'], __WEBPACK_IMPORTED_MODULE_8__modules_admin_users_js__["a" /* users */]);
+    }
+
+    /*
+      Checks to see if the user has permissions and if the
+      Vuex brew methods module is loaded.
+    */
+    if (!this.$store._modules.get(['admin', 'brewMethods']) && this.user.permission == 3) {
+      this.$store.registerModule(['admin', 'brewMethods'], __WEBPACK_IMPORTED_MODULE_9__modules_admin_brewMethods_js__["a" /* brewMethods */]);
     }
   },
 
@@ -5560,33 +5783,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /*
   Imports the event bus
@@ -5732,8 +5928,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_js__ = __webpack_require__("./resources/assets/js/config.js");
-//
-//
 //
 //
 //
@@ -7007,8 +7201,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /*
   Imports the Event Bus to pass events on tag updates
@@ -7867,11 +8059,1717 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/BrewMethod.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      method: '',
+      icon: '',
+
+      showChangeIcon: false,
+
+      validations: {
+        method: true
+      }
+    };
+  },
+
+
+  /*
+    Sets up the page when created.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminBrewMethod', {
+      id: this.$route.params.id
+    });
+  },
+
+
+  /*
+    Defines the computed properties on the page.
+  */
+  computed: {
+    /*
+      Get the brew method from the Vuex data store.
+    */
+    brewMethod: function brewMethod() {
+      return this.$store.getters.getAdminBrewMethod;
+    },
+
+
+    /*
+      Get the brew method load status from the Vuex data store.
+    */
+    brewMethodLoadStatus: function brewMethodLoadStatus() {
+      return this.$store.getters.getAdminBrewMethodLoadStatus;
+    },
+
+
+    /*
+      Get the brew method update status from the Vuex data store.
+    */
+    brewMethodUpdateStatus: function brewMethodUpdateStatus() {
+      return this.$store.getters.getAdminBrewMethodUpdateStatus;
+    }
+  },
+
+  /*
+    Defines the watchers on the page.
+  */
+  watch: {
+    /*
+      Watch the brew method load status.
+    */
+    'brewMethodLoadStatus': function brewMethodLoadStatus() {
+      /*
+        When the status is 2, meaning it's been loaded
+        correctly, sync the brew method to the model.
+      */
+      if (this.brewMethodLoadStatus == 2) {
+        this.syncBrewMethodToModel();
+      }
+    },
+
+    /*
+      Watch the brew method update status.
+    */
+    'brewMethodUpdateStatus': function brewMethodUpdateStatus() {
+      /*
+        When the status is 2, meaning the brew method has
+        been updated, sync the brew method to the model and
+        show a notification.
+      */
+      if (this.brewMethodUpdateStatus == 2) {
+        this.syncBrewMethodToModel();
+
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Brew method updated successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    /*
+      Syncs the brew method to the model.
+    */
+    syncBrewMethodToModel: function syncBrewMethodToModel() {
+      this.method = this.brewMethod.method;
+      this.icon = this.brewMethod.icon;
+    },
+
+
+    /*
+      Sends the request to update the brew method.
+    */
+    updateBrewMethod: function updateBrewMethod() {
+      if (this.validateEditBrewMethod()) {
+        this.$store.dispatch('updateAdminBrewMethod', {
+          id: this.brewMethod.id,
+          method: this.method,
+          icon: this.icon
+        });
+      }
+    },
+
+
+    /*
+      Validates that all fields are set before submitting
+      updates.
+    */
+    validateEditBrewMethod: function validateEditBrewMethod() {
+      var validEditBrewMethodForm = true;
+
+      /*
+        If the method is empty, we flag the field as invalid.
+      */
+      if (this.method.trim() == '') {
+        validEditBrewMethodForm = false;
+        this.validations.method = false;
+      } else {
+        this.validations.method = true;
+      }
+
+      return validEditBrewMethodForm;
+    },
+
+
+    /*
+      Shows the change icon model
+    */
+    promptChangeIcon: function promptChangeIcon() {
+      this.showChangeIcon = true;
+    },
+
+
+    /*
+      Hides the change icon modal
+    */
+    hideChangeIcon: function hideChangeIcon() {
+      this.showChangeIcon = false;
+    },
+
+
+    /*
+      Selects a new icon
+    */
+    selectIcon: function selectIcon(url) {
+      this.icon = url;
+      this.hideChangeIcon();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/BrewMethods.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showNewMethodModal: false,
+
+      method: '',
+      icon: '',
+
+      validations: {
+        method: true,
+        icon: true
+      }
+    };
+  },
+
+
+  /*
+    Sets up the page when created.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminBrewMethods');
+  },
+
+
+  /*
+    Defines the computed properties on the page.
+  */
+  computed: {
+    brewMethods: function brewMethods() {
+      return this.$store.getters.getAdminBrewMethods;
+    },
+    brewMethodAddedStatus: function brewMethodAddedStatus() {
+      return this.$store.getters.getAdminBrewMethodAddedStatus;
+    }
+  },
+
+  watch: {
+    'brewMethodAddedStatus': function brewMethodAddedStatus() {
+      if (this.brewMethodAddedStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Brew method added successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    hideNewMethodModal: function hideNewMethodModal() {
+      this.method = '';
+      this.icon = '';
+
+      this.validations.method = true;
+      this.validations.icon = true;
+
+      this.showNewMethodModal = false;
+    },
+    selectIcon: function selectIcon(icon) {
+      this.icon = icon;
+    },
+    addBrewMethod: function addBrewMethod() {
+      if (this.validateNewBrewMethod()) {
+        this.$store.dispatch('addAdminBrewMethod', {
+          method: this.method,
+          icon: this.icon
+        });
+
+        this.hideNewMethodModal();
+      }
+    },
+    validateNewBrewMethod: function validateNewBrewMethod() {
+      var validBrewMethod = true;
+
+      if (this.method == '') {
+        this.validations.method = false;
+        validBrewMethod = false;
+      } else {
+        this.validations.method = true;
+      }
+
+      if (this.icon == '') {
+        this.validations.icon = false;
+        validBrewMethod = false;
+      } else {
+        this.validations.icon = true;
+      }
+
+      return validBrewMethod;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Cafe.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the page.
+  */
+  data: function data() {
+    return {
+      tab: 'information',
+
+      location_name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      tea: '',
+      matcha: '',
+      brewMethodsSelected: [],
+      deleted: 0,
+
+      validations: {
+        location_name: true,
+        address: true,
+        city: true,
+        state: true,
+        zip: true
+      }
+    };
+  },
+
+
+  /*
+    Configures the component when created.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminCompany', { id: this.$route.params.id });
+    this.$store.dispatch('loadAdminCafe', { company_id: this.$route.params.id, cafe_id: this.$route.params.cafeID });
+  },
+
+
+  /*
+    Defines the computed properties used by the component.
+  */
+  computed: {
+    /*
+      Gets the brew methods from the Vuex store.
+    */
+    brewMethods: function brewMethods() {
+      return this.$store.getters.getBrewMethods;
+    },
+
+
+    /*
+      Gets the company the cafe belongs to from the Vuex store.
+    */
+    company: function company() {
+      return this.$store.getters.getCompany;
+    },
+
+
+    /*
+      Gets the cafe from the Vuex store.
+    */
+    cafe: function cafe() {
+      return this.$store.getters.getAdminCafe;
+    },
+
+
+    /*
+      Gets the cafe load status from the Vuex store.
+    */
+    cafeLoadStatus: function cafeLoadStatus() {
+      return this.$store.getters.getAdminCafeLoadStatus;
+    },
+
+
+    /*
+      Gets the cafe edit status from the Vuex store.
+    */
+    cafeEditStatus: function cafeEditStatus() {
+      return this.$store.getters.getAdminCafeEditStatus;
+    }
+  },
+
+  /*
+    Defines the watchers used by the page.
+  */
+  watch: {
+    /*
+      When the cafe has been loaded successfully, we sync the data
+      to the local model for editing.
+    */
+    'cafeLoadStatus': function cafeLoadStatus() {
+      if (this.cafeLoadStatus == 2) {
+        this.syncCafeToModel();
+      }
+    },
+
+    /*
+      When the cafe has been updated successfuly, we sync the data
+      to the local model for editing and display a notification.
+    */
+    'cafeEditStatus': function cafeEditStatus() {
+      if (this.cafeEditStatus == 2) {
+        this.syncCafeToModel();
+
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Cafe updated successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    /*
+      Syncs the cafe data to the model data.
+    */
+    syncCafeToModel: function syncCafeToModel() {
+      this.location_name = this.cafe.location_name;
+      this.address = this.cafe.address;
+      this.city = this.cafe.city;
+      this.state = this.cafe.state;
+      this.zip = this.cafe.zip;
+      this.tea = this.cafe.tea;
+      this.matcha = this.cafe.matcha;
+
+      for (var i = 0; i < this.cafe.brew_methods.length; i++) {
+        this.brewMethodsSelected.push(this.cafe.brew_methods[i].id);
+      }
+
+      this.deleted = this.cafe.deleted;
+    },
+
+
+    /*
+      Toggles the selected brew method
+    */
+    toggleSelectedBrewMethod: function toggleSelectedBrewMethod(id) {
+      if (this.brewMethodsSelected.indexOf(id) >= 0) {
+        this.brewMethodsSelected.splice(this.brewMethodsSelected.indexOf(id), 1);
+      } else {
+        this.brewMethodsSelected.push(id);
+      }
+    },
+
+
+    /*
+      Update the cafe
+    */
+    updateCafe: function updateCafe() {
+      if (this.validateEditCafe()) {
+        this.$store.dispatch('updateAdminCafe', {
+          id: this.cafe.id,
+          company_id: this.company.id,
+          location_name: this.location_name,
+          address: this.address,
+          city: this.city,
+          state: this.state,
+          zip: this.zip,
+          brew_methods: this.brewMethodsSelected,
+          matcha: this.matcha,
+          tea: this.tea,
+          deleted: this.deleted
+        });
+      }
+    },
+
+
+    /*
+      Validate the cafe edits.
+    */
+    validateEditCafe: function validateEditCafe() {
+      var validEditCafeForm = true;
+
+      /*
+        Ensure an address has been entered
+      */
+      if (this.address.trim() == '') {
+        validEditCafeForm = false;
+        this.validations.address = false;
+      } else {
+        this.validations.address = true;
+      }
+
+      /*
+        Ensure a city has been entered
+      */
+      if (this.city.trim() == '') {
+        validEditCafeForm = false;
+        this.validations.city = false;
+      } else {
+        this.validations.city = true;
+      }
+
+      /*
+        Ensure a state has been entered
+      */
+      if (this.state.trim() == '') {
+        validEditCafeForm = false;
+        this.validations.state = false;
+      } else {
+        this.validations.state = true;
+      }
+
+      /*
+        Ensure a zip has been entered
+      */
+      if (this.zip.trim() == '' || !this.zip.match(/(^\d{5}$)/)) {
+        validEditCafeForm = false;
+        this.validations.zip = false;
+      } else {
+        this.validations.zip = true;
+      }
+
+      return validEditCafeForm;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Company_vue__ = __webpack_require__("./resources/assets/js/components/admin/companies/Company.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Company_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Company_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7883,7 +9781,1077 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/*
+  Imports the components used by the page.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the page.
+  */
+  data: function data() {
+    return {
+      sortBy: 'name',
+      sortDirection: 'ASC',
+
+      search: ''
+    };
+  },
+
+
+  /*
+    Registers the components with the page.
+  */
+  components: {
+    Company: __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Company_vue___default.a
+  },
+
+  /*
+    Sets up the page
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminCompanies');
+  },
+
+
+  /*
+    Defines the computed properties on the page.
+  */
+  computed: {
+    /*
+      Gets the companies from the Vuex data store.
+    */
+    companies: function companies() {
+      return this.$store.getters.getCompanies;
+    },
+
+
+    /*
+      Gets the companies from the Vuex data store.
+    */
+    companiesLoadStatus: function companiesLoadStatus() {
+      return this.$store.getters.getCompaniesLoadStatus;
+    }
+  },
+
+  /*
+    Defines the watchers on the page.
+  */
+  watch: {
+    'companiesLoadStatus': function companiesLoadStatus() {
+      this.resortCafes('name');
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    /*
+      Re-sorts the cafes by what was selected.
+    */
+    resortCafes: function resortCafes(by) {
+      /*
+        Checks to see if what the user selected to sort by
+        is the same as it's been. If it is, then we toggle the
+        direction.
+      */
+      if (by == this.sortBy) {
+        if (this.sortDirection == 'ASC') {
+          this.sortDirection = 'DESC';
+        } else {
+          this.sortDirection = 'ASC';
+        }
+      }
+
+      /*
+        If the sort by is different we set the sort by to what the
+        user selected and defualt the direction to 'ASC'
+      */
+      if (by != this.sortBy) {
+        this.sortDirection = 'ASC';
+        this.sortBy = by;
+      }
+
+      /*
+        Switch by what the sort by is set to, and run the method
+        to sort by that column.
+      */
+      switch (this.sortBy) {
+        case 'name':
+          this.sortCompaniesByName();
+          break;
+        case 'cafes':
+          this.sortCompaniesByCafes();
+          break;
+        case 'pending-actions':
+          this.sortCompaniesByPendingActions();
+          break;
+      }
+    },
+
+
+    /*
+      Sorts the companies by name.
+    */
+    sortCompaniesByName: function sortCompaniesByName() {
+      this.companies.sort(function (a, b) {
+        if (this.sortDirection == 'ASC') {
+          return a.name == b.name ? 0 : a.name > b.name ? 1 : -1;
+        }
+
+        if (this.sortDirection == 'DESC') {
+          return a.name == b.name ? 0 : a.name < b.name ? 1 : -1;
+        }
+      }.bind(this));
+    },
+
+
+    /*
+      Sorts the companies by cafe count.
+    */
+    sortCompaniesByCafes: function sortCompaniesByCafes() {
+      this.companies.sort(function (a, b) {
+        if (this.sortDirection == 'ASC') {
+          return parseInt(a.cafes_count) < parseInt(b.cafes_count) ? 1 : -1;
+        }
+
+        if (this.sortDirection == 'DESC') {
+          return parseInt(a.cafes_count) > parseInt(b.cafes_count) ? 1 : -1;
+        }
+      }.bind(this));
+    },
+
+
+    /*
+      Sorts the companies by pending actions.
+    */
+    sortCompaniesByPendingActions: function sortCompaniesByPendingActions() {
+      this.companies.sort(function (a, b) {
+        if (this.sortDirection == 'ASC') {
+          return parseInt(a.actions_count) < parseInt(b.actions_count) ? 1 : -1;
+        }
+
+        if (this.sortDirection == 'DESC') {
+          return parseInt(a.actions_count) > parseInt(b.actions_count) ? 1 : -1;
+        }
+      }.bind(this));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Company.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Cafe_vue__ = __webpack_require__("./resources/assets/js/components/admin/companies/Cafe.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Cafe_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Cafe_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports components used by the page.
+*/
+
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/*
+  Imports lodash for debouncing
+*/
+
+
+/*
+  Imports the config for the API URL for searching companies.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the page.
+  */
+  data: function data() {
+    return {
+      tab: 'information',
+
+      newOwner: '',
+      newOwnerResults: [],
+      showAutocomplete: true,
+
+      name: '',
+      type: '',
+      website: '',
+      owners: [],
+      deleted: 0,
+
+      validations: {
+        name: true,
+        type: true,
+        website: true,
+        owners: true
+      }
+    };
+  },
+
+
+  /*
+    Registers the components with the page.
+  */
+  components: {
+    Cafe: __WEBPACK_IMPORTED_MODULE_0__components_admin_companies_Cafe_vue___default.a
+  },
+
+  /*
+    Sets up the page.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminCompany', { id: this.$route.params.id });
+  },
+
+
+  /*
+    Defines the computed properties used by the page.
+  */
+  computed: {
+    /*
+      Gets the authenticated user from the Vuex data store.
+    */
+    user: function user() {
+      return this.$store.getters.getUser;
+    },
+
+
+    /*
+      Returns the company from the Vuex data store.
+    */
+    company: function company() {
+      return this.$store.getters.getCompany;
+    },
+
+
+    /*
+      Returns the company load status from the data store.
+    */
+    companyLoadStatus: function companyLoadStatus() {
+      return this.$store.getters.getCompanyLoadStatus;
+    },
+
+
+    /*
+      Returns the company edit status from the data store.
+    */
+    companyEditStatus: function companyEditStatus() {
+      return this.$store.getters.getCompanyEditStatus;
+    }
+  },
+
+  /*
+    Defines the watchers used by the page.
+  */
+  watch: {
+    /*
+      When the company is loaded successfully, we sync the
+      data to the local model for editing.
+    */
+    'companyLoadStatus': function companyLoadStatus() {
+      if (this.companyLoadStatus == 2) {
+        this.syncCompanyToModel();
+      }
+    },
+
+    /*
+      When the company has been edited successfully, we sync
+      the data to the local model for editing and display a
+      notificaiton.
+    */
+    'companyEditStatus': function companyEditStatus() {
+      if (this.companyEditStatus == 2) {
+        this.syncCompanyToModel();
+
+        __WEBPACK_IMPORTED_MODULE_1__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'Company updated successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    /*
+      Toggles the company type.
+    */
+    setCompanyType: function setCompanyType(type) {
+      this.type = type;
+    },
+
+
+    /*
+      Removes an owner
+    */
+    removeOwner: function removeOwner(index) {
+      this.owners.splice(index, 1);
+    },
+
+
+    /*
+      Saves all edits.
+    */
+    saveEdits: function saveEdits() {
+      if (this.validateEditCompany()) {
+        this.$store.dispatch('updateAdminCompany', {
+          id: this.company.id,
+          name: this.name,
+          type: this.type,
+          website: this.website,
+          owners: this.owners,
+          deleted: this.deleted
+        });
+      }
+    },
+
+
+    /*
+      Validates all edits.
+    */
+    validateEditCompany: function validateEditCompany() {
+      var validCompanyForm = true;
+
+      /*
+        Ensure a name has been entered
+      */
+      if (this.name.trim() == '') {
+        validCompanyForm = false;
+        this.validations.name = false;
+      } else {
+        this.validations.name = true;
+      }
+
+      /*
+        If a website has been entered, ensure the URL is valid
+      */
+      if (this.website.trim != '' && !this.website.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/)) {
+        validNewCafeForm = false;
+        this.validations.website = false;
+      } else {
+        this.validations.website = true;
+      }
+
+      return validCompanyForm;
+    },
+
+
+    /*
+      Syncs the company data to the model data.
+    */
+    syncCompanyToModel: function syncCompanyToModel() {
+      this.name = this.company.name;
+      this.type = this.company.roaster == 1 ? 'roaster' : 'cafe';
+      this.website = this.company.website;
+      this.owners = this.company.owned_by;
+      this.deleted = this.company.deleted;
+    },
+
+
+    /*
+      Searches the API route for users
+    */
+    searchUsers: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function (e) {
+      /*
+        Ensures something is entered before searching companies.
+      */
+      if (this.newOwner.length > 1) {
+        this.showAutocomplete = true;
+
+        /*
+          Search for the users.
+        */
+        axios.get(__WEBPACK_IMPORTED_MODULE_3__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/users', {
+          params: {
+            search: this.newOwner
+          }
+        }).then(function (response) {
+          this.newOwnerResults = response.data;
+        }.bind(this));
+      }
+    }, 300),
+
+    /*
+      Selects a new owner
+    */
+    selectUser: function selectUser(user) {
+      this.owners.push(user);
+
+      this.newOwner = '';
+      this.showAutocomplete = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/User.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/*
+  Imports lodash for debouncing
+*/
+
+
+/*
+  Imports the config for the API URL for searching companies.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      companyName: '',
+      companyResults: [],
+      showAutocomplete: false,
+
+      permission: 0,
+      companies: []
+    };
+  },
+
+
+  /*
+    Sets up the page.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminUser', { id: this.$route.params.id });
+  },
+
+
+  /*
+    Defines the computed properties used by the page.
+  */
+  computed: {
+    /*
+      Gets the authenticated user from the data store.
+    */
+    user: function user() {
+      return this.$store.getters.getUser;
+    },
+
+
+    /*
+      Gets the admin user from the data store.
+    */
+    adminUser: function adminUser() {
+      return this.$store.getters.getAdminUser;
+    },
+
+
+    /*
+      Gets the admin user load status from the data store.
+    */
+    adminUserLoadStatus: function adminUserLoadStatus() {
+      return this.$store.getters.getAdminUserLoadStatus;
+    },
+
+
+    /*
+      Gets the admin user update status from the data store.
+    */
+    adminUserUpdateStatus: function adminUserUpdateStatus() {
+      return this.$store.getters.getAdminUserUpdateStatus;
+    }
+  },
+
+  /*
+    Defines what should be watched by the page
+  */
+  watch: {
+    /*
+      Watches the admin user load status and copies the
+      user to the model.
+    */
+    'adminUserLoadStatus': function adminUserLoadStatus() {
+      if (this.adminUserLoadStatus == 2) {
+        this.syncUserToModel();
+      }
+    },
+
+    /*
+      Watches the admin user update status and copies the
+      user to the model.
+    */
+    'adminUserUpdateStatus': function adminUserUpdateStatus() {
+      if (this.adminUserUpdateStatus == 2) {
+        this.syncUserToModel();
+
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'User updated successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the page.
+  */
+  methods: {
+    /*
+      Syncs the user to the model.
+    */
+    syncUserToModel: function syncUserToModel() {
+      this.permission = this.adminUser.permission;
+      this.companies = this.adminUser.companies_owned;
+    },
+
+
+    /*
+      Updates the profile.
+    */
+    updateProfile: function updateProfile() {
+      this.$store.dispatch('updateAdminUser', {
+        id: this.adminUser.id,
+        permission: this.permission,
+        companies: this.companies
+      });
+    },
+
+
+    /*
+      Searches the API route for companies
+    */
+    searchCompanies: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.debounce(function (e) {
+      /*
+        Ensures something is entered before searching companies.
+      */
+      if (this.companyName.length > 1) {
+        this.showAutocomplete = true;
+        axios.get(__WEBPACK_IMPORTED_MODULE_2__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies', {
+          params: {
+            search: this.companyName
+          }
+        }).then(function (response) {
+          this.companyResults = response.data;
+        }.bind(this));
+      }
+    }, 300),
+
+    /*
+      Selects an existing company
+    */
+    selectCompany: function selectCompany(company) {
+      this.showAutocomplete = false;
+      this.companies.push(company);
+      this.companyResults = [];
+      this.companyName = '';
+    },
+
+
+    /*
+      Removes a company
+    */
+    removeCompany: function removeCompany(index) {
+      this.companies.splice(index, 1);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Users.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_users_User_vue__ = __webpack_require__("./resources/assets/js/components/admin/users/User.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_users_User_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_users_User_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the components used by the page.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the components used by the page.
+  */
+  components: {
+    User: __WEBPACK_IMPORTED_MODULE_0__components_admin_users_User_vue___default.a
+  },
+
+  /*
+    Sets up the page on the created lifecycle hook.
+  */
+  created: function created() {
+    /*
+      Loads the application's users
+    */
+    this.$store.dispatch('loadAdminUsers');
+  },
+
+
+  computed: {
+    /*
+      Gets the users from the API
+    */
+    users: function users() {
+      return this.$store.getters.getAdminUsers;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.company {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  padding-bottom: 15px;\n  padding-top: 15px;\n  color: black;\n}\ndiv.company:hover {\n    background-color: #EEEEEE;\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -7917,6 +10885,21 @@ exports.push([module.i, "\n\n", ""]);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-cafe label {\n  font-weight: bold;\n  color: black;\n  font-size: 16px;\n  margin-top: 15px;\n}\ndiv#admin-cafe a.update-cafe {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n  margin-bottom: 100px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10b7d3a0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/NewCafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7925,7 +10908,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv#new-cafe-page[data-v-10b7d3a0] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: white;\n  z-index: 99999;\n  overflow: auto;\n}\ndiv#new-cafe-page img#back[data-v-10b7d3a0] {\n    float: right;\n    margin-top: 20px;\n    margin-right: 20px;\n}\ndiv#new-cafe-page .centered[data-v-10b7d3a0] {\n    margin: auto;\n}\ndiv#new-cafe-page h2.page-title[data-v-10b7d3a0] {\n    color: #342C0C;\n    font-size: 36px;\n    font-weight: 900;\n    font-family: \"Lato\", sans-serif;\n    margin-top: 60px;\n}\ndiv#new-cafe-page label.form-label[data-v-10b7d3a0] {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input[data-v-10b7d3a0] {\n    border: 1px solid #BABABA;\n    border-radius: 3px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input.invalid[data-v-10b7d3a0] {\n      border: 1px solid #D0021B;\n}\ndiv#new-cafe-page div.validation[data-v-10b7d3a0] {\n    color: #D0021B;\n    font-family: \"Lato\", sans-serif;\n    font-size: 14px;\n    margin-top: -15px;\n    margin-bottom: 15px;\n}\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    color: #E8635F;\n    border-bottom: 1px solid #E8635F;\n    border-top: 1px solid #E8635F;\n    border-left: 1px solid #E8635F;\n    border-right: 1px solid #E8635F;\n    width: 25%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n}\ndiv#new-cafe-page div.location-type.active[data-v-10b7d3a0] {\n      color: white;\n      background-color: #E8635F;\n}\ndiv#new-cafe-page div.location-type.roaster[data-v-10b7d3a0] {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n      border-right: 0px;\n}\ndiv#new-cafe-page div.location-type.cafe[data-v-10b7d3a0] {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv#new-cafe-page div.company-selection-container[data-v-10b7d3a0] {\n    position: relative;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container[data-v-10b7d3a0] {\n      border-radius: 3px;\n      border: 1px solid #BABABA;\n      background-color: white;\n      margin-top: -17px;\n      width: 80%;\n      position: absolute;\n      z-index: 9999;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name[data-v-10b7d3a0] {\n          display: block;\n          color: #0D223F;\n          font-size: 16px;\n          font-family: \"Lato\", sans-serif;\n          font-weight: bold;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations[data-v-10b7d3a0] {\n          display: block;\n          font-size: 14px;\n          color: #676767;\n          font-family: \"Lato\", sans-serif;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n        font-family: \"Lato\", sans-serif;\n        color: #054E7A;\n        font-style: italic;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page a.add-location-button[data-v-10b7d3a0] {\n    display: block;\n    text-align: center;\n    height: 50px;\n    color: white;\n    border-radius: 3px;\n    font-size: 18px;\n    font-family: \"Lato\", sans-serif;\n    background-color: #A7BE4D;\n    line-height: 50px;\n    margin-bottom: 50px;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    width: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\ndiv#new-cafe-page[data-v-10b7d3a0] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: white;\n  z-index: 99999;\n  overflow: auto;\n}\ndiv#new-cafe-page img#back[data-v-10b7d3a0] {\n    float: right;\n    margin-top: 20px;\n    margin-right: 20px;\n}\ndiv#new-cafe-page .centered[data-v-10b7d3a0] {\n    margin: auto;\n}\ndiv#new-cafe-page h2.page-title[data-v-10b7d3a0] {\n    color: #342C0C;\n    font-size: 36px;\n    font-weight: 900;\n    font-family: \"Lato\", sans-serif;\n    margin-top: 60px;\n}\ndiv#new-cafe-page label.form-label[data-v-10b7d3a0] {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input[data-v-10b7d3a0] {\n    border: 1px solid #BABABA;\n    border-radius: 3px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input.invalid[data-v-10b7d3a0] {\n      border: 1px solid #D0021B;\n}\ndiv#new-cafe-page div.validation[data-v-10b7d3a0] {\n    color: #D0021B;\n    font-family: \"Lato\", sans-serif;\n    font-size: 14px;\n    margin-top: -15px;\n    margin-bottom: 15px;\n}\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    width: 25%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n    margin-right: 10px;\n    background-color: #EEE;\n    color: #111111;\n}\ndiv#new-cafe-page div.location-type.active[data-v-10b7d3a0] {\n      color: white;\n      background-color: #E8635F;\n}\ndiv#new-cafe-page div.location-type.roaster[data-v-10b7d3a0] {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n      border-right: 0px;\n}\ndiv#new-cafe-page div.location-type.cafe[data-v-10b7d3a0] {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv#new-cafe-page div.company-selection-container[data-v-10b7d3a0] {\n    position: relative;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container[data-v-10b7d3a0] {\n      border-radius: 3px;\n      border: 1px solid #BABABA;\n      background-color: white;\n      margin-top: -17px;\n      width: 80%;\n      position: absolute;\n      z-index: 9999;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name[data-v-10b7d3a0] {\n          display: block;\n          color: #0D223F;\n          font-size: 16px;\n          font-family: \"Lato\", sans-serif;\n          font-weight: bold;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations[data-v-10b7d3a0] {\n          display: block;\n          font-size: 14px;\n          color: #676767;\n          font-family: \"Lato\", sans-serif;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n        font-family: \"Lato\", sans-serif;\n        color: #054E7A;\n        font-style: italic;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page a.add-location-button[data-v-10b7d3a0] {\n    display: block;\n    text-align: center;\n    height: 50px;\n    color: white;\n    border-radius: 3px;\n    font-size: 18px;\n    font-family: \"Lato\", sans-serif;\n    background-color: #A7BE4D;\n    line-height: 50px;\n    margin-bottom: 50px;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -7940,7 +10923,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv#new-cafe-page[data-v-10edfaf8] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: white;\n  z-index: 99999;\n  overflow: auto;\n}\ndiv#new-cafe-page img#back[data-v-10edfaf8] {\n    float: right;\n    margin-top: 20px;\n    margin-right: 20px;\n}\ndiv#new-cafe-page .centered[data-v-10edfaf8] {\n    margin: auto;\n}\ndiv#new-cafe-page h2.page-title[data-v-10edfaf8] {\n    color: #342C0C;\n    font-size: 36px;\n    font-weight: 900;\n    font-family: \"Lato\", sans-serif;\n    margin-top: 60px;\n}\ndiv#new-cafe-page label.form-label[data-v-10edfaf8] {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input[data-v-10edfaf8] {\n    border: 1px solid #BABABA;\n    border-radius: 3px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input.invalid[data-v-10edfaf8] {\n      border: 1px solid #D0021B;\n}\ndiv#new-cafe-page div.validation[data-v-10edfaf8] {\n    color: #D0021B;\n    font-family: \"Lato\", sans-serif;\n    font-size: 14px;\n    margin-top: -15px;\n    margin-bottom: 15px;\n}\ndiv#new-cafe-page div.location-type[data-v-10edfaf8] {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    color: #E8635F;\n    border-bottom: 1px solid #E8635F;\n    border-top: 1px solid #E8635F;\n    border-left: 1px solid #E8635F;\n    border-right: 1px solid #E8635F;\n    width: 25%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n}\ndiv#new-cafe-page div.location-type.active[data-v-10edfaf8] {\n      color: white;\n      background-color: #E8635F;\n}\ndiv#new-cafe-page div.location-type.roaster[data-v-10edfaf8] {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n      border-right: 0px;\n}\ndiv#new-cafe-page div.location-type.cafe[data-v-10edfaf8] {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv#new-cafe-page div.company-selection-container[data-v-10edfaf8] {\n    position: relative;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container[data-v-10edfaf8] {\n      border-radius: 3px;\n      border: 1px solid #BABABA;\n      background-color: white;\n      margin-top: -17px;\n      width: 80%;\n      position: absolute;\n      z-index: 9999;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10edfaf8] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name[data-v-10edfaf8] {\n          display: block;\n          color: #0D223F;\n          font-size: 16px;\n          font-family: \"Lato\", sans-serif;\n          font-weight: bold;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations[data-v-10edfaf8] {\n          display: block;\n          font-size: 14px;\n          color: #676767;\n          font-family: \"Lato\", sans-serif;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10edfaf8]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10edfaf8] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n        font-family: \"Lato\", sans-serif;\n        color: #054E7A;\n        font-style: italic;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10edfaf8]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page a.edit-location-button[data-v-10edfaf8] {\n    display: block;\n    text-align: center;\n    height: 50px;\n    color: white;\n    border-radius: 3px;\n    font-size: 18px;\n    font-family: \"Lato\", sans-serif;\n    background-color: #A7BE4D;\n    line-height: 50px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page a.delete-location[data-v-10edfaf8] {\n    color: #D0021B;\n    font-size: 14px;\n    text-decoration: underline;\n    display: inline-block;\n    margin-bottom: 50px;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#new-cafe-page div.location-type[data-v-10edfaf8] {\n    width: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\ndiv#new-cafe-page[data-v-10edfaf8] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: white;\n  z-index: 99999;\n  overflow: auto;\n}\ndiv#new-cafe-page img#back[data-v-10edfaf8] {\n    float: right;\n    margin-top: 20px;\n    margin-right: 20px;\n}\ndiv#new-cafe-page .centered[data-v-10edfaf8] {\n    margin: auto;\n}\ndiv#new-cafe-page h2.page-title[data-v-10edfaf8] {\n    color: #342C0C;\n    font-size: 36px;\n    font-weight: 900;\n    font-family: \"Lato\", sans-serif;\n    margin-top: 60px;\n}\ndiv#new-cafe-page label.form-label[data-v-10edfaf8] {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input[data-v-10edfaf8] {\n    border: 1px solid #BABABA;\n    border-radius: 3px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input.invalid[data-v-10edfaf8] {\n      border: 1px solid #D0021B;\n}\ndiv#new-cafe-page div.validation[data-v-10edfaf8] {\n    color: #D0021B;\n    font-family: \"Lato\", sans-serif;\n    font-size: 14px;\n    margin-top: -15px;\n    margin-bottom: 15px;\n}\ndiv#new-cafe-page div.location-type[data-v-10edfaf8] {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    width: 25%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n    margin-right: 10px;\n    background-color: #EEE;\n    color: #111111;\n}\ndiv#new-cafe-page div.location-type.active[data-v-10edfaf8] {\n      color: white;\n      background-color: #E8635F;\n}\ndiv#new-cafe-page div.location-type.roaster[data-v-10edfaf8] {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n      border-right: 0px;\n}\ndiv#new-cafe-page div.location-type.cafe[data-v-10edfaf8] {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv#new-cafe-page div.company-selection-container[data-v-10edfaf8] {\n    position: relative;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container[data-v-10edfaf8] {\n      border-radius: 3px;\n      border: 1px solid #BABABA;\n      background-color: white;\n      margin-top: -17px;\n      width: 80%;\n      position: absolute;\n      z-index: 9999;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10edfaf8] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name[data-v-10edfaf8] {\n          display: block;\n          color: #0D223F;\n          font-size: 16px;\n          font-family: \"Lato\", sans-serif;\n          font-weight: bold;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations[data-v-10edfaf8] {\n          display: block;\n          font-size: 14px;\n          color: #676767;\n          font-family: \"Lato\", sans-serif;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10edfaf8]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10edfaf8] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n        font-family: \"Lato\", sans-serif;\n        color: #054E7A;\n        font-style: italic;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10edfaf8]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page a.edit-location-button[data-v-10edfaf8] {\n    display: block;\n    text-align: center;\n    height: 50px;\n    color: white;\n    border-radius: 3px;\n    font-size: 18px;\n    font-family: \"Lato\", sans-serif;\n    background-color: #A7BE4D;\n    line-height: 50px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page a.delete-location[data-v-10edfaf8] {\n    color: #D0021B;\n    font-size: 14px;\n    text-decoration: underline;\n    display: inline-block;\n    margin-bottom: 50px;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#new-cafe-page div.location-type[data-v-10edfaf8] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -7956,6 +10939,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv#individual-cafe-map {\n  width: 700px;\n  height: 500px;\n  margin: auto;\n  margin-bottom: 200px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-users label {\n  font-weight: bold;\n  color: black;\n  font-size: 16px;\n  margin-top: 15px;\n}\ndiv#admin-users img.large-avatar {\n  display: block;\n  width: 50px;\n  height: 50px;\n  border-radius: 50px;\n}\ndiv#admin-users a.update-user {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n}\ndiv#admin-users div.company {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv#admin-users div.company a.remove-company {\n    text-decoration: underline;\n    color: red;\n    float: right;\n}\ndiv#admin-users input[type=\"text\"].company-owner-input {\n  margin-top: 30px;\n}\ndiv#admin-users div.company-selection-container {\n  position: relative;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container {\n    border-radius: 3px;\n    border: 1px solid #BABABA;\n    background-color: white;\n    margin-top: -17px;\n    width: 80%;\n    position: absolute;\n    z-index: 9999;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.company-autocomplete {\n      cursor: pointer;\n      padding-left: 12px;\n      padding-right: 12px;\n      padding-top: 8px;\n      padding-bottom: 8px;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name {\n        display: block;\n        color: #0D223F;\n        font-size: 16px;\n        font-family: \"Lato\", sans-serif;\n        font-weight: bold;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations {\n        display: block;\n        font-size: 14px;\n        color: #676767;\n        font-family: \"Lato\", sans-serif;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.company-autocomplete:hover {\n        background-color: #F2F2F2;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.new-company {\n      cursor: pointer;\n      padding-left: 12px;\n      padding-right: 12px;\n      padding-top: 8px;\n      padding-bottom: 8px;\n      font-family: \"Lato\", sans-serif;\n      color: #054E7A;\n      font-style: italic;\n}\ndiv#admin-users div.company-selection-container div.company-autocomplete-container div.new-company:hover {\n        background-color: #F2F2F2;\n}\n", ""]);
 
 // exports
 
@@ -8016,6 +11014,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv#login-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#login-modal div.login-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n}\ndiv#login-modal div.login-box a.social-link {\n      display: block;\n      margin: auto;\n      width: 230px;\n      margin-top: 10px;\n      margin-bottom: 10px;\n}\ndiv#login-modal div.login-box div.login-label {\n      color: black;\n      font-family: \"Lato\", sans-serif;\n      font-weight: bold;\n      text-transform: uppercase;\n      text-align: center;\n      margin-top: 40px;\n      margin-bottom: 20px;\n}\ndiv#login-modal div.login-box p.learn-more-description {\n      color: #666666;\n      text-align: center;\n}\ndiv#login-modal div.login-box a.learn-more-button {\n      border: 2px solid #E8635F;\n      border-radius: 3px;\n      text-transform: uppercase;\n      font-family: \"Lato\", sans-serif;\n      color: #E8635F;\n      width: 360px;\n      font-size: 16px;\n      text-align: center;\n      padding: 10px;\n      margin-top: 20px;\n      display: block;\n      margin: auto;\n}\ndiv#login-modal div.login-box a.learn-more-button:hover {\n        color: white;\n        background-color: #E8635F;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#login-modal div.login-box {\n    width: 95%;\n}\ndiv#login-modal div.login-box a.learn-more-button {\n      width: 300px;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-company label {\n  font-weight: bold;\n  color: black;\n  font-size: 16px;\n  margin-top: 15px;\n}\ndiv#admin-company div.cafes-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\ndiv#admin-company div.user-selection-container {\n  position: relative;\n  margin-top: 20px;\n}\ndiv#admin-company div.user-selection-container div.user-autocomplete-container {\n    border-radius: 3px;\n    border: 1px solid #BABABA;\n    background-color: white;\n    margin-top: -17px;\n    width: 80%;\n    position: absolute;\n    z-index: 9999;\n}\ndiv#admin-company div.user-selection-container div.user-autocomplete-container div.user-autocomplete {\n      cursor: pointer;\n      padding-left: 12px;\n      padding-right: 12px;\n      padding-top: 8px;\n      padding-bottom: 8px;\n}\ndiv#admin-company div.user-selection-container div.user-autocomplete-container div.user-autocomplete span.user-name {\n        display: block;\n        color: #0D223F;\n        font-size: 16px;\n        font-family: \"Lato\", sans-serif;\n        font-weight: bold;\n}\ndiv#admin-company div.user-selection-container div.user-autocomplete-container div.user-autocomplete:hover {\n        background-color: #F2F2F2;\n}\ndiv#admin-company div.location-type {\n  display: inline-block;\n  margin-right: 10px;\n  cursor: pointer;\n  background-color: #CCC;\n}\ndiv#admin-company div.location-type.active {\n    color: white;\n    background-color: #E8635F;\n}\ndiv#admin-company div.owner {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv#admin-company div.owner a.remove-owner {\n    text-decoration: underline;\n    color: red;\n    float: right;\n}\ndiv#admin-company a.save-edits {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n}\n", ""]);
 
 // exports
 
@@ -8120,7 +11133,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv#cafe-page {\n  position: absolute;\n  right: 30px;\n  top: 125px;\n  background: #FFFFFF;\n  -webkit-box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n          box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n  width: 100%;\n  max-width: 480px;\n  padding: 20px;\n  padding-top: 10px;\n}\ndiv#cafe-page img.close-icon {\n    float: right;\n    cursor: pointer;\n    margin-top: 10px;\n}\ndiv#cafe-page h2.cafe-title {\n    color: #342C0C;\n    font-size: 36px;\n    line-height: 44px;\n    font-family: \"Lato\", sans-serif;\n    font-weight: bolder;\n}\ndiv#cafe-page span.location-number {\n    display: inline-block;\n    color: #8E8E8E;\n    font-size: 18px;\n}\ndiv#cafe-page span.location-number span.location-image-container {\n      width: 35px;\n      text-align: center;\n      display: inline-block;\n}\ndiv#cafe-page label.cafe-label {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 20px;\n    margin-bottom: 10px;\n}\ndiv#cafe-page div.location-type {\n    color: white;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    width: 105px;\n    height: 45px;\n    text-align: center;\n    line-height: 45px;\n    border-radius: 3px;\n}\ndiv#cafe-page div.location-type img {\n      margin-right: 5px;\n}\ndiv#cafe-page div.location-type.roaster {\n      background-color: #E8635F;\n}\ndiv#cafe-page div.location-type.cafe {\n      background-color: #3D281E;\n}\ndiv#cafe-page div.location-type.cafe img {\n        margin-top: -6px;\n}\ndiv#cafe-page div.address-container {\n    color: #666666;\n    font-size: 18px;\n    line-height: 23px;\n    font-family: \"Lato\", sans-serif;\n    margin-bottom: 5px;\n}\ndiv#cafe-page div.address-container span.address {\n      display: block;\n}\ndiv#cafe-page div.address-container span.city-state {\n      display: block;\n}\ndiv#cafe-page div.address-container span.zip {\n      display: block;\n}\ndiv#cafe-page a.cafe-website {\n    font-family: \"Lato\", sans-serif;\n    color: #543729;\n    font-size: 18px;\n}\ndiv#cafe-page a.suggest-cafe-edit {\n    font-family: \"Lato\", sans-serif;\n    color: #054E7A;\n    font-size: 14px;\n    display: inline-block;\n    margin-top: 30px;\n    text-decoration: underline;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#cafe-page {\n    position: fixed;\n    right: 0px;\n    left: 0px;\n    top: 0px;\n    bottom: 0px;\n    z-index: 99999;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
+exports.push([module.i, "\ndiv#cafe-page {\n  position: absolute;\n  right: 30px;\n  top: 125px;\n  background: #FFFFFF;\n  -webkit-box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n          box-shadow: 0 2px 4px 0 rgba(3, 27, 78, 0.1);\n  width: 100%;\n  max-width: 480px;\n  padding: 20px;\n  padding-top: 10px;\n}\ndiv#cafe-page img.close-icon {\n    float: right;\n    cursor: pointer;\n    margin-top: 10px;\n}\ndiv#cafe-page h2.cafe-title {\n    color: #342C0C;\n    font-size: 36px;\n    line-height: 44px;\n    font-family: \"Lato\", sans-serif;\n    font-weight: bolder;\n}\ndiv#cafe-page span.location-number {\n    display: inline-block;\n    color: #8E8E8E;\n    font-size: 18px;\n}\ndiv#cafe-page span.location-number span.location-image-container {\n      width: 35px;\n      text-align: center;\n      display: inline-block;\n}\ndiv#cafe-page label.cafe-label {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 20px;\n    margin-bottom: 10px;\n}\ndiv#cafe-page div.address-container {\n    color: #666666;\n    font-size: 18px;\n    line-height: 23px;\n    font-family: \"Lato\", sans-serif;\n    margin-bottom: 5px;\n}\ndiv#cafe-page div.address-container span.address {\n      display: block;\n}\ndiv#cafe-page div.address-container span.city-state {\n      display: block;\n}\ndiv#cafe-page div.address-container span.zip {\n      display: block;\n}\ndiv#cafe-page a.cafe-website {\n    font-family: \"Lato\", sans-serif;\n    color: #543729;\n    font-size: 18px;\n}\ndiv#cafe-page a.suggest-cafe-edit {\n    font-family: \"Lato\", sans-serif;\n    color: #054E7A;\n    font-size: 14px;\n    display: inline-block;\n    margin-top: 30px;\n    text-decoration: underline;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#cafe-page {\n    position: fixed;\n    right: 0px;\n    left: 0px;\n    top: 0px;\n    bottom: 0px;\n    z-index: 99999;\n}\n}\n\n/* Medium only */\n/* Large only */\n", ""]);
 
 // exports
 
@@ -8166,6 +11179,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv.loader {\n  margin: auto;\n  vertical-align: middle;\n}\nsvg path,\nsvg rect {\n  fill: #E8635F;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethod.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-brew-method label {\n  font-weight: bold;\n  color: black;\n  font-size: 16px;\n  margin-top: 15px;\n}\ndiv#admin-brew-method a.update-brew-method {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n  margin-bottom: 100px;\n}\ndiv#admin-brew-method img.brew-method-icon {\n  width: 50px;\n}\ndiv#admin-brew-method a.change-icon {\n  display: block;\n  margin-top: 10px;\n  color: #E8635F;\n}\ndiv#admin-brew-method div.change-icon-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    max-height: 500px;\n    overflow-y: auto;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box label {\n      font-weight: bold;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box div.icon-selection-container {\n      margin-top: 10px;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box div.new-icon-container {\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 20px;\n      border-radius: 5px;\n      padding: 5px;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box div.new-icon-container.active {\n        background-color: #E8635F;\n        color: white;\n}\ndiv#admin-brew-method div.change-icon-modal div.modal-box div.new-icon-container img.new-icon {\n        display: block;\n        margin: auto;\n        margin-bottom: 10px;\n        height: 30px;\n}\n", ""]);
 
 // exports
 
@@ -8262,6 +11290,36 @@ exports.push([module.i, "\ndiv.success-notification-container {\n  position: fix
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/users/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.user-listing {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv.user-listing img.avatar {\n    width: 20px;\n    height: 20px;\n    border-radius: 20px;\n    display: inline-block;\n    vertical-align: middle;\n    margin-right: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethods.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-brew-methods div.brew-methods-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\ndiv#admin-brew-methods a.add-brew-method {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  float: right;\n  height: 45px;\n  line-height: 45px;\n}\ndiv#admin-brew-methods div.brew-method-listing {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv#admin-brew-methods div.brew-method-listing img.method-icon {\n    display: inline-block;\n    max-width: 20px;\n    max-height: 20px;\n    margin-right: 10px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    max-height: 500px;\n    overflow-y: auto;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box label {\n      font-weight: bold;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.icon-selection-container {\n      margin-top: 10px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container {\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 20px;\n      border-radius: 5px;\n      padding: 5px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container.active {\n        background-color: #E8635F;\n        color: white;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container img.new-icon {\n        display: block;\n        margin: auto;\n        margin-bottom: 10px;\n        height: 30px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal a.add-method-button {\n    display: block;\n    width: 150px;\n    color: white;\n    background-color: #CCC;\n    text-align: center;\n    border-radius: 5px;\n    margin-top: 20px;\n    height: 45px;\n    line-height: 45px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8d7c99f2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/ToggleCafesView.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8277,6 +11335,21 @@ exports.push([module.i, "\ndiv#toggle-cafes-view {\n  position: absolute;\n  z-i
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Users.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.users-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c8946024\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8285,7 +11358,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\ndiv#admin-companies div.companies-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\ndiv#admin-companies div.companies-header img.sort-icon {\n    display: inline-block;\n    margin-left: 10px;\n}\ndiv#admin-companies div.companies-header div.sortable-header {\n    cursor: pointer;\n}\ndiv#admin-companies div.no-companies-available {\n  text-align: center;\n  font-family: \"Lato\", sans-serif;\n  font-size: 20px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n", ""]);
 
 // exports
 
@@ -8301,6 +11374,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\nnav.admin-navigation div.admin-link {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Lato\", sans-serif;\n  text-transform: uppercase;\n  padding-top: 15px;\n  padding-bottom: 15px;\n}\nnav.admin-navigation div.admin-link a {\n    color: black;\n}\nnav.admin-navigation div.admin-link a.router-link-active {\n      color: #E8635F;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.cafe-listing {\n  padding-top: 10px;\n  padding-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -49289,6 +52377,63 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-008d0f22\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/companies/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "router-link",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.searchValidated,
+          expression: "searchValidated"
+        }
+      ],
+      attrs: { to: { name: "admin-company", params: { id: _vm.company.id } } }
+    },
+    [
+      _c("div", { staticClass: "company" }, [
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-3 medium-3 cell" }, [
+            _vm._v("\n        " + _vm._s(_vm.company.name) + "\n      ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "large-5 medium-5 cell" }, [
+            _vm._v("\n        " + _vm._s(_vm.company.website) + "\n      ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "large-2 medium-2 cell" }, [
+            _vm._v("\n        " + _vm._s(_vm.company.cafes_count) + "\n      ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "large-2 medium-2 cell" }, [
+            _vm._v(
+              "\n        " + _vm._s(_vm.company.actions_count) + "\n      "
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-008d0f22", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-03743e42\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/global/PopOut.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49715,6 +52860,694 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-04edff6d", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-109d83da\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-cafe" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c(
+            "h3",
+            { staticClass: "page-header" },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: { name: "admin-companies" } } },
+                [_vm._v("Companies")]
+              ),
+              _vm._v(" >\n          "),
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "admin-company",
+                      params: { id: this.$route.params.id }
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.company.name))]
+              ),
+              _vm._v(
+                " >\n          " +
+                  _vm._s(
+                    _vm.cafe.location_name != ""
+                      ? _vm.cafe.location_name
+                      : _vm.company.name +
+                        " at " +
+                        _vm.cafe.address +
+                        " " +
+                        _vm.cafe.city +
+                        " " +
+                        _vm.cafe.state
+                  ) +
+                  "\n        "
+              )
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-container" }, [
+        _c("div", { staticClass: "grid-x admin-tabs" }, [
+          _c(
+            "div",
+            {
+              staticClass: "tab",
+              class: { active: _vm.tab == "information" },
+              on: {
+                click: function($event) {
+                  _vm.tab = "information"
+                }
+              }
+            },
+            [_vm._v("\n          Information\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "tab",
+              class: { active: _vm.tab == "activity" },
+              on: {
+                click: function($event) {
+                  _vm.tab = "activity"
+                }
+              }
+            },
+            [_vm._v("\n          Activity\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "tab",
+              class: { active: _vm.tab == "history" },
+              on: {
+                click: function($event) {
+                  _vm.tab = "history"
+                }
+              }
+            },
+            [_vm._v("\n          History\n        ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.tab == "activity",
+              expression: "tab == 'activity'"
+            }
+          ],
+          staticClass: "grid-container"
+        },
+        [
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Likes")]),
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.cafe.likes_count) +
+                  " likes\n        "
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.tab == "information",
+              expression: "tab == 'information'"
+            }
+          ],
+          staticClass: "grid-container"
+        },
+        [
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Location Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.location_name,
+                    expression: "location_name"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.location_name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.location_name = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Address")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.address,
+                    expression: "address"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.address = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.validations.address,
+                      expression: "!validations.address"
+                    }
+                  ],
+                  staticClass: "validation"
+                },
+                [_vm._v("Please enter a valid address")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("City")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.city,
+                    expression: "city"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.city },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.city = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.validations.city,
+                      expression: "!validations.city"
+                    }
+                  ],
+                  staticClass: "validation"
+                },
+                [_vm._v("Please enter a valid city")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("State")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.state,
+                      expression: "state"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.state = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "AL" } }, [_vm._v("Alabama")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "AK" } }, [_vm._v("Alaska")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "AZ" } }, [_vm._v("Arizona")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "AR" } }, [
+                    _vm._v("Arkansas")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "CA" } }, [
+                    _vm._v("California")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "CO" } }, [
+                    _vm._v("Colorado")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "CT" } }, [
+                    _vm._v("Connecticut")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "DE" } }, [
+                    _vm._v("Delaware")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "DC" } }, [
+                    _vm._v("District Of Columbia")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "FL" } }, [_vm._v("Florida")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "GA" } }, [_vm._v("Georgia")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "HI" } }, [_vm._v("Hawaii")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ID" } }, [_vm._v("Idaho")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "IL" } }, [
+                    _vm._v("Illinois")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "IN" } }, [_vm._v("Indiana")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "IA" } }, [_vm._v("Iowa")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "KS" } }, [_vm._v("Kansas")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "KY" } }, [
+                    _vm._v("Kentucky")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "LA" } }, [
+                    _vm._v("Louisiana")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ME" } }, [_vm._v("Maine")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MD" } }, [
+                    _vm._v("Maryland")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MA" } }, [
+                    _vm._v("Massachusetts")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MI" } }, [
+                    _vm._v("Michigan")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MN" } }, [
+                    _vm._v("Minnesota")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MS" } }, [
+                    _vm._v("Mississippi")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MO" } }, [
+                    _vm._v("Missouri")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "MT" } }, [_vm._v("Montana")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NE" } }, [
+                    _vm._v("Nebraska")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NV" } }, [_vm._v("Nevada")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NH" } }, [
+                    _vm._v("New Hampshire")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NJ" } }, [
+                    _vm._v("New Jersey")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NM" } }, [
+                    _vm._v("New Mexico")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NY" } }, [
+                    _vm._v("New York")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "NC" } }, [
+                    _vm._v("North Carolina")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ND" } }, [
+                    _vm._v("North Dakota")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "OH" } }, [_vm._v("Ohio")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "OK" } }, [
+                    _vm._v("Oklahoma")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "OR" } }, [_vm._v("Oregon")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "PA" } }, [
+                    _vm._v("Pennsylvania")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "RI" } }, [
+                    _vm._v("Rhode Island")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "SC" } }, [
+                    _vm._v("South Carolina")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "SD" } }, [
+                    _vm._v("South Dakota")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "TN" } }, [
+                    _vm._v("Tennessee")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "TX" } }, [_vm._v("Texas")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "UT" } }, [_vm._v("Utah")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "VT" } }, [_vm._v("Vermont")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "VA" } }, [
+                    _vm._v("Virginia")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "WA" } }, [
+                    _vm._v("Washington")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "WV" } }, [
+                    _vm._v("West Virginia")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "WI" } }, [
+                    _vm._v("Wisconsin")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "WY" } }, [_vm._v("Wyoming")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Zip")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.zip,
+                    expression: "zip"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.zip },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.zip = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.validations.zip,
+                      expression: "!validations.zip"
+                    }
+                  ],
+                  staticClass: "validation"
+                },
+                [_vm._v("Please enter a valid zip")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Matcha")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "drink-option option",
+                  class: { active: _vm.matcha == 1 },
+                  on: {
+                    click: function($event) {
+                      _vm.matcha == 0 ? (_vm.matcha = 1) : (_vm.matcha = 0)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/matcha-latte.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Matcha")
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Tea Options")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "drink-option option",
+                  class: { active: _vm.tea == 1 },
+                  on: {
+                    click: function($event) {
+                      _vm.tea == 0 ? (_vm.tea = 1) : (_vm.tea = 0)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: "/img/icons/tea-bag.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v("Tea Options")
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c(
+              "div",
+              { staticClass: "large-8 medium-12 small-12 cell" },
+              [
+                _c("label", [_vm._v("Brew Methods")]),
+                _vm._v(" "),
+                _vm._l(_vm.brewMethods, function(method) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "brew-method option",
+                      class: {
+                        active: _vm.brewMethodsSelected.indexOf(method.id) >= 0
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.toggleSelectedBrewMethod(method.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "option-container" }, [
+                        _c("img", {
+                          staticClass: "option-icon",
+                          attrs: { src: method.icon + ".svg" }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "option-name" }, [
+                          _vm._v(_vm._s(method.method))
+                        ])
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Status")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.deleted,
+                      expression: "deleted"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.deleted = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0" } }, [_vm._v("Active")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Deleted")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-12 medium-12 cell" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "update-cafe",
+                  on: {
+                    click: function($event) {
+                      _vm.updateCafe()
+                    }
+                  }
+                },
+                [_vm._v("Update Cafe")]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.tab == "history",
+            expression: "tab == 'history'"
+          }
+        ],
+        staticClass: "grid-container"
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-109d83da", module.exports)
   }
 }
 
@@ -51547,6 +55380,252 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-15a52f08\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-users" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c(
+            "h3",
+            { staticClass: "page-header" },
+            [
+              _c("router-link", { attrs: { to: { name: "admin-users" } } }, [
+                _vm._v("Users")
+              ]),
+              _vm._v(" > " + _vm._s(_vm.adminUser.name))
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Avatar")]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "large-avatar",
+            attrs: { src: _vm.adminUser.avatar }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Name")]),
+          _vm._v("\n        " + _vm._s(_vm.adminUser.name) + "\n      ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Email")]),
+          _vm._v("\n        " + _vm._s(_vm.adminUser.email) + "\n      ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Permission Level")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.permission,
+                  expression: "permission"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.permission = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [_vm._v("General User")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Owner")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("Admin")]),
+              _vm._v(" "),
+              _vm.user.permission == 3
+                ? _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("Super Admin")
+                  ])
+                : _vm._e()
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c(
+          "div",
+          { staticClass: "large-8 medium-12 cell company-selection-container" },
+          [
+            _c("label", [_vm._v("Companies Owned")]),
+            _vm._v(" "),
+            _vm.companies.length == 0
+              ? _c("span", { staticClass: "no-companies-owned" }, [
+                  _vm._v("N/A")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.companies, function(company, key) {
+              return _c(
+                "div",
+                { staticClass: "company" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "admin-company",
+                          params: { id: company.id }
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(company.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "remove-company",
+                      on: {
+                        click: function($event) {
+                          _vm.removeCompany(key)
+                        }
+                      }
+                    },
+                    [_vm._v("Remove")]
+                  )
+                ],
+                1
+              )
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.companyName,
+                  expression: "companyName"
+                }
+              ],
+              staticClass: "form-input company-owner-input",
+              attrs: { type: "text" },
+              domProps: { value: _vm.companyName },
+              on: {
+                keyup: function($event) {
+                  _vm.searchCompanies()
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.companyName = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.companyName.length > 0 && _vm.showAutocomplete,
+                    expression: "companyName.length > 0 && showAutocomplete"
+                  }
+                ],
+                staticClass: "company-autocomplete-container"
+              },
+              _vm._l(_vm.companyResults, function(companyResult) {
+                return _c(
+                  "div",
+                  {
+                    staticClass: "company-autocomplete",
+                    on: {
+                      click: function($event) {
+                        _vm.selectCompany(companyResult)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "company-name" }, [
+                      _vm._v(_vm._s(companyResult.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "company-locations" }, [
+                      _vm._v(_vm._s(companyResult.cafes_count) + " location"),
+                      companyResult.cafes_count > 1
+                        ? _c("span", [_vm._v("s")])
+                        : _vm._e()
+                    ])
+                  ]
+                )
+              })
+            )
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c(
+            "a",
+            {
+              staticClass: "update-user",
+              on: {
+                click: function($event) {
+                  _vm.updateProfile()
+                }
+              }
+            },
+            [_vm._v("Update Profile")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-15a52f08", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1ad0fc42\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Layout.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51799,6 +55878,459 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2b3121c9", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-31c9e760\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-company" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c(
+            "h3",
+            { staticClass: "page-header" },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: { name: "admin-companies" } } },
+                [_vm._v("Companies")]
+              ),
+              _vm._v(" > " + _vm._s(_vm.company.name))
+            ],
+            1
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x admin-tabs" }, [
+        _c(
+          "div",
+          {
+            staticClass: "tab",
+            class: { "active-tab": _vm.tab == "information" },
+            on: {
+              click: function($event) {
+                _vm.tab = "information"
+              }
+            }
+          },
+          [_vm._v("\n        Information\n      ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "tab",
+            class: { "active-tab": _vm.tab == "cafes" },
+            on: {
+              click: function($event) {
+                _vm.tab = "cafes"
+              }
+            }
+          },
+          [_vm._v("\n        Cafes\n      ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "tab",
+            class: { "active-tab": _vm.tab == "history" },
+            on: {
+              click: function($event) {
+                _vm.tab = "history"
+              }
+            }
+          },
+          [_vm._v("\n        History\n      ")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.tab == "information",
+            expression: "tab == 'information'"
+          }
+        ],
+        staticClass: "grid-container"
+      },
+      [
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Company Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.name,
+                    expression: "!validations.name"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a name for the company")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Type")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "location-type roaster",
+                class: { active: _vm.type == "roaster" },
+                on: {
+                  click: function($event) {
+                    _vm.setCompanyType("roaster")
+                  }
+                }
+              },
+              [_vm._v("\n          Roaster\n        ")]
+            ),
+            _c(
+              "div",
+              {
+                staticClass: "location-type cafe",
+                class: { active: _vm.type == "cafe" },
+                on: {
+                  click: function($event) {
+                    _vm.setCompanyType("cafe")
+                  }
+                }
+              },
+              [_vm._v("\n          Cafe\n        ")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Website")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.website,
+                  expression: "website"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.website },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.website = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.website,
+                    expression: "!validations.website"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a valid website")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-8 medium-12 cell" },
+            [
+              _c("label", [_vm._v("Owners")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.owners.length == 0,
+                      expression: "owners.length == 0"
+                    }
+                  ],
+                  staticClass: "no-owners"
+                },
+                [_vm._v("N/A")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.owners, function(owner, key) {
+                return _c(
+                  "div",
+                  { staticClass: "owner" },
+                  [
+                    _vm.user.permission > 1
+                      ? _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "admin-user",
+                                params: { id: owner.id }
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(owner.name))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.permission == 1
+                      ? _c("span", [_vm._v(_vm._s(owner.name))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.permission > 1
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "remove-owner",
+                            on: {
+                              click: function($event) {
+                                _vm.removeOwner(key)
+                              }
+                            }
+                          },
+                          [_vm._v("Remove")]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _vm.user.permission > 1
+                ? _c("div", { staticClass: "user-selection-container" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newOwner,
+                          expression: "newOwner"
+                        }
+                      ],
+                      staticClass: "new-owner",
+                      attrs: { type: "text", placeholder: "Add An Owner" },
+                      domProps: { value: _vm.newOwner },
+                      on: {
+                        keyup: function($event) {
+                          _vm.searchUsers()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.newOwner = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.newOwner.length > 0 && _vm.showAutocomplete,
+                            expression:
+                              "newOwner.length > 0 && showAutocomplete"
+                          }
+                        ],
+                        staticClass: "user-autocomplete-container"
+                      },
+                      _vm._l(_vm.newOwnerResults, function(user) {
+                        return _c(
+                          "div",
+                          {
+                            staticClass: "user-autocomplete",
+                            on: {
+                              click: function($event) {
+                                _vm.selectUser(user)
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "user-name" }, [
+                              _vm._v(_vm._s(user.name))
+                            ])
+                          ]
+                        )
+                      })
+                    )
+                  ])
+                : _vm._e()
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Status")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.deleted,
+                    expression: "deleted"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.deleted = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [_vm._v("Active")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Deleted")])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 cell" }, [
+            _c(
+              "a",
+              {
+                staticClass: "save-edits",
+                on: {
+                  click: function($event) {
+                    _vm.saveEdits()
+                  }
+                }
+              },
+              [_vm._v("Update Company")]
+            )
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.tab == "cafes",
+            expression: "tab == 'cafes'"
+          }
+        ],
+        staticClass: "grid-container"
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.company.cafes, function(cafe) {
+          return _c("cafe", { key: cafe.id, attrs: { cafe: cafe } })
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x cafes-header" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Location Name\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _vm._v("\n        Address\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-31c9e760", module.exports)
   }
 }
 
@@ -53090,6 +57622,1666 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5ea2f000\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/BrewMethod.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-brew-method" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c(
+            "h3",
+            { staticClass: "page-header" },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: { name: "admin-brew-methods" } } },
+                [_vm._v("Brew Methods")]
+              ),
+              _vm._v(" > " + _vm._s(_vm.brewMethod.method))
+            ],
+            1
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Method")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.method,
+                expression: "method"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.method },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.method = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.validations.method,
+                  expression: "!validations.method"
+                }
+              ],
+              staticClass: "validation"
+            },
+            [_vm._v("Please enter a name for the brew method")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c("label", [_vm._v("Icon")]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "brew-method-icon",
+            attrs: { src: _vm.icon != "" ? _vm.icon + ".svg" : "" }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "change-icon",
+              on: {
+                click: function($event) {
+                  _vm.promptChangeIcon()
+                }
+              }
+            },
+            [_vm._v("Change Icon")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-8 medium-12 cell" }, [
+          _c(
+            "a",
+            {
+              staticClass: "update-brew-method",
+              on: {
+                click: function($event) {
+                  _vm.updateBrewMethod()
+                }
+              }
+            },
+            [_vm._v("Update")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.showChangeIcon,
+            expression: "showChangeIcon"
+          }
+        ],
+        staticClass: "change-icon-modal",
+        on: {
+          click: function($event) {
+            _vm.hideChangeIcon()
+          }
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-box",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "grid-x icon-selection-container" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/aeropress" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/aeropress")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/aeropress.svg" }
+                  }),
+                  _vm._v("\n          Aeropress\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/biscuit" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/biscuit")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/biscuit.svg" }
+                  }),
+                  _vm._v("\n          Biscuit\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/bottle-of-water" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/bottle-of-water")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/bottle-of-water.svg" }
+                  }),
+                  _vm._v("\n          Bottle of Water\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/chemex" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/chemex")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/chemex.svg" }
+                  }),
+                  _vm._v("\n          Chemex\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/chocolate" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/chocolate")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/chocolate.svg" }
+                  }),
+                  _vm._v("\n          Chocolate\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cinnamon" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cinnamon")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cinnamon.svg" }
+                  }),
+                  _vm._v("\n          Cinnamon\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/clover" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/clover")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/clover.svg" }
+                  }),
+                  _vm._v("\n          Clover\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-app" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-app")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-app.svg" }
+                  }),
+                  _vm._v("\n          Coffee App\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-beans" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-beans")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-beans.svg" }
+                  }),
+                  _vm._v("\n          Coffee Beans\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-capsules" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-capsules")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-capsules.svg" }
+                  }),
+                  _vm._v("\n          Coffee Capsules\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-coctail" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-coctail")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-cocktail.svg" }
+                  }),
+                  _vm._v("\n          Coffee Cocktail\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-cup.svg" }
+                  }),
+                  _vm._v("\n          Coffee Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-is-love" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-is-love")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-is-love.svg" }
+                  }),
+                  _vm._v("\n          Coffee Is Love\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-mill" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-mill")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-mill.svg" }
+                  }),
+                  _vm._v("\n          Coffee Mill\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pack" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pack")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pack.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pack\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pods" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pods")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pods.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pods\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pot.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-scoop" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-scoop")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-scoop.svg" }
+                  }),
+                  _vm._v("\n          Coffee Scoop\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shake" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shake")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shake.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shake\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shop-sign" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shop-sign")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shop-sign.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shop Sign\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shop" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shop")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shop.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shop\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-to-go" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-to-go")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-to-go.svg" }
+                  }),
+                  _vm._v("\n          Coffee To Go\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-tree" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-tree")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-tree.svg" }
+                  }),
+                  _vm._v("\n          Coffee Tree\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-with-cream" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-with-cream")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-with-cream.svg" }
+                  }),
+                  _vm._v("\n          Coffee With Cream\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/coffee-with-ice-cream"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-with-ice-cream")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-with-ice-cream.svg" }
+                  }),
+                  _vm._v("\n          Coffee With Ice Cream\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffeemaker" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffeemaker")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffeemaker.svg" }
+                  }),
+                  _vm._v("\n          Coffee Maker\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cold-brew" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cold-brew")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cold-brew.svg" }
+                  }),
+                  _vm._v("\n          Cold Brew\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/croissant" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/croissant")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/croissant.svg" }
+                  }),
+                  _vm._v("\n          Croissant\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cupcake" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cupcake")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cupcake.svg" }
+                  }),
+                  _vm._v("\n          Cupcake\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/donut" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/donut")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/donut.svg" }
+                  }),
+                  _vm._v("\n          Donut\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/drip-brew" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/drip-brew")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/drip-brew.svg" }
+                  }),
+                  _vm._v("\n          Drip Brew\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/drip-kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/drip-kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/drip-kettle.svg" }
+                  }),
+                  _vm._v("\n          Drip Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/electric-kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/electric-kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/electric-kettle.svg" }
+                  }),
+                  _vm._v("\n          Electric Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso-cup.svg" }
+                  }),
+                  _vm._v("\n          Espresso Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso-tamper" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso-tamper")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso-tamper.svg" }
+                  }),
+                  _vm._v("\n          Espresso Tamper\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso.svg" }
+                  }),
+                  _vm._v("\n          Espresso\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/eva-solo" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/eva-solo")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/eva-solo.svg" }
+                  }),
+                  _vm._v("\n          Eva Solo\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/fizzy-water" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/fizzy-water")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/fizzy-water.svg" }
+                  }),
+                  _vm._v("\n          Fizzy Water\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/frappe" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/frappe")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/frappe.svg" }
+                  }),
+                  _vm._v("\n          Frappe\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/french-press" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/french-press")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/french-press.svg" }
+                  }),
+                  _vm._v("\n          French Press\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/frozen-frappe" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/frozen-frappe")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/frozen-frappe.svg" }
+                  }),
+                  _vm._v("\n          Frozen Frappe\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/green-tea" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/green-tea")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/green-tea.svg" }
+                  }),
+                  _vm._v("\n          Green Tea\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/hario" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/hario")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/hario.svg" }
+                  }),
+                  _vm._v("\n          Hario\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/hot-chocolate" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/hot-chocolate")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/hot-chocolate.svg" }
+                  }),
+                  _vm._v("\n          Hot Chocolate\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/i-love-coffee" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/i-love-coffee")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/i-love-coffee.svg" }
+                  }),
+                  _vm._v("\n          I Love Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/iced-coffee_2" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/iced-coffee_2")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/iced-coffee_2.svg" }
+                  }),
+                  _vm._v("\n          Iced Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/iced-tea" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/iced-tea")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/iced-tea.svg" }
+                  }),
+                  _vm._v("\n          Iced Tea\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/instant-coffee" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/instant-coffee")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/instant-coffee.svg" }
+                  }),
+                  _vm._v("\n          Instant Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/kalita-wave" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/kalita-wave")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/kalita-wave.svg" }
+                  }),
+                  _vm._v("\n          Kalita Wave\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/kettle.svg" }
+                  }),
+                  _vm._v("\n          Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/latte_2" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/latte_2")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/latte_2.svg" }
+                  }),
+                  _vm._v("\n          Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/latte" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/latte")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/latte.svg" }
+                  }),
+                  _vm._v("\n          Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/matcha-latte" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/matcha-latte")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/matcha-latte.svg" }
+                  }),
+                  _vm._v("\n          Matcha Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/milk-pitcher" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/milk-pitcher")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/milk-pitcher.svg" }
+                  }),
+                  _vm._v("\n          Milk Pitcher\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/milk-product" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/milk-product")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/milk-product.svg" }
+                  }),
+                  _vm._v("\n          Milk Product\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/moka-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/moka-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/moka-pot.svg" }
+                  }),
+                  _vm._v("\n          Moka Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/nitrous" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/nitrous")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/nitrous.svg" }
+                  }),
+                  _vm._v("\n          Nitrous\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/percolator" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/percolator")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/percolator.svg" }
+                  }),
+                  _vm._v("\n          Percolator\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/porcelain-teapot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/porcelain-teapot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/porcelain-teapot.svg" }
+                  }),
+                  _vm._v("\n          Porcelain Teapot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/portafilter" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/portafilter")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/portafilter.svg" }
+                  }),
+                  _vm._v("\n          Portafilter\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/sack-of-coffee-beans"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sack-of-coffee-beans")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sack-of-coffee-beans.svg" }
+                  }),
+                  _vm._v("\n          Sack of Coffee Beans\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/sugar-and-milk" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sugar-and-milk")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sugar-and-milk.svg" }
+                  }),
+                  _vm._v("\n          Sugar and Milk\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/sugar" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sugar")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sugar.svg" }
+                  }),
+                  _vm._v("\n          Sugar\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/syphon" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/syphon")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/syphon.svg" }
+                  }),
+                  _vm._v("\n          Syphon\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/take-away" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/take-away")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/take-away.svg" }
+                  }),
+                  _vm._v("\n          Take Away\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-bag-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-bag-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-bag-cup.svg" }
+                  }),
+                  _vm._v("\n          Tea Bag Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-bag" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-bag")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-bag.svg" }
+                  }),
+                  _vm._v("\n          Tea Bag\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-ceremony" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-ceremony")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-ceremony.svg" }
+                  }),
+                  _vm._v("\n          Tea Ceremony\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/turkish-gezve" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/turkish-gezve")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/turkish-gezve.svg" }
+                  }),
+                  _vm._v("\n          Turkish Gezve\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vacuum-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vacuum-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vacuum-pot.svg" }
+                  }),
+                  _vm._v("\n          Vacuum Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vending-machine" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vending-machine")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vending-machine.svg" }
+                  }),
+                  _vm._v("\n          Vending Machine\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vietnamese-hot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vietnamese-hot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vietnamese-hot.svg" }
+                  }),
+                  _vm._v("\n          Vietnamese Hot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/vintage-coffee-pot"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vintage-coffee-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vintage-coffee-pot.svg" }
+                  }),
+                  _vm._v("\n          Vintage Coffee Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/wifi" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/wifi")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/wifi.svg" }
+                  }),
+                  _vm._v("\n          Wifi\n        ")
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "large-12 medium-12 cell" }, [
+      _c("label", [_vm._v("Icon")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5ea2f000", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-648b12e7\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/layouts/Admin.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54282,6 +60474,1790 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6b675b69\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/users/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "user user-listing" }, [
+    _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _c("img", { staticClass: "avatar", attrs: { src: _vm.user.avatar } }),
+        _vm._v(" " + _vm._s(_vm.user.name) + "\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n      " + _vm._s(_vm.user.email) + "\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm.user.permission == 0
+          ? _c("span", { staticClass: "general" }, [_vm._v("General")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.permission == 1
+          ? _c("span", { staticClass: "owner" }, [_vm._v("Owner")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.permission == 2
+          ? _c("span", { staticClass: "admin" }, [_vm._v("Admin")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.permission == 3
+          ? _c("span", { staticClass: "super-admin" }, [_vm._v("Super Admin")])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "large-3 medium-3 cell" },
+        [
+          _c(
+            "router-link",
+            {
+              attrs: { to: { name: "admin-user", params: { id: _vm.user.id } } }
+            },
+            [_vm._v("More Info")]
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6b675b69", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7966b123\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/BrewMethods.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-brew-methods" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "large-4 medium-4 cell" }, [
+          _c(
+            "a",
+            {
+              staticClass: "add-brew-method",
+              on: {
+                click: function($event) {
+                  _vm.showNewMethodModal = true
+                }
+              }
+            },
+            [_vm._v("Add Brew Method")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "grid-container" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.brewMethods, function(method) {
+            return _c("div", { staticClass: "grid-x brew-method-listing" }, [
+              _c("div", { staticClass: "large-1 medium-1 cell" }, [
+                _c("img", {
+                  staticClass: "method-icon",
+                  attrs: { src: method.icon + ".svg" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 cell" }, [
+                _vm._v("\n          " + _vm._s(method.method) + "\n        ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "large-3 medium-3 cell" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "admin-brew-method",
+                          params: { id: method.id }
+                        }
+                      }
+                    },
+                    [_vm._v("More Info")]
+                  )
+                ],
+                1
+              )
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.showNewMethodModal,
+            expression: "showNewMethodModal"
+          }
+        ],
+        staticClass: "new-brew-method-modal",
+        on: {
+          click: function($event) {
+            _vm.hideNewMethodModal()
+          }
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-box",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "grix-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Method")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.method,
+                      expression: "method"
+                    }
+                  ],
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.method },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.method = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.method,
+                        expression: "!validations.method"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a name for the brew method!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x icon-selection-container" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/aeropress" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/aeropress")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/aeropress.svg" }
+                  }),
+                  _vm._v("\n          Aeropress\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/biscuit" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/biscuit")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/biscuit.svg" }
+                  }),
+                  _vm._v("\n          Biscuit\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/bottle-of-water" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/bottle-of-water")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/bottle-of-water.svg" }
+                  }),
+                  _vm._v("\n          Bottle of Water\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/chemex" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/chemex")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/chemex.svg" }
+                  }),
+                  _vm._v("\n          Chemex\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/chocolate" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/chocolate")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/chocolate.svg" }
+                  }),
+                  _vm._v("\n          Chocolate\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cinnamon" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cinnamon")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cinnamon.svg" }
+                  }),
+                  _vm._v("\n          Cinnamon\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/clover" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/clover")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/clover.svg" }
+                  }),
+                  _vm._v("\n          Clover\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-app" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-app")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-app.svg" }
+                  }),
+                  _vm._v("\n          Coffee App\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-beans" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-beans")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-beans.svg" }
+                  }),
+                  _vm._v("\n          Coffee Beans\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-capsules" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-capsules")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-capsules.svg" }
+                  }),
+                  _vm._v("\n          Coffee Capsules\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-coctail" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-coctail")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-cocktail.svg" }
+                  }),
+                  _vm._v("\n          Coffee Cocktail\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-cup.svg" }
+                  }),
+                  _vm._v("\n          Coffee Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-is-love" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-is-love")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-is-love.svg" }
+                  }),
+                  _vm._v("\n          Coffee Is Love\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-mill" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-mill")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-mill.svg" }
+                  }),
+                  _vm._v("\n          Coffee Mill\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pack" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pack")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pack.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pack\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pods" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pods")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pods.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pods\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-pot.svg" }
+                  }),
+                  _vm._v("\n          Coffee Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-scoop" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-scoop")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-scoop.svg" }
+                  }),
+                  _vm._v("\n          Coffee Scoop\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shake" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shake")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shake.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shake\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shop-sign" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shop-sign")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shop-sign.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shop Sign\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-shop" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-shop")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-shop.svg" }
+                  }),
+                  _vm._v("\n          Coffee Shop\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-to-go" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-to-go")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-to-go.svg" }
+                  }),
+                  _vm._v("\n          Coffee To Go\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-tree" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-tree")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-tree.svg" }
+                  }),
+                  _vm._v("\n          Coffee Tree\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffee-with-cream" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-with-cream")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-with-cream.svg" }
+                  }),
+                  _vm._v("\n          Coffee With Cream\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/coffee-with-ice-cream"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffee-with-ice-cream")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffee-with-ice-cream.svg" }
+                  }),
+                  _vm._v("\n          Coffee With Ice Cream\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/coffeemaker" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/coffeemaker")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/coffeemaker.svg" }
+                  }),
+                  _vm._v("\n          Coffee Maker\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cold-brew" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cold-brew")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cold-brew.svg" }
+                  }),
+                  _vm._v("\n          Cold Brew\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/croissant" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/croissant")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/croissant.svg" }
+                  }),
+                  _vm._v("\n          Croissant\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/cupcake" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/cupcake")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/cupcake.svg" }
+                  }),
+                  _vm._v("\n          Cupcake\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/donut" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/donut")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/donut.svg" }
+                  }),
+                  _vm._v("\n          Donut\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/drip-brew" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/drip-brew")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/drip-brew.svg" }
+                  }),
+                  _vm._v("\n          Drip Brew\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/drip-kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/drip-kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/drip-kettle.svg" }
+                  }),
+                  _vm._v("\n          Drip Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/electric-kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/electric-kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/electric-kettle.svg" }
+                  }),
+                  _vm._v("\n          Electric Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso-cup.svg" }
+                  }),
+                  _vm._v("\n          Espresso Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso-tamper" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso-tamper")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso-tamper.svg" }
+                  }),
+                  _vm._v("\n          Espresso Tamper\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/espresso" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/espresso")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/espresso.svg" }
+                  }),
+                  _vm._v("\n          Espresso\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/eva-solo" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/eva-solo")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/eva-solo.svg" }
+                  }),
+                  _vm._v("\n          Eva Solo\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/fizzy-water" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/fizzy-water")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/fizzy-water.svg" }
+                  }),
+                  _vm._v("\n          Fizzy Water\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/frappe" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/frappe")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/frappe.svg" }
+                  }),
+                  _vm._v("\n          Frappe\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/french-press" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/french-press")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/french-press.svg" }
+                  }),
+                  _vm._v("\n          French Press\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/frozen-frappe" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/frozen-frappe")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/frozen-frappe.svg" }
+                  }),
+                  _vm._v("\n          Frozen Frappe\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/green-tea" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/green-tea")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/green-tea.svg" }
+                  }),
+                  _vm._v("\n          Green Tea\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/hario" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/hario")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/hario.svg" }
+                  }),
+                  _vm._v("\n          Hario\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/hot-chocolate" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/hot-chocolate")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/hot-chocolate.svg" }
+                  }),
+                  _vm._v("\n          Hot Chocolate\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/i-love-coffee" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/i-love-coffee")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/i-love-coffee.svg" }
+                  }),
+                  _vm._v("\n          I Love Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/iced-coffee_2" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/iced-coffee_2")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/iced-coffee_2.svg" }
+                  }),
+                  _vm._v("\n          Iced Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/iced-tea" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/iced-tea")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/iced-tea.svg" }
+                  }),
+                  _vm._v("\n          Iced Tea\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/instant-coffee" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/instant-coffee")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/instant-coffee.svg" }
+                  }),
+                  _vm._v("\n          Instant Coffee\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/kalita-wave" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/kalita-wave")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/kalita-wave.svg" }
+                  }),
+                  _vm._v("\n          Kalita Wave\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/kettle" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/kettle")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/kettle.svg" }
+                  }),
+                  _vm._v("\n          Kettle\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/latte_2" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/latte_2")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/latte_2.svg" }
+                  }),
+                  _vm._v("\n          Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/latte" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/latte")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/latte.svg" }
+                  }),
+                  _vm._v("\n          Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/matcha-latte" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/matcha-latte")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/matcha-latte.svg" }
+                  }),
+                  _vm._v("\n          Matcha Latte\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/milk-pitcher" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/milk-pitcher")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/milk-pitcher.svg" }
+                  }),
+                  _vm._v("\n          Milk Pitcher\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/milk-product" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/milk-product")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/milk-product.svg" }
+                  }),
+                  _vm._v("\n          Milk Product\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/moka-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/moka-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/moka-pot.svg" }
+                  }),
+                  _vm._v("\n          Moka Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/nitrous" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/nitrous")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/nitrous.svg" }
+                  }),
+                  _vm._v("\n          Nitrous\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/percolator" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/percolator")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/percolator.svg" }
+                  }),
+                  _vm._v("\n          Percolator\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/porcelain-teapot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/porcelain-teapot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/porcelain-teapot.svg" }
+                  }),
+                  _vm._v("\n          Porcelain Teapot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/portafilter" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/portafilter")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/portafilter.svg" }
+                  }),
+                  _vm._v("\n          Portafilter\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/sack-of-coffee-beans"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sack-of-coffee-beans")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sack-of-coffee-beans.svg" }
+                  }),
+                  _vm._v("\n          Sack of Coffee Beans\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/sugar-and-milk" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sugar-and-milk")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sugar-and-milk.svg" }
+                  }),
+                  _vm._v("\n          Sugar and Milk\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/sugar" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/sugar")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/sugar.svg" }
+                  }),
+                  _vm._v("\n          Sugar\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/syphon" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/syphon")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/syphon.svg" }
+                  }),
+                  _vm._v("\n          Syphon\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/take-away" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/take-away")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/take-away.svg" }
+                  }),
+                  _vm._v("\n          Take Away\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-bag-cup" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-bag-cup")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-bag-cup.svg" }
+                  }),
+                  _vm._v("\n          Tea Bag Cup\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-bag" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-bag")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-bag.svg" }
+                  }),
+                  _vm._v("\n          Tea Bag\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/tea-ceremony" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/tea-ceremony")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/tea-ceremony.svg" }
+                  }),
+                  _vm._v("\n          Tea Ceremony\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/turkish-gezve" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/turkish-gezve")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/turkish-gezve.svg" }
+                  }),
+                  _vm._v("\n          Turkish Gezve\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vacuum-pot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vacuum-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vacuum-pot.svg" }
+                  }),
+                  _vm._v("\n          Vacuum Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vending-machine" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vending-machine")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vending-machine.svg" }
+                  }),
+                  _vm._v("\n          Vending Machine\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/vietnamese-hot" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vietnamese-hot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vietnamese-hot.svg" }
+                  }),
+                  _vm._v("\n          Vietnamese Hot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: {
+                    active: _vm.icon == "/img/icons/vintage-coffee-pot"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/vintage-coffee-pot")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/vintage-coffee-pot.svg" }
+                  }),
+                  _vm._v("\n          Vintage Coffee Pot\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "large-3 medium-3 new-icon-container cell",
+                  class: { active: _vm.icon == "/img/icons/wifi" },
+                  on: {
+                    click: function($event) {
+                      _vm.selectIcon("/img/icons/wifi")
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "new-icon",
+                    attrs: { src: "/img/icons/wifi.svg" }
+                  }),
+                  _vm._v("\n          Wifi\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.icon,
+                        expression: "!validations.icon"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please select an icon for the brew method!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-method-button",
+                    on: {
+                      click: function($event) {
+                        _vm.addBrewMethod()
+                      }
+                    }
+                  },
+                  [_vm._v("Add Brew Method")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "large-8 medium-8 cell" }, [
+      _c("h3", { staticClass: "page-header" }, [_vm._v("Brew Methods")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x brew-methods-header" }, [
+      _c("div", { staticClass: "large-1 medium-1 cell" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-6 medium-6 cell" }, [
+        _vm._v("\n          Name\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "large-12 medium-12 cell" }, [
+      _c("label", [_vm._v("Icon")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7966b123", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-8d7c99f2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/cafes/ToggleCafesView.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54344,6 +62320,75 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-baa759ca\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Users.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-users" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.users, function(user, key) {
+          return _c("user", { key: user.id, attrs: { user: user } })
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c("h3", { staticClass: "page-header" }, [_vm._v("Users")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x users-header" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Name\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-4 medium-4 cell" }, [
+        _vm._v("\n        Email\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Type\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-2 medium-2 cell" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-baa759ca", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-c8946024\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54351,9 +62396,211 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "companies" } })
+  return _c("div", { attrs: { id: "admin-companies" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
+            }
+          ],
+          attrs: { type: "text", placeholder: "Search By Company Name" },
+          domProps: { value: _vm.search },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      [
+        _c("div", { staticClass: "grid-x companies-header" }, [
+          _c(
+            "div",
+            {
+              staticClass: "large-3 medium-3 cell sortable-header",
+              on: {
+                click: function($event) {
+                  _vm.resortCafes("name")
+                }
+              }
+            },
+            [
+              _vm._v("\n        Company\n        "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.sortBy == "name" && _vm.sortDirection == "ASC",
+                    expression: "sortBy == 'name' && sortDirection == 'ASC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-asc.svg" }
+              }),
+              _vm._v(" "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.sortBy == "name" && _vm.sortDirection == "DESC",
+                    expression: "sortBy == 'name' && sortDirection == 'DESC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-desc.svg" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "large-5 medium-5 cell" }, [
+            _vm._v("\n        Website\n      ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "large-2 medium-2 cell sortable-header",
+              on: {
+                click: function($event) {
+                  _vm.resortCafes("cafes")
+                }
+              }
+            },
+            [
+              _vm._v("\n        Cafes\n        "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.sortBy == "cafes" && _vm.sortDirection == "ASC",
+                    expression: "sortBy == 'cafes' && sortDirection == 'ASC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-asc.svg" }
+              }),
+              _vm._v(" "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.sortBy == "cafes" && _vm.sortDirection == "DESC",
+                    expression: "sortBy == 'cafes' && sortDirection == 'DESC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-desc.svg" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "large-2 medium-2 cell sortable-header",
+              on: {
+                click: function($event) {
+                  _vm.resortCafes("pending-actions")
+                }
+              }
+            },
+            [
+              _vm._v("\n        Actions Pending\n        "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value:
+                      _vm.sortBy == "pending-actions" &&
+                      _vm.sortDirection == "ASC",
+                    expression:
+                      "sortBy == 'pending-actions' && sortDirection == 'ASC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-asc.svg" }
+              }),
+              _vm._v(" "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value:
+                      _vm.sortBy == "pending-actions" &&
+                      _vm.sortDirection == "DESC",
+                    expression:
+                      "sortBy == 'pending-actions' && sortDirection == 'DESC'"
+                  }
+                ],
+                staticClass: "sort-icon",
+                attrs: { src: "/img/sort-desc.svg" }
+              })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.companies, function(company) {
+          return _c("company", {
+            key: company.id,
+            attrs: { company: company, search: _vm.search }
+          })
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.companies.length == 0,
+                expression: "companies.length == 0"
+              }
+            ],
+            staticClass: "large-12 medium-12 cell no-companies-available"
+          },
+          [_vm._v("\n      No companies available\n    ")]
+        )
+      ],
+      2
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _c("div", { staticClass: "large-12 medium-12 cell" }, [
+          _c("h3", { staticClass: "page-header" }, [_vm._v("Companies")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54395,13 +62642,33 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "admin-link" }, [_vm._v("\n    Users\n  ")]),
+    _vm.user.permission >= 2
+      ? _c(
+          "div",
+          { staticClass: "admin-link" },
+          [
+            _c("router-link", { attrs: { to: { name: "admin-users" } } }, [
+              _vm._v("\n      Users\n    ")
+            ])
+          ],
+          1
+        )
+      : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "admin-link" }, [
-      _vm._v("\n    Brew Methods\n  ")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "admin-link" }, [_vm._v("\n    Products\n  ")])
+    _vm.user.permission == 3
+      ? _c(
+          "div",
+          { staticClass: "admin-link" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: { name: "admin-brew-methods" } } },
+              [_vm._v("\n      Brew Methods\n    ")]
+            )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -54411,6 +62678,63 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-cb990dea", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-d5a67b70\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/companies/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "grid-x cafe-listing" }, [
+    _c("div", { staticClass: "large-3 medium-3 cell" }, [
+      _vm._v("\n    " + _vm._s(_vm.cafe.location_name) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "large-6 medium-6 cell" }, [
+      _vm._v(
+        "\n    " +
+          _vm._s(_vm.cafe.address) +
+          " " +
+          _vm._s(_vm.cafe.city) +
+          ", " +
+          _vm._s(_vm.cafe.state) +
+          "\n  "
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "large-3 medium-3 cell" },
+      [
+        _c(
+          "router-link",
+          {
+            attrs: {
+              to: {
+                name: "admin-cafe",
+                params: { id: _vm.cafe.company_id, cafeID: _vm.cafe.id }
+              }
+            }
+          },
+          [_vm._v("\n      More Info\n    ")]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d5a67b70", module.exports)
   }
 }
 
@@ -57113,6 +65437,33 @@ if (inBrowser && window.Vue) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Company.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("21e1df94", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Company.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Company.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-03743e42\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/global/PopOut.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57157,6 +65508,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeDeleted.vue", function() {
      var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-04edff6d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActionCafeDeleted.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("77e3f00a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cafe.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cafe.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -57238,6 +65616,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12aa39e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./IndividualCafeMap.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12aa39e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./IndividualCafeMap.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/User.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("aac7e908", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./User.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./User.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -57346,6 +65751,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b3121c9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./LoginModal.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b3121c9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./LoginModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Company.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("578401a0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Company.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Company.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -57626,6 +66058,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethod.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethod.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("4ba9c7b3", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BrewMethod.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BrewMethod.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-648b12e7\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/layouts/Admin.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57788,6 +66247,60 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/users/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/users/User.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("3cd8f5a0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./User.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./User.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethods.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethods.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("375bb408", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BrewMethods.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BrewMethods.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8d7c99f2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/ToggleCafesView.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57805,6 +66318,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8d7c99f2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ToggleCafesView.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8d7c99f2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ToggleCafesView.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Users.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Users.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("753f3d86", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -57859,6 +66399,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navigation.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cb990dea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navigation.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Cafe.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("5db027c4", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cafe.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cafe.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -70164,6 +78731,181 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/api/admin/brewMethods.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/admin/brew-methods
+  */
+  getBrewMethods: function getBrewMethods() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/brew-methods');
+  },
+
+  /*
+    GET   /api/v1/admin/brew-methods/{method}
+  */
+  getBrewMethod: function getBrewMethod(id) {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/brew-methods/' + id);
+  },
+
+  /*
+    POST  /api/v1/admin/brew-methods
+  */
+  postAddBrewMethod: function postAddBrewMethod(method, icon) {
+    return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/brew-methods', {
+      method: method,
+      icon: icon
+    });
+  },
+
+  /*
+    PUT   /api/v1/admin/brew-methods/{method}
+  */
+  putUpdateBrewMethod: function putUpdateBrewMethod(id, method, icon) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/brew-methods/' + id, {
+      method: method,
+      icon: icon
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/api/admin/cafes.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+		/*
+    GET   /api/v1/admin/companies/{companyID}/cafes/{cafeID}
+  */
+		getCafe: function getCafe(companyID, cafeID) {
+				return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies/' + companyID + '/cafes/' + cafeID);
+		},
+
+		/*
+   PUT 	/api/v1/admin/companies/{companyID/cafes/{cafeID}
+  */
+		putUpdateCafe: function putUpdateCafe(companyID, cafeID, locationName, address, city, state, zip, tea, matcha, brewMethods, deleted) {
+				/*
+    	Initialize the form data
+    */
+				var formData = new FormData();
+
+				/*
+    	Add the form data we need to submit
+    */
+				formData.append('company_id', companyID);
+				formData.append('location_name', locationName);
+				formData.append('address', address);
+				formData.append('city', city);
+				formData.append('state', state);
+				formData.append('zip', zip);
+				formData.append('brew_methods', JSON.stringify(brewMethods));
+				formData.append('matcha', matcha);
+				formData.append('tea', tea);
+				formData.append('deleted', deleted);
+				formData.append('_method', 'PUT');
+
+				return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies/' + companyID + '/cafes/' + cafeID, formData);
+		}
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/api/admin/companies.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/admin/companies
+  */
+  getCompanies: function getCompanies() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies');
+  },
+
+  /*
+    GET   /api/v1/admin/companies/{id}
+  */
+  getCompany: function getCompany(id) {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies/' + id);
+  },
+
+  /*
+    PUT   /api/v1/admin/companies/{id}
+  */
+  putUpdateCompany: function putUpdateCompany(id, name, type, website, owners, deleted) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies/' + id, {
+      name: name,
+      type: type,
+      website: website,
+      owners: owners,
+      deleted: deleted
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/api/admin/users.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/admin/users
+  */
+  getUsers: function getUsers() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/users');
+  },
+
+  /*
+    GET   /api/v1/admin/users/{id}
+  */
+  getUser: function getUser(id) {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/users/' + id);
+  },
+
+  /*
+    PUT   /api/v1/admin/users/{id}
+  */
+  putUpdateUser: function putUpdateUser(id, permission, companies) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/users/' + id, {
+      permission: permission,
+      companies: companies
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/api/brewMethod.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -70709,6 +79451,162 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-651aa4f6", Component.options)
   } else {
     hotAPI.reload("data-v-651aa4f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/companies/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d5a67b70\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Cafe.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/companies/Cafe.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-d5a67b70\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/companies/Cafe.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/companies/Cafe.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d5a67b70", Component.options)
+  } else {
+    hotAPI.reload("data-v-d5a67b70", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/companies/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-008d0f22\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/companies/Company.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/companies/Company.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-008d0f22\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/companies/Company.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/companies/Company.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-008d0f22", Component.options)
+  } else {
+    hotAPI.reload("data-v-008d0f22", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/admin/users/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b675b69\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/admin/users/User.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/admin/users/User.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6b675b69\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/admin/users/User.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/users/User.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6b675b69", Component.options)
+  } else {
+    hotAPI.reload("data-v-6b675b69", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -71952,7 +80850,7 @@ var actions = {
   },
 
   /*
-    Defines the mutations used by the Vuex modeule
+    Defines the mutations used by the Vuex module
   */
   mutations: {
     /*
@@ -72014,6 +80912,733 @@ var actions = {
     */
     getActionDeniedStatus: function getActionDeniedStatus(state) {
       return state.actionDeniedStatus;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/admin/brewMethods.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return brewMethods; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_brewMethods_js__ = __webpack_require__("./resources/assets/js/api/admin/brewMethods.js");
+var _getters;
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }return obj;
+}
+
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/brewMethods.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin brew methods
+*/
+
+
+var brewMethods = {
+  /*
+    Defines the state monitored for the module.
+  */
+  state: {
+    brewMethods: [],
+    brewMethodsLoadStatus: 0,
+
+    brewMethod: {},
+    brewMethodLoadStatus: 0,
+
+    brewMethodAddStatus: 0,
+    brewMethodUpdateStatus: 0
+  },
+
+  /*
+    Defines the actions that can mutate the state.
+  */
+  actions: {
+    /*
+      Loads the brew methods.
+    */
+    loadAdminBrewMethods: function loadAdminBrewMethods(_ref) {
+      var commit = _ref.commit;
+
+      commit('setAdminBrewMethodsLoadStatus', 1);
+
+      /*
+        Calls the API to load the admin brew methods.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_brewMethods_js__["a" /* default */].getBrewMethods().then(function (response) {
+        /*
+          Commit a successful response with the brew methods.
+        */
+        commit('setAdminBrewMethods', response.data);
+        commit('setAdminBrewMethodsLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setAdminBrewMethods', []);
+        commit('setAdminBrewMethodsLoadStatus', 3);
+      });
+    },
+
+    /*
+      Loads a brew method.
+    */
+    loadAdminBrewMethod: function loadAdminBrewMethod(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setAdminBrewMethodLoadStatus', 1);
+
+      /*
+        Calls the API to load the brew method.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_brewMethods_js__["a" /* default */].getBrewMethod(data.id).then(function (response) {
+        /*
+          Commits a successful response with the brew method.
+        */
+        commit('setAdminBrewMethod', response.data);
+        commit('setAdminBrewMethodLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commits a failed response and clear the data.
+        */
+        commit('setAdminBrewMethod', {});
+        commit('setAdminBrewMethodLoadStatus', 3);
+      });
+    },
+
+    /*
+      Updates a brew method.
+    */
+    updateAdminBrewMethod: function updateAdminBrewMethod(_ref3, data) {
+      var commit = _ref3.commit;
+
+      commit('setAdminBrewMethodUpdateStatus', 1);
+
+      /*
+        Calls the API to update a brew method.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_brewMethods_js__["a" /* default */].putUpdateBrewMethod(data.id, data.method, data.icon).then(function (response) {
+        /*
+          Commits a successful response.
+        */
+        commit('setAdminBrewMethod', response.data);
+        commit('setAdminBrewMethodUpdateStatus', 2);
+      }).catch(function () {
+        /*
+          Commits a failed response.
+        */
+        commit('setAdminBrewMethod', {});
+        commit('setAdminBrewMethodUpdateStatus', 3);
+      });
+    },
+
+    /*
+      Adds a brew method.
+    */
+    addAdminBrewMethod: function addAdminBrewMethod(_ref4, data) {
+      var commit = _ref4.commit,
+          state = _ref4.state,
+          dispatch = _ref4.dispatch;
+
+      commit('setAdminBrewMethodAddedStatus', 1);
+
+      /*
+        Calls the API to add a brew method.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_brewMethods_js__["a" /* default */].postAddBrewMethod(data.method, data.icon).then(function (response) {
+        commit('setAdminBrewMethodAddedStatus', 2);
+        dispatch('loadAdminBrewMethods');
+      }).catch(function () {
+        commit('setAdminBrewMethodAddedStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex module.
+  */
+  mutations: {
+    /*
+      Sets the admin brew methods load status.
+    */
+    setAdminBrewMethodsLoadStatus: function setAdminBrewMethodsLoadStatus(state, status) {
+      state.brewMethodsLoadStatus = status;
+    },
+
+    /*
+      Sets the admin brew methods.
+    */
+    setAdminBrewMethods: function setAdminBrewMethods(state, methods) {
+      state.brewMethods = methods;
+    },
+
+    /*
+      Set the brew method load status.
+    */
+    setAdminBrewMethodLoadStatus: function setAdminBrewMethodLoadStatus(state, status) {
+      state.brewMethodLoadStatus = status;
+    },
+
+    /*
+      Sets the admin brew method.
+    */
+    setAdminBrewMethod: function setAdminBrewMethod(state, method) {
+      state.brewMethod = method;
+    },
+
+    /*
+      Sets the admin brew method update status.
+    */
+    setAdminBrewMethodUpdateStatus: function setAdminBrewMethodUpdateStatus(state, status) {
+      state.brewMethodUpdateStatus = status;
+    },
+
+    /*
+      Sets the admin brew method add status.
+    */
+    setAdminBrewMethodAddedStatus: function setAdminBrewMethodAddedStatus(state, status) {
+      state.brewMethodAddStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters used by the Vuex module.
+  */
+  getters: (_getters = {
+    /*
+      Gets the admin brew method load status
+    */
+    getAdminBrewMethodLoadStatus: function getAdminBrewMethodLoadStatus(state) {
+      return state.brewMethodsLoadStatus;
+    },
+
+    /*
+      Gets the admin brew methods
+    */
+    getAdminBrewMethods: function getAdminBrewMethods(state) {
+      return state.brewMethods;
+    }
+  }, _defineProperty(_getters, 'getAdminBrewMethodLoadStatus', function getAdminBrewMethodLoadStatus(state) {
+    return state.brewMethodLoadStatus;
+  }), _defineProperty(_getters, 'getAdminBrewMethod', function getAdminBrewMethod(state) {
+    return state.brewMethod;
+  }), _defineProperty(_getters, 'getAdminBrewMethodUpdateStatus', function getAdminBrewMethodUpdateStatus(state) {
+    return state.brewMethodUpdateStatus;
+  }), _defineProperty(_getters, 'getAdminBrewMethodAddedStatus', function getAdminBrewMethodAddedStatus(state) {
+    return state.brewMethodAddStatus;
+  }), _getters)
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/admin/cafes.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cafes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_cafes_js__ = __webpack_require__("./resources/assets/js/api/admin/cafes.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/cafes.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin companies
+*/
+
+
+var cafes = {
+  /*
+    Defines the state monitored for the module.
+  */
+  state: {
+    cafe: {},
+    cafeLoadStatus: 0,
+
+    cafeEditStatus: 0
+  },
+
+  /*
+    Defines the actions that can mutate the state.
+  */
+  actions: {
+    /*
+      Loads the cafe from the admin side
+    */
+    loadAdminCafe: function loadAdminCafe(_ref, data) {
+      var commit = _ref.commit;
+
+      commit('setAdminCafeLoadStatus', 1);
+
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cafes_js__["a" /* default */].getCafe(data.company_id, data.cafe_id).then(function (response) {
+        /*
+          Commits a successful response with the cafe.
+        */
+        commit('setAdminCafe', response.data);
+        commit('setAdminCafeLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setAdminCafe', {});
+        commit('setAdminCafeLoadStatus', 3);
+      });
+    },
+
+    /*
+      Updates an admin cafe
+    */
+    updateAdminCafe: function updateAdminCafe(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setAdminCafeEditStatus', 1);
+
+      /*
+        Calls the API to update an admin cafe.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cafes_js__["a" /* default */].putUpdateCafe(data.company_id, data.id, data.location_name, data.address, data.city, data.state, data.zip, data.tea, data.matcha, data.brew_methods, data.deleted).then(function (response) {
+        commit('setAdminCafe', response.data);
+        commit('setAdminCafeEditStatus', 2);
+      }).catch(function () {
+        commit('setAdminCafeEditStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex module.
+  */
+  mutations: {
+    /*
+      Sets the cafe load status.
+    */
+    setAdminCafeLoadStatus: function setAdminCafeLoadStatus(state, status) {
+      state.cafeLoadStatus = status;
+    },
+
+    /*
+      Sets the cafe.
+    */
+    setAdminCafe: function setAdminCafe(state, cafe) {
+      state.cafe = cafe;
+    },
+
+    /*
+      Sets the cafe edit status
+    */
+    setAdminCafeEditStatus: function setAdminCafeEditStatus(state, status) {
+      state.cafeEditStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters used by the Vuex module.
+  */
+  getters: {
+    /*
+      Returns the cafe load status.
+    */
+    getAdminCafeLoadStatus: function getAdminCafeLoadStatus(state) {
+      return state.cafeLoadStatus;
+    },
+
+    /*
+      Returns the cafe
+    */
+    getAdminCafe: function getAdminCafe(state) {
+      return state.cafe;
+    },
+
+    /*
+      Returns the edit status.
+    */
+    getAdminCafeEditStatus: function getAdminCafeEditStatus(state) {
+      return state.cafeEditStatus;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/admin/companies.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return companies; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_companies_js__ = __webpack_require__("./resources/assets/js/api/admin/companies.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/companies.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin companies
+*/
+
+
+var companies = {
+  /*
+    Defines the state monitored for the module.
+  */
+  state: {
+    companies: [],
+    companiesLoadStatus: 0,
+
+    company: {},
+    companyLoadStatus: 0,
+
+    companyEditStatus: 0
+  },
+
+  /*
+    Define the actions that can mutate the state.
+  */
+  actions: {
+    /*
+      Loads the admin companies.
+    */
+    loadAdminCompanies: function loadAdminCompanies(_ref) {
+      var commit = _ref.commit;
+
+      commit('setCompaniesLoadStatus', 1);
+
+      /*
+        Calls the API to load the admin companies.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_companies_js__["a" /* default */].getCompanies().then(function (response) {
+        /*
+          Commit a successful response with the companies.
+        */
+        commit('setCompanies', response.data);
+        commit('setCompaniesLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setCompanies', []);
+        commit('setCompaniesLoadStatus', 3);
+      });
+    },
+
+    /*
+      Loads an admin company
+    */
+    loadAdminCompany: function loadAdminCompany(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setCompanyLoadStatus', 1);
+
+      /*
+        Calls the API to load an admin company.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_companies_js__["a" /* default */].getCompany(data.id).then(function (response) {
+        /*
+          Commit a successful response with the company.
+        */
+        commit('setCompany', response.data);
+        commit('setCompanyLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setCompany', {});
+        commit('setCompanyLoadStatus', 3);
+      });
+    },
+
+    /*
+      Updates an admin company
+    */
+    updateAdminCompany: function updateAdminCompany(_ref3, data) {
+      var commit = _ref3.commit;
+
+      commit('setCompanyEditStatus', 1);
+
+      /*
+        Calls the API to update an admin company.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_companies_js__["a" /* default */].putUpdateCompany(data.id, data.name, data.type, data.website, data.owners, data.deleted).then(function (response) {
+        commit('setCompany', response.data);
+        commit('setCompanyEditStatus', 2);
+      }).catch(function () {
+        /*
+          Set a failed response.
+        */
+        commit('setCompanyEditStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex module.
+  */
+  mutations: {
+    /*
+      Sets the companies load status.
+    */
+    setCompaniesLoadStatus: function setCompaniesLoadStatus(state, status) {
+      state.companiesLoadStatus = status;
+    },
+
+    /*
+      Sets the companies
+    */
+    setCompanies: function setCompanies(state, companies) {
+      state.companies = companies;
+    },
+
+    /*
+      Sets the company load status.
+    */
+    setCompanyLoadStatus: function setCompanyLoadStatus(state, status) {
+      state.companyLoadStatus = status;
+    },
+
+    /*
+      Sets the company
+    */
+    setCompany: function setCompany(state, company) {
+      state.company = company;
+    },
+
+    /*
+      Sets the company edited status
+    */
+    setCompanyEditStatus: function setCompanyEditStatus(state, status) {
+      state.companyEditStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters used by the Vuex module.
+  */
+  getters: {
+    /*
+      Returns the companies
+    */
+    getCompanies: function getCompanies(state) {
+      return state.companies;
+    },
+
+    /*
+      Get Companies load status.
+    */
+    getCompaniesLoadStatus: function getCompaniesLoadStatus(state) {
+      return state.companiesLoadStatus;
+    },
+
+    /*
+      Get company
+    */
+    getCompany: function getCompany(state) {
+      return state.company;
+    },
+
+    /*
+      Get company load status.
+    */
+    getCompanyLoadStatus: function getCompanyLoadStatus(state) {
+      return state.companyLoadStatus;
+    },
+
+    /*
+      Gets the company edited status.
+    */
+    getCompanyEditStatus: function getCompanyEditStatus(state) {
+      return state.companyEditStatus;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/admin/users.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return users; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_users_js__ = __webpack_require__("./resources/assets/js/api/admin/users.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/users.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin users
+*/
+
+
+var users = {
+  /*
+    Defines the state monitored for the module.
+  */
+  state: {
+    users: [],
+    usersLoadStatus: 0,
+
+    user: {},
+    userLoadStatus: 0,
+
+    userUpdateStatus: 0
+  },
+
+  /*
+    Define the actions that can mutate the state.
+  */
+  actions: {
+    /*
+      Loads the users.
+    */
+    loadAdminUsers: function loadAdminUsers(_ref) {
+      var commit = _ref.commit;
+
+      commit('setAdminUsersLoadStatus', 1);
+
+      /*
+        Calls the API to load the admin users.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_users_js__["a" /* default */].getUsers().then(function (response) {
+        /*
+          Commit a successful response with the users.
+        */
+        commit('setAdminUsers', response.data);
+        commit('setAdminUsersLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setAdminUsers', []);
+        commit('setAdminUsersLoadStatus', 3);
+      });
+    },
+
+    /*
+      Loads a user.
+    */
+    loadAdminUser: function loadAdminUser(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setAdminUserLoadStatus', 1);
+
+      /*
+        Calls the API to load the admin user.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_users_js__["a" /* default */].getUser(data.id).then(function (response) {
+        /*
+          Commits a successful response with the user.
+        */
+        commit('setAdminUser', response.data);
+        commit('setAdminUserLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response and clear the data.
+        */
+        commit('setAdminUser', {});
+        commit('setAdminUserLoadStatus', 3);
+      });
+    },
+
+    /*
+      Updates a user.
+    */
+    updateAdminUser: function updateAdminUser(_ref3, data) {
+      var commit = _ref3.commit;
+
+      commit('setAdminUserUpdateStatus', 1);
+
+      /*
+        Calls the API to update the admin user.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_users_js__["a" /* default */].putUpdateUser(data.id, data.permission, data.companies).then(function (response) {
+        commit('setAdminUser', response.data);
+        commit('setAdminUserUpdateStatus', 2);
+      }).catch(function () {
+        /*
+          Commit a failed response.
+        */
+        commit('setAdminUserUpdateStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex module.
+  */
+  mutations: {
+    /*
+      Sets the users load status.
+    */
+    setAdminUsersLoadStatus: function setAdminUsersLoadStatus(state, status) {
+      state.usersLoadStatus = status;
+    },
+
+    /*
+      Sets the users
+    */
+    setAdminUsers: function setAdminUsers(state, users) {
+      state.users = users;
+    },
+
+    /*
+      Sets the user load status.
+    */
+    setAdminUserLoadStatus: function setAdminUserLoadStatus(state, status) {
+      state.userLoadStatus = status;
+    },
+
+    /*
+      Sets the user.
+    */
+    setAdminUser: function setAdminUser(state, user) {
+      state.user = user;
+    },
+
+    /*
+      Sets the admin user update status.
+    */
+    setAdminUserUpdateStatus: function setAdminUserUpdateStatus(state, status) {
+      state.userUpdateStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters used by the Vuex module.
+  */
+  getters: {
+    /*
+      Returns the users.
+    */
+    getAdminUsers: function getAdminUsers(state) {
+      return state.users;
+    },
+
+    /*
+      Return the users load status.
+    */
+    getAdminUsersLoadStatus: function getAdminUsersLoadStatus(state) {
+      return state.usersLoadStatus;
+    },
+
+    /*
+      Return the user.
+    */
+    getAdminUser: function getAdminUser(state) {
+      return state.user;
+    },
+
+    /*
+      Return the user load status.
+    */
+    getAdminUserLoadStatus: function getAdminUserLoadStatus(state) {
+      return state.userLoadStatus;
+    },
+
+    /*
+      Return the user update status.
+    */
+    getAdminUserUpdateStatus: function getAdminUserUpdateStatus(state) {
+      return state.userUpdateStatus;
     }
   }
 };
@@ -73182,6 +82807,162 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/pages/admin/BrewMethod.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ea2f000\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethod.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/BrewMethod.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5ea2f000\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/BrewMethod.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/BrewMethod.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5ea2f000", Component.options)
+  } else {
+    hotAPI.reload("data-v-5ea2f000", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/BrewMethods.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7966b123\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/BrewMethods.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/BrewMethods.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7966b123\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/BrewMethods.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/BrewMethods.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7966b123", Component.options)
+  } else {
+    hotAPI.reload("data-v-7966b123", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/Cafe.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Cafe.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-109d83da\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Cafe.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/Cafe.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-109d83da", Component.options)
+  } else {
+    hotAPI.reload("data-v-109d83da", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -73223,6 +83004,162 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-c8946024", Component.options)
   } else {
     hotAPI.reload("data-v-c8946024", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/Company.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31c9e760\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Company.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Company.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-31c9e760\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Company.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/Company.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-31c9e760", Component.options)
+  } else {
+    hotAPI.reload("data-v-31c9e760", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/User.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15a52f08\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/User.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/User.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-15a52f08\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/User.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/User.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15a52f08", Component.options)
+  } else {
+    hotAPI.reload("data-v-15a52f08", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/Users.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-baa759ca\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Users.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Users.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-baa759ca\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Users.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/Users.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-baa759ca", Component.options)
+  } else {
+    hotAPI.reload("data-v-baa759ca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -73429,7 +83366,50 @@ function requireAuth(to, from, next) {
 			meta: {
 				permission: 'owner'
 			}
+		}, {
+			path: 'companies/:id',
+			name: 'admin-company',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminCompany', __webpack_require__("./resources/assets/js/pages/admin/Company.vue")),
+			meta: {
+				permission: 'owner'
+			}
+		}, {
+			path: 'companies/:id/cafe/:cafeID',
+			name: 'admin-cafe',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminCafe', __webpack_require__("./resources/assets/js/pages/admin/Cafe.vue")),
+			meta: {
+				permission: 'owner'
+			}
+		}, {
+			path: 'users',
+			name: 'admin-users',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminUsers', __webpack_require__("./resources/assets/js/pages/admin/Users.vue")),
+			meta: {
+				permission: 'admin'
+			}
+		}, {
+			path: 'users/:id',
+			name: 'admin-user',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminUser', __webpack_require__("./resources/assets/js/pages/admin/User.vue")),
+			meta: {
+				permission: 'admin'
+			}
+		}, {
+			path: 'brew-methods',
+			name: 'admin-brew-methods',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminBrewMethods', __webpack_require__("./resources/assets/js/pages/admin/BrewMethods.vue")),
+			meta: {
+				permission: 'super-admin'
+			}
+		}, {
+			path: 'brew-methods/:id',
+			name: 'admin-brew-method',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminBrewMethod', __webpack_require__("./resources/assets/js/pages/admin/BrewMethod.vue")),
+			meta: {
+				permission: 'super-admin'
+			}
 		},
+
 		/*
   	Catch Alls
   */

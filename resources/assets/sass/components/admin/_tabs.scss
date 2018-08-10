@@ -1,0 +1,23 @@
+div.admin-tabs{
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+
+  div.tab{
+    display: inline-block;
+    color: $black;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+
+    &:hover{
+      color: white;
+      background-color: $secondary-color;
+    }
+
+    &.active-tab{
+      color: white;
+      background-color: $secondary-color;
+    }
+  }
+}

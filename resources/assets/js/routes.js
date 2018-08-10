@@ -197,6 +197,55 @@ export default new VueRouter({
 						permission: 'owner'
 					}
 				},
+				{
+					path: 'companies/:id',
+					name: 'admin-company',
+					component: Vue.component( 'AdminCompany', require( './pages/admin/Company.vue' ) ),
+					meta: {
+						permission: 'owner'
+					}
+				},
+				{
+					path: 'companies/:id/cafe/:cafeID',
+					name: 'admin-cafe',
+					component: Vue.component( 'AdminCafe', require( './pages/admin/Cafe.vue' ) ),
+					meta: {
+						permission: 'owner'
+					}
+				},
+				{
+					path: 'users',
+					name: 'admin-users',
+					component: Vue.component( 'AdminUsers', require( './pages/admin/Users.vue' ) ),
+					meta: {
+						permission: 'admin'
+					}
+				},
+				{
+					path: 'users/:id',
+					name: 'admin-user',
+					component: Vue.component( 'AdminUser', require( './pages/admin/User.vue' ) ),
+					meta: {
+						permission: 'admin'
+					}
+				},
+				{
+					path: 'brew-methods',
+					name: 'admin-brew-methods',
+					component: Vue.component( 'AdminBrewMethods', require( './pages/admin/BrewMethods.vue' ) ),
+					meta: {
+						permission: 'super-admin'
+					}
+				},
+				{
+					path: 'brew-methods/:id',
+					name: 'admin-brew-method',
+					component: Vue.component( 'AdminBrewMethod', require( './pages/admin/BrewMethod.vue' ) ),
+					meta: {
+						permission: 'super-admin'
+					}
+				},
+
 				/*
 					Catch Alls
 				*/

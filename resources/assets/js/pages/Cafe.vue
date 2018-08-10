@@ -47,33 +47,6 @@
       margin-bottom: 10px;
     }
 
-    div.location-type{
-      color: white;
-      font-family: "Lato", sans-serif;
-      font-size: 16px;
-      width: 105px;
-      height: 45px;
-      text-align: center;
-      line-height: 45px;
-      border-radius: 3px;
-
-      img{
-        margin-right: 5px;
-      }
-
-      &.roaster{
-        background-color: $secondary-color;
-      }
-
-      &.cafe{
-        background-color: #3D281E;
-
-        img{
-          margin-top: -6px;
-        }
-      }
-    }
-
     div.address-container{
       color: #666666;
       font-size: 18px;

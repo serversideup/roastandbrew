@@ -106,10 +106,42 @@ div.option div.option-container span.option-name {
   vertical-align: middle;
 }
 
+div.location-type {
+  color: white;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  width: 105px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  border-radius: 3px;
+}
+
+div.location-type img {
+  margin-right: 5px;
+}
+
+div.location-type.roaster {
+  background-color: #E8635F;
+}
+
+div.location-type.cafe {
+  background-color: #3D281E;
+}
+
+div.location-type.cafe img {
+  margin-top: -6px;
+}
+
 h3.page-header {
   font-weight: bold;
   font-family: "Lato", sans-serif;
   margin-bottom: 30px;
+  font-size: 20px;
+}
+
+h3.page-header a {
+  color: black;
 }
 
 div.action-cafe-detail {
@@ -148,6 +180,30 @@ div.action-cafe-detail span.action-information {
   margin-top: 10px;
   font-style: italic;
   font-family: "Lato", sans-serif;
+}
+
+div.admin-tabs {
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+
+div.admin-tabs div.tab {
+  display: inline-block;
+  color: #111111;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+div.admin-tabs div.tab:hover {
+  color: white;
+  background-color: #E8635F;
+}
+
+div.admin-tabs div.tab.active-tab {
+  color: white;
+  background-color: #E8635F;
 }
 
 /**

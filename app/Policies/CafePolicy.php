@@ -86,4 +86,23 @@ class CafePolicy
         return false;
       }
     }
+
+    /**
+     * Determines if the admin can view the cafe. This is an admin
+     * only route.
+     *
+     * @param  \App\Models\User   $user;
+     * @param  \App\Models\Cafe   $cafe;
+     * @return bool
+     */
+     public function view( User $user, Cafe $cafe ){
+       if( $user->permission == 2 || $user->permission == 3 ){
+         return true;
+       }else if( $user->companiesOwned->contains( $cafe->company_id ) ){
+         return true;
+       }else{
+         return false;
+       }
+     }
+
 }

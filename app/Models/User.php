@@ -53,15 +53,15 @@ class User extends Authenticatable
     /**
      * A user can perform many actions.
      */
-    public function cafeActions(){
-      return $this->hasMany( 'App\Models\CafeAction', 'id', 'user_id' );
+    public function actions(){
+      return $this->hasMany( 'App\Models\Action', 'id', 'user_id' );
     }
 
     /**
      * A user can process many actions.
      */
-    public function cafeActionsProcessed(){
-      return $this->hasMany( 'App\Models\CafeAction', 'id', 'processed_by' );
+    public function actionsProcessed(){
+      return $this->hasMany( 'App\Models\Action', 'id', 'processed_by' );
     }
 
     /**

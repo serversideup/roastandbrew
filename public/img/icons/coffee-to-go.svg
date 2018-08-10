@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="243px" height="330px" viewBox="0 0 243 330" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>coffee to go</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="coffee-to-go" fill-rule="nonzero">
+            <g id="Group">
+                <polygon id="Shape" fill="#FFFFFF" points="215 34 203.9 6.1 127.4 6.1 38.1 6.1 27 34 5.4 55.9 5.4 81.4 127.4 81.4 236.6 81.4 236.6 55.9"></polygon>
+                <polygon id="Shape" fill="#FFFFFF" points="141.5 81.4 100.5 81.4 25.3 81.4 45.8 297 100.5 297 141.5 297 196.2 297 216.7 81.4"></polygon>
+                <rect id="Rectangle-path" fill="#FFFFFF" x="45.8" y="297" width="150.5" height="27"></rect>
+                <path d="M201.2,302.4 L40.8,302.4 L19.2,75.9 L222.6,75.9 L201.2,302.4 Z M50.8,291.5 L191.2,291.5 L210.7,86.9 L31.3,86.9 L50.8,291.5 Z" id="Shape" fill="#3A3033"></path>
+                <path d="M201.8,329.4 L40.3,329.4 L40.3,291.5 L201.7,291.5 L201.7,329.4 L201.8,329.4 Z M51.3,318.5 L190.8,318.5 L190.8,302.5 L51.3,302.5 L51.3,318.5 Z" id="Shape" fill="#3A3033"></path>
+                <path d="M242,86.9 L0,86.9 L0,53.7 L22.4,31 L34.5,0.7 L207.6,0.7 L219.7,31 L242.1,53.7 L242.1,86.9 L242,86.9 Z M10.9,75.9 L231.1,75.9 L231.1,58.1 L210.3,37 L200.1,11.5 L41.9,11.5 L31.7,37 L10.9,58.1 L10.9,75.9 Z" id="Shape" fill="#3A3033"></path>
+                <rect id="Rectangle-path" fill="#3A3033" x="27" y="28.5" width="188" height="10.9"></rect>
+                <rect id="Rectangle-path" fill="#3A3033" x="5.4" y="50.4" width="231.1" height="10.9"></rect>
+            </g>
+            <polygon id="Shape" fill="#9D705C" points="129.6 124.5 116.1 124.5 13.5 124.5 25.8 250 116.1 250 129.6 250 216.2 250 228.5 124.5"></polygon>
+            <path d="M221.1,255.4 L20.9,255.4 L7.4,119 L234.5,119 L221.1,255.4 Z M30.8,244.5 L211.2,244.5 L222.5,129.9 L19.5,129.9 L30.8,244.5 Z" id="Shape" fill="#3A3033"></path>
+        </g>
+    </g>
+</svg>

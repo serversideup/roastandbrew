@@ -9,8 +9,14 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Models\Cafe;
 use App\Policies\CafePolicy;
 
-use App\Models\CafeAction;
-use App\Policies\CafeActionPolicy;
+use App\Models\Action;
+use App\Policies\ActionPolicy;
+
+use App\Models\Company;
+use App\Policies\CompanyPolicy;
+
+use App\Models\User;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,7 +27,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Cafe::class => CafePolicy::class,
-        CafeAction::class => CafeActionPolicy::class
+        Action::class => ActionPolicy::class,
+        Company::class => CompanyPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**

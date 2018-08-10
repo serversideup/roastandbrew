@@ -44,4 +44,11 @@ class Company extends Model
 	public function ownedBy(){
 		return $this->belongsToMany( 'App\Models\User', 'companies_owners', 'company_id', 'user_id' );
 	}
+
+	/**
+	 * A company has many actions.
+	 */
+	public function actions(){
+		return $this->hasMany( 'App\Models\Action', 'company_id', 'id' );
+	}
 }

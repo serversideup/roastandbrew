@@ -90,7 +90,7 @@ export const actions = {
   },
 
   /*
-    Defines the mutations used by the Vuex modeule
+    Defines the mutations used by the Vuex module
   */
   mutations: {
     /*

@@ -14,13 +14,13 @@ use App\Http\Controllers\Controller;
 */
 use App\Models\Company;
 use App\Models\Cafe;
-use App\Models\CafeAction;
+use App\Models\Action;
 
 /*
   Defines the servies used in the controller
 */
 use App\Services\CafeService;
-use App\Services\CafeActionService;
+use App\Services\ActionService;
 
 /*
   Uses the Auth facade.
@@ -43,7 +43,7 @@ class ActionsController extends Controller
       processed.
     */
     if( Auth::user()->permission >= 2 ){
-      $actions = CafeAction::with(['cafe' => function( $query ){
+      $actions = Action::with(['cafe' => function( $query ){
                                 $query->with('brewMethods');
                             }])
                             ->with('company')
@@ -54,7 +54,7 @@ class ActionsController extends Controller
       /*
         Geta all of the un processed actions owned by the user.
       */
-      $actions = CafeAction::with(['cafe' => function( $query ){
+      $actions = Action::with(['cafe' => function( $query ){
                                 $query->with('brewMethods');
                             }])
                            ->with('company')
@@ -72,9 +72,9 @@ class ActionsController extends Controller
    * URL: /api/v1/admin/actions/{action}/approve
    * Method: PUT
    *
-   * @param \App\Models\CafeAction $action
+   * @param \App\Models\Action $action
    */
-  public function putApproveAction( CafeAction $action ){
+  public function putApproveAction( Action $action ){
     /*
       Determine the proper action based on action type.
     */
@@ -83,38 +83,38 @@ class ActionsController extends Controller
         /*
           Unserialize the new cafe data
         */
-        $newCafeActionData = json_decode( $action->content, true );
+        $newActionData = json_decode( $action->content, true );
 
         /*
           Add the cafe
         */
-        CafeService::addCafe( $newCafeActionData, $action->user_id );
+        CafeService::addCafe( $newActionData, $action->user_id );
 
         /*
           Approve the action
         */
-        CafeActionService::approveAction( $action );
+        ActionService::approveAction( $action );
       break;
       case 'cafe-updated':
         /*
           Unserialize the content.
         */
-        $cafeActionData = json_decode( $action->content, true );
+        $actionData = json_decode( $action->content, true );
 
         /*
           Get the updated data for the cafe.
         */
-        $updatedCafeActionData = $cafeActionData['after'];
+        $updatedActionData = $actionData['after'];
 
         /*
           Apply updates to the cafe
         */
-        CafeService::editCafe( $action->cafe_id, $updatedCafeActionData );
+        CafeService::editCafe( $action->cafe_id, $updatedActionData );
 
         /*
           Approve the action
         */
-        CafeActionService::approveAction( $action );
+        ActionService::approveAction( $action );
       break;
       case 'cafe-deleted':
         /*
@@ -128,7 +128,7 @@ class ActionsController extends Controller
         /*
           Approve the action
         */
-        CafeActionService::approveAction( $action );
+        ActionService::approveAction( $action );
       break;
     }
 
@@ -143,13 +143,13 @@ class ActionsController extends Controller
    * URL: /api/v1/admin/actions/{action}/deny
    * Method: PUT
    *
-   * @param \App\Models\CafeAction $action
+   * @param \App\Models\Action $action
    */
-  public function putDenyAction( CafeAction $action ){
+  public function putDenyAction( Action $action ){
     /*
       Denies the action
     */
-    CafeActionService::denyAction( $action );
+    ActionService::denyAction( $action );
 
     /*
       Returns a successful no content response.

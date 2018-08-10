@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="222px" height="294px" viewBox="0 0 222 294" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>iced tea</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iced-tea" fill-rule="nonzero">
+            <path d="M111,5.5 L6.1,5.5 L17.1,119 C18,127.8 23.2,135.6 31,139.8 C38.3,143.7 43.4,150.7 44.7,158.9 L63.5,273.6 L111,273.6 L158.5,273.6 L177.3,158.9 C178.6,150.7 183.7,143.7 191,139.8 C198.8,135.6 204.1,127.8 204.9,119 L215.9,5.5 L111,5.5 Z" id="Shape" fill="#FFFFFF"></path>
+            <rect id="Rectangle-path" fill="#FFFFFF" x="63.5" y="273.6" width="94.9" height="14.9"></rect>
+            <path d="M211.9,46.9 L204.9,119 C204,127.8 198.8,135.6 191,139.8 C183.7,143.7 178.6,150.7 177.3,158.9 L158.5,273.6 L63.5,273.6 L44.7,158.9 C43.4,150.7 38.3,143.7 31,139.8 C23.2,135.6 17.9,127.8 17.1,119 L10.1,46.9 L211.9,46.9 Z" id="Shape" fill="#CD9E5D"></path>
+            <path d="M211.9,46.9 L204.9,119 C204,127.8 198.8,135.6 191,139.8 C183.7,143.7 178.6,150.7 177.3,158.9 L158.5,273.6 L63.5,273.6 L44.7,158.9 C43.4,150.7 38.3,143.7 31,139.8 C23.2,135.6 17.9,127.8 17.1,119 L10.1,46.9 L211.9,46.9 Z" id="Shape" fill="#CD9E5D"></path>
+            <path d="M163.1,279 L58.9,279 L39.4,159.7 C38.3,153.3 34.3,147.6 28.5,144.5 L28.4,144.4 C19,139.3 12.8,130 11.7,119.4 L0.1,0 L221.9,0 L210.3,119.5 C209.3,130.1 203,139.5 193.6,144.5 L193.5,144.6 C187.8,147.7 183.7,153.3 182.6,159.8 L163.1,279 Z M68.2,268.1 L153.9,268.1 L171.9,158 C173.5,148.3 179.6,139.7 188.3,135 L188.4,134.9 C194.6,131.6 198.8,125.4 199.4,118.4 L209.9,11 L12.1,11 L22.5,118.5 C23.2,125.5 27.3,131.7 33.5,135 L33.6,135.1 C42.3,139.8 48.4,148.3 50,158.1 L68.2,268.1 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M163.9,294 L58.1,294 L58.1,268.1 L164,268.1 L164,294 L163.9,294 Z M69,283 L153,283 L153,279 L69,279 L69,283 Z" id="Shape" fill="#3A3033"></path>
+            <rect id="Rectangle-path" fill="#FFFFFF" transform="translate(169.503095, 72.002825) rotate(-74.942364) translate(-169.503095, -72.002825) " x="159.252723" y="61.7524533" width="20.5007434" height="20.5007434"></rect>
+            <polygon id="Shape" fill="#FFFFFF" points="149.7 101.4 117.3 125.2 93.5 92.9 125.8 69"></polygon>
+            <polygon id="Shape" fill="#FFFFFF" points="72 86.4 44.1 97.1 33.4 69.2 61.3 58.4"></polygon>
+            <g id="Group" transform="translate(10.000000, 188.000000)">
+                <circle id="Oval" fill="#FFFFFF" cx="49.9" cy="50.6" r="49.7"></circle>
+                <circle id="Oval" fill="#CD9E5D" cx="49.9" cy="50.6" r="33.6"></circle>
+                <path d="M49.9,100.3 L49.9,0.8" id="Shape" fill="#FFFFFF"></path>
+                <path d="M14.7,85.7 L85.1,15.4" id="Shape" fill="#FFFFFF"></path>
+                <path d="M0.1,50.6 L99.6,50.6" id="Shape" fill="#FFFFFF"></path>
+                <path d="M14.7,15.4 L85.1,85.7" id="Shape" fill="#FFFFFF"></path>
+            </g>
+            <g id="Group" transform="translate(4.000000, 183.000000)" fill="#3A3033">
+                <path d="M55.9,110.8 C25.5,110.8 0.7,86 0.7,55.6 C0.7,25.2 25.5,0.4 55.9,0.4 C86.3,0.4 111.1,25.2 111.1,55.6 C111.1,86 86.3,110.8 55.9,110.8 Z M55.9,11.3 C31.5,11.3 11.6,31.2 11.6,55.6 C11.6,80 31.5,99.9 55.9,99.9 C80.3,99.9 100.2,80 100.2,55.6 C100.2,31.2 80.3,11.3 55.9,11.3 Z" id="Shape"></path>
+                <rect id="Rectangle-path" x="50.4" y="5.8" width="10.9" height="99.5"></rect>
+                <rect id="Rectangle-path" transform="translate(55.877030, 55.535140) rotate(45.000000) translate(-55.877030, -55.535140) " x="50.4270823" y="5.7856171" width="10.8998955" height="99.4990458"></rect>
+                <rect id="Rectangle-path" x="6.1" y="50.1" width="99.5" height="10.9"></rect>
+                <rect id="Rectangle-path" transform="translate(55.876430, 55.534840) rotate(45.000000) translate(-55.876430, -55.534840) " x="6.1269071" y="50.0848923" width="99.4990458" height="10.8998955"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

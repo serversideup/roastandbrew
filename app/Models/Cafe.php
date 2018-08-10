@@ -93,6 +93,6 @@ class Cafe extends Model
 	 * A cafe can have many actions
 	 */
 	public function actions(){
-		return $this->hasMany( 'App\Models\CafeAction', 'id', 'cafe_id' );
+		return $this->hasMany( 'App\Models\Action', 'cafe_id', 'id' );
 	}
 }

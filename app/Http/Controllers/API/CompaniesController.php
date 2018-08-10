@@ -39,6 +39,7 @@ class CompaniesController extends Controller{
     */
     $companies = Company::where('name', 'LIKE', '%'.$term.'%')
                         ->withCount('cafes')
+                        ->where('deleted', '=', 0)
                         ->get();
 
     /*

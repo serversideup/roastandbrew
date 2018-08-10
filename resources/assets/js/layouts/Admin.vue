@@ -48,6 +48,10 @@
     Import admin Vuex modules
   */
   import { actions } from '../modules/admin/actions.js'
+  import { companies } from '../modules/admin/companies.js';
+  import { cafes } from '../modules/admin/cafes.js';
+  import { users } from '../modules/admin/users.js';
+  import { brewMethods } from '../modules/admin/brewMethods.js';
 
   export default {
     /*
@@ -84,6 +88,38 @@
       */
       if( !this.$store._modules.get(['admin', 'actions']) ){
         this.$store.registerModule( ['admin', 'actions'], actions );
+      }
+
+      /*
+        Checks to see if the admin companies module is active. If not,
+        register the admin companies module.
+      */
+      if( !this.$store._modules.get(['admin', 'companies']) ){
+        this.$store.registerModule( ['admin', 'companies'], companies );
+      }
+
+      /*
+        Checks to see if the admin cafes module is active. If not,
+        register the admin cafes module.
+      */
+      if( !this.$store._modules.get(['admin', 'cafes']) ){
+        this.$store.registerModule( ['admin', 'cafes'], cafes );
+      }
+
+      /*
+        Checks to see if the user has permissions and if the
+        Vuex users module is loaded.
+      */
+      if( !this.$store._modules.get(['admin', 'users'] ) && this.user.permission >= 2 ){
+        this.$store.registerModule( ['admin', 'users'], users );
+      }
+
+      /*
+        Checks to see if the user has permissions and if the
+        Vuex brew methods module is loaded.
+      */
+      if( !this.$store._modules.get(['admin', 'brewMethods'] ) && this.user.permission == 3 ){
+        this.$store.registerModule( ['admin', 'brewMethods'], brewMethods );
       }
     },
 

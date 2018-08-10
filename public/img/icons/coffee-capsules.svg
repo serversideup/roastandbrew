@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="340px" height="248px" viewBox="0 0 340 248" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>coffee capsules</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="coffee-capsules" fill-rule="nonzero">
+            <polygon id="Shape" fill="#CDCCCC" points="216.3 97.6 184.7 114.7 153.6 114.7 124.5 97.6 109.9 6.2 230.9 6.2"></polygon>
+            <polygon id="Shape" fill="#95BDA6" points="126.7 224.6 95.1 241.8 64 241.8 34.9 224.6 20.3 133.3 141.3 133.3"></polygon>
+            <polygon id="Shape" fill="#CD9E5D" points="305.1 224.6 273.5 241.8 242.4 241.8 213.3 224.6 198.7 133.3 319.7 133.3"></polygon>
+            <rect id="Rectangle-path" fill="#3A3033" x="0.5" y="127.8" width="160.7" height="10.9"></rect>
+            <path d="M96.5,247.2 L62.5,247.2 L29.9,228 L13.9,127.8 L147.7,127.8 L131.7,228.1 L96.5,247.2 Z M65.4,236.3 L93.6,236.3 L121.6,221.1 L134.8,138.7 L26.7,138.7 L39.9,221.2 L65.4,236.3 Z" id="Shape" fill="#3A3033"></path>
+            <rect id="Rectangle-path" fill="#3A3033" x="90.1" y="0.8" width="160.7" height="10.9"></rect>
+            <path d="M186.1,120.2 L152.1,120.2 L119.5,101 L103.5,0.8 L237.3,0.8 L221.3,101.1 L186.1,120.2 Z M155.1,109.2 L183.3,109.2 L211.3,94 L224.5,11.7 L116.3,11.7 L129.5,94.2 L155.1,109.2 Z" id="Shape" fill="#3A3033"></path>
+            <rect id="Rectangle-path" fill="#3A3033" x="178.9" y="127.8" width="160.7" height="10.9"></rect>
+            <path d="M274.9,247.2 L240.9,247.2 L208.3,228 L192.3,127.8 L326.1,127.8 L310.1,228.1 L274.9,247.2 Z M243.9,236.3 L272.1,236.3 L300.1,221.1 L313.3,138.7 L205.1,138.7 L218.3,221.2 L243.9,236.3 Z" id="Shape" fill="#3A3033"></path>
+            <g id="Group" transform="translate(41.000000, 148.000000)" fill="#3A3033">
+                <rect id="Rectangle-path" transform="translate(9.525090, 23.840920) rotate(80.607381) translate(-9.525090, -23.840920) " x="-13.375068" y="18.3908824" width="45.800316" height="10.9000752"></rect>
+                <rect id="Rectangle-path" transform="translate(15.766710, 61.641330) rotate(80.607381) translate(-15.766710, -61.641330) " x="9.51666688" y="56.1912924" width="12.5000862" height="10.9000752"></rect>
+            </g>
+            <g id="Group" transform="translate(220.000000, 148.000000)" fill="#3A3033">
+                <rect id="Rectangle-path" transform="translate(9.148320, 23.847265) rotate(80.601728) translate(-9.148320, -23.847265) " x="-13.7522118" y="18.3971384" width="45.8010637" height="10.9002531"></rect>
+                <rect id="Rectangle-path" transform="translate(15.370265, 61.622255) rotate(80.601728) translate(-15.370265, -61.622255) " x="9.12011985" y="56.1721284" width="12.5002903" height="10.9002531"></rect>
+            </g>
+            <g id="Group" transform="translate(130.000000, 16.000000)" fill="#3A3033">
+                <rect id="Rectangle-path" transform="translate(9.531230, 24.447740) rotate(80.607381) translate(-9.531230, -24.447740) " x="-13.368928" y="18.9977024" width="45.800316" height="10.9000752"></rect>
+                <rect id="Rectangle-path" transform="translate(15.762625, 62.234275) rotate(80.601728) translate(-15.762625, -62.234275) " x="9.51247985" y="56.7841484" width="12.5002903" height="10.9002531"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

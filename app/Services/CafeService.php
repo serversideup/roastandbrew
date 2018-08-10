@@ -115,80 +115,89 @@ class CafeService{
    *
    * @param int $id ID of the cafe being edited.
    * @param array $data Array of the data defining the cafe updates.
+   * @param bool $admin Determines if the updates are coming from the admin side.
    */
-  public static function editCafe( $id, $data ){
+  public static function editCafe( $id, $data, $admin = false ){
     /*
-      If the company ID is not empty, load the company being
-      edited.
+      If the updates are not coming from the admin side, we update the
+      company information.
     */
-    if( isset( $data['company_id'] ) ){
-      $company = Company::where( 'id', '=', $data['company_id'] )->first();
-
+    if( !$admin ){
       /*
-        If the request has a company name, update the company name.
+        If the company ID is not empty, load the company being
+        edited.
       */
-      if( isset( $data['company_name'] ) ){
-        $company->name = $data['company_name'];
-      }
+      if( isset( $data['company_id'] ) ){
+        $company = Company::where( 'id', '=', $data['company_id'] )->first();
 
-      /*
-        If the request has a company type, update the company type.
-      */
-      if( isset( $data['company_type'] ) ){
-        $company->roaster = $data['company_type'] == 'roaster' ? 1 : 0;
-      }
+        /*
+          If the request has a company name, update the company name.
+        */
+        if( isset( $data['company_name'] ) ){
+          $company->name = $data['company_name'];
+        }
 
-      /*
-        If the request has a website, update the website.
-      */
-      if( isset( $data['website'] ) ){
-        $company->website = $data['website'];
-      }
+        /*
+          If the request has a company type, update the company type.
+        */
+        if( isset( $data['company_type'] ) ){
+          $company->roaster = $data['company_type'] == 'roaster' ? 1 : 0;
+        }
 
-      $company->logo 				= '';
-      $company->description = '';
+        /*
+          If the request has a website, update the website.
+        */
+        if( isset( $data['website'] ) ){
+          $company->website = $data['website'];
+        }
 
-      /*
-        Save the company
-      */
-      $company->save();
-    }else{
-      /*
-        Create a new company
-      */
-      $company = new Company();
+        $company->logo 				= '';
+        $company->description = '';
 
-      /*
-        If the data has a company name, add the company name.
-      */
-      if( isset( $data['company_name'] ) ){
-        $company->name = $data['company_name'];
-      }
-
-      /*
-        If the data has a company type, add the type but default to not a roaster.
-      */
-      if( isset( $data['company_type'] ) ){
-        $company->roaster	= $data['company_type'] == 'roaster' ? 1 : 0;
+        /*
+          Save the company
+        */
+        $company->save();
       }else{
-        $company->roaster = 0;
+        /*
+          Create a new company
+        */
+        $company = new Company();
+
+        /*
+          If the data has a company name, add the company name.
+        */
+        if( isset( $data['company_name'] ) ){
+          $company->name = $data['company_name'];
+        }
+
+        /*
+          If the data has a company type, add the type but default to not a roaster.
+        */
+        if( isset( $data['company_type'] ) ){
+          $company->roaster	= $data['company_type'] == 'roaster' ? 1 : 0;
+        }else{
+          $company->roaster = 0;
+        }
+
+        /*
+          If the request has a website, add the company website.
+        */
+        if( isset( $data['website'] ) ){
+          $company->website = $data['website'];
+        }
+
+        $company->logo 				= '';
+        $company->description = '';
+        $company->added_by 		= Auth::user()->id;
+
+        /*
+          Save the company.
+        */
+        $company->save();
       }
-
-      /*
-        If the request has a website, add the company website.
-      */
-      if( isset( $data['website'] ) ){
-        $company->website = $data['website'];
-      }
-
-      $company->logo 				= '';
-      $company->description = '';
-      $company->added_by 		= Auth::user()->id;
-
-      /*
-        Save the company.
-      */
-      $company->save();
+    }else{
+      $company = Company::where( 'id', '=', $data['company_id'] )->first();
     }
 
     /*
@@ -255,24 +264,51 @@ class CafeService{
     }
 
     /*
-      Grab the lat and lng from the data
+      If the request is not coming from the admin side,
+      check to see if the lat and lng is set.
     */
-    $lat = isset( $data['lat'] ) != '' ? $data['lat'] : 0;
-    $lng = isset( $data['lng'] ) != '' ? $data['lng'] : 0;
+    if( !$admin ){
+      /*
+        Grab the lat and lng from the data
+      */
+      $lat = isset( $data['lat'] ) != '' ? $data['lat'] : 0;
+      $lng = isset( $data['lng'] ) != '' ? $data['lng'] : 0;
 
-    /*
-      If needed, update the latitude and longitude if not set.
-    */
-    if( $lat == 0 && $lng == 0 ){
-      $coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
-      $lat = $coordinates['lat'];
-      $lng = $coordinates['lng'];
+      /*
+        If needed, update the latitude and longitude if not set.
+      */
+      if( $lat == 0 && $lng == 0 ){
+        $coordinates = GoogleMaps::geocodeAddress( $address, $city, $state, $zip );
+        $lat = $coordinates['lat'];
+        $lng = $coordinates['lng'];
+      }
+    }else{
+      /*
+        Determine if the address has changed at all. If it has,
+        we need to re-geocode and update the slug.
+      */
+      if( ( isset( $data['address'] ) && $data['address'] != $cafe->address )
+          || ( isset( $data['city'] ) && $data['city'] != $cafe->city )
+          || ( isset( $data['state'] ) && $data['state'] != $cafe->state )
+          || ( isset( $data['zip'] ) && $data['zip'] != $cafe->zip ) ){
+            $coordinates = GoogleMaps::geocodeAddress( $data['address'], $data['city'], $data['state'], $data['zip'] );
+
+            $slug = SlugService::createSlug(Cafe::class, 'slug', $company->name.' '.$locationName.' '.$address.' '.$city.' '.$state);
+
+            $lat = $coordinates['lat'];
+            $lng = $coordinates['lng'];
+          }else{
+            $slug = $cafe->slug;
+            $lat = $cafe->lat;
+            $lng = $cafe->lng;
+          }
     }
 
     /*
       Update all of the cafe data to the new data.
     */
     $cafe->company_id 			= $company->id;
+    $cafe->slug             = $slug;
     $cafe->location_name 		= $locationName != null ? $locationName : '';
     $cafe->address 					= $address;
     $cafe->city 						= $city;
@@ -293,6 +329,13 @@ class CafeService{
     */
     if( isset( $data['tea'] ) ){
       $cafe->tea = $data['tea'];
+    }
+
+    /*
+      If admin check for deleted.
+    */
+    if( $admin && isset( $data['deleted'] ) ){
+      $cafe->deleted = $data['deleted'];
     }
 
     /*

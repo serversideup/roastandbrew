@@ -33,20 +33,25 @@
         Companies
       </router-link>
     </div>
-    <div class="admin-link">
-      Users
+    <div class="admin-link" v-if="user.permission >= 2">
+      <router-link :to="{ name: 'admin-users' }">
+        Users
+      </router-link>
     </div>
-    <div class="admin-link">
-      Brew Methods
-    </div>
-    <div class="admin-link">
-      Products
+    <div class="admin-link" v-if="user.permission == 3">
+      <router-link :to="{ name: 'admin-brew-methods' }">
+        Brew Methods
+      </router-link>
     </div>
   </nav>
 </template>
 
 <script>
   export default {
-
+    computed: {
+      user(){
+        return this.$store.getters.getUser;
+      }
+    }
   }
 </script>

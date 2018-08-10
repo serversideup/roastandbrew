@@ -59,17 +59,15 @@
       text-align: center;
       font-family: "Lato", sans-serif;
       font-size: 16px;
-      color: $secondary-color;
-      border-bottom: 1px solid $secondary-color;
-      border-top: 1px solid $secondary-color;
-      border-left: 1px solid $secondary-color;
-      border-right: 1px solid $secondary-color;
       width: 25%;
       display: inline-block;
       height: 55px;
       line-height: 55px;
       cursor: pointer;
       margin-bottom: 5px;
+      margin-right: 10px;
+      background-color: #EEE;
+      color: $black;
 
       &.active{
         color: white;

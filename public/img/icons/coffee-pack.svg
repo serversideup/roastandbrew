@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="222px" height="350px" viewBox="0 0 222 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>coffee pack</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="coffee-pack" fill-rule="nonzero">
+            <polygon id="Shape" fill="#FFFFFF" points="117.2 5.6 89.6 5.6 43.3 5.6 43.3 74.5 5.5 157.4 5.5 344.4 89.6 344.4 117.2 344.4 141 344.4 141 157.4 178.7 74.5 178.7 5.6"></polygon>
+            <polygon id="Shape" fill="#CDCCCC" points="216.5 157.4 216.5 344.4 141 344.4 141 157.4 178.7 74.5"></polygon>
+            <path d="M146.5,349.9 L0.1,349.9 L0.1,156.3 L37.8,73.4 L37.8,0.1 L184.2,0.1 L184.2,75.7 L146.5,158.6 L146.5,349.9 Z M11,339 L135.5,339 L135.5,156.3 L173.2,73.4 L173.2,11 L48.7,11 L48.7,75.7 L11,158.6 L11,339 Z" id="Shape" fill="#3A3033"></path>
+            <path d="M221.9,349.9 L135.5,349.9 L135.5,156.3 L178.7,61.4 L221.9,156.3 L221.9,349.9 Z M146.5,339 L211,339 L211,158.6 L178.8,87.7 L146.6,158.6 L146.6,339 L146.5,339 Z" id="Shape" fill="#3A3033"></path>
+            <polyline id="Shape" fill="#FFFFFF" points="178.7 5.6 156.6 5.6 156.6 34.1 174.9 34.1 26.1 34.1 26.1 5.6 156.6 5.6"></polyline>
+            <path d="M174.9,39.5 L20.6,39.5 L20.6,0.1 L178.8,0.1 L178.8,11 L162.1,11 L162.1,28.6 L174.9,28.6 L174.9,39.5 Z M31.5,28.6 L151.1,28.6 L151.1,11 L31.5,11 L31.5,28.6 Z" id="Shape" fill="#3A3033"></path>
+            <polygon id="Shape" fill="#3A3033" points="184.2 344.4 173.3 344.4 173.3 80 43.3 80 43.3 69.1 184.2 69.1"></polygon>
+            <rect id="Rectangle-path" fill="#3A3033" x="5.5" y="152" width="135.5" height="10.9"></rect>
+            <circle id="Oval" fill="#CD9E5D" cx="70.2" cy="259.9" r="50.5"></circle>
+            <g id="Group" transform="translate(44.000000, 227.000000)" fill="#3A3033">
+                <path d="M26.2,65 C12.1,65 0.6,50.6 0.6,32.9 C0.6,15.2 12.1,0.8 26.2,0.8 C40.3,0.8 51.8,15.2 51.8,32.9 C51.8,50.6 40.3,65 26.2,65 Z M26.2,11.8 C18.2,11.8 11.5,21.5 11.5,32.9 C11.5,44.3 18.2,54 26.2,54 C34.2,54 40.9,44.3 40.9,32.9 C40.9,21.5 34.1,11.8 26.2,11.8 Z" id="Shape"></path>
+                <path d="M27.9,63.1 L19.7,55.9 C20.1,55.4 29.5,44.3 22.3,36.7 C11.2,25 17.2,9.7 21.8,3.2 L30.7,9.6 L26.3,6.4 L30.8,9.6 C30.5,10.1 22.7,21.3 30.3,29.2 C41.4,41.1 33.6,56.6 27.9,63.1 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
