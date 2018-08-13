@@ -282,6 +282,8 @@ class CafeService{
         $lat = $coordinates['lat'];
         $lng = $coordinates['lng'];
       }
+
+      $slug = $cafe->slug;
     }else{
       /*
         Determine if the address has changed at all. If it has,

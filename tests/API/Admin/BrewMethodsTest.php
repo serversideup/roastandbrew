@@ -130,7 +130,7 @@ class BrewMethodsTest extends TestCase
       */
       $response = $this->actingAs( $this->superAdmin, 'api' )
                        ->json( 'POST', '/api/v1/admin/brew-methods', [
-                         'name' => 'New Brew Method',
+                         'method' => 'New Brew Method',
                          'icon' => '/brew/method/icon.svg'
                        ]);
 
@@ -152,7 +152,7 @@ class BrewMethodsTest extends TestCase
       */
       $response = $this->actingAs( $this->superAdmin, 'api' )
                        ->json( 'PUT', '/api/v1/admin/brew-methods/'.$this->brewMethods[0]->id, [
-                         'name' => 'UPDATED Brew Method',
+                         'method' => 'UPDATED Brew Method',
                          'icon' => '/updated-brew/method/icon.svg'
                        ]);
 
