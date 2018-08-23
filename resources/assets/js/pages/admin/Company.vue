@@ -156,6 +156,24 @@
       </div>
       <div class="grid-x">
         <div class="large-8 medium-12 cell">
+          <label>Instagram URL</label>
+          <input type="text" v-model="instagram_url"/>
+        </div>
+      </div>
+      <div class="grid-x">
+        <div class="large-8 medium-12 cell">
+          <label>Facebook URL</label>
+          <input type="text" v-model="facebook_url"/>
+        </div>
+      </div>
+      <div class="grid-x">
+        <div class="large-8 medium-12 cell">
+          <label>Twitter URL</label>
+          <input type="text" v-model="twitter_url"/>
+        </div>
+      </div>
+      <div class="grid-x">
+        <div class="large-8 medium-12 cell">
           <label>Owners</label>
           <div class="no-owners" v-show="owners.length == 0">N/A</div>
           <div class="owner" v-for="(owner, key) in owners">
@@ -248,6 +266,9 @@
         type: '',
         subscription: 0,
         website: '',
+        instagram_url: '',
+        facebook_url: '',
+        twitter_url: '',
         owners: [],
         deleted: 0,
 
@@ -365,6 +386,9 @@
             name: this.name,
             type: this.type,
             website: this.website,
+            instagram_url: this.instagram_url,
+            facebook_url: this.facebook_url,
+            twitter_url: this.twitter_url,
             subscription: this.subscription,
             owners: this.owners,
             deleted: this.deleted
@@ -409,6 +433,9 @@
         this.type = this.company.roaster == 1 ? 'roaster' : 'cafe';
         this.subscription = this.company.subscription;
         this.website = this.company.website;
+        this.instagram_url = this.company.instagram_url;
+        this.facebook_url = this.company.facebook_url;
+        this.twitter_url = this.company.twitter_url;
         this.owners = this.company.owned_by;
         this.deleted = this.company.deleted;
       },

@@ -73,6 +73,11 @@
       font-size: 18px;
     }
 
+    img.social-icon{
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
     a.suggest-cafe-edit{
       font-family: "Lato", sans-serif;
       color: #054E7A;
@@ -160,6 +165,19 @@
             <img v-bind:src="'/img/icons/tea-bag.svg'" class="option-icon"/> <span class="option-name">Tea</span>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="grid-x" v-if="cafe.company.instagram_url != '' || cafe.company.facebook_url != '' || cafe.company.twitter_url != ''">
+      <div class="large-12 medium-12 small-12 cell">
+        <a v-bind:href="cafe.company.instagram_url" v-if="cafe.company.instagram_url != ''" target="_blank">
+          <img src="/img/instagram-logo.svg" class="social-icon"/>
+        </a>
+        <a v-bind:href="cafe.company.facebook_url" v-if="cafe.company.facebook_url != ''" target="_blank">
+          <img src="/img/facebook-logo.svg" class="social-icon"/>
+        </a>
+        <a v-bind:href="cafe.company.twitter_url" v-if="cafe.company.twitter_url != ''" target="_blank">
+          <img src="/img/twitter-logo.svg" class="social-icon"/>
+        </a>
       </div>
     </div>
     <div class="grid-x">

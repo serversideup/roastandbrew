@@ -250,6 +250,9 @@ class CompaniesTest extends TestCase
                         ->json('PUT', '/api/v1/admin/companies/'.$this->companyNotOwned->id, [
                           'website' => 'http://www.google.com',
                           'name' => 'Updated Cafe Name',
+                          'instagram_url' => 'https://instagram.com',
+                          'facebook_url' => 'https://facebook.com',
+                          'twitter_url' => 'https://twitter.com',
                           'subscription' => 1
                         ]);
 
@@ -259,6 +262,9 @@ class CompaniesTest extends TestCase
        $this->assertDatabaseHas('companies', [
          'id' => $this->companyNotOwned->id,
          'website' => 'http://www.google.com',
+         'instagram_url' => 'https://instagram.com',
+         'facebook_url' => 'https://facebook.com',
+         'twitter_url' => 'https://twitter.com',
          'name' => 'Updated Cafe Name',
          'subscription' => 1
        ]);

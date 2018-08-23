@@ -103,7 +103,7 @@ export const cafes = {
 		editCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeEditStatus', 1 );
 
-			CafeAPI.putEditCafe( data.slug, data.company_name, data.company_id, data.company_type, data.subscription, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
+			CafeAPI.putEditCafe( data.slug, data.company_name, data.company_id, data.company_type, data.subscription, data.website, data.instagram_url, data.facebook_url, data.twitter_url, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
 						/*
 								If the cafe is pending because the user didn't have permission,
@@ -136,7 +136,7 @@ export const cafes = {
 		*/
 		addCafe( { commit, state, dispatch }, data ){
 			commit( 'setCafeAddedStatus', 1 );
-			CafeAPI.postAddNewCafe( data.company_name, data.company_id, data.company_type, data.subscription, data.website, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
+			CafeAPI.postAddNewCafe( data.company_name, data.company_id, data.company_type, data.subscription, data.website, data.instagram_url, data.facebook_url, data.twitter_url, data.location_name, data.address, data.city, data.state, data.zip, data.lat, data.lng, data.brew_methods, data.matcha, data.tea )
 					.then( function( response ){
 
 						/*

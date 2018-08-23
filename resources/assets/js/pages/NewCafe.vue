@@ -204,6 +204,24 @@
             <div class="validation" v-show="!validations.website.is_valid">{{ validations.website.text }}</div>
           </div>
         </div>
+        <div class="grid-x grid-padding-x" v-if="newCompany">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Instagram URL</label>
+            <input type="text" class="form-input" v-model="instagram_url"/>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x" v-if="newCompany">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Facebook URL</label>
+            <input type="text" class="form-input" v-model="facebook_url"/>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x" v-if="newCompany">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Twitter URL</label>
+            <input type="text" class="form-input" v-model="twitter_url"/>
+          </div>
+        </div>
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Location Type</label>
@@ -409,6 +427,9 @@
         companyType: 'roaster',
         subscription: 0,
         website: '',
+        instagram_url: '',
+        facebook_url: '',
+        twitter_url: '',
 
         locationName: '',
         address: '',
@@ -626,6 +647,9 @@
             company_type: this.companyType,
             subscription: this.subscription,
             website: this.website,
+            instagram_url: this.instagram_url,
+            facebook_url: this.facebook_url,
+            twitter_url: this.twitter_url,
             location_name: this.locationName,
             address: this.address,
             city: this.city,
@@ -754,6 +778,10 @@
         this.companyID            = '';
         this.newCompany           = false;
         this.companyType          = 'roaster';
+        this.subscription         = 0;
+        this.instagram_url        = '';
+        this.facebook_url         = '';
+        this.twitter_url          = '';
         this.website              = '';
         this.locationName         = '';
         this.address              = '';

@@ -85,7 +85,7 @@ export const companies = {
       /*
         Calls the API to update an admin company.
       */
-      CompaniesAPI.putUpdateCompany( data.id, data.name, data.type, data.website, data.subscription, data.owners, data.deleted )
+      CompaniesAPI.putUpdateCompany( data.id, data.name, data.type, data.website, data.instagram_url, data.facebook_url, data.twitter_url, data.subscription, data.owners, data.deleted )
         .then( function( response ){
           commit( 'setCompany', response.data );
           commit( 'setCompanyEditStatus', 2 );

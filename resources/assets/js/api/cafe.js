@@ -28,7 +28,7 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( companyName, companyID, companyType, subscription, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
+	postAddNewCafe: function( companyName, companyID, companyType, subscription, website, instagramURL, facebookURL, twitterURL, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -42,6 +42,9 @@ export default {
 		formData.append('company_type', companyType);
 		formData.append('subscription', subscription);
 		formData.append('website', website);
+		formData.append('instagram_url', instagramURL);
+		formData.append('twitter_url', twitterURL);
+		formData.append('facebook_url', facebookURL);
 		formData.append('location_name', locationName);
 		formData.append('address', address);
 		formData.append('city', city);
@@ -66,7 +69,7 @@ export default {
 	/*
 	  PUT 	/api/v1/cafes/{slug}
 	*/
-	putEditCafe: function( slug, companyName, companyID, companyType, subscription, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
+	putEditCafe: function( slug, companyName, companyID, companyType, subscription, website, instagramURL, facebookURL, twitterURL, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -80,6 +83,9 @@ export default {
 		formData.append('company_type', companyType);
 		formData.append('subscription', subscription);
 		formData.append('website', website);
+		formData.append('instagram_url', instagramURL);
+		formData.append('twitter_url', twitterURL);
+		formData.append('facebook_url', facebookURL);
 		formData.append('location_name', locationName);
 		formData.append('address', address);
 		formData.append('city', city);

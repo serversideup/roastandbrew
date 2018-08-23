@@ -172,6 +172,9 @@ class CafeTest extends TestCase
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
+                          'instagram_url' => 'https://instagram.com',
+                          'facebook_url'  => 'https://facebook.com',
+                          'twitter_url'   => 'https://twitter.com',
                           'added_by'     => $user->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
@@ -188,7 +191,10 @@ class CafeTest extends TestCase
       $response->assertJSON([
           'name' => 'Ruby',
           'roaster' => '1',
-          'website' => 'https://rubycoffeeroasters.com/'
+          'website' => 'https://rubycoffeeroasters.com/',
+          'instagram_url' => 'https://instagram.com',
+          'facebook_url' => 'https://facebook.com',
+          'twitter_url' => 'https://twitter.com'
         ]);
 
       /*
@@ -666,6 +672,9 @@ class CafeTest extends TestCase
                         ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                           'company_id'   => $company->id,
                           'company_name' => 'EDITED name',
+                          'instagram_url' => 'https://instagram.com',
+                          'facebook_url' => 'https://facebook.com',
+                          'twitter_url' => 'https://twitter.com',
                           'added_by'     => $user->id,
                           'address'      => 'EDITED 9515 Water St',
                           'city'         => 'EDITED Amherst Junction',
@@ -681,6 +690,9 @@ class CafeTest extends TestCase
       */
       $response->assertJSON([
                   'name' => 'EDITED name',
+                  'instagram_url' => 'https://instagram.com',
+                  'facebook_url' => 'https://facebook.com',
+                  'twitter_url' => 'https://twitter.com'
                 ]);
     }
 

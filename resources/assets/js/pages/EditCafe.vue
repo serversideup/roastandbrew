@@ -214,6 +214,24 @@
         </div>
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Instagram URL</label>
+            <input type="text" class="form-input" v-model="instagram_url"/>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Facebook URL</label>
+            <input type="text" class="form-input" v-model="facebook_url"/>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Twitter URL</label>
+            <input type="text" class="form-input" v-model="twitter_url"/>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Location Type</label>
           </div>
         </div>
@@ -417,6 +435,9 @@
         companyType: 'roaster',
         subscription: 0,
         website: '',
+        instagram_url: '',
+        facebook_url: '',
+        twitter_url: '',
 
         locationName: '',
         addressSearch: '',
@@ -639,6 +660,9 @@
         this.companyType    = this.editCafe.company.roaster == 1 ? 'roaster' : 'cafe';
         this.subscription   = this.editCafe.company.subscription;
         this.website        = this.editCafe.company.website;
+        this.instagram_url  = this.editCafe.company.instagram_url;
+        this.facebook_url   = this.editCafe.company.facebook_url;
+        this.twitter_url    = this.editCafe.company.twitter_url;
 
         this.locationName   = this.editCafe.location_name;
         this.address        = this.editCafe.address;
@@ -671,6 +695,9 @@
             company_type: this.companyType,
             subscription: this.subscription,
             website: this.website,
+            instagram_url: this.instagram_url,
+            twitter_url: this.twitter_url,
+            facebook_url: this.facebook_url,
             location_name: this.locationName,
             address: this.address,
             city: this.city,
@@ -806,7 +833,11 @@
         this.companyID            = '';
         this.newCompany           = false;
         this.companyType          = 'roaster';
+        this.subscription         = 0;
         this.website              = '';
+        this.instagram_url        = '';
+        this.facebook_url         = '';
+        this.twitter_url          = '';
         this.locationName         = '';
         this.address              = '';
         this.city                 = '';
