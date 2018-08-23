@@ -62,21 +62,21 @@ class CompanyService{
       If the user updates the instagram url, save the updates.
     */
     if( isset( $data['instagram_url'] ) ){
-      $company->instagram_url = $data['instagram_url'];
+      $company->instagram_url = $data['instagram_url'] == '' ? null : $data['instagram_url'];
     }
 
     /*
       If the user updates the facebook url, save the updates.
     */
     if( isset( $data['facebook_url'] ) ){
-      $company->facebook_url = $data['facebook_url'];
+      $company->facebook_url = $data['facebook_url'] == '' ? null : $data['facebook_url'];
     }
 
     /*
       If the user updates the twitter url, save the updates.
     */
     if( isset( $data['twitter_url'] ) ){
-      $company->twitter_url = $data['twitter_url'];
+      $company->twitter_url = $data['twitter_url'] == '' ? null : $data['twitter_url'];
     }
 
     /*

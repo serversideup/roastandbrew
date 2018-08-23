@@ -55,9 +55,9 @@ class CafeService{
       $company->roaster			  = $data['company_type'] == 'roaster' ? 1 : 0;
       $company->subscription  = isset( $data['subscription'] ) ? $data['subscription'] : 0;
       $company->website 		  = $data['website'];
-      $company->instagram_url = isset( $data['instagram_url'] ) ? $data['instagram_url'] : '';
-      $company->facebook_url  = isset( $data['facebook_url'] ) ? $data['facebook_url'] : '';
-      $company->twitter_url   = isset( $data['twitter_url'] ) ? $data['twitter_url'] : '';
+      $company->instagram_url = isset( $data['instagram_url'] ) ? $data['instagram_url'] : null;
+      $company->facebook_url  = isset( $data['facebook_url'] ) ? $data['facebook_url'] : null;
+      $company->twitter_url   = isset( $data['twitter_url'] ) ? $data['twitter_url'] : null;
       $company->logo 				  = '';
       $company->description   = '';
       $company->added_by 		  = Auth::user()->id;
@@ -166,21 +166,21 @@ class CafeService{
           If the request has an instagram url, update the url.
         */
         if( isset( $data['instagram_url'] ) ){
-          $company->instagram_url = $data['instagram_url'];
+          $company->instagram_url = $data['instagram_url'] == '' ? null : $data['instagram_url'];
         }
 
         /*
           If the request has an facebook url, update the url.
         */
         if( isset( $data['facebook_url'] ) ){
-          $company->facebook_url = $data['facebook_url'];
+          $company->facebook_url = $data['facebook_url'] == '' ? null : $data['facebook_url'];
         }
 
         /*
           If the request has an twitter url, update the url.
         */
         if( isset( $data['twitter_url'] ) ){
-          $company->twitter_url = $data['twitter_url'];
+          $company->twitter_url = $data['twitter_url'] == '' ? null : $data['twitter_url'];
         }
 
         $company->logo 				= '';
@@ -230,21 +230,21 @@ class CafeService{
           If the request has an instagram url, update the url.
         */
         if( isset( $data['instagram_url'] ) ){
-          $company->instagram_url = $data['instagram_url'];
+          $company->instagram_url = $data['instagram_url'] == '' ? null : $data['instagram_url'];
         }
 
         /*
           If the request has an facebook url, update the url.
         */
         if( isset( $data['facebook_url'] ) ){
-          $company->facebook_url = $data['facebook_url'];
+          $company->facebook_url = $data['facebook_url'] == '' ? null : $data['facebook_url'];
         }
 
         /*
           If the request has an twitter url, update the url.
         */
         if( isset( $data['twitter_url'] ) ){
-          $company->twitter_url = $data['twitter_url'];
+          $company->twitter_url = $data['twitter_url'] == '' ? null : $data['twitter_url'];
         }
 
         $company->logo 				= '';

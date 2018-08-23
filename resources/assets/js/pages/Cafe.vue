@@ -142,6 +142,16 @@
         </div>
       </div>
     </div>
+    <div class="grid-x" v-if="cafe.company.subscription == 1">
+      <div class="large-12 medium-12 small-12 cell centered">
+        <label class="cafe-label">Offers Coffee Subscription</label>
+        <div class="subscription-option option" v-on:click="cafe.company.subscription == 0 ? cafe.company.subscription = 1 : cafe.company.subscription = 0">
+          <div class="option-container">
+            <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="grid-x">
       <div class="large-12 medium-12 small-12 cell">
         <label class="cafe-label">Brew Methods</label>
@@ -167,15 +177,15 @@
         </div>
       </div>
     </div>
-    <div class="grid-x" v-if="cafe.company.instagram_url != '' || cafe.company.facebook_url != '' || cafe.company.twitter_url != ''">
+    <div class="grid-x" v-if="cafe.company.instagram_url != null || cafe.company.facebook_url != null || cafe.company.twitter_url != null">
       <div class="large-12 medium-12 small-12 cell">
-        <a v-bind:href="cafe.company.instagram_url" v-if="cafe.company.instagram_url != ''" target="_blank">
+        <a v-bind:href="cafe.company.instagram_url" v-if="cafe.company.instagram_url != null" target="_blank">
           <img src="/img/instagram-logo.svg" class="social-icon"/>
         </a>
-        <a v-bind:href="cafe.company.facebook_url" v-if="cafe.company.facebook_url != ''" target="_blank">
+        <a v-bind:href="cafe.company.facebook_url" v-if="cafe.company.facebook_url != null" target="_blank">
           <img src="/img/facebook-logo.svg" class="social-icon"/>
         </a>
-        <a v-bind:href="cafe.company.twitter_url" v-if="cafe.company.twitter_url != ''" target="_blank">
+        <a v-bind:href="cafe.company.twitter_url" v-if="cafe.company.twitter_url != null" target="_blank">
           <img src="/img/twitter-logo.svg" class="social-icon"/>
         </a>
       </div>
