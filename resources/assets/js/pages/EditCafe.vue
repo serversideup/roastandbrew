@@ -227,6 +227,22 @@
           </div>
         </div>
 
+        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Does the roaster offer a subscription service?</label>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <div class="subscription-option option" v-on:click="subscription == 0 ? subscription = 1 : subscription = 0" v-bind:class="{'active': subscription == 1}">
+              <div class="option-container">
+                <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Brew Methods Available</label>
@@ -399,6 +415,7 @@
         companyID: '',
         newCompany: false,
         companyType: 'roaster',
+        subscription: 0,
         website: '',
 
         locationName: '',
@@ -620,6 +637,7 @@
         this.companyID      = this.editCafe.company.id;
         this.newCompany     = false;
         this.companyType    = this.editCafe.company.roaster == 1 ? 'roaster' : 'cafe';
+        this.subscription   = this.editCafe.company.subscription;
         this.website        = this.editCafe.company.website;
 
         this.locationName   = this.editCafe.location_name;
@@ -651,6 +669,7 @@
             company_name: this.companyName,
             company_id: this.companyID,
             company_type: this.companyType,
+            subscription: this.subscription,
             website: this.website,
             location_name: this.locationName,
             address: this.address,

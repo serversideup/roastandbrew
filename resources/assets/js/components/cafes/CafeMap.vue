@@ -77,6 +77,7 @@
   import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
   import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
   import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
+  import { CafeSubscriptionFilter } from '../../mixins/filters/CafeSubscriptionFilter.js';
 
   /*
     Imports the Event Bus to pass updates.
@@ -127,7 +128,8 @@
       CafeTextFilter,
       CafeUserLikeFilter,
       CafeHasMatchaFilter,
-      CafeHasTeaFilter
+      CafeHasTeaFilter,
+      CafeSubscriptionFilter
     ],
 
     /*
@@ -213,7 +215,8 @@
             && filters.brewMethods.length == 0
             && !filters.liked
             && !filters.matcha
-            && !filters.tea ){
+            && !filters.tea
+            && !filters.subscription ){
                 this.$markers[i].setMap( this.$map );
               }else{
                 /*
@@ -225,6 +228,7 @@
                 var likedPassed = false;
                 var matchaPassed = false;
                 var teaPassed = false;
+                var subscriptionPassed = false;
 
 
                 /*
@@ -280,9 +284,18 @@
                 }
 
                 /*
+                  Checks to see if the subscription filter works.
+                */
+                if( filters.subscription && this.processCafeSubscriptionFilter( this.$markers[i].cafe ) ){
+                  subscriptionPassed = true;
+                }else if( !filters.subscription ){
+                  subscriptionPassed = true;
+                }
+
+                /*
                   If everything passes, then we show the Cafe Marker
                 */
-                if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed ){
+                if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed ){
                   this.$markers[i].setMap( this.$map );
                 }else{
                   this.$markers[i].setMap( null );

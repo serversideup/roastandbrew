@@ -209,12 +209,29 @@
             <label class="form-label">Location Type</label>
           </div>
         </div>
+
         <div class="grid-x grid-padding-x">
           <div class="large-8 medium-9 small-12 cell centered">
             <div class="location-type roaster" v-bind:class="{ 'active': companyType == 'roaster' }" v-on:click="setCompanyType('roaster')">
               Roaster
             </div><div class="location-type cafe" v-bind:class="{ 'active': companyType == 'cafe' }" v-on:click="setCompanyType('cafe')">
               Cafe
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <label class="form-label">Does the roaster offer a subscription service?</label>
+          </div>
+        </div>
+
+        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+          <div class="large-8 medium-9 small-12 cell centered">
+            <div class="subscription-option option" v-on:click="subscription == 0 ? subscription = 1 : subscription = 0" v-bind:class="{'active': subscription == 1}">
+              <div class="option-container">
+                <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
+              </div>
             </div>
           </div>
         </div>
@@ -390,6 +407,7 @@
         companyID: '',
         newCompany: false,
         companyType: 'roaster',
+        subscription: 0,
         website: '',
 
         locationName: '',
@@ -606,6 +624,7 @@
             company_name: this.companyName,
             company_id: this.companyID,
             company_type: this.companyType,
+            subscription: this.subscription,
             website: this.website,
             location_name: this.locationName,
             address: this.address,

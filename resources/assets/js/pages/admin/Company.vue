@@ -132,6 +132,21 @@
           </div>
         </div>
       </div>
+      <div class="grid-x grid-padding-x" v-show="type == 'roaster'">
+        <div class="large-8 medium-9 small-12 cell centered">
+          <label>Does the roaster offer a subscription service?</label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x" v-show="type == 'roaster'">
+        <div class="large-8 medium-9 small-12 cell centered">
+          <div class="subscription-option option" v-on:click="subscription == 0 ? subscription = 1 : subscription = 0" v-bind:class="{'active': subscription == 1}">
+            <div class="option-container">
+              <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="grid-x">
         <div class="large-8 medium-12 cell">
           <label>Website</label>
@@ -231,6 +246,7 @@
 
         name: '',
         type: '',
+        subscription: 0,
         website: '',
         owners: [],
         deleted: 0,
@@ -349,6 +365,7 @@
             name: this.name,
             type: this.type,
             website: this.website,
+            subscription: this.subscription,
             owners: this.owners,
             deleted: this.deleted
           });
@@ -390,6 +407,7 @@
       syncCompanyToModel(){
         this.name = this.company.name;
         this.type = this.company.roaster == 1 ? 'roaster' : 'cafe';
+        this.subscription = this.company.subscription;
         this.website = this.company.website;
         this.owners = this.company.owned_by;
         this.deleted = this.company.deleted;

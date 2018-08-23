@@ -178,6 +178,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -188,6 +189,62 @@ class CafeTest extends TestCase
           'name' => 'Ruby',
           'roaster' => '1',
           'website' => 'https://rubycoffeeroasters.com/'
+        ]);
+
+      /*
+        Confirm that the cafe doesn't have matcha or tea flags.
+      */
+      $response->assertJSONFragment([
+          'matcha' => 0,
+          'tea' => 0
+        ]);
+    }
+
+    /**
+     * Test adding a cafe new company that has a subscription
+     *
+     * @return void
+     */
+    public function testAddCafeNewCompanyWithSubscription(){
+      /*
+        Create a user to run the test.
+      */
+      $user = factory(\App\Models\User::class)->create();
+
+      /*
+        Create a brew method to add to the cafe.
+      */
+      $method = factory(\App\Models\BrewMethod::class)->create([
+          'method' => 'Hario V60 Dripper',
+          'icon' => ''
+      ]);
+
+      /*
+        Run the request to add the cafe
+      */
+      $response = $this->actingAs($user, 'api')
+                        ->json('POST', '/api/v1/cafes', [
+                          'company_name' => 'Ruby',
+                          'company_type' => 'roaster',
+                          'website'      => 'https://rubycoffeeroasters.com/',
+                          'added_by'     => $user->id,
+                          'address'      => '9515 Water St',
+                          'city'         => 'Amherst Junction',
+                          'state'        => 'WI',
+                          'zip'          => '54407',
+                          'location_name' => 'Tasting Room',
+                          'subscription' => 1,
+                          'brew_methods' => json_encode( [$method->id] )
+                        ]);
+
+      /*
+        Confirm the cafe has been added because it will have been returned.
+      */
+      $response->assertJSON([
+          'name' => 'Ruby',
+          'roaster' => '1',
+          'website' => 'https://rubycoffeeroasters.com/',
+          'subscription' => 1
         ]);
 
       /*
@@ -233,6 +290,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -291,6 +349,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -344,6 +403,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'matcha'       => 1,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
@@ -437,7 +497,8 @@ class CafeTest extends TestCase
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'tea'           => 1,
-                          'brew_methods'  => json_encode( [$method->id] )
+                          'brew_methods'  => json_encode( [$method->id] ),
+                          'subscription'  => 0
                         ]);
 
       /*
@@ -487,6 +548,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -545,6 +607,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -609,6 +672,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'EDITED Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -617,6 +681,71 @@ class CafeTest extends TestCase
       */
       $response->assertJSON([
                   'name' => 'EDITED name',
+                ]);
+    }
+
+    /**
+     * Test editing a cafe and adding a subscription
+     *
+     * @return void
+     */
+    public function testEditCafeAddSubscriptionToCompany(){
+      /*
+        Creates a user to run the test
+      */
+      $user = factory(\App\Models\User::class)->create();
+
+      /*
+        Creates a company to run the test
+      */
+      $company = factory(\App\Models\Company::class)->create([
+        'added_by' => $user->id
+      ]);
+
+      /*
+        Create a cafe to run the test to edit.
+      */
+      $cafes = factory(\App\Models\Cafe::class)->create([
+        'company_id' => $company->id,
+        'added_by' => $user->id
+      ]);
+
+      /*
+        Create a brew method to add to the cafe
+      */
+      $method = factory(\App\Models\BrewMethod::class)->create([
+          'method' => 'Hario V60 Dripper',
+          'icon' => ''
+      ]);
+
+      /*
+        Grab the slug from the cafe.
+      */
+      $cafeSlug = $cafes->slug;
+
+      /*
+        Run the request to edit the cafe
+      */
+      $response = $this->actingAs($user, 'api')
+                        ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
+                          'company_id'   => $company->id,
+                          'company_name' => 'EDITED name',
+                          'added_by'     => $user->id,
+                          'address'      => 'EDITED 9515 Water St',
+                          'city'         => 'EDITED Amherst Junction',
+                          'state'        => 'WI',
+                          'zip'          => '54407',
+                          'location_name' => 'EDITED Tasting Room',
+                          'subscription' => 1,
+                          'brew_methods' => json_encode( [$method->id] )
+                        ]);
+
+      /*
+        Confirm that the cafe has the edited name.
+      */
+      $response->assertJSON([
+                  'name' => 'EDITED name',
+                  'subscription' => 1
                 ]);
     }
 
@@ -672,6 +801,7 @@ class CafeTest extends TestCase
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'EDITED Tasting Room',
+                          'subscription' => 0,
                           'brew_methods' => json_encode( [$method->id] )
                         ]);
 
@@ -746,6 +876,7 @@ class CafeTest extends TestCase
                            'city'         => 'EDITED Amherst Junction',
                            'state'        => 'WI',
                            'zip'          => '54407',
+                           'subscription' => 0,
                            'location_name' => 'EDITED Tasting Room',
                          ]);
 
@@ -817,6 +948,7 @@ class CafeTest extends TestCase
                             'city'         => 'EDITED Amherst Junction',
                             'state'        => 'WI',
                             'zip'          => '54407',
+                            'subscription' => 0,
                             'location_name' => 'EDITED Tasting Room',
                           ]);
 
@@ -1085,6 +1217,7 @@ class CafeTest extends TestCase
                            'state'        => 'WI',
                            'zip'          => '54407',
                            'location_name' => 'EDITED Tasting Room',
+                           'subscription' => 0,
                            'brew_methods' => json_encode( [$method->id] )
                          ]);
 
@@ -1152,6 +1285,7 @@ class CafeTest extends TestCase
                            'state'        => 'WI',
                            'zip'          => '54407',
                            'location_name' => 'EDITED Tasting Room',
+                           'subscription' => 0,
                            'brew_methods' => json_encode( [$method->id] )
                          ]);
 

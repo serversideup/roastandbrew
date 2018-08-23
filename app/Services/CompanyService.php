@@ -45,6 +45,13 @@ class CompanyService{
     }
 
     /*
+      If the user updates the subscription, save the updates.
+    */
+    if( isset( $data['subscription'] ) ){
+      $company->subscription = $data['subscription'];
+    }
+
+    /*
       If the user updates the website, save the updates.
     */
     if( isset( $data['website'] ) ){

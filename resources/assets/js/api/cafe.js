@@ -28,7 +28,7 @@ export default {
 	/*
 		POST 	/api/v1/cafes
 	*/
-	postAddNewCafe: function( companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
+	postAddNewCafe: function( companyName, companyID, companyType, subscription, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -40,6 +40,7 @@ export default {
 		formData.append('company_name', companyName);
 		formData.append('company_id', companyID);
 		formData.append('company_type', companyType);
+		formData.append('subscription', subscription);
 		formData.append('website', website);
 		formData.append('location_name', locationName);
 		formData.append('address', address);
@@ -65,7 +66,7 @@ export default {
 	/*
 	  PUT 	/api/v1/cafes/{slug}
 	*/
-	putEditCafe: function( slug, companyName, companyID, companyType, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
+	putEditCafe: function( slug, companyName, companyID, companyType, subscription, website, locationName, address, city, state, zip, lat, lng, brewMethods, matcha, tea ){
 		/*
 			Initialize the form data
 		*/
@@ -77,6 +78,7 @@ export default {
 		formData.append('company_name', companyName);
 		formData.append('company_id', companyID);
 		formData.append('company_type', companyType);
+		formData.append('subscription', subscription);
 		formData.append('website', website);
 		formData.append('location_name', locationName);
 		formData.append('address', address);

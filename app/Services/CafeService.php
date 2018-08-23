@@ -51,12 +51,13 @@ class CafeService{
     }else{
       $company = new Company();
 
-      $company->name 				= $data['company_name'];
-      $company->roaster			= $data['company_type'] == 'roaster' ? 1 : 0;
-      $company->website 		= $data['website'];
-      $company->logo 				= '';
-      $company->description = '';
-      $company->added_by 		= Auth::user()->id;
+      $company->name 				  = $data['company_name'];
+      $company->roaster			  = $data['company_type'] == 'roaster' ? 1 : 0;
+      $company->subscription  = isset( $data['subscription'] ) ? $data['subscription'] : 0;
+      $company->website 		  = $data['website'];
+      $company->logo 				  = '';
+      $company->description   = '';
+      $company->added_by 		  = Auth::user()->id;
 
       $company->save();
     }
@@ -145,6 +146,13 @@ class CafeService{
         }
 
         /*
+          If the request has a subscription, update the subscription.
+        */
+        if( isset( $data['subscription'] ) ){
+          $company->subscription = $data['subscription'];
+        }
+
+        /*
           If the request has a website, update the website.
         */
         if( isset( $data['website'] ) ){
@@ -178,6 +186,13 @@ class CafeService{
           $company->roaster	= $data['company_type'] == 'roaster' ? 1 : 0;
         }else{
           $company->roaster = 0;
+        }
+
+        /*
+          If the company has a subscription, update it.
+        */
+        if( isset( $data['subscription'] ) ){
+          $company->subscription = $data['subscription'];
         }
 
         /*

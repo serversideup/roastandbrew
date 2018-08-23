@@ -9,7 +9,7 @@ export const display = {
     Defines the state being monitored for the module
   */
   state: {
-    showFilters: false,
+    showFilters: true,
     showPopOut: false,
   },
 

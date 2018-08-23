@@ -21,11 +21,12 @@ export default {
   /*
     PUT   /api/v1/admin/companies/{id}
   */
-  putUpdateCompany: function( id, name, type, website, owners, deleted ){
+  putUpdateCompany: function( id, name, type, website, subscription, owners, deleted ){
     return axios.put( ROAST_CONFIG.API_URL + '/admin/companies/'+id, {
       name: name,
       type: type,
       website: website,
+      subscription: subscription,
       owners: owners,
       deleted: deleted
     });

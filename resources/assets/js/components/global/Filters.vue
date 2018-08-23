@@ -30,6 +30,13 @@
       }
     }
 
+    span.filters-header{
+      display: block;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
     input[type="text"].search{
       box-shadow: none;
       border-radius: 3px;
@@ -155,6 +162,13 @@
       <div class="close-filters" v-on:click="toggleShowFilters()">
         <img src="/img/grey-left.svg"/>
       </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 medium-12 small-12 cell">
+          <span class="filters-header">Find the type of coffee shop you are looking for!</span>
+        </div>
+      </div>
+
       <div class="grid-x grid-padding-x" id="text-container">
         <div class="large-12 medium-12 small-12 cell">
           <span class="clear-filters" v-show="showFilters" v-on:click="clearFilters()">
@@ -187,6 +201,22 @@
       <div class="grid-x grid-padding-x" id="only-liked-container" v-show="user != '' && userLoadStatus == 2">
         <div class="large-12 medium-12 small-12 cell">
           <input type="checkbox" v-model="onlyLiked"/> <span class="liked-location-label">Show only locations that I like</span>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x" v-show="activeLocationFilter == 'roasters' || activeLocationFilter == 'all'">
+        <div class="large-12 medium-12 small-12 cell">
+          <label class="filter-label">Has Subscription Service</label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x" v-show="activeLocationFilter == 'roasters' || activeLocationFilter == 'all'">
+        <div class="large-12 medium-12 small-12 cell">
+          <div class="subscription option" v-on:click="toggleSubscriptionFilter()" v-bind:class="{'active': hasSubscription }">
+            <div class="option-container">
+              <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -257,7 +287,8 @@
         onlyLiked: false,
         brewMethodsFilter: [],
         hasMatcha: false,
-        hasTea: false
+        hasTea: false,
+        hasSubscription: false
       }
     },
 
@@ -304,6 +335,13 @@
         Watch the has tea filter.
       */
       hasTea(){
+        this.updateFilterDisplay();
+      },
+
+      /*
+        Watch has subscription filter
+      */
+      hasSubscription(){
         this.updateFilterDisplay();
       }
     },
@@ -411,7 +449,8 @@
           liked: this.onlyLiked,
           brewMethods: this.brewMethodsFilter,
           matcha: this.hasMatcha,
-          tea: this.hasTea
+          tea: this.hasTea,
+          subscription: this.hasSubscription
         });
       },
 
@@ -437,6 +476,13 @@
       },
 
       /*
+        Toggle the subscription filter.
+      */
+      toggleSubscriptionFilter(){
+        this.hasSubscription = !this.hasSubscription;
+      },
+
+      /*
         Clear all of the filters.
       */
       clearFilters(){
@@ -446,6 +492,7 @@
         this.brewMethodsFilter = [];
         this.hasMatcha = false;
         this.hasTea = false;
+        this.hasSubscription = false;
       }
     }
   }

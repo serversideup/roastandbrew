@@ -79,6 +79,7 @@
   import { CafeUserLikeFilter } from '../../mixins/filters/CafeUserLikeFilter.js';
   import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
   import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
+  import { CafeSubscriptionFilter } from '../../mixins/filters/CafeSubscriptionFilter.js';
 
   /*
     Imports the Event Bus to listen to filter updates
@@ -109,7 +110,8 @@
       CafeTextFilter,
       CafeUserLikeFilter,
       CafeHasMatchaFilter,
-      CafeHasTeaFilter
+      CafeHasTeaFilter,
+      CafeSubscriptionFilter
     ],
 
     /*
@@ -140,7 +142,8 @@
           && filters.brewMethods.length == 0
           && !filters.liked
           && !filters.matcha
-          && !filters.tea ){
+          && !filters.tea
+          && !filters.subscription ){
             this.show = true;
         }else{
           /*
@@ -152,6 +155,7 @@
           var likedPassed = false;
           var matchaPassed = false;
           var teaPassed = false;
+          var subscriptionPassed = false;
 
           /*
             Check if the roaster passes
@@ -206,9 +210,18 @@
           }
 
           /*
+            Checks to see if the subscription filter works.
+          */
+          if( filters.subscription && this.processCafeSubscriptionFilter( this.cafe ) ){
+            subscriptionPassed = true;
+          }else if( !filters.subscription ){
+            subscriptionPassed = true;
+          }
+
+          /*
             If everything passes, then we show the Cafe Card
           */
-          if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed ){
+          if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed ){
             this.show = true;
           }else{
             this.show = false;

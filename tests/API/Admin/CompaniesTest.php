@@ -249,7 +249,8 @@ class CompaniesTest extends TestCase
        $response = $this->actingAs( $this->admin, 'api' )
                         ->json('PUT', '/api/v1/admin/companies/'.$this->companyNotOwned->id, [
                           'website' => 'http://www.google.com',
-                          'name' => 'Updated Cafe Name'
+                          'name' => 'Updated Cafe Name',
+                          'subscription' => 1
                         ]);
 
        /*
@@ -258,7 +259,8 @@ class CompaniesTest extends TestCase
        $this->assertDatabaseHas('companies', [
          'id' => $this->companyNotOwned->id,
          'website' => 'http://www.google.com',
-         'name' => 'Updated Cafe Name'
+         'name' => 'Updated Cafe Name',
+         'subscription' => 1
        ]);
      }
 
