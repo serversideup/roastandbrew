@@ -23,8 +23,8 @@
 		<meta property="og:title" content="Roast - Helping the coffee enthusiast find their next cup of coffee" />
 		<meta property="og:url" content="https://roastandbrew.coffee/" />
 		<meta property="og:site_name" content="Roast and Brew" />
-		<meta property="og:image" content="https://roastandbrew.coffee/img/og-image.jpg" />
-		<meta property="og:image:secure_url" content="https://roastandbrew.coffee/img/og-image.jpg" />
+		<meta property="og:image" content="https://roastandbrew.coffee/img/og-roast.jpg" />
+		<meta property="og:image:secure_url" content="https://roastandbrew.coffee/img/og-roast.jpg" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 
@@ -32,7 +32,7 @@
 		<meta name="twitter:description" content="Welcome to Roast and Brew! We help the coffee enthusiast find their next cup of coffee and teach developers how to develop apps!" />
 		<meta name="twitter:title" content="Roast - Helping the coffee enthusiast find their next cup of coffee" />
 		<meta name="twitter:site" content="@roast_n_brew" />
-		<meta name="twitter:image" content="https://roastandbrew.coffee/img/og-image.jpg" />
+		<meta name="twitter:image" content="https://roastandbrew.coffee/img/og-roast.jpg" />
 
 		<script type='application/ld+json'>
 			{
