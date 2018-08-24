@@ -55,7 +55,7 @@
 					],
 				"@id":"https:\/\/roastandbrew.coffee\/#organization",
 				"name":"Roast And Brew",
-				"logo":"https:\/\/roastandbrew.coffee\/img\/og-image.jpg"
+				"logo":"https:\/\/roastandbrew.coffee\/img\/og-roast.jpg"
 			}
 		</script>
 		<script type='text/javascript'>
