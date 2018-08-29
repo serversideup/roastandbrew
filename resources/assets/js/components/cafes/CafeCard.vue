@@ -4,7 +4,7 @@
   div.cafe-card{
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-    padding: 15px 5px;
+    padding: 15px 5px 5px 5px;
     margin-top: 20px;
     cursor: pointer;
     -webkit-transform: scaleX(1) scaleY(1);
@@ -46,6 +46,17 @@
       }
     }
 
+    span.liked-meta{
+      color: $grey;
+      font-size: 10px;
+      margin-left: 5px;
+      margin-right: 3px;
+
+      img{
+        width: 10px;
+      }
+    }
+
     &:hover{
       -webkit-transform: scaleX(1.041) scaleY(1.041);
       transform: scaleX(1.041) scaleY(1.041);
@@ -64,6 +75,9 @@
           <span class="city">{{ cafe.city }}</span> <span class="state">{{ cafe.state }}</span>
           <span class="zip">{{ cafe.zip }}</span>
         </span>
+        <div class="meta-data">
+          <span class="liked-meta"><img v-bind:src="cafe.user_like_count > 0 ? '/img/liked.svg' : '/img/unliked.svg'"/> {{ cafe.likes_count }}</span>
+        </div>
       </div>
     </router-link>
   </div>
@@ -126,6 +140,66 @@
       }.bind(this));
     },
 
+    computed: {
+      textSearch(){
+        return this.$store.getters.getTextSearch;
+      },
+
+      activeLocationFilter(){
+        return this.$store.getters.getActiveLocationFilter;
+      },
+
+      onlyLiked(){
+        return this.$store.getters.getOnlyLiked;
+      },
+
+      brewMethodsFilter(){
+        return this.$store.getters.getBrewMethodsFilter;
+      },
+
+      hasMatcha(){
+        return this.$store.getters.getHasMatcha;
+      },
+
+      hasTea(){
+        return this.$store.getters.getHasTea;
+      },
+
+      hasSubscription(){
+        return this.$store.getters.getHasSubscription;
+      }
+    },
+
+    watch: {
+      textSearch(){
+        this.processFilters();
+      },
+
+      activeLocationFilter(){
+        this.processFilters();
+      },
+
+      onlyLiked(){
+        this.processFilters();
+      },
+
+      brewMethodsFilter(){
+        this.processFilters();
+      },
+
+      hasMatcha(){
+        this.processFilters();
+      },
+
+      hasTea(){
+        this.processFilters();
+      },
+
+      hasSubscription(){
+        this.processFilters();
+      }
+    },
+
     /*
       Defines the methods used by the component.
     */
@@ -137,13 +211,13 @@
         /*
           If no filters are selected, show the card
         */
-        if( filters.text == ''
-          && filters.type == 'all'
-          && filters.brewMethods.length == 0
-          && !filters.liked
-          && !filters.matcha
-          && !filters.tea
-          && !filters.subscription ){
+        if( this.textSearch == ''
+          && this.activeLocationFilter == 'all'
+          && this.brewMethodsFilter.length == 0
+          && !this.onlyLiked
+          && !this.hasMatcha
+          && !this.hasTea
+          && !this.hasSubscription ){
             this.show = true;
         }else{
           /*
@@ -160,61 +234,61 @@
           /*
             Check if the roaster passes
           */
-          if( this.processCafeTypeFilter( this.cafe, filters.type) ){
+          if( this.processCafeTypeFilter( this.cafe, this.activeLocationFilter) ){
             typePassed = true;
           }
 
           /*
             Check if text passes
           */
-          if( filters.text != '' && this.processCafeTextFilter( this.cafe, filters.text ) ){
+          if( this.textSearch != '' && this.processCafeTextFilter( this.cafe, this.textSearch ) ){
             textPassed = true;
-          }else if( filters.text == '' ){
+          }else if( this.textSearch == '' ){
             textPassed = true;
           }
 
           /*
             Check if brew methods passes
           */
-          if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.cafe, filters.brewMethods ) ){
+          if( this.brewMethodsFilter.length != 0 && this.processCafeBrewMethodsFilter( this.cafe, this.brewMethodsFilter ) ){
             brewMethodsPassed = true;
-          }else if( filters.brewMethods.length == 0 ){
+          }else if( this.brewMethodsFilter.length == 0 ){
             brewMethodsPassed = true;
           }
 
           /*
             Check if liked passes
           */
-          if( filters.liked && this.processCafeUserLikeFilter( this.cafe ) ){
+          if( this.onlyLiked && this.processCafeUserLikeFilter( this.cafe ) ){
             likedPassed = true;
-          }else if( !filters.liked ){
+          }else if( !this.onlyLiked ){
             likedPassed = true;
           }
 
           /*
             Checks if the cafe passes matcha filter
           */
-          if( filters.matcha && this.processCafeHasMatchaFilter( this.cafe ) ){
+          if( this.hasMatcha && this.processCafeHasMatchaFilter( this.cafe ) ){
             matchaPassed = true;
-          }else if( !filters.matcha ){
+          }else if( !this.hasMatcha ){
             matchaPassed = true;
           }
 
           /*
             Checks if the cafe passes the tea filter
           */
-          if( filters.tea && this.processCafeHasTeaFilter( this.cafe ) ){
+          if( this.hasTea && this.processCafeHasTeaFilter( this.cafe ) ){
             teaPassed = true;
-          }else if( !filters.tea ){
+          }else if( !this.hasTea ){
             teaPassed = true;
           }
 
           /*
             Checks to see if the subscription filter works.
           */
-          if( filters.subscription && this.processCafeSubscriptionFilter( this.cafe ) ){
+          if( this.hasSubscription && this.processCafeSubscriptionFilter( this.cafe ) ){
             subscriptionPassed = true;
-          }else if( !filters.subscription ){
+          }else if( !this.hasSubscription ){
             subscriptionPassed = true;
           }
 

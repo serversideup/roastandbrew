@@ -145,7 +145,7 @@
     <div class="grid-x" v-if="cafe.company.subscription == 1">
       <div class="large-12 medium-12 small-12 cell centered">
         <label class="cafe-label">Offers Coffee Subscription</label>
-        <div class="subscription-option option" v-on:click="cafe.company.subscription == 0 ? cafe.company.subscription = 1 : cafe.company.subscription = 0">
+        <div class="subscription-option option">
           <div class="option-container">
             <img src="/img/icons/coffee-pack.svg" class="option-icon"/> <span class="option-name">Coffee Subscription</span>
           </div>
@@ -240,6 +240,7 @@
       route parameter.
     */
     created(){
+      this.$store.dispatch( 'toggleShowFilters', { showFilters : false } );
       this.$store.dispatch( 'changeCafesView', 'map' );
       this.$store.dispatch( 'loadCafe', {
         slug: this.$route.params.slug

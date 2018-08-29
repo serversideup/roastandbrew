@@ -11,6 +11,9 @@ export const display = {
   state: {
     showFilters: true,
     showPopOut: false,
+    zoomLevel: '',
+    lat: 0.0,
+    lng: 0.0
   },
 
   /*
@@ -29,6 +32,27 @@ export const display = {
     */
     toggleShowPopOut( { commit }, data ){
       commit( 'setShowPopOut', data.showPopOut );
+    },
+
+    /*
+      Applies the zoom level.
+    */
+    applyZoomLevel( { commit }, data ){
+      commit( 'setZoomLevel', data );
+    },
+
+    /*
+      Applies the latitude.
+    */
+    applyLat( { commit }, data ){
+      commit( 'setLat', data );
+    },
+
+    /*
+      Applies the longitude.
+    */
+    applyLng( { commit }, data ){
+      commit( 'setLng', data );
     }
   },
 
@@ -48,6 +72,27 @@ export const display = {
     */
     setShowPopOut( state, show ){
       state.showPopOut = show;
+    },
+
+    /*
+      Sets the zoom level
+    */
+    setZoomLevel( state, level ){
+      state.zoomLevel = level;
+    },
+
+    /*
+      Sets the lat
+    */
+    setLat( state, lat ){
+      state.lat = lat;
+    },
+
+    /*
+      Sets the lng
+    */
+    setLng( state, lng ){
+      state.lng = lng;
     }
   },
 
@@ -67,6 +112,27 @@ export const display = {
     */
     getShowPopOut( state ){
       return state.showPopOut;
+    },
+
+    /*
+      Gets the zoom level
+    */
+    getZoomLevel( state ){
+      return state.zoomLevel;
+    },
+
+    /*
+      Gets the latitude
+    */
+    getLat( state ){
+      return state.lat;
+    },
+
+    /*
+      Gets the longitude
+    */
+    getLng( state ){
+      return state.lng;
     }
   }
 }

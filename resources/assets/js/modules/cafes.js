@@ -45,12 +45,13 @@ export const cafes = {
     /*
       Loads the cafes from the API
     */
-		loadCafes( { commit } ){
+		loadCafes( { commit, rootState, dispatch } ){
       commit( 'setCafesLoadStatus', 1 );
 
       CafeAPI.getCafes()
         .then( function( response ){
           commit( 'setCafes', response.data );
+					dispatch( 'orderCafes', { order: rootState.filters.orderBy, direction: rootState.filters.orderDirection } );
           commit( 'setCafesLoadStatus', 2 );
         })
         .catch( function(){
@@ -252,6 +253,51 @@ export const cafes = {
 		*/
 		changeCafesView( { commit, state, dispatch }, view ){
 			commit( 'setCafesView', view );
+		},
+
+		/*
+			Orders the cafes in the data store.
+		*/
+		orderCafes( { commit, state, dispatch }, data ){
+			/*
+				Set the cafes to a local variable.
+			*/
+			let localCafes = state.cafes;
+
+			/*
+				Switch what we are ordering by.
+			*/
+			switch( data.order ){
+				case 'name':
+					/*
+						Sort cafes by name.
+					*/
+					localCafes.sort( function( a, b ){
+						if( data.direction == 'desc' ){
+							return ( ( a.company.name == b.company.name ) ? 0 : ( ( a.company.name < b.company.name ) ? 1 : -1 ) );
+						}else{
+							return ( ( a.company.name == b.company.name ) ? 0 : ( ( a.company.name > b.company.name ) ? 1 : -1 ) );
+						}
+					});
+				break;
+				case 'most-liked':
+					/*
+						Sort cafes by most liked.
+					*/
+					localCafes.sort( function( a, b ){
+						if( data.direction == 'desc' ){
+							return ( ( a.likes_count == b.likes_count ) ? 0 : ( ( a.likes_count < b.likes_count ) ? 1 : -1 ) );
+						}else{
+							return ( ( a.likes_count == b.likes_count ) ? 0 : ( ( a.likes_count > b.likes_count ) ? 1 : -1 ) );
+						}
+					});
+				break;
+			}
+
+			/*
+				Update the cafes state.
+			*/
+			commit( 'setCafes', localCafes );
 		}
 	},
 

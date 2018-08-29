@@ -22,7 +22,7 @@
 
 <template>
   <div id="app-layout">
-    <div class="show-filters" v-show="!showFilters" v-on:click="toggleShowFilters()">
+    <div class="show-filters" v-show="( !showFilters && cafesView == 'map' )" v-on:click="toggleShowFilters()">
       <img src="/img/grey-right.svg"/>
     </div>
 
@@ -113,6 +113,13 @@
       */
       addCafeStatus(){
         return this.$store.getters.getCafeAddStatus;
+      },
+
+      /*
+        Gets the current views the cafes are in.
+      */
+      cafesView(){
+        return this.$store.getters.getCafesView;
       }
     },
 

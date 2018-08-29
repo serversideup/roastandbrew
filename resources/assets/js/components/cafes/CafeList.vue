@@ -26,6 +26,10 @@
 
 <template>
   <div id="cafe-list-container">
+    <div class="grid-x grid-padding-x cafe-grid-container">
+      <list-filters></list-filters>
+    </div>
+
     <div class="grid-x grid-padding-x cafe-grid-container" id="cafe-grid">
       <cafe-card v-for="cafe in cafes" :key="cafe.id" :cafe="cafe"></cafe-card>
       <div class="large-12 medium-12 small-12 cell">
@@ -40,11 +44,7 @@
     Imports the cafe card component.
   */
   import CafeCard from '../../components/cafes/CafeCard.vue';
-
-  /*
-    Imports the Event Bus to pass updates.
-  */
-  import { EventBus } from '../../event-bus.js';
+  import ListFilters from '../../components/cafes/ListFilters.vue';
 
   export default {
 
@@ -61,19 +61,8 @@
       Regisers the components with the component.
     */
     components: {
-      CafeCard
-    },
-
-    /*
-      Defines the mounted life cycle hook.
-    */
-    mounted(){
-      /*
-        When the filters are updated, compute count of cafes shown.
-      */
-      EventBus.$on('filters-updated', function( filters ){
-        this.computeShown();
-      }.bind(this));
+      CafeCard,
+      ListFilters
     },
 
     /*
@@ -85,20 +74,13 @@
       */
       cafes(){
         return this.$store.getters.getCafes;
-      }
-    },
+      },
 
-    /*
-      Defines the methods used by the component.
-    */
-    methods: {
       /*
-        Computes the count of cafes that are shown.
+        Gets the current views the cafes are in.
       */
-      computeShown(){
-        this.shownCount = $('.cafe-card-container').filter(function() {
-              return $(this).css('display') !== 'none';
-          }).length;
+      cafesView(){
+        return this.$store.getters.getCafesView;
       }
     }
   }

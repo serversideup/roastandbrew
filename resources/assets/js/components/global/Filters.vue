@@ -158,7 +158,7 @@
 
 <template>
   <transition name="slide-in-left">
-    <div class="filters-container" id="filters-container" v-show="showFilters">
+    <div class="filters-container" id="filters-container" v-show="showFilters && cafesView == 'map'">
       <div class="close-filters" v-on:click="toggleShowFilters()">
         <img src="/img/grey-left.svg"/>
       </div>
@@ -271,88 +271,7 @@
   */
   import { EventBus } from '../../event-bus.js';
 
-  /*
-    Imports the cafe card component.
-  */
-  import CafeCard from '../../components/cafes/CafeCard.vue';
-
   export default {
-    /*
-      Defines the data used by the component.
-    */
-    data(){
-      return {
-        textSearch: '',
-        activeLocationFilter: 'all',
-        onlyLiked: false,
-        brewMethodsFilter: [],
-        hasMatcha: false,
-        hasTea: false,
-        hasSubscription: false
-      }
-    },
-
-    /*
-      Defines the watchers used by the component.
-    */
-    watch: {
-      /*
-        Watch the text search variable
-      */
-      textSearch(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch the active location filter
-      */
-      activeLocationFilter(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch the only liked filter.
-      */
-      onlyLiked(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch the brew methods filter.
-      */
-      brewMethodsFilter(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch the has matcha filter.
-      */
-      hasMatcha(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch the has tea filter.
-      */
-      hasTea(){
-        this.updateFilterDisplay();
-      },
-
-      /*
-        Watch has subscription filter
-      */
-      hasSubscription(){
-        this.updateFilterDisplay();
-      }
-    },
-
-    /*
-      Registers the components with the component.
-    */
-    components: {
-      CafeCard
-    },
-
     /*
       Defines the mounted lifecycle hook.
     */
@@ -392,13 +311,6 @@
       },
 
       /*
-        Gets the cafes from the state.
-      */
-      cafes(){
-        return this.$store.getters.getCafes;
-      },
-
-      /*
         Gets the user from the state.
       */
       user(){
@@ -410,6 +322,60 @@
       */
       userLoadStatus(){
         return this.$store.getters.getUserLoadStatus();
+      },
+
+      /*
+        Gets the current views the cafes are in.
+      */
+      cafesView(){
+        return this.$store.getters.getCafesView;
+      },
+
+      /*
+        Gets the current filter text search
+      */
+      textSearch: {
+        set( textSearch ) {
+          this.$store.commit( 'setTextSearch', textSearch )
+        },
+        get() {
+          return this.$store.getters.getTextSearch;
+        }
+      },
+
+      /*
+        Gets the active location filter.
+      */
+      activeLocationFilter(){
+        return this.$store.getters.getActiveLocationFilter;
+      },
+
+      /*
+        Gets the only liked filter.
+      */
+      onlyLiked: {
+        set( onlyLiked ){
+          this.$store.commit( 'setOnlyLiked', onlyLiked );
+        },
+        get(){
+          return this.$store.getters.getOnlyLiked;
+        }
+      },
+
+      brewMethodsFilter(){
+        return this.$store.getters.getBrewMethodsFilter;
+      },
+
+      hasMatcha(){
+        return this.$store.getters.getHasMatcha;
+      },
+
+      hasTea(){
+        return this.$store.getters.getHasTea;
+      },
+
+      hasSubscription(){
+        return this.$store.getters.getHasSubscription;
       }
     },
 
@@ -421,37 +387,26 @@
         Sets the active location filter.
       */
       setActiveLocationFilter( filter ){
-        this.activeLocationFilter = filter;
+        this.$store.dispatch('updateActiveLocationFilter', filter);
       },
 
       /*
         Toggle the brew method filter.
       */
       toggleBrewMethodFilter( id ){
+        let localBrewMethodsFilter = this.brewMethodsFilter;
         /*
           If the filter is in the selected filter, we remove it, otherwise
           we add it.
         */
-        if( this.brewMethodsFilter.indexOf( id ) >= 0 ){
-          this.brewMethodsFilter.splice( this.brewMethodsFilter.indexOf( id ), 1 );
-        }else{
-          this.brewMethodsFilter.push( id );
-        }
-      },
 
-      /*
-        Update filtered cafes when the filters have changed.
-      */
-      updateFilterDisplay(){
-        EventBus.$emit('filters-updated', {
-          text: this.textSearch,
-          type: this.activeLocationFilter,
-          liked: this.onlyLiked,
-          brewMethods: this.brewMethodsFilter,
-          matcha: this.hasMatcha,
-          tea: this.hasTea,
-          subscription: this.hasSubscription
-        });
+        if( localBrewMethodsFilter.indexOf( id ) >= 0 ){
+          localBrewMethodsFilter.splice( localBrewMethodsFilter.indexOf( id ), 1 );
+        }else{
+          localBrewMethodsFilter.push( id );
+        }
+
+        this.$store.dispatch('updateBrewMethodsFilter', localBrewMethodsFilter );
       },
 
       /*
@@ -465,34 +420,28 @@
         Toggle the matcha filter.
       */
       toggleMatchaFilter(){
-        this.hasMatcha = !this.hasMatcha;
+        this.$store.dispatch( 'updateHasMatcha', !this.hasMatcha );
       },
 
       /*
         Toggle the tea filter.
       */
       toggleTeaFilter(){
-        this.hasTea = !this.hasTea;
+        this.$store.dispatch( 'updateHasTea', !this.hasTea );
       },
 
       /*
         Toggle the subscription filter.
       */
       toggleSubscriptionFilter(){
-        this.hasSubscription = !this.hasSubscription;
+        this.$store.dispatch( 'updateHasSubscription', !this.hasSubscription );
       },
 
       /*
         Clear all of the filters.
       */
       clearFilters(){
-        this.textSearch = '';
-        this.activeLocationFilter = 'all';
-        this.onlyLiked = false;
-        this.brewMethodsFilter = [];
-        this.hasMatcha = false;
-        this.hasTea = false;
-        this.hasSubscription = false;
+        this.$store.dispatch( 'resetFilters' );
       }
     }
   }

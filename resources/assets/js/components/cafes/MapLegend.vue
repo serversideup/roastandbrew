@@ -34,7 +34,7 @@
 </style>
 
 <template>
-  <div id="map-legend" v-show="!showFilters">
+  <div id="map-legend" v-show="( !showFilters && cafesView == 'map' )">
     <div class="grid-x">
       <div class="large-12 medium-12 small-12 cell">
         <span class="legend-title">Legend</span>
@@ -66,6 +66,13 @@
       */
       showFilters(){
         return this.$store.getters.getShowFilters;
+      },
+
+      /*
+        Gets the current views the cafes are in.
+      */
+      cafesView(){
+        return this.$store.getters.getCafesView;
       }
     }
   }

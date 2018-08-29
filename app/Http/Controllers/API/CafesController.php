@@ -63,6 +63,7 @@ class CafesController extends Controller
 									}])
 									->with('company')
 									->withCount('userLike')
+									->withCount('likes')
 									->where('deleted', '=', 0)
 									->get();
 

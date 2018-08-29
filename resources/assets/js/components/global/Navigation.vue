@@ -34,6 +34,10 @@
         vertical-align: middle;
         margin-right: 10px;
         height: 13px;
+
+        &.list{
+          transform: rotate(-90deg);
+        }
       }
 
       img.chevron-active{
@@ -50,6 +54,10 @@
 
         img.chevron-active{
           display: inline-block;
+
+          &.list{
+            transform: rotate(-90deg);
+          }
         }
       }
     }
@@ -164,8 +172,8 @@
     <div class="grid-x">
       <div class="large-4 medium-4 small-4 cell">
         <a class="filters" v-bind:class="{'active': showFilters}" v-on:click="toggleShowFilters()">
-          <img class="chevron" src="/img/chevron-right.svg"/>
-          <img class="chevron-active" src="/img/chevron-right-active.svg"/> Filters
+          <img class="chevron" v-bind:class="{'list' : cafesView == 'list'}" src="/img/chevron-right.svg"/>
+          <img class="chevron-active" v-bind:class="{'list' : cafesView == 'list'}" src="/img/chevron-right-active.svg"/> Filters
         </a>
 
         <span class="clear-filters" v-show="showFilters" v-on:click="clearFilters()">
@@ -217,6 +225,13 @@
       */
       showFilters(){
         return this.$store.getters.getShowFilters;
+      },
+
+      /*
+        Gets the current views the cafes are in.
+      */
+      cafesView(){
+        return this.$store.getters.getCafesView;
       }
     },
 

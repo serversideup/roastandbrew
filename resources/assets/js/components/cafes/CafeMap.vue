@@ -110,15 +110,6 @@
     },
 
     /*
-      Defines the data used by the component.
-    */
-    data(){
-      return {
-
-      }
-    },
-
-    /*
       Defines the mixins used by the component.
     */
     mixins: [
@@ -141,6 +132,76 @@
       */
       cafes(){
         return this.$store.getters.getCafes;
+      },
+
+      /*
+        Grabs the text search filter.
+      */
+      textSearch(){
+        return this.$store.getters.getTextSearch;
+      },
+
+      /*
+        Grabs the active location filter
+      */
+      activeLocationFilter(){
+        return this.$store.getters.getActiveLocationFilter;
+      },
+
+      /*
+        Grabs the only liked filter.
+      */
+      onlyLiked(){
+        return this.$store.getters.getOnlyLiked;
+      },
+
+      /*
+        Grabs the brew methods filter.
+      */
+      brewMethodsFilter(){
+        return this.$store.getters.getBrewMethodsFilter;
+      },
+
+      /*
+        Grabs the has matcha filter
+      */
+      hasMatcha(){
+        return this.$store.getters.getHasMatcha;
+      },
+
+      /*
+        Grabs the has tea filter
+      */
+      hasTea(){
+        return this.$store.getters.getHasTea;
+      },
+
+      /*
+        Grabs the has subscription filter
+      */
+      hasSubscription(){
+        return this.$store.getters.getHasSubscription;
+      },
+
+      /*
+        Grabs the previous lat
+      */
+      previousLat(){
+        return this.$store.getters.getLat;
+      },
+
+      /*
+        Grabs the previous lng
+      */
+      previousLng(){
+        return this.$store.getters.getLng;
+      },
+
+      /*
+        Grabs the previous zoom
+      */
+      previousZoom(){
+        return this.$store.getters.getZoomLevel;
       }
     },
 
@@ -149,12 +210,77 @@
     */
     watch: {
       /*
+        When the route changes from an individual cafe to all of the cafes,
+        check if a previous lat and lng are set and go back to where the user
+        was located.
+      */
+      '$route' (to, from) {
+        if( to.name == 'cafes' && from.name == 'cafe' ){
+          if( this.previousLat != 0.0 && this.previousLng != 0.0 && this.previousZoom != '' ){
+            var latLng = new google.maps.LatLng( this.previousLat, this.previousLng );
+            this.$map.setZoom( this.previousZoom );
+            this.$map.panTo( latLng );
+          }
+        }
+      },
+
+      /*
         Watches the cafes. When they are updated, clear the markers
         and re build them.
       */
       cafes(){
         this.clearMarkers();
         this.buildMarkers();
+      },
+
+      /*
+        When the text input changes, process the filters.
+      */
+      textSearch(){
+        this.processFilters();
+      },
+
+      /*
+        When the active location filter changes, process the
+        filters.
+      */
+      activeLocationFilter(){
+        this.processFilters();
+      },
+
+      /*
+        When the only liked changes, process the filters.
+      */
+      onlyLiked(){
+        this.processFilters();
+      },
+
+      /*
+        When the brew methods change, process the filters.
+      */
+      brewMethodsFilter(){
+        this.processFilters();
+      },
+
+      /*
+        When the has matcha changes, process the filters.
+      */
+      hasMatcha(){
+        this.processFilters();
+      },
+
+      /*
+        When the has tea changes, process the filters.
+      */
+      hasTea(){
+        this.processFilters();
+      },
+
+      /*
+        When the has subscription changes, process the filters.
+      */
+      hasSubscription(){
+        this.processFilters();
       }
     },
 
@@ -184,13 +310,6 @@
       this.buildMarkers();
 
       /*
-        Listen to the filters-updated event to filter the map markers
-      */
-      EventBus.$on('filters-updated', function( filters ){
-        this.processFilters( filters );
-      }.bind(this));
-
-      /*
         Listen to the location-selected event to zoom into the appropriate
         cafe.
       */
@@ -208,15 +327,15 @@
       /*
         Process filters on the map selected by the user.
       */
-      processFilters( filters ){
+      processFilters(){
         for( var i = 0; i < this.$markers.length; i++ ){
-          if( filters.text == ''
-            && filters.type == 'all'
-            && filters.brewMethods.length == 0
-            && !filters.liked
-            && !filters.matcha
-            && !filters.tea
-            && !filters.subscription ){
+          if( this.textSearch == ''
+            && this.activeLocationFilter == 'all'
+            && this.brewMethodsFilter.length == 0
+            && !this.onlyLiked
+            && !this.hasMatcha
+            && !this.hasTea
+            && !this.hasSubscription ){
                 this.$markers[i].setMap( this.$map );
               }else{
                 /*
@@ -234,61 +353,61 @@
                 /*
                   Check if the roaster passes
                 */
-                if( this.processCafeTypeFilter( this.$markers[i].cafe, filters.type) ){
+                if( this.processCafeTypeFilter( this.$markers[i].cafe, this.activeLocationFilter) ){
                   typePassed = true;
                 }
 
                 /*
                   Check if text passes
                 */
-                if( filters.text != '' && this.processCafeTextFilter( this.$markers[i].cafe, filters.text ) ){
+                if( this.textSearch != '' && this.processCafeTextFilter( this.$markers[i].cafe, this.textSearch ) ){
                   textPassed = true;
-                }else if( filters.text == '' ){
+                }else if( this.textSearch == '' ){
                   textPassed = true;
                 }
 
                 /*
                   Check if brew methods passes
                 */
-                if( filters.brewMethods.length != 0 && this.processCafeBrewMethodsFilter( this.$markers[i].cafe, filters.brewMethods ) ){
+                if( this.brewMethodsFilter.length != 0 && this.processCafeBrewMethodsFilter( this.$markers[i].cafe, this.brewMethodsFilter ) ){
                   brewMethodsPassed = true;
-                }else if( filters.brewMethods.length == 0 ){
+                }else if( this.brewMethodsFilter.length == 0 ){
                   brewMethodsPassed = true;
                 }
 
                 /*
                   Check if liked passes
                 */
-                if( filters.liked && this.processCafeUserLikeFilter( this.$markers[i].cafe ) ){
+                if( this.onlyLiked && this.processCafeUserLikeFilter( this.$markers[i].cafe ) ){
                   likedPassed = true;
-                }else if( !filters.liked ){
+                }else if( !this.onlyLiked ){
                   likedPassed = true;
                 }
 
                 /*
                   Checks if the cafe passes matcha filter
                 */
-                if( filters.matcha && this.processCafeHasMatchaFilter( this.$markers[i].cafe ) ){
+                if( this.hasMatcha && this.processCafeHasMatchaFilter( this.$markers[i].cafe ) ){
                   matchaPassed = true;
-                }else if( !filters.matcha ){
+                }else if( !this.hasMatcha ){
                   matchaPassed = true;
                 }
 
                 /*
                   Checks if the cafe passes the tea filter
                 */
-                if( filters.tea && this.processCafeHasTeaFilter( this.$markers[i].cafe ) ){
+                if( this.hasTea && this.processCafeHasTeaFilter( this.$markers[i].cafe ) ){
                   teaPassed = true;
-                }else if( !filters.tea ){
+                }else if( !this.hasTea ){
                   teaPassed = true;
                 }
 
                 /*
                   Checks to see if the subscription filter works.
                 */
-                if( filters.subscription && this.processCafeSubscriptionFilter( this.$markers[i].cafe ) ){
+                if( this.hasSubscription && this.processCafeSubscriptionFilter( this.$markers[i].cafe ) ){
                   subscriptionPassed = true;
-                }else if( !filters.subscription ){
+                }else if( !this.hasSubscription ){
                   subscriptionPassed = true;
                 }
 
@@ -360,11 +479,18 @@
 
             /*
               Localize the global router variable so when clicked, we go
-              to the cafe.
+              to the cafe and the store so we can dispatch the current locations.
             */
             let router = this.$router;
+            let store = this.$store;
 
             marker.addListener('click', function() {
+              let center = this.map.getCenter();
+
+              store.dispatch( 'applyZoomLevel', this.map.getZoom() );
+              store.dispatch( 'applyLat', center.lat() );
+              store.dispatch( 'applyLng', center.lng() );
+
               router.push( { name: 'cafe', params: { slug: this.cafe.slug } } );
             });
 

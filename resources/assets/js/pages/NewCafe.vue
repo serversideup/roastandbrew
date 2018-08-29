@@ -222,13 +222,13 @@
             <input type="text" class="form-input" v-model="twitter_url"/>
           </div>
         </div>
-        <div class="grid-x grid-padding-x">
+        <div class="grid-x grid-padding-x" v-if="newCompany">
           <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Location Type</label>
           </div>
         </div>
 
-        <div class="grid-x grid-padding-x">
+        <div class="grid-x grid-padding-x" v-if="newCompany">
           <div class="large-8 medium-9 small-12 cell centered">
             <div class="location-type roaster" v-bind:class="{ 'active': companyType == 'roaster' }" v-on:click="setCompanyType('roaster')">
               Roaster
@@ -238,13 +238,13 @@
           </div>
         </div>
 
-        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+        <div class="grid-x grid-padding-x" v-if="newCompany" v-show="companyType == 'roaster'">
           <div class="large-8 medium-9 small-12 cell centered">
             <label class="form-label">Does the roaster offer a subscription service?</label>
           </div>
         </div>
 
-        <div class="grid-x grid-padding-x" v-show="companyType == 'roaster'">
+        <div class="grid-x grid-padding-x" v-if="newCompany" v-show="companyType == 'roaster'">
           <div class="large-8 medium-9 small-12 cell centered">
             <div class="subscription-option option" v-on:click="subscription == 0 ? subscription = 1 : subscription = 0" v-bind:class="{'active': subscription == 1}">
               <div class="option-container">
