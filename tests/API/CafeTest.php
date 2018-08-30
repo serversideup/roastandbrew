@@ -12,6 +12,70 @@ class CafeTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
+    protected $generalUser;
+    protected $owner;
+    protected $admin;
+
+    protected $company;
+
+    protected $generalUserCompany;
+
+    protected $generalUserCafes;
+
+    protected $brewMethod;
+
+    /**
+     * Sets up our testing scenario by building some
+     * entities.
+     */
+    public function setUp(){
+      parent::setUp();
+
+      /*
+        Creates a general user for testing.
+      */
+      $this->generalUser = factory(\App\Models\User::class)->create([
+        'permission' => 0
+      ]);
+
+      /*
+        Creates a coffee shop owner for testing
+      */
+      $this->owner = factory(\App\Models\User::class)->create([
+        'permission' => 1
+      ]);
+
+      /*
+        Creates an admin for testing
+      */
+      $this->admin = factory(\App\Models\User::class)->create();
+
+
+      /*
+        Creates a company for the test which is
+        added by the user.
+      */
+      $this->generalUserCompany = factory(\App\Models\Company::class)->create([
+        'added_by' => $this->generalUser->id
+      ]);
+
+      /*
+        Creates some cafes for testing.
+      */
+      $this->generalUserCafes = factory(\App\Models\Cafe::class, 3)->create([
+        'company_id' => $this->generalUserCompany->id,
+        'added_by' => $this->generalUser->id
+      ]);
+
+      /*
+        Creates a brew method for testing
+      */
+      $this->brewMethod = factory(\App\Models\BrewMethod::class)->create([
+          'method' => 'Hario V60 Dripper',
+          'icon' => ''
+      ]);
+    }
+
     /**
      * Tests Getting Cafes
      *
@@ -19,30 +83,9 @@ class CafeTest extends TestCase
      */
     public function testGetCafes(){
       /*
-        Creates a user for the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Creates a company for the test which is
-        added by the user.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create 3 cafes so we can return all of them.
-      */
-      $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Get the response from the request.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->generalUser, 'api')
                         ->get('/api/v1/cafes');
 
       /*
@@ -59,23 +102,11 @@ class CafeTest extends TestCase
      */
     public function testGetCafe(){
       /*
-        Create a user for the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a company for the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
         Creates 3 cafes for the test.
       */
       $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
+        'company_id' => $this->generalUserCompany->id,
+        'added_by' => $this->generalUser->id
       ]);
 
       /*
@@ -86,7 +117,7 @@ class CafeTest extends TestCase
       /*
         As the user, grab the new cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->generalUser, 'api')
                        ->get('/api/v1/cafes/'.$cafeSlug);
 
 
@@ -106,34 +137,14 @@ class CafeTest extends TestCase
      */
     public function testGetCafeEditData(){
       /*
-        Create a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a company to run the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create 3 cafes to run the test.
-      */
-      $cafes = factory(\App\Models\Cafe::class, 3)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Get the first cafe's slug
       */
-      $cafeSlug = $cafes[0]->slug;
+      $cafeSlug = $this->generalUserCafes[0]->slug;
 
       /*
         Get the response from getting the cafe selected.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->generalUser, 'api')
                        ->get('/api/v1/cafes/'.$cafeSlug);
 
       /*
@@ -152,22 +163,9 @@ class CafeTest extends TestCase
      */
     public function testAddCafeNewCompany(){
       /*
-        Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Run the request to add the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
@@ -175,14 +173,14 @@ class CafeTest extends TestCase
                           'instagram_url' => 'https://instagram.com',
                           'facebook_url'  => 'https://facebook.com',
                           'twitter_url'   => 'https://twitter.com',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -213,34 +211,21 @@ class CafeTest extends TestCase
      */
     public function testAddCafeNewCompanyWithSubscription(){
       /*
-        Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Run the request to add the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 1,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -270,34 +255,21 @@ class CafeTest extends TestCase
      */
     public function testAddCafeNewCompanyConfirmActionApproved(){
       /*
-        Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Run the request to add the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -313,10 +285,10 @@ class CafeTest extends TestCase
           Confirm the database has an action for the added cafe.
         */
         $this->assertDatabaseHas('actions', [
-          'user_id' => $user->id,
+          'user_id' => $this->admin->id,
           'type' => 'cafe-added',
           'status' => 1,
-          'processed_by' => $user->id
+          'processed_by' => $this->admin->id
         ]);
     }
 
@@ -327,36 +299,21 @@ class CafeTest extends TestCase
      */
     public function testAddCafeNewCompanyAsRegularUser(){
       /*
-        Creates a user with no permissions to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create([
-        'permission' => 0
-      ]);
-
-      /*
-        Creates a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Add the cafe as a user who doesn't have permissions.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->generalUser, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->generalUser->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -370,7 +327,7 @@ class CafeTest extends TestCase
         Confirm the database has an action for the added cafe.
       */
       $this->assertDatabaseHas('actions', [
-        'user_id' => $user->id,
+        'user_id' => $this->generalUser->id,
         'type' => 'cafe-added',
         'status' => 0
       ]);
@@ -383,27 +340,14 @@ class CafeTest extends TestCase
      */
     public function testAddCafeWithMatcha(){
       /*
-        Create a user to add a cafe with.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Add a brew method for the cafe to have.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Add the cafe.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
@@ -411,7 +355,7 @@ class CafeTest extends TestCase
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
                           'matcha'       => 1,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -429,27 +373,14 @@ class CafeTest extends TestCase
      */
     public function testAddingCafeWithMatchaAndTea(){
       /*
-        Create a user to add a cafe with.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Add a brew method to be added to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Run the request to add the cafe.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
@@ -457,7 +388,7 @@ class CafeTest extends TestCase
                           'location_name' => 'Tasting Room',
                           'matcha'       => 1,
                           'tea'          => 1,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -476,34 +407,21 @@ class CafeTest extends TestCase
      */
     public function testAddingCafeWithTea(){
       /*
-        Create a new user to run the test with.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Add a cafe with a tea flag.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
                           'company_name' => 'Ruby',
                           'company_type' => 'roaster',
                           'website'      => 'https://rubycoffeeroasters.com/',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'tea'           => 1,
-                          'brew_methods'  => json_encode( [$method->id] ),
+                          'brew_methods'  => json_encode( [$this->brewMethod->id] ),
                           'subscription'  => 0
                         ]);
 
@@ -522,48 +440,27 @@ class CafeTest extends TestCase
      */
     public function testAddCafeExistingCompany(){
       /*
-        Create a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Create a company to run the test
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id,
-        'name' => 'Existing Company'
-      ]);
-
-      /*
-        Create a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Run the request to add the cafe.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('POST', '/api/v1/cafes', [
-                          'company_id'   => $company->id,
-                          'added_by'     => $user->id,
+                          'company_id'   => $this->generalUserCompany->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
         Confirm the cafe has been added to an existing company
       */
       $response->assertJSON([
-        'name' => $company->name,
-        'website' => $company->website
+        'name' => $this->generalUserCompany->name,
+        'website' => $this->generalUserCompany->website
       ]);
     }
 
@@ -574,55 +471,32 @@ class CafeTest extends TestCase
      */
     public function testAddCafeExistingCompanyOwner(){
       /*
-        Create a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create([
-        'permission' => 1
-      ]);
-
-      /*
-        Create a company to run the test
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id,
-        'name' => 'Existing Company'
-      ]);
-
-      /*
-        Create a brew method to add to the cafe.
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
          Bind the company to the user's owned company
       */
-      $user->companiesOwned()->attach( $company->id );
+      $this->generalUser->companiesOwned()->attach( $this->generalUserCompany->id );
 
       /*
         Run the request to add the cafe.
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->generalUser, 'api')
                         ->json('POST', '/api/v1/cafes', [
-                          'company_id'   => $company->id,
-                          'added_by'     => $user->id,
+                          'company_id'   => $this->generalUserCompany->id,
+                          'added_by'     => $this->generalUser->id,
                           'address'      => '9515 Water St',
                           'city'         => 'Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
         Confirm the cafe has been added to an existing company
       */
       $response->assertJSON([
-        'name' => $company->name,
-        'website' => $company->website
+        'name' => $this->generalUserCompany->name,
+        'website' => $this->generalUserCompany->website
       ]);
     }
 
@@ -633,56 +507,28 @@ class CafeTest extends TestCase
      */
     public function testEditCafe(){
       /*
-        Creates a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Creates a company to run the test
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a cafe to run the test to edit.
-      */
-      $cafes = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a brew method to add to the cafe
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Grab the slug from the cafe.
       */
-      $cafeSlug = $cafes->slug;
+      $cafeSlug = $this->generalUserCafes[0]->slug;
 
       /*
         Run the request to edit the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
-                          'company_id'   => $company->id,
+                          'company_id'   => $this->generalUserCompany->id,
                           'company_name' => 'EDITED name',
                           'instagram_url' => 'https://instagram.com',
                           'facebook_url' => 'https://facebook.com',
                           'twitter_url' => 'https://twitter.com',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => 'EDITED 9515 Water St',
                           'city'         => 'EDITED Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'EDITED Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -703,53 +549,25 @@ class CafeTest extends TestCase
      */
     public function testEditCafeAddSubscriptionToCompany(){
       /*
-        Creates a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Creates a company to run the test
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a cafe to run the test to edit.
-      */
-      $cafes = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a brew method to add to the cafe
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Grab the slug from the cafe.
       */
-      $cafeSlug = $cafes->slug;
+      $cafeSlug = $this->generalUserCafes[0]->slug;
 
       /*
         Run the request to edit the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
-                          'company_id'   => $company->id,
+                          'company_id'   => $this->generalUserCompany->id,
                           'company_name' => 'EDITED name',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => 'EDITED 9515 Water St',
                           'city'         => 'EDITED Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'EDITED Tasting Room',
                           'subscription' => 1,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
@@ -768,63 +586,35 @@ class CafeTest extends TestCase
      */
     public function testEditCafeAndActionApproved(){
       /*
-        Creates a user to run the test
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-        Creates a company to run the test
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a cafe to run the test to edit.
-      */
-      $cafes = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
-        Create a brew method to add to the cafe
-      */
-      $method = factory(\App\Models\BrewMethod::class)->create([
-          'method' => 'Hario V60 Dripper',
-          'icon' => ''
-      ]);
-
-      /*
         Grab the slug from the cafe.
       */
-      $cafeSlug = $cafes->slug;
+      $cafeSlug = $this->generalUserCafes[0]->slug;
 
       /*
         Run the request to edit the cafe
       */
-      $response = $this->actingAs($user, 'api')
+      $response = $this->actingAs($this->admin, 'api')
                         ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
-                          'company_id'   => $company->id,
+                          'company_id'   => $this->generalUserCompany->id,
                           'company_name' => 'EDITED name',
-                          'added_by'     => $user->id,
+                          'added_by'     => $this->admin->id,
                           'address'      => 'EDITED 9515 Water St',
                           'city'         => 'EDITED Amherst Junction',
                           'state'        => 'WI',
                           'zip'          => '54407',
                           'location_name' => 'EDITED Tasting Room',
                           'subscription' => 0,
-                          'brew_methods' => json_encode( [$method->id] )
+                          'brew_methods' => json_encode( [$this->brewMethod->id] )
                         ]);
 
       /*
         Confirm the database has an action for the added cafe.
       */
       $this->assertDatabaseHas('actions', [
-        'user_id' => $user->id,
+        'user_id' => $this->admin->id,
         'type' => 'cafe-updated',
         'status' => 1,
-        'processed_by' => $user->id
+        'processed_by' => $this->admin->id
       ]);
     }
 
@@ -835,37 +625,9 @@ class CafeTest extends TestCase
      */
      public function testChangingCafeToHaveMatcha(){
        /*
-          Create a user to run the test.
-       */
-       $user = factory(\App\Models\User::class)->create();
-
-       /*
-          Create a company to run the test.
-       */
-       $company = factory(\App\Models\Company::class)->create([
-         'added_by' => $user->id
-       ]);
-
-       /*
-          Create a cafe to run the test on
-       */
-       $cafes = factory(\App\Models\Cafe::class)->create([
-         'company_id' => $company->id,
-         'added_by' => $user->id
-       ]);
-
-       /*
-          Create a brew method to add to the cafe.
-       */
-       $method = factory(\App\Models\BrewMethod::class)->create([
-           'method' => 'Hario V60 Dripper',
-           'icon' => ''
-       ]);
-
-       /*
           Grab the slug from the cafe.
        */
-       $cafeSlug = $cafes->slug;
+       $cafeSlug = $this->generalUserCafes[0]->slug;
 
        /*
           Confirm the database has the cafe with no matcha flag.
@@ -878,12 +640,12 @@ class CafeTest extends TestCase
        /*
           Run the request to add the matcha flag.
        */
-       $response = $this->actingAs($user, 'api')
+       $response = $this->actingAs($this->admin, 'api')
                          ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                            'matcha' => 1,
                            'company_name' => 'EDITED name',
                            'website'      => 'https://rubycoffeeroasters.com/',
-                           'added_by'     => $user->id,
+                           'added_by'     => $this->admin->id,
                            'address'      => 'EDITED 9515 Water St',
                            'city'         => 'EDITED Amherst Junction',
                            'state'        => 'WI',
@@ -907,37 +669,9 @@ class CafeTest extends TestCase
       */
       public function testChangingCafeToHaveTea(){
         /*
-           Create a user to run the test.
-        */
-        $user = factory(\App\Models\User::class)->create();
-
-        /*
-           Create a company to run the test.
-        */
-        $company = factory(\App\Models\Company::class)->create([
-          'added_by' => $user->id
-        ]);
-
-        /*
-           Create a cafe to run the test on
-        */
-        $cafes = factory(\App\Models\Cafe::class)->create([
-          'company_id' => $company->id,
-          'added_by' => $user->id
-        ]);
-
-        /*
-           Create a brew method to add to the cafe.
-        */
-        $method = factory(\App\Models\BrewMethod::class)->create([
-            'method' => 'Hario V60 Dripper',
-            'icon' => ''
-        ]);
-
-        /*
            Grab the slug from the cafe.
         */
-        $cafeSlug = $cafes->slug;
+        $cafeSlug = $this->generalUserCafes[0]->slug;
 
         /*
           Confirm the database has the cafe with no tea flag.
@@ -950,12 +684,12 @@ class CafeTest extends TestCase
         /*
           Run the request to add a tea flag.
         */
-        $response = $this->actingAs($user, 'api')
+        $response = $this->actingAs($this->admin, 'api')
                           ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
                             'tea' => 1,
                             'company_name' => 'EDITED name',
                             'website'      => 'https://rubycoffeeroasters.com/',
-                            'added_by'     => $user->id,
+                            'added_by'     => $this->admin->id,
                             'address'      => 'EDITED 9515 Water St',
                             'city'         => 'EDITED Amherst Junction',
                             'state'        => 'WI',
@@ -979,30 +713,10 @@ class CafeTest extends TestCase
      */
     public function testLikeCafe(){
       /*
-         Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-         Create a company to run the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-         Create a cafe to run the test on
-      */
-      $cafe = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Run the request to like a cafe.
       */
-      $response = $this->actingAs($user, 'api')
-                        ->json('POST', '/api/v1/cafes/'.$cafe->slug.'/like');
+      $response = $this->actingAs($this->generalUser, 'api')
+                        ->json('POST', '/api/v1/cafes/'.$this->generalUserCafes[0]->slug.'/like');
 
       /*
         Confirm the cafe has been liked
@@ -1015,8 +729,8 @@ class CafeTest extends TestCase
         Confirms the database has a record of the like.
       */
       $this->assertDatabaseHas('users_cafes_likes', [
-                'user_id' => $user->id,
-                'cafe_id' => $cafe->id
+                'user_id' => $this->generalUser->id,
+                'cafe_id' => $this->generalUserCafes[0]->id
             ]);
     }
 
@@ -1027,30 +741,10 @@ class CafeTest extends TestCase
      */
     public function testDeleteLikeCafe(){
       /*
-         Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-         Create a company to run the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-         Create a cafe to run the test on
-      */
-      $cafe = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Run the request to like a cafe.
       */
-      $response = $this->actingAs($user, 'api')
-                        ->json('POST', '/api/v1/cafes/'.$cafe->slug.'/like');
+      $response = $this->actingAs($this->generalUser, 'api')
+                        ->json('POST', '/api/v1/cafes/'.$this->generalUserCafes[0]->slug.'/like');
 
       /*
         Confirm the response has a liked cafe.
@@ -1063,22 +757,22 @@ class CafeTest extends TestCase
         Confirms the database has a record of the like.
       */
       $this->assertDatabaseHas('users_cafes_likes', [
-                'user_id' => $user->id,
-                'cafe_id' => $cafe->id
+                'user_id' => $this->generalUser->id,
+                'cafe_id' => $this->generalUserCafes[0]->id
             ]);
 
       /*
         Run the request to unlike the cafe
       */
-      $this->actingAs($user, 'api')
-            ->json('DELETE', '/api/v1/cafes/'.$cafe->slug.'/like');
+      $this->actingAs($this->generalUser, 'api')
+            ->json('DELETE', '/api/v1/cafes/'.$this->generalUserCafes[0]->slug.'/like');
 
       /*
         Confirms the database has no record of the like.
       */
       $this->assertDatabaseMissing('users_cafes_likes', [
-                'user_id' => $user->id,
-                'cafe_id' => $cafe->id
+                'user_id' => $this->generalUser->id,
+                'cafe_id' => $this->generalUserCafes[0]->id
             ]);
 
     }
@@ -1090,36 +784,16 @@ class CafeTest extends TestCase
      */
     public function testDeleteCafe(){
       /*
-         Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-         Create a company to run the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-         Create a cafe to run the test on
-      */
-      $cafe = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Sends a request to delete a cafe.
       */
-      $this->actingAs( $user, 'api' )
-           ->json('DELETE', '/api/v1/cafes/'.$cafe->slug);
+      $this->actingAs( $this->admin, 'api' )
+           ->json('DELETE', '/api/v1/cafes/'.$this->generalUserCafes[0]->slug);
 
       /*
         Confirms the database has a soft delete of the cafe.
       */
       $this->assertDatabaseHas('cafes', [
-               'id' => $cafe->id,
+               'id' => $this->generalUserCafes[0]->id,
                'deleted' => 1
            ]);
 
@@ -1132,39 +806,19 @@ class CafeTest extends TestCase
      */
     public function testDeleteCafeAndActionAdded(){
       /*
-         Create a user to run the test.
-      */
-      $user = factory(\App\Models\User::class)->create();
-
-      /*
-         Create a company to run the test.
-      */
-      $company = factory(\App\Models\Company::class)->create([
-        'added_by' => $user->id
-      ]);
-
-      /*
-         Create a cafe to run the test on
-      */
-      $cafe = factory(\App\Models\Cafe::class)->create([
-        'company_id' => $company->id,
-        'added_by' => $user->id
-      ]);
-
-      /*
         Sends a request to delete a cafe.
       */
-      $this->actingAs( $user, 'api' )
-           ->json('DELETE', '/api/v1/cafes/'.$cafe->slug);
+      $this->actingAs( $this->admin, 'api' )
+           ->json('DELETE', '/api/v1/cafes/'.$this->generalUserCafes[0]->slug);
 
        /*
          Confirm the database has an action for the added cafe.
        */
        $this->assertDatabaseHas('actions', [
-         'user_id' => $user->id,
+         'user_id' => $this->admin->id,
          'type' => 'cafe-deleted',
          'status' => 1,
-         'processed_by' => $user->id
+         'processed_by' => $this->admin->id
        ]);
 
     }
@@ -1176,61 +830,30 @@ class CafeTest extends TestCase
      */
      public function testCafeOwnerCanUpdateCafe(){
        /*
-          Create a user to run the test that doesn't have
-          permission to edit the cafe
-       */
-       $user = factory(\App\Models\User::class)->create([
-         'permission' => 0
-       ]);
-
-       /*
-          Create a company to run the test.
-       */
-       $company = factory(\App\Models\Company::class)->create([
-         'added_by' => $user->id
-       ]);
-
-       /*
           Bind the company to the user's owned company
        */
-       $user->companiesOwned()->attach( $company->id );
-
-       /*
-          Create a cafe to run the test on
-       */
-       $cafe = factory(\App\Models\Cafe::class)->create([
-         'company_id' => $company->id,
-         'added_by' => $user->id
-       ]);
-
-       /*
-         Create a brew method to add to the cafe
-       */
-       $method = factory(\App\Models\BrewMethod::class)->create([
-           'method' => 'Hario V60 Dripper',
-           'icon' => ''
-       ]);
+       $this->generalUser->companiesOwned()->attach( $this->generalUserCompany->id );
 
        /*
          Grab the slug from the cafe.
        */
-       $cafeSlug = $cafe->slug;
+       $cafeSlug = $this->generalUserCafes[0]->slug;
 
        /*
          Run the request to edit the cafe
        */
-       $response = $this->actingAs($user, 'api')
+       $response = $this->actingAs($this->generalUser, 'api')
                          ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
-                           'company_id'   => $company->id,
+                           'company_id'   => $this->generalUserCompany->id,
                            'company_name' => 'EDITED name',
-                           'added_by'     => $user->id,
+                           'added_by'     => $this->generalUser->id,
                            'address'      => 'EDITED 9515 Water St',
                            'city'         => 'EDITED Amherst Junction',
                            'state'        => 'WI',
                            'zip'          => '54407',
                            'location_name' => 'EDITED Tasting Room',
                            'subscription' => 0,
-                           'brew_methods' => json_encode( [$method->id] )
+                           'brew_methods' => json_encode( [$this->brewMethod->id] )
                          ]);
 
        /*
@@ -1249,56 +872,25 @@ class CafeTest extends TestCase
      */
      public function testUserEditCafeActionCreated(){
        /*
-          Create a user to run the test that doesn't have
-          permission to edit the cafe
-       */
-       $user = factory(\App\Models\User::class)->create([
-         'permission' => 0
-       ]);
-
-       /*
-          Create a company to run the test.
-       */
-       $company = factory(\App\Models\Company::class)->create([
-         'added_by' => $user->id
-       ]);
-
-       /*
-          Create a cafe to run the test on
-       */
-       $cafe = factory(\App\Models\Cafe::class)->create([
-         'company_id' => $company->id,
-         'added_by' => $user->id
-       ]);
-
-       /*
-         Create a brew method to add to the cafe
-       */
-       $method = factory(\App\Models\BrewMethod::class)->create([
-           'method' => 'Hario V60 Dripper',
-           'icon' => ''
-       ]);
-
-       /*
          Grab the slug from the cafe.
        */
-       $cafeSlug = $cafe->slug;
+       $cafeSlug = $this->generalUserCafes[0]->slug;
 
        /*
          Run the request to edit the cafe
        */
-       $response = $this->actingAs($user, 'api')
+       $response = $this->actingAs($this->generalUser, 'api')
                          ->json('PUT', '/api/v1/cafes/'.$cafeSlug, [
-                           'company_id'   => $company->id,
+                           'company_id'   => $this->generalUserCompany->id,
                            'company_name' => 'EDITED name',
-                           'added_by'     => $user->id,
+                           'added_by'     => $this->generalUser->id,
                            'address'      => 'EDITED 9515 Water St',
                            'city'         => 'EDITED Amherst Junction',
                            'state'        => 'WI',
                            'zip'          => '54407',
                            'location_name' => 'EDITED Tasting Room',
                            'subscription' => 0,
-                           'brew_methods' => json_encode( [$method->id] )
+                           'brew_methods' => json_encode( [$this->brewMethod->id] )
                          ]);
 
         /*
@@ -1313,7 +905,7 @@ class CafeTest extends TestCase
           Confirms that the action exists in the database
         */
         $this->assertDatabaseHas('actions', [
-          'cafe_id' => $cafe->id,
+          'cafe_id' => $this->generalUserCafes[0]->id,
           'type' => 'cafe-updated'
         ]);
 
@@ -1321,7 +913,7 @@ class CafeTest extends TestCase
           Confirms the cafe has not been edited
         */
         $this->assertDatabaseMissing('companies', [
-          'id' => $cafe->id,
+          'id' => $this->generalUserCafes[0]->id,
           'name' => 'EDITED cafe'
         ]);
      }
@@ -1333,57 +925,26 @@ class CafeTest extends TestCase
       */
       public function testCafeOwnerCanDeleteCafe(){
         /*
-           Create a user to run the test that doesn't have
-           permission to edit the cafe
-        */
-        $user = factory(\App\Models\User::class)->create([
-          'permission' => 0
-        ]);
-
-        /*
-           Create a company to run the test.
-        */
-        $company = factory(\App\Models\Company::class)->create([
-          'added_by' => $user->id
-        ]);
-
-        /*
            Bind the company to the user's owned company
         */
-        $user->companiesOwned()->attach( $company->id );
-
-        /*
-           Create a cafe to run the test on
-        */
-        $cafe = factory(\App\Models\Cafe::class)->create([
-          'company_id' => $company->id,
-          'added_by' => $user->id
-        ]);
-
-        /*
-          Create a brew method to add to the cafe
-        */
-        $method = factory(\App\Models\BrewMethod::class)->create([
-            'method' => 'Hario V60 Dripper',
-            'icon' => ''
-        ]);
+        $this->generalUser->companiesOwned()->attach( $this->generalUserCompany->id );
 
         /*
           Grab the slug from the cafe.
         */
-        $cafeSlug = $cafe->slug;
+        $cafeSlug = $this->generalUserCafes[0]->slug;
 
         /*
           Run the request to delete the cafe
         */
-        $response = $this->actingAs($user, 'api')
+        $response = $this->actingAs($this->generalUser, 'api')
                           ->json('DELETE', '/api/v1/cafes/'.$cafeSlug);
 
         /*
           Confirms the database has a soft delete of the cafe.
         */
         $this->assertDatabaseHas('cafes', [
-                 'id' => $cafe->id,
+                 'id' => $this->generalUserCafes[0]->id,
                  'deleted' => 1
              ]);
       }
@@ -1396,45 +957,14 @@ class CafeTest extends TestCase
       */
       public function testUserDeleteCafeActionCreated(){
         /*
-           Create a user to run the test that doesn't have
-           permission to edit the cafe
-        */
-        $user = factory(\App\Models\User::class)->create([
-          'permission' => 0
-        ]);
-
-        /*
-           Create a company to run the test.
-        */
-        $company = factory(\App\Models\Company::class)->create([
-          'added_by' => $user->id
-        ]);
-
-        /*
-           Create a cafe to run the test on
-        */
-        $cafe = factory(\App\Models\Cafe::class)->create([
-          'company_id' => $company->id,
-          'added_by' => $user->id
-        ]);
-
-        /*
-          Create a brew method to add to the cafe
-        */
-        $method = factory(\App\Models\BrewMethod::class)->create([
-            'method' => 'Hario V60 Dripper',
-            'icon' => ''
-        ]);
-
-        /*
           Grab the slug from the cafe.
         */
-        $cafeSlug = $cafe->slug;
+        $cafeSlug = $this->generalUserCafes[0]->slug;
 
         /*
           Run the request to delete the cafe
         */
-        $response = $this->actingAs($user, 'api')
+        $response = $this->actingAs($this->generalUser, 'api')
                           ->json('DELETE', '/api/v1/cafes/'.$cafeSlug);
 
          /*
@@ -1442,14 +972,14 @@ class CafeTest extends TestCase
            pending
          */
          $response->assertJSON([
-           'cafe_delete_pending' => $cafe->company->name,
+           'cafe_delete_pending' => $this->generalUserCafes[0]->company->name,
          ]);
 
          /*
            Confirms that the action exists in the database
          */
          $this->assertDatabaseHas('actions', [
-           'cafe_id' => $cafe->id,
+           'cafe_id' => $this->generalUserCafes[0]->id,
            'type' => 'cafe-deleted'
          ]);
 
@@ -1457,7 +987,7 @@ class CafeTest extends TestCase
            Confirms the cafe has not been deleted
          */
          $this->assertDatabaseMissing('cafes', [
-           'id' => $cafe->id,
+           'id' => $this->generalUserCafes[0]->id,
            'deleted' => 1
          ]);
       }

@@ -55,7 +55,7 @@ class HTMLTest extends TestCase
      */
     public function testOGImage(){
       $this->get('/')
-           ->assertSee('<meta property="og:image" content="https://roastandbrew.coffee/img/og-image.jpg" />');
+           ->assertSee('<meta property="og:image" content="https://roastandbrew.coffee/img/og-roast.jpg" />');
     }
 
     /**
@@ -63,7 +63,7 @@ class HTMLTest extends TestCase
      */
      public function testOGImageSecureURL(){
        $this->get('/')
-            ->assertSee('<meta property="og:image:secure_url" content="https://roastandbrew.coffee/img/og-image.jpg" />');
+            ->assertSee('<meta property="og:image:secure_url" content="https://roastandbrew.coffee/img/og-roast.jpg" />');
      }
 
      /**
@@ -134,7 +134,7 @@ class HTMLTest extends TestCase
     public function testTwitterImage()
     {
         $this->get('/')
-             ->assertSee('<meta name="twitter:image" content="https://roastandbrew.coffee/img/og-image.jpg" />');
+             ->assertSee('<meta name="twitter:image" content="https://roastandbrew.coffee/img/og-roast.jpg" />');
     }
 
     /**
@@ -161,6 +161,6 @@ class HTMLTest extends TestCase
            ->assertSee('"https:\/\/twitter.com\/roast_n_brew"')
            ->assertSee('"@id":"https:\/\/roastandbrew.coffee\/#organization"')
            ->assertSee('"name":"Roast And Brew"')
-           ->assertSee('"logo":"https:\/\/roastandbrew.coffee\/img\/og-image.jpg"');
+           ->assertSee('"logo":"https:\/\/roastandbrew.coffee\/img\/og-roast.jpg"');
     }
 }
