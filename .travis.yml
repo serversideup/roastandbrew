@@ -1,6 +1,8 @@
 language: generic
 addons:
-  ssh_known_hosts: $deploy_host
+  ssh_known_hosts:
+    - $DEPLOY_SERVER_HOST
+    - $DEPLOY_SERVER_HOST_IP
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_210275373e1a_key -iv $encrypted_210275373e1a_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
