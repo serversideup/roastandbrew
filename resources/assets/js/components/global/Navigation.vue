@@ -60,6 +60,11 @@
           }
         }
       }
+
+      span.filter-count-active{
+        display: inline-block;
+        margin-left: 5px;
+      }
     }
 
     span.clear-filters{
@@ -67,7 +72,7 @@
       color: $text-secondary-color;
       font-family: "Lato", sans-serif;
       cursor: pointer;
-      margin-left: 25px;
+      margin-left: 15px;
       display: block;
       float: left;
       margin-top: 25px;
@@ -174,6 +179,7 @@
         <a class="filters" v-bind:class="{'active': showFilters}" v-on:click="toggleShowFilters()">
           <img class="chevron" v-bind:class="{'list' : cafesView == 'list'}" src="/img/chevron-right.svg"/>
           <img class="chevron-active" v-bind:class="{'list' : cafesView == 'list'}" src="/img/chevron-right-active.svg"/> Filters
+          <span class="filter-count-active" v-show="activeFilterCount > 0">({{ activeFilterCount }})</span>
         </a>
 
         <span class="clear-filters" v-show="showFilters" v-on:click="clearFilters()">
@@ -232,6 +238,92 @@
       */
       cafesView(){
         return this.$store.getters.getCafesView;
+      },
+
+      /*
+        Gets the active text search
+      */
+      textSearch(){
+        return this.$store.getters.getTextSearch;
+      },
+
+      /*
+        Gets the active location filter.
+      */
+      activeLocationFilter(){
+        return this.$store.getters.getActiveLocationFilter;
+      },
+
+      /*
+        Gets only liked filter.
+      */
+      onlyLiked(){
+        return this.$store.getters.getOnlyLiked;
+      },
+
+      /*
+        Get brew methods filter.
+      */
+      brewMethods(){
+        return this.$store.getters.getBrewMethodsFilter;
+      },
+
+      /*
+        Gets has matcha filter.
+      */
+      hasMatcha(){
+        return this.$store.getters.getHasMatcha;
+      },
+
+      /*
+        Gets has tea filter.
+      */
+      hasTea(){
+        return this.$store.getters.getHasTea;
+      },
+
+      /*
+        Gets has subscription filter.
+      */
+      hasSubscription(){
+        return this.$store.getters.getHasSubscription;
+      },
+
+      /*
+        Gets count of active filters.
+      */
+      activeFilterCount(){
+        let activeCount = 0;
+
+        if( this.textSearch != '' ){
+          activeCount++;
+        }
+
+        if( this.activeLocationFilter != 'all' ){
+          activeCount++;
+        }
+
+        if( this.onlyLiked ){
+          activeCount++;
+        }
+
+        if( this.brewMethods.length != 0 ){
+          activeCount++;
+        }
+
+        if( this.hasMatcha ){
+          activeCount++;
+        }
+
+        if( this.hasTea ){
+          activeCount++;
+        }
+
+        if( this.hasSubscription ){
+          activeCount++;
+        }
+
+        return activeCount;
       }
     },
 
