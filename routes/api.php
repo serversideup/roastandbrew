@@ -71,6 +71,28 @@ Route::group(['prefix' => 'v1'], function(){
   | Description:    Searches the tags if a query is set otherwise returns all tags
   */
   Route::get('/tags', 'API\TagsController@getTags');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Gets All Cities
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/cities
+  | Controller:     API\CitiesController@getCities
+  | Method:         GET
+  | Description:    Get all cities
+  */
+  Route::get('/cities', 'API\CitiesController@getCities');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Gets An Individual City
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/cities/{slug}
+  | Controller:     API\CitiesController@getCity
+  | Method:         GET
+  | Description:    Gets an individual city
+  */
+  Route::get('/cities/{slug}', 'API\CitiesController@getCity');
 });
 
 /*
@@ -375,4 +397,59 @@ Route::group(['prefix' => 'v1/admin', 'middleware' => ['auth:api', 'super-admin'
   | Description:    Updates a brew method
   */
   Route::put('/brew-methods/{method}', 'API\Admin\BrewMethodsController@putUpdateBrewMethod');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Gets All Cities
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/admin/cities
+  | Controller:     API\Admin\CitiesController@getCities
+  | Method:         GET
+  | Description:    Gets all cities in the application
+  */
+  Route::get('/cities', 'API\Admin\CitiesController@getCities');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Gets An Individual City
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/admin/cities/{id}
+  | Controller:     API\Admin\CitiesController@getCity
+  | Method:         GET
+  | Description:    Gets an individual city
+  */
+  Route::get('/cities/{city}', 'API\Admin\CitiesController@getCity');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Adds a City
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/admin/cities
+  | Controller:     API\Admin\CitiesController@postAddCity
+  | Method:         POST
+  | Description:    Adds a city
+  */
+  Route::post('/cities', 'API\Admin\CitiesController@postAddCity');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Updates a City
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/admin/cities/{city}
+  | Controller:     API\Admin\CitiesController@putUpdateCity
+  | Method:         PUT
+  | Description:    Updates a city
+  */
+  Route::put('/cities/{city}', 'API\Admin\CitiesController@putUpdateCity');
+
+  /*
+  |-------------------------------------------------------------------------------
+  | Deletes a City
+  |-------------------------------------------------------------------------------
+  | URL:            /api/v1/admin/cities/{city}
+  | Controller:     API\Admin\CitiesController@deleteCity
+  | Method:         DELETE
+  | Description:    Delets a city
+  */
+  Route::delete('/cities/{city}', 'API\Admin\CitiesController@deleteCity');
 });

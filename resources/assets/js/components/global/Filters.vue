@@ -165,6 +165,16 @@
 
       <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 small-12 cell">
+          <span class="filters-header">City</span>
+          <select v-model="cityFilter">
+            <option value=""></option>
+            <option v-for="city in cities" v-bind:value="city.id">{{ city.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 medium-12 small-12 cell">
           <span class="filters-header">Find the type of coffee shop you are looking for!</span>
         </div>
       </div>
@@ -292,10 +302,99 @@
       }.bind(this));
     },
 
+    watch: {
+      /*
+        Watch the city filter.
+      */
+      'cityFilter': function(){
+        /*
+          If the city filter is not empty, find the city slug
+          for the city we are filtering by.
+        */
+        if( this.cityFilter != '' ){
+          let slug = '';
+
+          /*
+            Iterate over all of the cities and find the city that
+            matches the ID of the selected filter.
+          */
+          for( let i = 0; i < this.cities.length; i++ ){
+            if( this.cities[i].id == this.cityFilter ){
+              slug = this.cities[i].slug;
+            }
+          }
+
+          if( slug == '' ){
+            /*
+              We are moving to just the cafes screen if the filter is empty.
+            */
+            this.$router.push( { name: 'cafes' } );
+          }else{
+            /*
+              Navigate to the city.
+            */
+            this.$router.push( { name: 'city', params: { slug: slug } } );
+          }
+        }else{
+          /*
+            Navigate to the cafes view.
+          */
+          this.$router.push( { name: 'cafes' } );
+        }
+
+      },
+
+      /*
+        Watch the cities load status.
+      */
+      'citiesLoadStatus': function(){
+        if( this.citiesLoadStatus == 2 && this.$route.name == 'city' ){
+          let id = '';
+
+          /*
+            Check to see if the slug matches the route parameter and
+            set the city filter.
+          */
+          for( let i = 0; i < this.cities.length; i++ ){
+            if( this.cities[i].slug == this.$route.params.slug ){
+              this.cityFilter = this.cities[i].id;
+            }
+          }
+        }
+      }
+    },
+
     /*
       Defines the computed properties on the component.
     */
     computed: {
+      /*
+        Get the cities from the Vuex store.
+      */
+      cities(){
+        return this.$store.getters.getCities;
+      },
+
+      /*
+        Gets the cities load status from the Vuex data store.
+      */
+      citiesLoadStatus(){
+        return this.$store.getters.getCitiesLoadStatus;
+      },
+
+      /*
+        Get the city filter and provide a setter. This way
+        we can use it as model.
+      */
+      cityFilter: {
+        set( cityFilter ) {
+          this.$store.commit( 'setCityFilter', cityFilter );
+        },
+        get() {
+          return this.$store.getters.getCityFilter;
+        }
+      },
+
       /*
         Gets the show filters data from the state.
       */
@@ -362,18 +461,30 @@
         }
       },
 
+      /*
+        Gets the brew methods filter.
+      */
       brewMethodsFilter(){
         return this.$store.getters.getBrewMethodsFilter;
       },
 
+      /*
+        Gets the has matcha filter.
+      */
       hasMatcha(){
         return this.$store.getters.getHasMatcha;
       },
 
+      /*
+        Gets the has tea filter.
+      */
       hasTea(){
         return this.$store.getters.getHasTea;
       },
 
+      /*
+        Gets the has subscription filter.
+      */
       hasSubscription(){
         return this.$store.getters.getHasSubscription;
       }

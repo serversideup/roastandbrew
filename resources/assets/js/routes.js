@@ -145,6 +145,11 @@ export default new VueRouter({
 							name: 'cafe',
 							component: Vue.component( 'Cafe', require( './pages/Cafe.vue' ) )
 						},
+						{
+							path: 'cities/:slug',
+							name: 'city',
+							component: Vue.component( 'City', require( './pages/City.vue' ))
+						}
 					]
 				},
 				{
@@ -241,6 +246,22 @@ export default new VueRouter({
 					path: 'brew-methods/:id',
 					name: 'admin-brew-method',
 					component: Vue.component( 'AdminBrewMethod', require( './pages/admin/BrewMethod.vue' ) ),
+					meta: {
+						permission: 'super-admin'
+					}
+				},
+				{
+					path: 'cities',
+					name: 'admin-cities',
+					component: Vue.component( 'AdminCities', require( './pages/admin/Cities.vue' ) ),
+					meta: {
+						permission: 'super-admin'
+					}
+				},
+				{
+					path: 'cities/:id',
+					name: 'admin-city',
+					component: Vue.component( 'AdminCity', require( './pages/admin/City.vue' ) ),
 					meta: {
 						permission: 'super-admin'
 					}

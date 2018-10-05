@@ -80,6 +80,7 @@
       this.$store.dispatch( 'loadCafes' );
       this.$store.dispatch( 'loadUser' );
       this.$store.dispatch( 'loadBrewMethods' );
+      this.$store.dispatch( 'loadCities' );
 
       /*
         If the admin module is set, unregister it. We don't need

@@ -241,6 +241,13 @@
       },
 
       /*
+        Gets the city filter.
+      */
+      cityFilter(){
+        return this.$store.getters.getCityFilter;
+      },
+
+      /*
         Gets the active text search
       */
       textSearch(){
@@ -320,6 +327,10 @@
         }
 
         if( this.hasSubscription ){
+          activeCount++;
+        }
+
+        if( this.cityFilter != '' ){
           activeCount++;
         }
 

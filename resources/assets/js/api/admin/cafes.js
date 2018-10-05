@@ -14,7 +14,7 @@ export default {
   /*
 	  PUT 	/api/v1/admin/companies/{companyID/cafes/{cafeID}
 	*/
-	putUpdateCafe: function( companyID, cafeID, locationName, address, city, state, zip, tea, matcha, brewMethods, deleted ){
+	putUpdateCafe: function( companyID, cafeID, cityID, locationName, address, city, state, zip, tea, matcha, brewMethods, deleted ){
 		/*
 			Initialize the form data
 		*/
@@ -24,6 +24,7 @@ export default {
 			Add the form data we need to submit
 		*/
 		formData.append('company_id', companyID);
+    formData.append('city_id', cityID);
 		formData.append('location_name', locationName);
 		formData.append('address', address);
 		formData.append('city', city);

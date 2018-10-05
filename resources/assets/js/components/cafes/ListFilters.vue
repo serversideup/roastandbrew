@@ -154,6 +154,15 @@
       <div class="grid-x cafe-grid-container">
         <div class="large-12 medium-12 small-12 cell">
           <div class="grid-x grid-padding-x">
+            <div class="large-12 medium-12 small-12 cell">
+              <label class="filter-label">City</label>
+              <select v-model="cityFilter">
+                <option value=""></option>
+                <option v-for="city in cities" v-bind:value="city.id">{{ city.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid-x grid-padding-x">
             <div class="large-6 medium-6 small-12 cell">
               <span class="clear-filters" v-show="showFilters" v-on:click="clearFilters()">
                 <img src="/img/clear-filters-icon.svg"/> Clear filters
@@ -296,6 +305,70 @@
     },
 
     /*
+      Defines what should be watched by the component.
+    */
+    watch: {
+      /*
+        Watches the city filter
+      */
+      'cityFilter': function(){
+        /*
+          If the city filter changes and is not empty, we begin
+          navigation to the city page.
+        */
+        if( this.cityFilter != '' ){
+          let slug = '';
+
+          /*
+            We find the slug of the city that matches the id from the filter.
+          */
+          for( let i = 0; i < this.cities.length; i++ ){
+            if( this.cities[i].id == this.cityFilter ){
+              slug = this.cities[i].slug;
+            }
+          }
+
+          if( slug == '' ){
+            /*
+              We are moving to just the cafes screen if the filter is empty.
+            */
+            this.$router.push( { name: 'cafes' } );
+          }else{
+            /*
+              Navigate to the city.
+            */
+            this.$router.push( { name: 'city', params: { slug: slug } } );
+          }
+        }else{
+          /*
+            We are moving to just the cafes screen if the filter is empty.
+          */
+          this.$router.push( { name: 'cafes' } );
+        }
+      },
+
+      /*
+        Watches the city load status
+      */
+      'citiesLoadStatus': function(){
+        /*
+          If the city is loaded and we are on the city route, find the
+          city that matches the slug of the route then pre-fill the city filter
+          by setting the cityFilter value to the ID of the city.
+        */
+        if( this.citiesLoadStatus == 2 && this.$route.name == 'city' ){
+          let id = '';
+
+          for( let i = 0; i < this.cities.length; i++ ){
+            if( this.cities[i].slug == this.$route.params.slug ){
+              this.cityFilter = this.cities[i].id;
+            }
+          }
+        }
+      }
+    },
+
+    /*
       Defines the computed properties on the component.
     */
     computed: {
@@ -304,6 +377,23 @@
       */
       showFilters(){
         return this.$store.getters.getShowFilters;
+      },
+
+      cities(){
+        return this.$store.getters.getCities;
+      },
+
+      citiesLoadStatus(){
+        return this.$store.getters.getCitiesLoadStatus;
+      },
+
+      cityFilter: {
+        set( cityFilter ) {
+          this.$store.commit( 'setCityFilter', cityFilter );
+        },
+        get() {
+          return this.$store.getters.getCityFilter;
+        }
       },
 
       /*

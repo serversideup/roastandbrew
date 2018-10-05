@@ -2,13 +2,6 @@
   @import '~@/abstracts/_variables.scss';
 
   div#admin-brew-methods{
-    div.brew-methods-header{
-      font-family: "Lato", sans-serif;
-      border-bottom: 1px solid black;
-      font-weight: bold;
-      padding-bottom: 10px;
-    }
-
     a.add-brew-method{
       display: block;
       width: 150px;
@@ -19,19 +12,6 @@
       float: right;
       height: 45px;
       line-height: 45px;
-    }
-
-    div.brew-method-listing{
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid black;
-
-      img.method-icon{
-        display: inline-block;
-        max-width: 20px;
-        max-height: 20px;
-        margin-right: 10px;
-      }
     }
 
     div.new-brew-method-modal{
@@ -118,7 +98,7 @@
       </div>
 
       <div class="grid-container">
-        <div class="grid-x brew-methods-header">
+        <div class="grid-x list-header">
           <div class="large-1 medium-1 cell">
 
           </div>
@@ -129,9 +109,9 @@
 
           </div>
         </div>
-        <div class="grid-x brew-method-listing" v-for="method in brewMethods">
+        <div class="grid-x listing" v-for="method in brewMethods">
           <div class="large-1 medium-1 cell">
-            <img v-bind:src="method.icon+'.svg'" class="method-icon"/>
+            <img v-bind:src="method.icon+'.svg'" class="icon"/>
           </div>
           <div class="large-6 medium-6 cell">
             {{ method.method }}
@@ -520,6 +500,9 @@
       Defines the methods used by the page.
     */
     methods: {
+      /*
+        Hides the new brew method modal
+      */
       hideNewMethodModal(){
         this.method = '';
         this.icon = '';
@@ -530,10 +513,16 @@
         this.showNewMethodModal = false;
       },
 
+      /*
+        Selects the new brew method icon.
+      */
       selectIcon( icon ){
         this.icon = icon;
       },
 
+      /*
+        Adds a new brew method.
+      */
       addBrewMethod(){
         if( this.validateNewBrewMethod() ){
           this.$store.dispatch( 'addAdminBrewMethod', {
@@ -545,6 +534,9 @@
         }
       },
 
+      /*
+        Validates a new brew method.
+      */
       validateNewBrewMethod(){
         let validBrewMethod = true;
 

@@ -1815,6 +1815,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
@@ -2856,7 +2861,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasTeaFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeSubscriptionFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeSubscriptionFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mixins_filters_CafeInCityFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeInCityFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
 //
 //
 //
@@ -2954,6 +2960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /*
   Imports the Event Bus to listen to filter updates
 */
@@ -2978,7 +2985,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   /*
     Define the mixins used by the component.
   */
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeSubscriptionFilter_js__["a" /* CafeSubscriptionFilter */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeSubscriptionFilter_js__["a" /* CafeSubscriptionFilter */], __WEBPACK_IMPORTED_MODULE_7__mixins_filters_CafeInCityFilter_js__["a" /* CafeInCityFilter */]],
 
   /*
     Listen to the mounted lifecycle hook.
@@ -2987,55 +2994,156 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     /*
       When the filters are updated, we process the filters.
     */
-    __WEBPACK_IMPORTED_MODULE_7__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
+    __WEBPACK_IMPORTED_MODULE_8__event_bus_js__["a" /* EventBus */].$on('filters-updated', function (filters) {
       this.processFilters(filters);
     }.bind(this));
+
+    /*
+      Apply filters
+    */
+    this.processFilters();
   },
 
 
+  /*
+    Defines the computed variables.
+  */
   computed: {
+    /*
+      Gets the city from the Vuex data store.
+    */
+    city: function city() {
+      return this.$store.getters.getCity;
+    },
+
+
+    /*
+      Gets the city filter from the Vuex data store.
+    */
+    cityFilter: function cityFilter() {
+      return this.$store.getters.getCityFilter;
+    },
+
+
+    /*
+      Gets the text search filter from the Vuex data store.
+    */
     textSearch: function textSearch() {
       return this.$store.getters.getTextSearch;
     },
+
+
+    /*
+      Gets the active location filter from the Vuex data store.
+    */
     activeLocationFilter: function activeLocationFilter() {
       return this.$store.getters.getActiveLocationFilter;
     },
+
+
+    /*
+      Gets the only liked filter from the Vuex data store.
+    */
     onlyLiked: function onlyLiked() {
       return this.$store.getters.getOnlyLiked;
     },
+
+
+    /*
+      Gets the brew methods filter from the Vuex data store.
+    */
     brewMethodsFilter: function brewMethodsFilter() {
       return this.$store.getters.getBrewMethodsFilter;
     },
+
+
+    /*
+      Gets the has matcha filter from the Vuex data store.
+    */
     hasMatcha: function hasMatcha() {
       return this.$store.getters.getHasMatcha;
     },
+
+
+    /*
+      Gets the has tea filter from the Vuex data store.
+    */
     hasTea: function hasTea() {
       return this.$store.getters.getHasTea;
     },
+
+
+    /*
+      Gets the has subscription from the Vuex data store.
+    */
     hasSubscription: function hasSubscription() {
       return this.$store.getters.getHasSubscription;
     }
   },
 
+  /*
+    Defines what should be watched by the cafe card.
+  */
   watch: {
+    /*
+      Watches the city filter
+    */
+    cityFilter: function cityFilter() {
+      this.processFilters();
+    },
+
+
+    /*
+      Watches the text search filter.
+    */
     textSearch: function textSearch() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the active location filter.
+    */
     activeLocationFilter: function activeLocationFilter() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the only liked filter.
+    */
     onlyLiked: function onlyLiked() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the brew methods filter.
+    */
     brewMethodsFilter: function brewMethodsFilter() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the has matcha filter.
+    */
     hasMatcha: function hasMatcha() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the has tea filter.
+    */
     hasTea: function hasTea() {
       this.processFilters();
     },
+
+
+    /*
+      Watches the has subscription filter.
+    */
     hasSubscription: function hasSubscription() {
       this.processFilters();
     }
@@ -3048,11 +3156,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     /*
       Process the selected filters from the user.
     */
-    processFilters: function processFilters(filters) {
+    processFilters: function processFilters() {
       /*
         If no filters are selected, show the card
       */
-      if (this.textSearch == '' && this.activeLocationFilter == 'all' && this.brewMethodsFilter.length == 0 && !this.onlyLiked && !this.hasMatcha && !this.hasTea && !this.hasSubscription) {
+      if (this.textSearch == '' && this.activeLocationFilter == 'all' && this.brewMethodsFilter.length == 0 && !this.onlyLiked && !this.hasMatcha && !this.hasTea && !this.hasSubscription && this.cityFilter == '') {
         this.show = true;
       } else {
         /*
@@ -3065,6 +3173,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var matchaPassed = false;
         var teaPassed = false;
         var subscriptionPassed = false;
+        var cityPassed = false;
 
         /*
           Check if the roaster passes
@@ -3128,9 +3237,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         /*
+          Checks to see if the city passed or not.
+        */
+        if (this.cityFilter != '' && this.processCafeInCityFilter(this.cafe, this.cityFilter)) {
+          cityPassed = true;
+        } else {
+          cityPassed = false;
+        }
+
+        /*
           If everything passes, then we show the Cafe Card
         */
-        if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed) {
+        if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed && cityPassed) {
           this.show = true;
         } else {
           this.show = false;
@@ -3143,7 +3261,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       Pans to the location of the cafe on the map when selected.
     */
     panToLocation: function panToLocation(cafe) {
-      __WEBPACK_IMPORTED_MODULE_7__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(cafe.latitude), lng: parseFloat(cafe.longitude) });
+      __WEBPACK_IMPORTED_MODULE_8__event_bus_js__["a" /* EventBus */].$emit('location-selected', { lat: parseFloat(cafe.latitude), lng: parseFloat(cafe.longitude) });
     }
   }
 });
@@ -3263,7 +3381,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasMatchaFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeHasTeaFilter.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mixins_filters_CafeSubscriptionFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeSubscriptionFilter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_filters_CafeInCityFilter_js__ = __webpack_require__("./resources/assets/js/mixins/filters/CafeInCityFilter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
 //
 //
 //
@@ -3345,6 +3464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /*
   Imports the Event Bus to pass updates.
 */
@@ -3378,7 +3498,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   /*
     Defines the mixins used by the component.
   */
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */], __WEBPACK_IMPORTED_MODULE_7__mixins_filters_CafeSubscriptionFilter_js__["a" /* CafeSubscriptionFilter */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_filters_CafeTypeFilter_js__["a" /* CafeTypeFilter */], __WEBPACK_IMPORTED_MODULE_1__mixins_filters_CafeBrewMethodsFilter_js__["a" /* CafeBrewMethodsFilter */], __WEBPACK_IMPORTED_MODULE_2__mixins_filters_CafeTagsFilter_js__["a" /* CafeTagsFilter */], __WEBPACK_IMPORTED_MODULE_3__mixins_filters_CafeTextFilter_js__["a" /* CafeTextFilter */], __WEBPACK_IMPORTED_MODULE_4__mixins_filters_CafeUserLikeFilter_js__["a" /* CafeUserLikeFilter */], __WEBPACK_IMPORTED_MODULE_5__mixins_filters_CafeHasMatchaFilter_js__["a" /* CafeHasMatchaFilter */], __WEBPACK_IMPORTED_MODULE_6__mixins_filters_CafeHasTeaFilter_js__["a" /* CafeHasTeaFilter */], __WEBPACK_IMPORTED_MODULE_7__mixins_filters_CafeSubscriptionFilter_js__["a" /* CafeSubscriptionFilter */], __WEBPACK_IMPORTED_MODULE_8__mixins_filters_CafeInCityFilter_js__["a" /* CafeInCityFilter */]],
 
   /*
     Defines the computed properties used by the component.
@@ -3389,6 +3509,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     cafes: function cafes() {
       return this.$store.getters.getCafes;
+    },
+
+
+    /*
+      Gets the city from the Vuex store.
+    */
+    city: function city() {
+      return this.$store.getters.getCity;
+    },
+
+
+    /*
+      Gets the city filter from the Vuex store.
+    */
+    cityFilter: function cityFilter() {
+      return this.$store.getters.getCityFilter;
     },
 
 
@@ -3494,11 +3630,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*
       Watches the cafes. When they are updated, clear the markers
-      and re build them.
+      and re build them. We also process existing filters.
     */
     cafes: function cafes() {
       this.clearMarkers();
       this.buildMarkers();
+      this.processFilters();
+    },
+
+
+    /*
+      Watch the city filter
+    */
+    cityFilter: function cityFilter() {
+      this.processFilters();
     },
 
 
@@ -3588,9 +3733,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       Listen to the location-selected event to zoom into the appropriate
       cafe.
     */
-    __WEBPACK_IMPORTED_MODULE_8__event_bus_js__["a" /* EventBus */].$on('location-selected', function (cafe) {
+    __WEBPACK_IMPORTED_MODULE_9__event_bus_js__["a" /* EventBus */].$on('location-selected', function (cafe) {
       var latLng = new google.maps.LatLng(cafe.lat, cafe.lng);
       this.$map.setZoom(17);
+      this.$map.panTo(latLng);
+    }.bind(this));
+
+    /*
+      Listen to the location-selected event to zoom into the appropriate
+      cafe.
+    */
+    __WEBPACK_IMPORTED_MODULE_9__event_bus_js__["a" /* EventBus */].$on('city-selected', function (city) {
+      var latLng = new google.maps.LatLng(city.lat, city.lng);
+      this.$map.setZoom(11);
       this.$map.panTo(latLng);
     }.bind(this));
   },
@@ -3605,7 +3760,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     processFilters: function processFilters() {
       for (var i = 0; i < this.$markers.length; i++) {
-        if (this.textSearch == '' && this.activeLocationFilter == 'all' && this.brewMethodsFilter.length == 0 && !this.onlyLiked && !this.hasMatcha && !this.hasTea && !this.hasSubscription) {
+        if (this.textSearch == '' && this.activeLocationFilter == 'all' && this.brewMethodsFilter.length == 0 && !this.onlyLiked && !this.hasMatcha && !this.hasTea && !this.hasSubscription && this.cityFilter == '') {
           this.$markers[i].setMap(this.$map);
         } else {
           /*
@@ -3618,6 +3773,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var matchaPassed = false;
           var teaPassed = false;
           var subscriptionPassed = false;
+          var cityPassed = false;
 
           /*
             Check if the roaster passes
@@ -3681,9 +3837,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
 
           /*
+            Checks to see if the city passed or not.
+          */
+          if (this.cityFilter != '' && this.processCafeInCityFilter(this.$markers[i].cafe, this.cityFilter)) {
+            cityPassed = true;
+          } else {
+            cityPassed = false;
+          }
+
+          /*
             If everything passes, then we show the Cafe Marker
           */
-          if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed) {
+          if (typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed && cityPassed) {
             this.$markers[i].setMap(this.$map);
           } else {
             this.$markers[i].setMap(null);
@@ -4154,6 +4319,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*
   Imports the event bus
@@ -4183,6 +4357,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   /*
+    Defines what should be watched by the component.
+  */
+  watch: {
+    /*
+      Watches the city filter
+    */
+    'cityFilter': function cityFilter() {
+      /*
+        If the city filter changes and is not empty, we begin
+        navigation to the city page.
+      */
+      if (this.cityFilter != '') {
+        var slug = '';
+
+        /*
+          We find the slug of the city that matches the id from the filter.
+        */
+        for (var i = 0; i < this.cities.length; i++) {
+          if (this.cities[i].id == this.cityFilter) {
+            slug = this.cities[i].slug;
+          }
+        }
+
+        if (slug == '') {
+          /*
+            We are moving to just the cafes screen if the filter is empty.
+          */
+          this.$router.push({ name: 'cafes' });
+        } else {
+          /*
+            Navigate to the city.
+          */
+          this.$router.push({ name: 'city', params: { slug: slug } });
+        }
+      } else {
+        /*
+          We are moving to just the cafes screen if the filter is empty.
+        */
+        this.$router.push({ name: 'cafes' });
+      }
+    },
+
+    /*
+      Watches the city load status
+    */
+    'citiesLoadStatus': function citiesLoadStatus() {
+      /*
+        If the city is loaded and we are on the city route, find the
+        city that matches the slug of the route then pre-fill the city filter
+        by setting the cityFilter value to the ID of the city.
+      */
+      if (this.citiesLoadStatus == 2 && this.$route.name == 'city') {
+        var id = '';
+
+        for (var i = 0; i < this.cities.length; i++) {
+          if (this.cities[i].slug == this.$route.params.slug) {
+            this.cityFilter = this.cities[i].id;
+          }
+        }
+      }
+    }
+  },
+
+  /*
     Defines the computed properties on the component.
   */
   computed: {
@@ -4192,7 +4430,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     showFilters: function showFilters() {
       return this.$store.getters.getShowFilters;
     },
+    cities: function cities() {
+      return this.$store.getters.getCities;
+    },
+    citiesLoadStatus: function citiesLoadStatus() {
+      return this.$store.getters.getCitiesLoadStatus;
+    },
 
+
+    cityFilter: {
+      set: function set(cityFilter) {
+        this.$store.commit('setCityFilter', cityFilter);
+      },
+      get: function get() {
+        return this.$store.getters.getCityFilter;
+      }
+    },
 
     /*
       Gets the brew methods from the state.
@@ -5088,6 +5341,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*
   Imports the event bus
@@ -5116,10 +5379,100 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  watch: {
+    /*
+      Watch the city filter.
+    */
+    'cityFilter': function cityFilter() {
+      /*
+        If the city filter is not empty, find the city slug
+        for the city we are filtering by.
+      */
+      if (this.cityFilter != '') {
+        var slug = '';
+
+        /*
+          Iterate over all of the cities and find the city that
+          matches the ID of the selected filter.
+        */
+        for (var i = 0; i < this.cities.length; i++) {
+          if (this.cities[i].id == this.cityFilter) {
+            slug = this.cities[i].slug;
+          }
+        }
+
+        if (slug == '') {
+          /*
+            We are moving to just the cafes screen if the filter is empty.
+          */
+          this.$router.push({ name: 'cafes' });
+        } else {
+          /*
+            Navigate to the city.
+          */
+          this.$router.push({ name: 'city', params: { slug: slug } });
+        }
+      } else {
+        /*
+          Navigate to the cafes view.
+        */
+        this.$router.push({ name: 'cafes' });
+      }
+    },
+
+    /*
+      Watch the cities load status.
+    */
+    'citiesLoadStatus': function citiesLoadStatus() {
+      if (this.citiesLoadStatus == 2 && this.$route.name == 'city') {
+        var id = '';
+
+        /*
+          Check to see if the slug matches the route parameter and
+          set the city filter.
+        */
+        for (var i = 0; i < this.cities.length; i++) {
+          if (this.cities[i].slug == this.$route.params.slug) {
+            this.cityFilter = this.cities[i].id;
+          }
+        }
+      }
+    }
+  },
+
   /*
     Defines the computed properties on the component.
   */
   computed: {
+    /*
+      Get the cities from the Vuex store.
+    */
+    cities: function cities() {
+      return this.$store.getters.getCities;
+    },
+
+
+    /*
+      Gets the cities load status from the Vuex data store.
+    */
+    citiesLoadStatus: function citiesLoadStatus() {
+      return this.$store.getters.getCitiesLoadStatus;
+    },
+
+
+    /*
+      Get the city filter and provide a setter. This way
+      we can use it as model.
+    */
+    cityFilter: {
+      set: function set(cityFilter) {
+        this.$store.commit('setCityFilter', cityFilter);
+      },
+      get: function get() {
+        return this.$store.getters.getCityFilter;
+      }
+    },
+
     /*
       Gets the show filters data from the state.
     */
@@ -5192,15 +5545,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
 
+    /*
+      Gets the brew methods filter.
+    */
     brewMethodsFilter: function brewMethodsFilter() {
       return this.$store.getters.getBrewMethodsFilter;
     },
+
+
+    /*
+      Gets the has matcha filter.
+    */
     hasMatcha: function hasMatcha() {
       return this.$store.getters.getHasMatcha;
     },
+
+
+    /*
+      Gets the has tea filter.
+    */
     hasTea: function hasTea() {
       return this.$store.getters.getHasTea;
     },
+
+
+    /*
+      Gets the has subscription filter.
+    */
     hasSubscription: function hasSubscription() {
       return this.$store.getters.getHasSubscription;
     }
@@ -5747,6 +6118,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     /*
+      Gets the city filter.
+    */
+    cityFilter: function cityFilter() {
+      return this.$store.getters.getCityFilter;
+    },
+
+
+    /*
       Gets the active text search
     */
     textSearch: function textSearch() {
@@ -5833,6 +6212,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       if (this.hasSubscription) {
+        activeCount++;
+      }
+
+      if (this.cityFilter != '') {
         activeCount++;
       }
 
@@ -6199,6 +6582,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_admin_cafes_js__ = __webpack_require__("./resources/assets/js/modules/admin/cafes.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_admin_users_js__ = __webpack_require__("./resources/assets/js/modules/admin/users.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_admin_brewMethods_js__ = __webpack_require__("./resources/assets/js/modules/admin/brewMethods.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_admin_cities_js__ = __webpack_require__("./resources/assets/js/modules/admin/cities.js");
 //
 //
 //
@@ -6248,6 +6632,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /*
   Import admin Vuex modules
 */
+
 
 
 
@@ -6321,6 +6706,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     if (!this.$store._modules.get(['admin', 'brewMethods']) && this.user.permission == 3) {
       this.$store.registerModule(['admin', 'brewMethods'], __WEBPACK_IMPORTED_MODULE_9__modules_admin_brewMethods_js__["a" /* brewMethods */]);
+    }
+
+    /*
+      Checks to see if the user has permissions and if the
+      Vuex cities module is loaded.
+    */
+    if (!this.$store._modules.get(['admin', 'cities']) && this.user.permission == 3) {
+      this.$store.registerModule(['admin', 'cities'], __WEBPACK_IMPORTED_MODULE_10__modules_admin_cities_js__["a" /* cities */]);
     }
   },
 
@@ -6440,6 +6833,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.$store.dispatch('loadCafes');
     this.$store.dispatch('loadUser');
     this.$store.dispatch('loadBrewMethods');
+    this.$store.dispatch('loadCities');
 
     /*
       If the admin module is set, unregister it. We don't need
@@ -6823,6 +7217,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   */
   computed: {
     /*
+      Gets the cities from the Vuex data store.
+    */
+    cities: function cities() {
+      return this.$store.getters.getCities;
+    },
+
+
+    /*
+      Gets the cities filter from the Vuex data store.
+    */
+    cityFilter: function cityFilter() {
+      return this.$store.getters.getCityFilter;
+    },
+
+
+    /*
       Grabs the cafe load status from the Vuex state.
     */
     cafeLoadStatus: function cafeLoadStatus() {
@@ -6874,8 +7284,127 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Defines the methods used by the component.
   */
   methods: {
+    /*
+      Requires the user be logged in to edit.
+    */
     loginToEdit: function loginToEdit() {
       __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('prompt-login');
+    },
+
+
+    /*
+      When leaving a cafe, we determine which page to go to.
+    */
+    leaveCafe: function leaveCafe() {
+      /*
+        If the city filter is set, we go back to the city, otherwise,
+        we load all cafes.
+      */
+      if (this.cityFilter != '') {
+        var slug = '';
+
+        for (var i = 0; i < this.cities.length; i++) {
+          if (this.cities[i].id == this.cityFilter) {
+            slug = this.cities[i].slug;
+          }
+        }
+
+        this.$router.push({ name: 'city', params: { slug: slug } });
+      } else {
+        this.$router.push({ name: 'cafes' });
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/City.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    On the created lifecycle hook, load the individual city.
+  */
+  created: function created() {
+    this.$store.dispatch('loadCity', {
+      slug: this.$route.params.slug
+    });
+  },
+
+
+  /*
+    Defines the computed properties on the component.
+  */
+  computed: {
+    /*
+      Gets the city load status from the Vuex data store.
+    */
+    cityLoadStatus: function cityLoadStatus() {
+      return this.$store.getters.getCityLoadStatus;
+    },
+
+
+    /*
+      Gets the city from the Vuex data store.
+    */
+    city: function city() {
+      return this.$store.getters.getCity;
+    }
+  },
+
+  /*
+    Defines what to watch on the component.
+  */
+  watch: {
+    /*
+      When the city changes, load the city.
+    */
+    '$route.params.slug': function $routeParamsSlug() {
+      if (this.$route.name == 'city') {
+        this.$store.dispatch('loadCity', {
+          slug: this.$route.params.slug
+        });
+      }
+    },
+
+    /*
+      Watches the city load status.
+    */
+    'cityLoadStatus': function cityLoadStatus() {
+      /*
+        On success, go to the city.
+      */
+      if (this.cityLoadStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('city-selected', { lat: parseFloat(this.city.latitude), lng: parseFloat(this.city.longitude) });
+      }
+
+      /*
+        If the city fails to load, redirect back to the cafes screen.
+      */
+      if (this.cityLoadStatus == 3) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-error', { notification: 'City Not Found!' });
+        this.$router.push({ name: 'cafes' });
+      }
     }
   }
 });
@@ -10190,26 +10719,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /*
   Imports the event bus to emit events.
@@ -10266,6 +10775,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Defines the methods used by the page.
   */
   methods: {
+    /*
+      Hides the new brew method modal
+    */
     hideNewMethodModal: function hideNewMethodModal() {
       this.method = '';
       this.icon = '';
@@ -10275,9 +10787,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.showNewMethodModal = false;
     },
+
+
+    /*
+      Selects the new brew method icon.
+    */
     selectIcon: function selectIcon(icon) {
       this.icon = icon;
     },
+
+
+    /*
+      Adds a new brew method.
+    */
     addBrewMethod: function addBrewMethod() {
       if (this.validateNewBrewMethod()) {
         this.$store.dispatch('addAdminBrewMethod', {
@@ -10288,6 +10810,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.hideNewMethodModal();
       }
     },
+
+
+    /*
+      Validates a new brew method.
+    */
     validateNewBrewMethod: function validateNewBrewMethod() {
       var validBrewMethod = true;
 
@@ -10529,6 +11056,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*
   Imports the event bus to emit events.
@@ -10551,6 +11088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       tea: '',
       matcha: '',
       brewMethodsSelected: [],
+      boundToCity: '',
       deleted: 0,
 
       validations: {
@@ -10570,6 +11108,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     this.$store.dispatch('loadAdminCompany', { id: this.$route.params.id });
     this.$store.dispatch('loadAdminCafe', { company_id: this.$route.params.id, cafe_id: this.$route.params.cafeID });
+    this.$store.dispatch('loadAdminCities');
   },
 
 
@@ -10614,6 +11153,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     */
     cafeEditStatus: function cafeEditStatus() {
       return this.$store.getters.getAdminCafeEditStatus;
+    },
+
+
+    /*
+      Gets the cities from the Vuex store.
+    */
+    cities: function cities() {
+      return this.$store.getters.getAdminCities;
+    },
+
+
+    /*
+      Gets the cities load status from the Vuex store.
+    */
+    citiesLoadStatus: function citiesLoadStatus() {
+      return this.$store.getters.getAdminCitiesLoadStatus;
     }
   },
 
@@ -10661,6 +11216,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.zip = this.cafe.zip;
       this.tea = this.cafe.tea;
       this.matcha = this.cafe.matcha;
+      this.boundToCity = this.cafe.city_id;
 
       for (var i = 0; i < this.cafe.brew_methods.length; i++) {
         this.brewMethodsSelected.push(this.cafe.brew_methods[i].id);
@@ -10690,6 +11246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$store.dispatch('updateAdminCafe', {
           id: this.cafe.id,
           company_id: this.company.id,
+          city_id: this.boundToCity,
           location_name: this.location_name,
           address: this.address,
           city: this.city,
@@ -10751,6 +11308,867 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       return validEditCafeForm;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Cities.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the cities component.
+  */
+  data: function data() {
+    return {
+      showNewCityModal: false,
+
+      name: '',
+      state: '',
+      country: '',
+      radius: '',
+      latitude: '',
+      longitude: '',
+
+      validations: {
+        name: true,
+        state: true,
+        country: true,
+        radius: true,
+        latitude: true,
+        longitude: true
+      }
+    };
+  },
+
+
+  /*
+    When created load the admin cities.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminCities');
+  },
+
+
+  /*
+    Defines the computed variables used by the component.
+  */
+  computed: {
+    /*
+      Gets the cities from the Vuex data store.
+    */
+    cities: function cities() {
+      return this.$store.getters.getAdminCities;
+    },
+
+
+    /*
+      Gets the cities add status from the Vuex data store.
+    */
+    cityAddStatus: function cityAddStatus() {
+      return this.$store.getters.getAdminCityAddStatus;
+    }
+  },
+
+  /*
+    Defines what to watch in the component.
+  */
+  watch: {
+    /*
+      If the city add status is successful, hide the modal
+      and show success message.
+    */
+    'cityAddStatus': function cityAddStatus() {
+      if (this.cityAddStatus == 2) {
+        this.clearForm();
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: 'City added successfully!'
+        });
+        this.showNewCityModal = false;
+      }
+    }
+  },
+
+  /*
+    Define the mounted lifecycle hook.
+  */
+  mounted: function mounted() {
+    /*
+      Gets the autocomplete element and sets it up with Google places autocomplete.
+    */
+    this.autocomplete = document.getElementById('city-name');
+    var googleMapsAutocomplete = new google.maps.places.Autocomplete(this.autocomplete);
+
+    /*
+      Listen to when the place has changed.
+    */
+    googleMapsAutocomplete.addListener('place_changed', function () {
+      var place = googleMapsAutocomplete.getPlace();
+
+      /*
+        Find the address we need in the address components.
+      */
+      for (var i = 0; i < place.address_components.length; i++) {
+        var type = place.address_components[i].types[0];
+
+        /*
+          Switch the type of the address components and assign it to the
+          corresponding variable.
+        */
+        switch (type) {
+          case 'locality':
+            this.name = place.address_components[i].short_name;
+            break;
+          case 'administrative_area_level_1':
+            this.state = place.address_components[i].short_name;
+            break;
+          case 'country':
+            this.country = place.address_components[i].short_name;
+            break;
+        }
+      }
+
+      /*
+        Gets the latitude and longitude of the address.
+      */
+      this.latitude = place.geometry.location.lat();
+      this.longitude = place.geometry.location.lng();
+    }.bind(this));
+  },
+
+
+  /*
+    Defines the methods used by the component.
+  */
+  methods: {
+    /*
+      Add a city.
+    */
+    addCity: function addCity() {
+      if (this.validateNewCity()) {
+        this.$store.dispatch('addAdminCity', {
+          name: this.name,
+          state: this.state,
+          country: this.country,
+          radius: this.radius,
+          latitude: this.latitude,
+          longitude: this.longitude
+        });
+      }
+    },
+
+
+    /*
+      Validate a new city.
+    */
+    validateNewCity: function validateNewCity() {
+      var validNewCityForm = true;
+
+      if (this.name.trim() == '') {
+        validNewCityForm = false;
+        this.validations.name = false;
+      } else {
+        this.validations.name = true;
+      }
+
+      if (this.state == '') {
+        validNewCityForm = false;
+        this.validations.state = false;
+      } else {
+        this.validations.state = true;
+      }
+
+      if (this.country == '') {
+        validNewCityForm = false;
+        this.validations.country = false;
+      } else {
+        this.validations.country = true;
+      }
+
+      if (this.radius == '') {
+        validNewCityForm = false;
+        this.validations.radius = false;
+      } else {
+        this.validations.radius = true;
+      }
+
+      if (this.latitude == '') {
+        validNewCityForm = false;
+        this.validations.latitude = false;
+      } else {
+        this.validations.latitude = true;
+      }
+
+      if (this.longitude == '') {
+        validNewCityForm = false;
+        this.validations.longitude = false;
+      } else {
+        this.validations.longitude = true;
+      }
+
+      return validNewCityForm;
+    },
+
+
+    /*
+      Hide the new city modal.
+    */
+    hideNewCityModal: function hideNewCityModal() {
+      this.showNewCityModal = false;
+
+      this.clearForm();
+    },
+
+
+    /*
+      Clear the form.
+    */
+    clearForm: function clearForm() {
+      this.name = '';
+      this.state = '';
+      this.country = '';
+      this.radius = '';
+      this.latitude = '';
+      this.longitude = '';
+
+      this.validations.name = true;
+      this.validations.state = true;
+      this.validations.country = true;
+      this.validations.radius = true;
+      this.validations.latitude = true;
+      this.validations.longitude = true;
+    }
+  }
+
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/City.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__("./resources/assets/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+  Imports the event bus to emit events.
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+    Defines the data used by the component.
+  */
+  data: function data() {
+    return {
+      name: '',
+      state: '',
+      country: '',
+      latitude: '',
+      longitude: '',
+      radius: '',
+
+      validations: {
+        name: true,
+        state: true,
+        country: true,
+        radius: true,
+        latitude: true,
+        longitude: true
+      }
+    };
+  },
+
+
+  /*
+    When created load the admin city.
+  */
+  created: function created() {
+    this.$store.dispatch('loadAdminCity', { id: this.$route.params.id });
+  },
+
+
+  /*
+    Defines the computed data used by the component.
+  */
+  computed: {
+    /*
+      Imports the city from the Vuex data store.
+    */
+    city: function city() {
+      return this.$store.getters.getAdminCity;
+    },
+
+
+    /*
+      Imports the city load status from the Vuex data store.
+    */
+    cityLoadStatus: function cityLoadStatus() {
+      return this.$store.getters.getAdminCityLoadStatus;
+    },
+
+
+    /*
+      Imports the city edit status from the Vuex data store.
+    */
+    cityEditStatus: function cityEditStatus() {
+      return this.$store.getters.getAdminCityEditStatus;
+    },
+
+
+    /*
+      Imports the city delete status from the Vuex data store.
+    */
+    cityDeleteStatus: function cityDeleteStatus() {
+      return this.$store.getters.getAdminCityDeleteStatus;
+    }
+  },
+
+  /*
+    Defines what to watch in the component.
+  */
+  watch: {
+    /*
+      When the city is loaded, copy the data to the model.
+    */
+    'cityLoadStatus': function cityLoadStatus() {
+      this.syncCityToModel();
+    },
+
+    /*
+      When the city is deleted, show a success message
+      and navigate back to the cities page.
+    */
+    'cityDeleteStatus': function cityDeleteStatus() {
+      if (this.cityDeleteStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: this.name + ' deleted successfully!'
+        });
+
+        this.$router.push({ name: 'admin-cities' });
+      }
+    },
+
+    /*
+      When the city has been edited show a success message.
+    */
+    'cityEditStatus': function cityEditStatus() {
+      if (this.cityEditStatus == 2) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('show-success', {
+          notification: this.name + ' updated successfully!'
+        });
+      }
+    }
+  },
+
+  /*
+    Defines the methods used by the component.
+  */
+  methods: {
+    /*
+      Sync the city to model.
+    */
+    syncCityToModel: function syncCityToModel() {
+      this.name = this.city.name;
+      this.state = this.city.state;
+      this.country = this.city.country;
+      this.latitude = this.city.latitude;
+      this.longitude = this.city.longitude;
+      this.radius = this.city.radius;
+    },
+
+
+    /*
+      Save the city edits.
+    */
+    saveEdits: function saveEdits() {
+      if (this.validateEditCity()) {
+        this.$store.dispatch('updateAdminCity', {
+          id: this.city.id,
+          name: this.name,
+          state: this.state,
+          country: this.country,
+          radius: this.radius,
+          latitude: this.latitude,
+          longitude: this.longitude
+        });
+      }
+    },
+
+
+    /*
+      Delete a city.
+    */
+    deleteCity: function deleteCity() {
+      this.$store.dispatch('deleteAdminCity', {
+        id: this.city.id
+      });
+    },
+
+
+    /*
+      Validate editing a city.
+    */
+    validateEditCity: function validateEditCity() {
+      var validEditCityForm = true;
+
+      if (this.name.trim() == '') {
+        validEditCityForm = false;
+        this.validations.name = false;
+      } else {
+        this.validations.name = true;
+      }
+
+      if (this.state == '') {
+        validEditCityForm = false;
+        this.validations.state = false;
+      } else {
+        this.validations.state = true;
+      }
+
+      if (this.country == '') {
+        validEditCityForm = false;
+        this.validations.country = false;
+      } else {
+        this.validations.country = true;
+      }
+
+      if (this.radius == '') {
+        validEditCityForm = false;
+        this.validations.radius = false;
+      } else {
+        this.validations.radius = true;
+      }
+
+      if (this.latitude == '') {
+        validEditCityForm = false;
+        this.validations.latitude = false;
+      } else {
+        this.validations.latitude = true;
+      }
+
+      if (this.longitude == '') {
+        validEditCityForm = false;
+        this.validations.longitude = false;
+      } else {
+        this.validations.longitude = true;
+      }
+
+      return validEditCityForm;
     }
   }
 });
@@ -11995,6 +13413,21 @@ exports.push([module.i, "\n\n", ""]);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12190,6 +13623,21 @@ exports.push([module.i, "\ndiv.action {\n  font-family: \"Lato\", sans-serif;\n 
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cities.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv#admin-cities a.add-city {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  float: right;\n  height: 45px;\n  line-height: 45px;\n}\ndiv#admin-cities div.city-listing {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv#admin-cities div.new-city-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#admin-cities div.new-city-modal div.modal-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    max-height: 500px;\n    overflow-y: auto;\n}\ndiv#admin-cities div.new-city-modal div.modal-box label {\n      font-weight: bold;\n}\ndiv#admin-cities div.new-city-modal div.modal-box a.add-city-button {\n      display: block;\n      width: 150px;\n      color: white;\n      background-color: #CCC;\n      text-align: center;\n      border-radius: 5px;\n      margin-top: 20px;\n      height: 45px;\n      line-height: 45px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-405821f0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12304,6 +13752,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\ndiv.loader {\n  margin: auto;\n  vertical-align: middle;\n}\nsvg path,\nsvg rect {\n  fill: #E8635F;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\na.save-edits {\n  display: inline-block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n  margin-right: 10px;\n  margin-bottom: 20px;\n}\na.delete-city {\n  display: inline-block;\n  width: 150px;\n  color: white;\n  background-color: #E8635F;\n  text-align: center;\n  border-radius: 5px;\n  margin-top: 20px;\n  height: 45px;\n  line-height: 45px;\n  margin-right: 10px;\n  margin-bottom: 20px;\n}\n", ""]);
 
 // exports
 
@@ -12438,7 +13901,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ndiv#admin-brew-methods div.brew-methods-header {\n  font-family: \"Lato\", sans-serif;\n  border-bottom: 1px solid black;\n  font-weight: bold;\n  padding-bottom: 10px;\n}\ndiv#admin-brew-methods a.add-brew-method {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  float: right;\n  height: 45px;\n  line-height: 45px;\n}\ndiv#admin-brew-methods div.brew-method-listing {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid black;\n}\ndiv#admin-brew-methods div.brew-method-listing img.method-icon {\n    display: inline-block;\n    max-width: 20px;\n    max-height: 20px;\n    margin-right: 10px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    max-height: 500px;\n    overflow-y: auto;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box label {\n      font-weight: bold;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.icon-selection-container {\n      margin-top: 10px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container {\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 20px;\n      border-radius: 5px;\n      padding: 5px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container.active {\n        background-color: #E8635F;\n        color: white;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container img.new-icon {\n        display: block;\n        margin: auto;\n        margin-bottom: 10px;\n        height: 30px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal a.add-method-button {\n    display: block;\n    width: 150px;\n    color: white;\n    background-color: #CCC;\n    text-align: center;\n    border-radius: 5px;\n    margin-top: 20px;\n    height: 45px;\n    line-height: 45px;\n}\n", ""]);
+exports.push([module.i, "\ndiv#admin-brew-methods a.add-brew-method {\n  display: block;\n  width: 150px;\n  color: white;\n  background-color: #CCC;\n  text-align: center;\n  border-radius: 5px;\n  float: right;\n  height: 45px;\n  line-height: 45px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n  z-index: 99999;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box {\n    width: 100%;\n    max-width: 530px;\n    min-width: 320px;\n    padding: 20px;\n    background-color: #fff;\n    border: 1px solid #ddd;\n    -webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);\n    border-radius: 4px;\n    font-size: 16px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    max-height: 500px;\n    overflow-y: auto;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box label {\n      font-weight: bold;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.icon-selection-container {\n      margin-top: 10px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container {\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 20px;\n      border-radius: 5px;\n      padding: 5px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container.active {\n        background-color: #E8635F;\n        color: white;\n}\ndiv#admin-brew-methods div.new-brew-method-modal div.modal-box div.new-icon-container img.new-icon {\n        display: block;\n        margin: auto;\n        margin-bottom: 10px;\n        height: 30px;\n}\ndiv#admin-brew-methods div.new-brew-method-modal a.add-method-button {\n    display: block;\n    width: 150px;\n    color: white;\n    background-color: #CCC;\n    text-align: center;\n    border-radius: 5px;\n    margin-top: 20px;\n    height: 45px;\n    line-height: 45px;\n}\n", ""]);
 
 // exports
 
@@ -54005,6 +55468,27 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0c4e7da8\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "city" } })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0c4e7da8", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-109d83da\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Cafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54255,6 +55739,52 @@ var render = function() {
                   staticClass: "validation"
                 },
                 [_vm._v("Please enter a valid city")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "large-8 medium-12 cell" }, [
+              _c("label", [_vm._v("Bound To City")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.boundToCity,
+                      expression: "boundToCity"
+                    }
+                  ],
+                  attrs: { id: "bound-to-city" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.boundToCity = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }),
+                  _vm._v(" "),
+                  _vm._l(_vm.cities, function(city) {
+                    return _c("option", { domProps: { value: city.id } }, [
+                      _vm._v(_vm._s(city.name))
+                    ])
+                  })
+                ],
+                2
               )
             ])
           ]),
@@ -56913,6 +58443,51 @@ var render = function() {
         _c("div", { staticClass: "grid-x cafe-grid-container" }, [
           _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
             _c("div", { staticClass: "grid-x grid-padding-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("label", { staticClass: "filter-label" }, [_vm._v("City")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cityFilter,
+                        expression: "cityFilter"
+                      }
+                    ],
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.cityFilter = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }),
+                    _vm._v(" "),
+                    _vm._l(_vm.cities, function(city) {
+                      return _c("option", { domProps: { value: city.id } }, [
+                        _vm._v(_vm._s(city.name))
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x grid-padding-x" }, [
               _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
                 _c(
                   "span",
@@ -58717,6 +60292,632 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3e2dcb74\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Cities.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-cities" } }, [
+    _c("div", { staticClass: "grid-container" }, [
+      _c("div", { staticClass: "grid-x" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "large-4 medium-4 cell" }, [
+          _c(
+            "a",
+            {
+              staticClass: "add-city",
+              on: {
+                click: function($event) {
+                  _vm.showNewCityModal = true
+                }
+              }
+            },
+            [_vm._v("Add City")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.cities, function(city) {
+          return _c("div", { staticClass: "grid-x listing" }, [
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(city.name) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(city.state) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(city.country) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "large-3 medium-3 cell" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: { name: "admin-city", params: { id: city.id } }
+                    }
+                  },
+                  [_vm._v("Edit")]
+                )
+              ],
+              1
+            )
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.showNewCityModal,
+            expression: "showNewCityModal"
+          }
+        ],
+        staticClass: "new-city-modal",
+        on: {
+          click: function($event) {
+            _vm.hideNewCityModal()
+          }
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-box",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Name")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  attrs: { type: "text", id: "city-name" },
+                  domProps: { value: _vm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.name,
+                        expression: "!validations.name"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a city name!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("State")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.state,
+                        expression: "state"
+                      }
+                    ],
+                    class: { invalid: !_vm.validations.state },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.state = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "AL" } }, [
+                      _vm._v("Alabama")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "AK" } }, [
+                      _vm._v("Alaska")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "AZ" } }, [
+                      _vm._v("Arizona")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "AR" } }, [
+                      _vm._v("Arkansas")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "CA" } }, [
+                      _vm._v("California")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "CO" } }, [
+                      _vm._v("Colorado")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "CT" } }, [
+                      _vm._v("Connecticut")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "DE" } }, [
+                      _vm._v("Delaware")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "DC" } }, [
+                      _vm._v("District Of Columbia")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "FL" } }, [
+                      _vm._v("Florida")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "GA" } }, [
+                      _vm._v("Georgia")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "HI" } }, [
+                      _vm._v("Hawaii")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "ID" } }, [_vm._v("Idaho")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "IL" } }, [
+                      _vm._v("Illinois")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "IN" } }, [
+                      _vm._v("Indiana")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "IA" } }, [_vm._v("Iowa")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "KS" } }, [
+                      _vm._v("Kansas")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "KY" } }, [
+                      _vm._v("Kentucky")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "LA" } }, [
+                      _vm._v("Louisiana")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "ME" } }, [_vm._v("Maine")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MD" } }, [
+                      _vm._v("Maryland")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MA" } }, [
+                      _vm._v("Massachusetts")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MI" } }, [
+                      _vm._v("Michigan")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MN" } }, [
+                      _vm._v("Minnesota")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MS" } }, [
+                      _vm._v("Mississippi")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MO" } }, [
+                      _vm._v("Missouri")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "MT" } }, [
+                      _vm._v("Montana")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NE" } }, [
+                      _vm._v("Nebraska")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NV" } }, [
+                      _vm._v("Nevada")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NH" } }, [
+                      _vm._v("New Hampshire")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NJ" } }, [
+                      _vm._v("New Jersey")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NM" } }, [
+                      _vm._v("New Mexico")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NY" } }, [
+                      _vm._v("New York")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "NC" } }, [
+                      _vm._v("North Carolina")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "ND" } }, [
+                      _vm._v("North Dakota")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "OH" } }, [_vm._v("Ohio")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "OK" } }, [
+                      _vm._v("Oklahoma")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "OR" } }, [
+                      _vm._v("Oregon")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "PA" } }, [
+                      _vm._v("Pennsylvania")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "RI" } }, [
+                      _vm._v("Rhode Island")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "SC" } }, [
+                      _vm._v("South Carolina")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "SD" } }, [
+                      _vm._v("South Dakota")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "TN" } }, [
+                      _vm._v("Tennessee")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "TX" } }, [_vm._v("Texas")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "UT" } }, [_vm._v("Utah")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "VT" } }, [
+                      _vm._v("Vermont")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "VA" } }, [
+                      _vm._v("Virginia")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "WA" } }, [
+                      _vm._v("Washington")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "WV" } }, [
+                      _vm._v("West Virginia")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "WI" } }, [
+                      _vm._v("Wisconsin")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "WY" } }, [
+                      _vm._v("Wyoming")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.name,
+                        expression: "!validations.name"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please select a state!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Country")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.country,
+                      expression: "country"
+                    }
+                  ],
+                  attrs: { type: "text", id: "country" },
+                  domProps: { value: _vm.country },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.country = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.country,
+                        expression: "!validations.country"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a country!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Latitude")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.latitude,
+                      expression: "latitude"
+                    }
+                  ],
+                  attrs: { type: "text", id: "latitude" },
+                  domProps: { value: _vm.latitude },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.latitude = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.latitude,
+                        expression: "!validations.latitude"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a latitude!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Longitude")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.longitude,
+                      expression: "longitude"
+                    }
+                  ],
+                  attrs: { type: "text", id: "longitude" },
+                  domProps: { value: _vm.longitude },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.longitude = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.longitude,
+                        expression: "!validations.longitude"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a longitude!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c("label", [_vm._v("Radius")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.radius,
+                      expression: "radius"
+                    }
+                  ],
+                  attrs: { type: "text", id: "country" },
+                  domProps: { value: _vm.radius },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.radius = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.radius,
+                        expression: "!validations.radius"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v("Please enter a radius!")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 cell" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-city-button",
+                    on: {
+                      click: function($event) {
+                        _vm.addCity()
+                      }
+                    }
+                  },
+                  [_vm._v("Add City")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "large-8 medium-8 cell" }, [
+      _c("h3", { staticClass: "page-header" }, [_vm._v("Cities")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x list-header" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Name\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        State\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Country\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3e2dcb74", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-405821f0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -59012,6 +61213,51 @@ var render = function() {
           },
           [_c("img", { attrs: { src: "/img/grey-left.svg" } })]
         ),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x grid-padding-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("span", { staticClass: "filters-header" }, [_vm._v("City")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cityFilter,
+                    expression: "cityFilter"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.cityFilter = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _vm._l(_vm.cities, function(city) {
+                  return _c("option", { domProps: { value: city.id } }, [
+                    _vm._v(_vm._s(city.name))
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "grid-x grid-padding-x" }, [
           _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
@@ -59401,277 +61647,280 @@ var render = function() {
         _vm.cafeLikeActionStatus == 2 ||
         _vm.cafeUnlikeActionStatus == 1 ||
         _vm.cafeUnlikeActionStatus == 2))
-    ? _c(
-        "div",
-        { attrs: { id: "cafe-page" } },
-        [
-          _c("router-link", { attrs: { to: { name: "cafes" } } }, [
+    ? _c("div", { attrs: { id: "cafe-page" } }, [
+        _c(
+          "a",
+          {
+            on: {
+              click: function($event) {
+                _vm.leaveCafe()
+              }
+            }
+          },
+          [
             _c("img", {
               staticClass: "close-icon",
               attrs: { src: "/img/close-icon.svg" }
             })
-          ]),
-          _vm._v(" "),
-          _c("h2", { staticClass: "cafe-title" }, [
-            _vm._v(_vm._s(_vm.cafe.company.name))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "grid-x" }, [
-            _c(
-              "div",
-              { staticClass: "large-12 medium-12 small-12 cell" },
-              [_c("toggle-like")],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm.cafe.company.cafes_count > 1
-            ? _c("div", { staticClass: "grid-x" }, [
-                _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-                  _c("span", { staticClass: "location-number" }, [
-                    _vm._m(0),
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm.cafe.company.cafes_count) +
-                        " other locations\n      "
-                    )
-                  ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("h2", { staticClass: "cafe-title" }, [
+          _vm._v(_vm._s(_vm.cafe.company.name))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [_c("toggle-like")],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm.cafe.company.cafes_count > 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c("span", { staticClass: "location-number" }, [
+                  _vm._m(0),
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.cafe.company.cafes_count) +
+                      " other locations\n      "
+                  )
                 ])
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "grid-x" }, [
-            _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+            _c("label", { staticClass: "cafe-label" }, [
+              _vm._v("Location Type")
+            ]),
+            _vm._v(" "),
+            _vm.cafe.company.roaster == 1
+              ? _c("div", { staticClass: "location-type roaster" }, [
+                  _c("img", { attrs: { src: "/img/roaster-logo.svg" } }),
+                  _vm._v(" Roaster\n      ")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.cafe.company.roaster == 0
+              ? _c("div", { staticClass: "location-type cafe" }, [
+                  _c("img", { attrs: { src: "/img/cafe-logo.svg" } }),
+                  _vm._v(" Cafe\n      ")
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.cafe.company.subscription == 1
+          ? _c("div", { staticClass: "grid-x" }, [_vm._m(1)])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
               _c("label", { staticClass: "cafe-label" }, [
-                _vm._v("Location Type")
+                _vm._v("Brew Methods")
               ]),
               _vm._v(" "),
-              _vm.cafe.company.roaster == 1
-                ? _c("div", { staticClass: "location-type roaster" }, [
-                    _c("img", { attrs: { src: "/img/roaster-logo.svg" } }),
-                    _vm._v(" Roaster\n      ")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.cafe.company.roaster == 0
-                ? _c("div", { staticClass: "location-type cafe" }, [
-                    _c("img", { attrs: { src: "/img/cafe-logo.svg" } }),
-                    _vm._v(" Cafe\n      ")
-                  ])
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.cafe.company.subscription == 1
-            ? _c("div", { staticClass: "grid-x" }, [_vm._m(1)])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "grid-x" }, [
-            _c(
-              "div",
-              { staticClass: "large-12 medium-12 small-12 cell" },
-              [
-                _c("label", { staticClass: "cafe-label" }, [
-                  _vm._v("Brew Methods")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.cafe.brew_methods, function(method) {
-                  return _c("div", { staticClass: "brew-method option" }, [
-                    _c("div", { staticClass: "option-container" }, [
-                      _c("img", {
-                        staticClass: "option-icon",
-                        attrs: { src: method.icon + ".svg" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "option-name" }, [
-                        _vm._v(_vm._s(method.method))
-                      ])
+              _vm._l(_vm.cafe.brew_methods, function(method) {
+                return _c("div", { staticClass: "brew-method option" }, [
+                  _c("div", { staticClass: "option-container" }, [
+                    _c("img", {
+                      staticClass: "option-icon",
+                      attrs: { src: method.icon + ".svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "option-name" }, [
+                      _vm._v(_vm._s(method.method))
                     ])
                   ])
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _vm.cafe.matcha == 1 || _vm.cafe.tea == 1
-            ? _c("div", { staticClass: "grid-x" }, [
-                _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-                  _c("label", { staticClass: "cafe-label" }, [
-                    _vm._v("Drink Options")
-                  ]),
-                  _vm._v(" "),
-                  _vm.cafe.matcha == 1
-                    ? _c("div", { staticClass: "drink-option option" }, [
-                        _c("div", { staticClass: "option-container" }, [
-                          _c("img", {
-                            staticClass: "option-icon",
-                            attrs: { src: "/img/icons/matcha-latte.svg" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "option-name" }, [
-                            _vm._v("Matcha")
-                          ])
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.cafe.tea == 1
-                    ? _c("div", { staticClass: "drink-option option" }, [
-                        _c("div", { staticClass: "option-container" }, [
-                          _c("img", {
-                            staticClass: "option-icon",
-                            attrs: { src: "/img/icons/tea-bag.svg" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "option-name" }, [
-                            _vm._v("Tea")
-                          ])
-                        ])
-                      ])
-                    : _vm._e()
                 ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.cafe.company.instagram_url != null ||
-          _vm.cafe.company.facebook_url != null ||
-          _vm.cafe.company.twitter_url != null
-            ? _c("div", { staticClass: "grid-x" }, [
-                _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-                  _vm.cafe.company.instagram_url != null
-                    ? _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: _vm.cafe.company.instagram_url,
-                            target: "_blank"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "social-icon",
-                            attrs: { src: "/img/instagram-logo.svg" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.cafe.company.facebook_url != null
-                    ? _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: _vm.cafe.company.facebook_url,
-                            target: "_blank"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "social-icon",
-                            attrs: { src: "/img/facebook-logo.svg" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.cafe.company.twitter_url != null
-                    ? _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: _vm.cafe.company.twitter_url,
-                            target: "_blank"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "social-icon",
-                            attrs: { src: "/img/twitter-logo.svg" }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "grid-x" }, [
-            _c(
-              "div",
-              { staticClass: "large-12 medium-12 small-12 cell" },
-              [
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.cafe.matcha == 1 || _vm.cafe.tea == 1
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
                 _c("label", { staticClass: "cafe-label" }, [
-                  _vm._v("Location And Information")
+                  _vm._v("Drink Options")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "address-container" }, [
-                  _c("span", { staticClass: "address" }, [
-                    _vm._v(_vm._s(_vm.cafe.address))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "city-state" }, [
-                    _vm._v(
-                      _vm._s(_vm.cafe.city) + ", " + _vm._s(_vm.cafe.state)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "zip" }, [
-                    _vm._v(_vm._s(_vm.cafe.zip))
-                  ])
-                ]),
+                _vm.cafe.matcha == 1
+                  ? _c("div", { staticClass: "drink-option option" }, [
+                      _c("div", { staticClass: "option-container" }, [
+                        _c("img", {
+                          staticClass: "option-icon",
+                          attrs: { src: "/img/icons/matcha-latte.svg" }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "option-name" }, [
+                          _vm._v("Matcha")
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "cafe-website",
-                    attrs: { target: "_blank", href: _vm.cafe.company.website }
-                  },
-                  [_vm._v(_vm._s(_vm.cafe.company.website))]
-                ),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.userLoadStatus == 2 && _vm.user != "",
-                        expression: "userLoadStatus == 2 && user != ''"
-                      }
-                    ],
-                    staticClass: "suggest-cafe-edit",
-                    attrs: {
-                      to: { name: "editcafe", params: { slug: _vm.cafe.slug } }
-                    }
-                  },
-                  [_vm._v("\n        Suggest an edit\n      ")]
-                ),
-                _vm._v(" "),
-                _vm.userLoadStatus == 2 && _vm.user == ""
+                _vm.cafe.tea == 1
+                  ? _c("div", { staticClass: "drink-option option" }, [
+                      _c("div", { staticClass: "option-container" }, [
+                        _c("img", {
+                          staticClass: "option-icon",
+                          attrs: { src: "/img/icons/tea-bag.svg" }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "option-name" }, [
+                          _vm._v("Tea")
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.cafe.company.instagram_url != null ||
+        _vm.cafe.company.facebook_url != null ||
+        _vm.cafe.company.twitter_url != null
+          ? _c("div", { staticClass: "grid-x" }, [
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _vm.cafe.company.instagram_url != null
                   ? _c(
                       "a",
                       {
-                        staticClass: "suggest-cafe-edit",
-                        on: {
-                          click: function($event) {
-                            _vm.loginToEdit()
-                          }
+                        attrs: {
+                          href: _vm.cafe.company.instagram_url,
+                          target: "_blank"
                         }
                       },
-                      [_vm._v("\n        Sign in to make an edit\n      ")]
+                      [
+                        _c("img", {
+                          staticClass: "social-icon",
+                          attrs: { src: "/img/instagram-logo.svg" }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.cafe.company.facebook_url != null
+                  ? _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.cafe.company.facebook_url,
+                          target: "_blank"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "social-icon",
+                          attrs: { src: "/img/facebook-logo.svg" }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.cafe.company.twitter_url != null
+                  ? _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.cafe.company.twitter_url,
+                          target: "_blank"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "social-icon",
+                          attrs: { src: "/img/twitter-logo.svg" }
+                        })
+                      ]
                     )
                   : _vm._e()
-              ],
-              1
-            )
-          ])
-        ],
-        1
-      )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "large-12 medium-12 small-12 cell" },
+            [
+              _c("label", { staticClass: "cafe-label" }, [
+                _vm._v("Location And Information")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "address-container" }, [
+                _c("span", { staticClass: "address" }, [
+                  _vm._v(_vm._s(_vm.cafe.address))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "city-state" }, [
+                  _vm._v(_vm._s(_vm.cafe.city) + ", " + _vm._s(_vm.cafe.state))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "zip" }, [
+                  _vm._v(_vm._s(_vm.cafe.zip))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "cafe-website",
+                  attrs: { target: "_blank", href: _vm.cafe.company.website }
+                },
+                [_vm._v(_vm._s(_vm.cafe.company.website))]
+              ),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.userLoadStatus == 2 && _vm.user != "",
+                      expression: "userLoadStatus == 2 && user != ''"
+                    }
+                  ],
+                  staticClass: "suggest-cafe-edit",
+                  attrs: {
+                    to: { name: "editcafe", params: { slug: _vm.cafe.slug } }
+                  }
+                },
+                [_vm._v("\n        Suggest an edit\n      ")]
+              ),
+              _vm._v(" "),
+              _vm.userLoadStatus == 2 && _vm.user == ""
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "suggest-cafe-edit",
+                      on: {
+                        click: function($event) {
+                          _vm.loginToEdit()
+                        }
+                      }
+                    },
+                    [_vm._v("\n        Sign in to make an edit\n      ")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ])
     : _vm._e()
 }
 var staticRenderFns = [
@@ -59985,6 +62234,555 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5795fc18", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5e65e6b0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "admin-city" } }, [
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      [
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c(
+              "h3",
+              { staticClass: "page-header" },
+              [
+                _c("router-link", { attrs: { to: { name: "admin-cities" } } }, [
+                  _vm._v("Cities")
+                ]),
+                _vm._v(" >\n          " + _vm._s(_vm.city.name) + "\n        ")
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.name,
+                    expression: "!validations.name"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a city name!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("State")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.state,
+                    expression: "state"
+                  }
+                ],
+                class: { invalid: !_vm.validations.state },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.state = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "AL" } }, [_vm._v("Alabama")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "AK" } }, [_vm._v("Alaska")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "AZ" } }, [_vm._v("Arizona")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "AR" } }, [_vm._v("Arkansas")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "CA" } }, [
+                  _vm._v("California")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "CO" } }, [_vm._v("Colorado")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "CT" } }, [
+                  _vm._v("Connecticut")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "DE" } }, [_vm._v("Delaware")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "DC" } }, [
+                  _vm._v("District Of Columbia")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "FL" } }, [_vm._v("Florida")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "GA" } }, [_vm._v("Georgia")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "HI" } }, [_vm._v("Hawaii")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "ID" } }, [_vm._v("Idaho")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "IL" } }, [_vm._v("Illinois")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "IN" } }, [_vm._v("Indiana")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "IA" } }, [_vm._v("Iowa")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "KS" } }, [_vm._v("Kansas")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "KY" } }, [_vm._v("Kentucky")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "LA" } }, [_vm._v("Louisiana")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "ME" } }, [_vm._v("Maine")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MD" } }, [_vm._v("Maryland")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MA" } }, [
+                  _vm._v("Massachusetts")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MI" } }, [_vm._v("Michigan")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MN" } }, [_vm._v("Minnesota")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MS" } }, [
+                  _vm._v("Mississippi")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MO" } }, [_vm._v("Missouri")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MT" } }, [_vm._v("Montana")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NE" } }, [_vm._v("Nebraska")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NV" } }, [_vm._v("Nevada")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NH" } }, [
+                  _vm._v("New Hampshire")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NJ" } }, [
+                  _vm._v("New Jersey")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NM" } }, [
+                  _vm._v("New Mexico")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NY" } }, [_vm._v("New York")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "NC" } }, [
+                  _vm._v("North Carolina")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "ND" } }, [
+                  _vm._v("North Dakota")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "OH" } }, [_vm._v("Ohio")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "OK" } }, [_vm._v("Oklahoma")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "OR" } }, [_vm._v("Oregon")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "PA" } }, [
+                  _vm._v("Pennsylvania")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "RI" } }, [
+                  _vm._v("Rhode Island")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "SC" } }, [
+                  _vm._v("South Carolina")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "SD" } }, [
+                  _vm._v("South Dakota")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "TN" } }, [_vm._v("Tennessee")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "TX" } }, [_vm._v("Texas")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "UT" } }, [_vm._v("Utah")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "VT" } }, [_vm._v("Vermont")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "VA" } }, [_vm._v("Virginia")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "WA" } }, [
+                  _vm._v("Washington")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "WV" } }, [
+                  _vm._v("West Virginia")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "WI" } }, [_vm._v("Wisconsin")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "WY" } }, [_vm._v("Wyoming")])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.name,
+                    expression: "!validations.name"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please select a state!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Country")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.country,
+                  expression: "country"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.country },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.country = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.country,
+                    expression: "!validations.country"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a country!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Latitude")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.latitude,
+                  expression: "latitude"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.latitude },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.latitude = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.latitude,
+                    expression: "!validations.latitude"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a latitude!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Longitude")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.longitude,
+                  expression: "longitude"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.longitude },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.longitude = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.longitude,
+                    expression: "!validations.longitude"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a longitude!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-8 medium-12 cell" }, [
+            _c("label", [_vm._v("Radius")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.radius,
+                  expression: "radius"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.radius },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.radius = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.validations.radius,
+                    expression: "!validations.radius"
+                  }
+                ],
+                staticClass: "validation"
+              },
+              [_vm._v("Please enter a radius!")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "large-12 medium-12 cell" }, [
+            _c(
+              "a",
+              {
+                staticClass: "save-edits",
+                on: {
+                  click: function($event) {
+                    _vm.saveEdits()
+                  }
+                }
+              },
+              [_vm._v("Update City")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "delete-city",
+                on: {
+                  click: function($event) {
+                    _vm.deleteCity()
+                  }
+                }
+              },
+              [_vm._v("Delete City")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.city.cafes, function(cafe) {
+          return _c("div", { staticClass: "grid-x listing" }, [
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(cafe.company.name) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(cafe.location_name) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "large-3 medium-3 cell" }, [
+              _vm._v("\n        " + _vm._s(cafe.address) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "large-3 medium-3 cell" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: {
+                        name: "admin-cafe",
+                        params: { id: cafe.company.id, cafeID: cafe.id }
+                      }
+                    }
+                  },
+                  [_vm._v("Edit")]
+                )
+              ],
+              1
+            )
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "large-8 medium-12 cell" }, [
+        _c("h3", { staticClass: "page-header" }, [_vm._v("Cafes")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x list-header" }, [
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Company\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Cafe\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" }, [
+        _vm._v("\n        Address\n      ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-3 medium-3 cell" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5e65e6b0", module.exports)
   }
 }
 
@@ -62959,10 +65757,10 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _vm._l(_vm.brewMethods, function(method) {
-            return _c("div", { staticClass: "grid-x brew-method-listing" }, [
+            return _c("div", { staticClass: "grid-x listing" }, [
               _c("div", { staticClass: "large-1 medium-1 cell" }, [
                 _c("img", {
-                  staticClass: "method-icon",
+                  staticClass: "icon",
                   attrs: { src: method.icon + ".svg" }
                 })
               ]),
@@ -64613,7 +67411,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid-x brew-methods-header" }, [
+    return _c("div", { staticClass: "grid-x list-header" }, [
       _c("div", { staticClass: "large-1 medium-1 cell" }),
       _vm._v(" "),
       _c("div", { staticClass: "large-6 medium-6 cell" }, [
@@ -64657,8 +67455,8 @@ var render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value: _vm.$route.name == "cafes",
-          expression: "$route.name == 'cafes'"
+          value: _vm.$route.name == "cafes" || _vm.$route.name == "city",
+          expression: "$route.name == 'cafes' || $route.name == 'city'"
         }
       ],
       attrs: { id: "toggle-cafes-view" }
@@ -65114,6 +67912,19 @@ var render = function() {
               { attrs: { to: { name: "admin-brew-methods" } } },
               [_vm._v("\n      Brew Methods\n    ")]
             )
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.user.permission == 3
+      ? _c(
+          "div",
+          { staticClass: "admin-link" },
+          [
+            _c("router-link", { attrs: { to: { name: "admin-cities" } } }, [
+              _vm._v("\n      Cities\n    ")
+            ])
           ],
           1
         )
@@ -67981,6 +70792,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/City.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("1946d3df", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./City.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./City.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-109d83da\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cafe.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -68332,6 +71170,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cities.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cities.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("0cfeb5a8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cities.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cities.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-405821f0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/cafes/AddCafeButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -68538,6 +71403,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5795fc18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/City.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("7b035336", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./City.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./City.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -81317,7 +84209,7 @@ module.exports = function(module) {
 		/*
    PUT 	/api/v1/admin/companies/{companyID/cafes/{cafeID}
   */
-		putUpdateCafe: function putUpdateCafe(companyID, cafeID, locationName, address, city, state, zip, tea, matcha, brewMethods, deleted) {
+		putUpdateCafe: function putUpdateCafe(companyID, cafeID, cityID, locationName, address, city, state, zip, tea, matcha, brewMethods, deleted) {
 				/*
     	Initialize the form data
     */
@@ -81327,6 +84219,7 @@ module.exports = function(module) {
     	Add the form data we need to submit
     */
 				formData.append('company_id', companyID);
+				formData.append('city_id', cityID);
 				formData.append('location_name', locationName);
 				formData.append('address', address);
 				formData.append('city', city);
@@ -81340,6 +84233,69 @@ module.exports = function(module) {
 
 				return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/companies/' + companyID + '/cafes/' + cafeID, formData);
 		}
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/api/admin/cities.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/admin/cities
+  */
+  getCities: function getCities() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/cities');
+  },
+
+  /*
+    GET   /api/v1/admin/cities/{id}
+  */
+  getCity: function getCity(id) {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/cities/' + id);
+  },
+
+  /*
+    POST  /api/v1/admin/cities
+  */
+  postAddCity: function postAddCity(name, state, country, latitude, longitude, radius) {
+    return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/cities', {
+      name: name,
+      state: state,
+      country: country,
+      latitude: latitude,
+      longitude: longitude,
+      radius: radius
+    });
+  },
+
+  /*
+    PUT   /api/v1/admin/cities/{id}
+  */
+  putUpdateCity: function putUpdateCity(id, name, state, country, latitude, longitude, radius) {
+    return axios.put(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/cities/' + id, {
+      name: name,
+      state: state,
+      country: country,
+      latitude: latitude,
+      longitude: longitude,
+      radius: radius
+    });
+  },
+
+  /*
+    DELETE /api/v1/admin/cities/{id}
+  */
+  deleteCity: function deleteCity(id) {
+    return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/admin/cities/' + id);
+  }
 });
 
 /***/ }),
@@ -81570,6 +84526,34 @@ module.exports = function(module) {
 	deleteCafe: function deleteCafe(slug) {
 		return axios.delete(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes/' + slug);
 	}
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/api/cities.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__("./resources/assets/js/config.js");
+/*
+  Imports the Roast API URL from the config.
+*/
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /*
+    GET   /api/v1/cities
+  */
+  getCities: function getCities() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cities');
+  },
+
+  /*
+    GET   /api/v1/cities/{slug}
+  */
+  getCity: function getCity(slug) {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cities/' + slug);
+  }
 });
 
 /***/ }),
@@ -83227,6 +86211,28 @@ var CafeHasTeaFilter = {
 
 /***/ }),
 
+/***/ "./resources/assets/js/mixins/filters/CafeInCityFilter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CafeInCityFilter; });
+var CafeInCityFilter = {
+  methods: {
+    processCafeInCityFilter: function processCafeInCityFilter(cafe, cityID) {
+      /*
+        Checks to see if the cafe has tea
+      */
+      if (cafe.city_id == cityID) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/assets/js/mixins/filters/CafeSubscriptionFilter.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -83856,7 +86862,7 @@ var cafes = {
       /*
         Calls the API to update an admin cafe.
       */
-      __WEBPACK_IMPORTED_MODULE_0__api_admin_cafes_js__["a" /* default */].putUpdateCafe(data.company_id, data.id, data.location_name, data.address, data.city, data.state, data.zip, data.tea, data.matcha, data.brew_methods, data.deleted).then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cafes_js__["a" /* default */].putUpdateCafe(data.company_id, data.id, data.city_id, data.location_name, data.address, data.city, data.state, data.zip, data.tea, data.matcha, data.brew_methods, data.deleted).then(function (response) {
         commit('setAdminCafe', response.data);
         commit('setAdminCafeEditStatus', 2);
       }).catch(function () {
@@ -83914,6 +86920,257 @@ var cafes = {
     */
     getAdminCafeEditStatus: function getAdminCafeEditStatus(state) {
       return state.cafeEditStatus;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/admin/cities.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cities; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__ = __webpack_require__("./resources/assets/js/api/admin/cities.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/admin/cities.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the admin cities
+*/
+
+
+var cities = {
+  /*
+    Defines the state monitored for the module.
+  */
+  state: {
+    cities: [],
+    citiesLoadStatus: 0,
+
+    city: {},
+    cityLoadStatus: 0,
+
+    cityEditStatus: 0,
+    cityAddStatus: 0,
+    cityDeleteStatus: 0
+  },
+
+  /*
+    Defines the actions that can mutate the state.
+  */
+  actions: {
+    /*
+      Loads all of the cities.
+    */
+    loadAdminCities: function loadAdminCities(_ref) {
+      var commit = _ref.commit;
+
+      commit('setAdminCitiesLoadStatus', 1);
+
+      /*
+        Call the admin cities API route.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__["a" /* default */].getCities().then(function (response) {
+        /*
+          Commits a successful response with the cities.
+        */
+        commit('setAdminCities', response.data);
+        commit('setAdminCitiesLoadStatus', 2);
+      }).catch(function () {
+        /*
+          Commits a failed response and clear the data.
+        */
+        commit('setAdminCities', []);
+        commit('setAdminCitiesLoadStatus', 3);
+      });
+    },
+
+    /*
+      Load an individual city.
+    */
+    loadAdminCity: function loadAdminCity(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setAdminCityLoadStatus', 1);
+
+      /*
+        Calls the API to load an individual city.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__["a" /* default */].getCity(data.id).then(function (response) {
+        commit('setAdminCity', response.data);
+        commit('setAdminCityLoadStatus', 2);
+      }).catch(function () {
+        commit('setAdminCity', {});
+        commit('setAdminCityLoadStatus', 3);
+      });
+    },
+
+    /*
+      Submits a request to add a city.
+    */
+    addAdminCity: function addAdminCity(_ref3, data) {
+      var commit = _ref3.commit,
+          state = _ref3.state,
+          dispatch = _ref3.dispatch;
+
+      commit('setAdminCityAddStatus', 1);
+
+      /*
+        Calls the API to add a city.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__["a" /* default */].postAddCity(data.name, data.state, data.country, data.latitude, data.longitude, data.radius).then(function (response) {
+        commit('setAdminCityAddStatus', 2);
+
+        dispatch('loadAdminCities');
+      }).catch(function (response) {
+        commit('setAdminCityAddStatus', 3);
+      });
+    },
+
+    /*
+      Update an individual admin city.
+    */
+    updateAdminCity: function updateAdminCity(_ref4, data) {
+      var commit = _ref4.commit,
+          state = _ref4.state,
+          dispatch = _ref4.dispatch;
+
+      commit('setAdminCityEditStatus', 1);
+
+      /*
+        Calls the API to update an individual city.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__["a" /* default */].putUpdateCity(data.id, data.name, data.state, data.country, data.latitude, data.longitude, data.radius).then(function (response) {
+        commit('setAdminCityEditStatus', 2);
+      }).catch(function (response) {
+        commit('setAdminCityEditStatus', 3);
+      });
+    },
+
+    /*
+      Deletes a city.
+    */
+    deleteAdminCity: function deleteAdminCity(_ref5, data) {
+      var commit = _ref5.commit,
+          state = _ref5.state,
+          dispatch = _ref5.dispatch;
+
+      commit('setAdminCityDeleteStatus', 1);
+
+      __WEBPACK_IMPORTED_MODULE_0__api_admin_cities_js__["a" /* default */].deleteCity(data.id).then(function (response) {
+        commit('setAdminCityDeleteStatus', 2);
+      }).catch(function (response) {
+        commit('setAdminCityDeleteStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations used by the Vuex module.
+  */
+  mutations: {
+    /*
+      Set the admin cities load status.
+    */
+    setAdminCitiesLoadStatus: function setAdminCitiesLoadStatus(state, status) {
+      state.citiesLoadStatus = status;
+    },
+
+    /*
+      Sets the admin cities.
+    */
+    setAdminCities: function setAdminCities(state, cities) {
+      state.cities = cities;
+    },
+
+    /*
+      Set the admin city load status.
+    */
+    setAdminCityLoadStatus: function setAdminCityLoadStatus(state, status) {
+      state.cityLoadStatus = status;
+    },
+
+    /*
+      Sets the admin city.
+    */
+    setAdminCity: function setAdminCity(state, city) {
+      state.city = city;
+    },
+
+    /*
+      Sets the admin city add status.
+    */
+    setAdminCityAddStatus: function setAdminCityAddStatus(state, status) {
+      state.cityAddStatus = status;
+    },
+
+    /*
+      Sets the admin city edit status.
+    */
+    setAdminCityEditStatus: function setAdminCityEditStatus(state, status) {
+      state.cityEditStatus = status;
+    },
+
+    /*
+      Sets the admin city delete status.
+    */
+    setAdminCityDeleteStatus: function setAdminCityDeleteStatus(state, status) {
+      state.cityDeleteStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters used by the Vuex module.
+  */
+  getters: {
+    /*
+      Get all admin cities.
+    */
+    getAdminCities: function getAdminCities(state) {
+      return state.cities;
+    },
+
+    /*
+      Gets the admin cities load status.
+    */
+    getAdminCitiesLoadStatus: function getAdminCitiesLoadStatus(state) {
+      return state.citiesLoadStatus;
+    },
+
+    /*
+      Gets the admin city.
+    */
+    getAdminCity: function getAdminCity(state) {
+      return state.city;
+    },
+
+    /*
+      Gets the admin city load status.
+    */
+    getAdminCityLoadStatus: function getAdminCityLoadStatus(state) {
+      return state.cityLoadStatus;
+    },
+
+    /*
+      Gets the admin city edit status.
+    */
+    getAdminCityEditStatus: function getAdminCityEditStatus(state) {
+      return state.cityEditStatus;
+    },
+
+    /*
+      Gets the admin city add status.
+    */
+    getAdminCityAddStatus: function getAdminCityAddStatus(state) {
+      return state.cityAddStatus;
+    },
+
+    /*
+      Gets the admin city delete status.
+    */
+    getAdminCityDeleteStatus: function getAdminCityDeleteStatus(state) {
+      return state.cityDeleteStatus;
     }
   }
 };
@@ -84988,6 +88245,146 @@ var cafes = {
 
 /***/ }),
 
+/***/ "./resources/assets/js/modules/cities.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cities; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_cities_js__ = __webpack_require__("./resources/assets/js/api/cities.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/cities.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the cities state
+*/
+
+
+var cities = {
+  /*
+    Defines the state being monitored for the module.
+  */
+  state: {
+    cities: [],
+    citiesLoadStatus: 0,
+
+    city: {},
+    cityLoadStatus: 0
+  },
+
+  /*
+    Defines the actions available on the module.
+  */
+  actions: {
+    /*
+      Loads all cities.
+    */
+    loadCities: function loadCities(_ref) {
+      var commit = _ref.commit;
+
+      commit('setCitiesLoadStatus', 1);
+
+      /*
+        Calls the API to load the cities
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_cities_js__["a" /* default */].getCities().then(function (response) {
+        commit('setCities', response.data);
+        commit('setCitiesLoadStatus', 2);
+      }).catch(function () {
+        commit('setCities', []);
+        commit('setCitiesLoadStatus', 3);
+      });
+    },
+
+    /*
+      Loads an individual city.
+    */
+    loadCity: function loadCity(_ref2, data) {
+      var commit = _ref2.commit;
+
+      commit('setCityLoadStatus', 1);
+
+      /*
+        Calls the API to load an individual city by slug.
+      */
+      __WEBPACK_IMPORTED_MODULE_0__api_cities_js__["a" /* default */].getCity(data.slug).then(function (response) {
+        commit('setCity', response.data);
+        commit('setCityLoadStatus', 2);
+      }).catch(function () {
+        commit('setCity', {});
+        commit('setCityLoadStatus', 3);
+      });
+    }
+  },
+
+  /*
+    Defines the mutations based on the data store.
+  */
+  mutations: {
+    /*
+      Sets the cities in the state.
+    */
+    setCities: function setCities(state, cities) {
+      state.cities = cities;
+    },
+
+    /*
+      Sets the cities load status.
+    */
+    setCitiesLoadStatus: function setCitiesLoadStatus(state, status) {
+      state.citiesLoadStatus = status;
+    },
+
+    /*
+      Sets the city
+    */
+    setCity: function setCity(state, city) {
+      state.city = city;
+    },
+
+    /*
+      Sets the city load status.
+    */
+    setCityLoadStatus: function setCityLoadStatus(state, status) {
+      state.cityLoadStatus = status;
+    }
+  },
+
+  /*
+    Defines the getters on the module.
+  */
+  getters: {
+    /*
+      Gets the cities
+    */
+    getCities: function getCities(state) {
+      return state.cities;
+    },
+
+    /*
+      Gets the cities load status.
+    */
+    getCitiesLoadStatus: function getCitiesLoadStatus(state) {
+      return state.citiesLoadStatus;
+    },
+
+    /*
+      Get the city
+    */
+    getCity: function getCity(state) {
+      return state.city;
+    },
+
+    /*
+      Get the city load status.
+    */
+    getCityLoadStatus: function getCityLoadStatus(state) {
+      return state.cityLoadStatus;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/assets/js/modules/display.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85160,6 +88557,7 @@ var filters = {
     Defines the state used by the module
   */
   state: {
+    cityFilter: '',
     textSearch: '',
     activeLocationFilter: 'all',
     onlyLiked: false,
@@ -85176,10 +88574,19 @@ var filters = {
   */
   actions: {
     /*
+      Updates the city filter.
+    */
+    updateCityFilter: function updateCityFilter(_ref, data) {
+      var commit = _ref.commit;
+
+      commit('setCityFilter', data);
+    },
+
+    /*
       Updates the text search filter
     */
-    updateSetTextSearch: function updateSetTextSearch(_ref, data) {
-      var commit = _ref.commit;
+    updateSetTextSearch: function updateSetTextSearch(_ref2, data) {
+      var commit = _ref2.commit;
 
       commit('setTextSearch', data);
     },
@@ -85187,8 +88594,8 @@ var filters = {
     /*
       Updates the active location filter.
     */
-    updateActiveLocationFilter: function updateActiveLocationFilter(_ref2, data) {
-      var commit = _ref2.commit;
+    updateActiveLocationFilter: function updateActiveLocationFilter(_ref3, data) {
+      var commit = _ref3.commit;
 
       commit('setActiveLocationFilter', data);
     },
@@ -85196,8 +88603,8 @@ var filters = {
     /*
       Updates the only liked filter.
     */
-    updateOnlyLiked: function updateOnlyLiked(_ref3, data) {
-      var commit = _ref3.commit;
+    updateOnlyLiked: function updateOnlyLiked(_ref4, data) {
+      var commit = _ref4.commit;
 
       commit('setOnlyLiked', data);
     },
@@ -85205,8 +88612,8 @@ var filters = {
     /*
       Updates the brew methods filter.
     */
-    updateBrewMethodsFilter: function updateBrewMethodsFilter(_ref4, data) {
-      var commit = _ref4.commit;
+    updateBrewMethodsFilter: function updateBrewMethodsFilter(_ref5, data) {
+      var commit = _ref5.commit;
 
       commit('setBrewMethodsFilter', data);
     },
@@ -85214,8 +88621,8 @@ var filters = {
     /*
       Updates the has matcha filter.
     */
-    updateHasMatcha: function updateHasMatcha(_ref5, data) {
-      var commit = _ref5.commit;
+    updateHasMatcha: function updateHasMatcha(_ref6, data) {
+      var commit = _ref6.commit;
 
       commit('setHasMatcha', data);
     },
@@ -85223,8 +88630,8 @@ var filters = {
     /*
       Updates the has tea filter.
     */
-    updateHasTea: function updateHasTea(_ref6, data) {
-      var commit = _ref6.commit;
+    updateHasTea: function updateHasTea(_ref7, data) {
+      var commit = _ref7.commit;
 
       commit('setHasTea', data);
     },
@@ -85232,8 +88639,8 @@ var filters = {
     /*
       Updates the has subscription filter.
     */
-    updateHasSubscription: function updateHasSubscription(_ref7, data) {
-      var commit = _ref7.commit;
+    updateHasSubscription: function updateHasSubscription(_ref8, data) {
+      var commit = _ref8.commit;
 
       commit('setHasSubscription', data);
     },
@@ -85241,10 +88648,10 @@ var filters = {
     /*
       Updates the order by setting and sorts the cafes.
     */
-    updateOrderBy: function updateOrderBy(_ref8, data) {
-      var commit = _ref8.commit,
-          state = _ref8.state,
-          dispatch = _ref8.dispatch;
+    updateOrderBy: function updateOrderBy(_ref9, data) {
+      var commit = _ref9.commit,
+          state = _ref9.state,
+          dispatch = _ref9.dispatch;
 
       commit('setOrderBy', data);
       dispatch('orderCafes', { order: state.orderBy, direction: state.orderDirection });
@@ -85253,10 +88660,10 @@ var filters = {
     /*
       Updates the order direction and sorts the cafes.
     */
-    updateOrderDirection: function updateOrderDirection(_ref9, data) {
-      var commit = _ref9.commit,
-          state = _ref9.state,
-          dispatch = _ref9.dispatch;
+    updateOrderDirection: function updateOrderDirection(_ref10, data) {
+      var commit = _ref10.commit,
+          state = _ref10.state,
+          dispatch = _ref10.dispatch;
 
       commit('setOrderDirection', data);
       dispatch('orderCafes', { order: state.orderBy, direction: state.orderDirection });
@@ -85265,8 +88672,8 @@ var filters = {
     /*
       Resets the filters
     */
-    resetFilters: function resetFilters(_ref10, data) {
-      var commit = _ref10.commit;
+    resetFilters: function resetFilters(_ref11, data) {
+      var commit = _ref11.commit;
 
       commit('resetFilters');
     }
@@ -85276,6 +88683,13 @@ var filters = {
     Defines the mutations used by the state.
   */
   mutations: {
+    /*
+      Sets the city filter.
+    */
+    setCityFilter: function setCityFilter(state, city) {
+      state.cityFilter = city;
+    },
+
     /*
       Sets the text search filter.
     */
@@ -85343,6 +88757,7 @@ var filters = {
       Resets the active filters.
     */
     resetFilters: function resetFilters(state) {
+      state.cityFilter = '';
       state.textSearch = '';
       state.activeLocationFilter = 'all';
       state.onlyLiked = false;
@@ -85359,6 +88774,13 @@ var filters = {
     Defines the getters on the Vuex module.
   */
   getters: {
+    /*
+      Gets the city fitler.
+    */
+    getCityFilter: function getCityFilter(state) {
+      return state.cityFilter;
+    },
+
     /*
       Gets the text search filter.
     */
@@ -85597,6 +89019,58 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-4c1ef4da", Component.options)
   } else {
     hotAPI.reload("data-v-4c1ef4da", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c4e7da8\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/City.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/City.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0c4e7da8\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/City.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/City.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0c4e7da8", Component.options)
+  } else {
+    hotAPI.reload("data-v-0c4e7da8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -86024,6 +89498,110 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/pages/admin/Cities.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2dcb74\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/Cities.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/Cities.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3e2dcb74\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/Cities.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/Cities.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3e2dcb74", Component.options)
+  } else {
+    hotAPI.reload("data-v-3e2dcb74", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/admin/City.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e65e6b0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/pages/admin/City.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/pages/admin/City.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5e65e6b0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/pages/admin/City.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/admin/City.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5e65e6b0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5e65e6b0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/pages/admin/Companies.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86382,6 +89960,10 @@ function requireAuth(to, from, next) {
 				path: ':slug',
 				name: 'cafe',
 				component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafe', __webpack_require__("./resources/assets/js/pages/Cafe.vue"))
+			}, {
+				path: 'cities/:slug',
+				name: 'city',
+				component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('City', __webpack_require__("./resources/assets/js/pages/City.vue"))
 			}]
 		}, {
 			path: 'cafes/:slug/edit',
@@ -86469,6 +90051,20 @@ function requireAuth(to, from, next) {
 			meta: {
 				permission: 'super-admin'
 			}
+		}, {
+			path: 'cities',
+			name: 'admin-cities',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminCities', __webpack_require__("./resources/assets/js/pages/admin/Cities.vue")),
+			meta: {
+				permission: 'super-admin'
+			}
+		}, {
+			path: 'cities/:id',
+			name: 'admin-city',
+			component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('AdminCity', __webpack_require__("./resources/assets/js/pages/admin/City.vue")),
+			meta: {
+				permission: 'super-admin'
+			}
 		},
 
 		/*
@@ -86488,10 +90084,11 @@ function requireAuth(to, from, next) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_cafes_js__ = __webpack_require__("./resources/assets/js/modules/cafes.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_js__ = __webpack_require__("./resources/assets/js/modules/users.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_brewMethods_js__ = __webpack_require__("./resources/assets/js/modules/brewMethods.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_display_js__ = __webpack_require__("./resources/assets/js/modules/display.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_filters_js__ = __webpack_require__("./resources/assets/js/modules/filters.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_cities_js__ = __webpack_require__("./resources/assets/js/modules/cities.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users_js__ = __webpack_require__("./resources/assets/js/modules/users.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_brewMethods_js__ = __webpack_require__("./resources/assets/js/modules/brewMethods.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_display_js__ = __webpack_require__("./resources/assets/js/modules/display.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_filters_js__ = __webpack_require__("./resources/assets/js/modules/filters.js");
 /*
 |-------------------------------------------------------------------------------
 | VUEX store.js
@@ -86523,16 +90120,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 
 
+
 /*
   Exports our data store.
 */
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 	modules: {
 		cafes: __WEBPACK_IMPORTED_MODULE_2__modules_cafes_js__["a" /* cafes */],
-		users: __WEBPACK_IMPORTED_MODULE_3__modules_users_js__["a" /* users */],
-		brewMethods: __WEBPACK_IMPORTED_MODULE_4__modules_brewMethods_js__["a" /* brewMethods */],
-		display: __WEBPACK_IMPORTED_MODULE_5__modules_display_js__["a" /* display */],
-		filters: __WEBPACK_IMPORTED_MODULE_6__modules_filters_js__["a" /* filters */]
+		cities: __WEBPACK_IMPORTED_MODULE_3__modules_cities_js__["a" /* cities */],
+		users: __WEBPACK_IMPORTED_MODULE_4__modules_users_js__["a" /* users */],
+		brewMethods: __WEBPACK_IMPORTED_MODULE_5__modules_brewMethods_js__["a" /* brewMethods */],
+		display: __WEBPACK_IMPORTED_MODULE_6__modules_display_js__["a" /* display */],
+		filters: __WEBPACK_IMPORTED_MODULE_7__modules_filters_js__["a" /* filters */]
 	}
 }));
 

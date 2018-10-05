@@ -42,7 +42,7 @@
 </style>
 
 <template>
-  <div id="toggle-cafes-view" v-show="$route.name == 'cafes'">
+  <div id="toggle-cafes-view" v-show="$route.name == 'cafes' || $route.name == 'city'">
     <span class="map-view toggle-button" v-bind:class="{ 'active': cafesView == 'map' }" v-on:click="displayView('map')">Map</span><span class="list-view toggle-button" v-bind:class="{ 'active': cafesView == 'list' }" v-on:click="displayView('list')">List</span>
   </div>
 </template>

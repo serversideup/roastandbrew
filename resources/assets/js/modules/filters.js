@@ -9,6 +9,7 @@ export const filters = {
     Defines the state used by the module
   */
   state: {
+    cityFilter: '',
     textSearch: '',
     activeLocationFilter: 'all',
     onlyLiked: false,
@@ -24,6 +25,13 @@ export const filters = {
     Defines the actions that can be performed on the state.
   */
   actions: {
+    /*
+      Updates the city filter.
+    */
+    updateCityFilter( { commit }, data ){
+      commit( 'setCityFilter', data );
+    },
+
     /*
       Updates the text search filter
     */
@@ -102,6 +110,13 @@ export const filters = {
   */
   mutations: {
     /*
+      Sets the city filter.
+    */
+    setCityFilter( state, city ){
+      state.cityFilter = city;
+    },
+
+    /*
       Sets the text search filter.
     */
     setTextSearch( state, search ){
@@ -168,6 +183,7 @@ export const filters = {
       Resets the active filters.
     */
     resetFilters( state ){
+      state.cityFilter = '';
       state.textSearch = '';
       state.activeLocationFilter = 'all';
       state.onlyLiked = false;
@@ -184,6 +200,13 @@ export const filters = {
     Defines the getters on the Vuex module.
   */
   getters: {
+    /*
+      Gets the city fitler.
+    */
+    getCityFilter( state ){
+      return state.cityFilter;
+    },
+
     /*
       Gets the text search filter.
     */

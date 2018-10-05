@@ -113,9 +113,9 @@
 
 <template>
   <div id="cafe-page" v-if="cafeLoadStatus == 2 || ( cafeLoadStatus != 2 && ( cafeLikeActionStatus == 1 || cafeLikeActionStatus == 2 || cafeUnlikeActionStatus == 1 || cafeUnlikeActionStatus == 2 ) )">
-    <router-link :to="{ name: 'cafes' }">
+    <a v-on:click="leaveCafe()">
       <img class="close-icon" src="/img/close-icon.svg"/>
-    </router-link>
+    </a>
     <h2 class="cafe-title">{{ cafe.company.name }}</h2>
     <div class="grid-x">
       <div class="large-12 medium-12 small-12 cell">
@@ -290,6 +290,20 @@
     */
     computed: {
       /*
+        Gets the cities from the Vuex data store.
+      */
+      cities(){
+        return this.$store.getters.getCities;
+      },
+
+      /*
+        Gets the cities filter from the Vuex data store.
+      */
+      cityFilter(){
+        return this.$store.getters.getCityFilter;
+      },
+
+      /*
         Grabs the cafe load status from the Vuex state.
       */
       cafeLoadStatus(){
@@ -336,8 +350,34 @@
       Defines the methods used by the component.
     */
     methods: {
+      /*
+        Requires the user be logged in to edit.
+      */
       loginToEdit(){
         EventBus.$emit('prompt-login');
+      },
+
+      /*
+        When leaving a cafe, we determine which page to go to.
+      */
+      leaveCafe(){
+        /*
+          If the city filter is set, we go back to the city, otherwise,
+          we load all cafes.
+        */
+        if( this.cityFilter != '' ){
+          let slug = '';
+
+          for( let i = 0; i < this.cities.length; i++ ){
+            if( this.cities[i].id == this.cityFilter ){
+              slug = this.cities[i].slug;
+            }
+          }
+
+          this.$router.push( { name: 'city', params: { slug: slug } } );
+        }else{
+          this.$router.push({ name: 'cafes' });
+        }
       }
     }
   }

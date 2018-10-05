@@ -94,6 +94,7 @@
   import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
   import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
   import { CafeSubscriptionFilter } from '../../mixins/filters/CafeSubscriptionFilter.js';
+  import { CafeInCityFilter } from '../../mixins/filters/CafeInCityFilter.js';
 
   /*
     Imports the Event Bus to listen to filter updates
@@ -125,7 +126,8 @@
       CafeUserLikeFilter,
       CafeHasMatchaFilter,
       CafeHasTeaFilter,
-      CafeSubscriptionFilter
+      CafeSubscriptionFilter,
+      CafeInCityFilter
     ],
 
     /*
@@ -138,63 +140,137 @@
       EventBus.$on('filters-updated', function( filters ){
         this.processFilters( filters );
       }.bind(this));
+
+      /*
+        Apply filters
+      */
+      this.processFilters();
     },
 
+    /*
+      Defines the computed variables.
+    */
     computed: {
+      /*
+        Gets the city from the Vuex data store.
+      */
+      city(){
+        return this.$store.getters.getCity;
+      },
+
+      /*
+        Gets the city filter from the Vuex data store.
+      */
+      cityFilter(){
+        return this.$store.getters.getCityFilter;
+      },
+
+      /*
+        Gets the text search filter from the Vuex data store.
+      */
       textSearch(){
         return this.$store.getters.getTextSearch;
       },
 
+      /*
+        Gets the active location filter from the Vuex data store.
+      */
       activeLocationFilter(){
         return this.$store.getters.getActiveLocationFilter;
       },
 
+      /*
+        Gets the only liked filter from the Vuex data store.
+      */
       onlyLiked(){
         return this.$store.getters.getOnlyLiked;
       },
 
+      /*
+        Gets the brew methods filter from the Vuex data store.
+      */
       brewMethodsFilter(){
         return this.$store.getters.getBrewMethodsFilter;
       },
 
+      /*
+        Gets the has matcha filter from the Vuex data store.
+      */
       hasMatcha(){
         return this.$store.getters.getHasMatcha;
       },
 
+      /*
+        Gets the has tea filter from the Vuex data store.
+      */
       hasTea(){
         return this.$store.getters.getHasTea;
       },
 
+      /*
+        Gets the has subscription from the Vuex data store.
+      */
       hasSubscription(){
         return this.$store.getters.getHasSubscription;
       }
     },
 
+    /*
+      Defines what should be watched by the cafe card.
+    */
     watch: {
+      /*
+        Watches the city filter
+      */
+      cityFilter(){
+        this.processFilters();
+      },
+
+      /*
+        Watches the text search filter.
+      */
       textSearch(){
         this.processFilters();
       },
 
+      /*
+        Watches the active location filter.
+      */
       activeLocationFilter(){
         this.processFilters();
       },
 
+      /*
+        Watches the only liked filter.
+      */
       onlyLiked(){
         this.processFilters();
       },
 
+      /*
+        Watches the brew methods filter.
+      */
       brewMethodsFilter(){
         this.processFilters();
       },
 
+      /*
+        Watches the has matcha filter.
+      */
       hasMatcha(){
         this.processFilters();
       },
 
+      /*
+        Watches the has tea filter.
+      */
       hasTea(){
         this.processFilters();
       },
 
+      /*
+        Watches the has subscription filter.
+      */
       hasSubscription(){
         this.processFilters();
       }
@@ -207,7 +283,7 @@
       /*
         Process the selected filters from the user.
       */
-      processFilters( filters ){
+      processFilters( ){
         /*
           If no filters are selected, show the card
         */
@@ -217,7 +293,8 @@
           && !this.onlyLiked
           && !this.hasMatcha
           && !this.hasTea
-          && !this.hasSubscription ){
+          && !this.hasSubscription
+          && this.cityFilter == '' ){
             this.show = true;
         }else{
           /*
@@ -230,6 +307,7 @@
           var matchaPassed = false;
           var teaPassed = false;
           var subscriptionPassed = false;
+          var cityPassed = false;
 
           /*
             Check if the roaster passes
@@ -293,9 +371,18 @@
           }
 
           /*
+            Checks to see if the city passed or not.
+          */
+          if( this.cityFilter != '' && this.processCafeInCityFilter( this.cafe, this.cityFilter ) ){
+            cityPassed = true;
+          }else{
+            cityPassed = false;
+          }
+
+          /*
             If everything passes, then we show the Cafe Card
           */
-          if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed ){
+          if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed && cityPassed ){
             this.show = true;
           }else{
             this.show = false;

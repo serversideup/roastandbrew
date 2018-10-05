@@ -78,6 +78,7 @@
   import { CafeHasMatchaFilter } from '../../mixins/filters/CafeHasMatchaFilter.js';
   import { CafeHasTeaFilter } from '../../mixins/filters/CafeHasTeaFilter.js';
   import { CafeSubscriptionFilter } from '../../mixins/filters/CafeSubscriptionFilter.js';
+  import { CafeInCityFilter } from '../../mixins/filters/CafeInCityFilter.js';
 
   /*
     Imports the Event Bus to pass updates.
@@ -120,7 +121,8 @@
       CafeUserLikeFilter,
       CafeHasMatchaFilter,
       CafeHasTeaFilter,
-      CafeSubscriptionFilter
+      CafeSubscriptionFilter,
+      CafeInCityFilter
     ],
 
     /*
@@ -132,6 +134,20 @@
       */
       cafes(){
         return this.$store.getters.getCafes;
+      },
+
+      /*
+        Gets the city from the Vuex store.
+      */
+      city(){
+        return this.$store.getters.getCity;
+      },
+
+      /*
+        Gets the city filter from the Vuex store.
+      */
+      cityFilter(){
+        return this.$store.getters.getCityFilter;
       },
 
       /*
@@ -226,11 +242,19 @@
 
       /*
         Watches the cafes. When they are updated, clear the markers
-        and re build them.
+        and re build them. We also process existing filters.
       */
       cafes(){
         this.clearMarkers();
         this.buildMarkers();
+        this.processFilters();
+      },
+
+      /*
+        Watch the city filter
+      */
+      cityFilter(){
+        this.processFilters();
       },
 
       /*
@@ -318,6 +342,16 @@
         this.$map.setZoom( 17 );
         this.$map.panTo(latLng);
       }.bind(this));
+
+      /*
+        Listen to the location-selected event to zoom into the appropriate
+        cafe.
+      */
+      EventBus.$on('city-selected', function( city ){
+        var latLng = new google.maps.LatLng( city.lat, city.lng );
+        this.$map.setZoom( 11 );
+        this.$map.panTo(latLng);
+      }.bind(this));
     },
 
     /*
@@ -335,7 +369,8 @@
             && !this.onlyLiked
             && !this.hasMatcha
             && !this.hasTea
-            && !this.hasSubscription ){
+            && !this.hasSubscription
+            && this.cityFilter == '' ){
                 this.$markers[i].setMap( this.$map );
               }else{
                 /*
@@ -348,6 +383,7 @@
                 var matchaPassed = false;
                 var teaPassed = false;
                 var subscriptionPassed = false;
+                var cityPassed = false;
 
 
                 /*
@@ -412,9 +448,18 @@
                 }
 
                 /*
+                  Checks to see if the city passed or not.
+                */
+                if( this.cityFilter != '' && this.processCafeInCityFilter( this.$markers[i].cafe, this.cityFilter ) ){
+                  cityPassed = true;
+                }else{
+                  cityPassed = false;
+                }
+
+                /*
                   If everything passes, then we show the Cafe Marker
                 */
-                if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed ){
+                if( typePassed && textPassed && brewMethodsPassed && likedPassed && matchaPassed && teaPassed && subscriptionPassed && cityPassed ){
                   this.$markers[i].setMap( this.$map );
                 }else{
                   this.$markers[i].setMap( null );

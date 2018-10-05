@@ -52,6 +52,7 @@
   import { cafes } from '../modules/admin/cafes.js';
   import { users } from '../modules/admin/users.js';
   import { brewMethods } from '../modules/admin/brewMethods.js';
+  import { cities } from '../modules/admin/cities.js';
 
   export default {
     /*
@@ -120,6 +121,14 @@
       */
       if( !this.$store._modules.get(['admin', 'brewMethods'] ) && this.user.permission == 3 ){
         this.$store.registerModule( ['admin', 'brewMethods'], brewMethods );
+      }
+
+      /*
+        Checks to see if the user has permissions and if the
+        Vuex cities module is loaded.
+      */
+      if( !this.$store._modules.get(['admin', 'cities'] ) && this.user.permission == 3 ){
+        this.$store.registerModule( ['admin', 'cities'], cities );
       }
     },
 

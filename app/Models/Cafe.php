@@ -95,4 +95,11 @@ class Cafe extends Model
 	public function actions(){
 		return $this->hasMany( 'App\Models\Action', 'cafe_id', 'id' );
 	}
+
+	/**
+	 * A cafe belongs to a city
+	 */
+	public function city(){
+		return $this->belongsTo( 'App\Models\City', 'city_id', 'id' );
+	}
 }

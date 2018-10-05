@@ -53,7 +53,7 @@ export const cafes = {
       /*
         Calls the API to update an admin cafe.
       */
-      CafesAPI.putUpdateCafe( data.company_id, data.id, data.location_name, data.address, data.city, data.state, data.zip, data.tea, data.matcha, data.brew_methods, data.deleted )
+      CafesAPI.putUpdateCafe( data.company_id, data.id, data.city_id, data.location_name, data.address, data.city, data.state, data.zip, data.tea, data.matcha, data.brew_methods, data.deleted )
               .then( function( response ){
                 commit( 'setAdminCafe', response.data );
                 commit( 'setAdminCafeEditStatus', 2 );

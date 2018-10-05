@@ -86,6 +86,16 @@
 
         <div class="grid-x">
           <div class="large-8 medium-12 cell">
+            <label>Bound To City</label>
+            <select id="bound-to-city" v-model="boundToCity">
+              <option value=""></option>
+              <option v-for="city in cities" v-bind:value="city.id">{{ city.name }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-x">
+          <div class="large-8 medium-12 cell">
             <label>State</label>
             <select v-model="state">
               <option value=""></option>
@@ -231,6 +241,7 @@
         tea: '',
         matcha: '',
         brewMethodsSelected: [],
+        boundToCity: '',
         deleted: 0,
 
         validations: {
@@ -249,6 +260,7 @@
     created(){
       this.$store.dispatch( 'loadAdminCompany', { id: this.$route.params.id } );
       this.$store.dispatch( 'loadAdminCafe', { company_id: this.$route.params.id, cafe_id: this.$route.params.cafeID } );
+      this.$store.dispatch( 'loadAdminCities' );
     },
 
     /*
@@ -288,6 +300,20 @@
       */
       cafeEditStatus(){
         return this.$store.getters.getAdminCafeEditStatus;
+      },
+
+      /*
+        Gets the cities from the Vuex store.
+      */
+      cities(){
+        return this.$store.getters.getAdminCities;
+      },
+
+      /*
+        Gets the cities load status from the Vuex store.
+      */
+      citiesLoadStatus(){
+        return this.$store.getters.getAdminCitiesLoadStatus;
       }
     },
 
@@ -335,6 +361,7 @@
         this.zip = this.cafe.zip;
         this.tea = this.cafe.tea;
         this.matcha = this.cafe.matcha;
+        this.boundToCity = this.cafe.city_id;
 
         for( let i = 0; i < this.cafe.brew_methods.length; i++ ){
           this.brewMethodsSelected.push( this.cafe.brew_methods[i].id );
@@ -362,6 +389,7 @@
           this.$store.dispatch( 'updateAdminCafe', {
             id: this.cafe.id,
             company_id: this.company.id,
+            city_id: this.boundToCity,
             location_name: this.location_name,
             address: this.address,
             city: this.city,

@@ -93,6 +93,7 @@ class CafeService{
 
     $cafe->slug 						= SlugService::createSlug(Cafe::class, 'slug', $company->name.' '.$locationName.' '.$address.' '.$city.' '.$state);
     $cafe->location_name 		= $locationName != null ? $locationName : '';
+    $cafe->city_id          = GoogleMaps::findClosestCity( $lat, $lng );
     $cafe->address 					= $address;
     $cafe->city 						= $city;
     $cafe->state 						= $state;
@@ -265,6 +266,12 @@ class CafeService{
     */
     $cafe = Cafe::where( 'id', '=', $id )->first();
 
+    if( isset( $data['city_id'] ) ){
+      $cityID = $data['city_id'];
+    }else{
+      $cityID = $cafe->city_id;
+    }
+
     /*
       If the data has an address, update the address or
       using the existing address
@@ -370,6 +377,7 @@ class CafeService{
       Update all of the cafe data to the new data.
     */
     $cafe->company_id 			= $company->id;
+    $cafe->city_id          = $cityID;
     $cafe->slug             = $slug;
     $cafe->location_name 		= $locationName != null ? $locationName : '';
     $cafe->address 					= $address;

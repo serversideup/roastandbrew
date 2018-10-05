@@ -43,6 +43,11 @@
         Brew Methods
       </router-link>
     </div>
+    <div class="admin-link" v-if="user.permission == 3">
+      <router-link :to="{ name: 'admin-cities' }">
+        Cities
+      </router-link>
+    </div>
   </nav>
 </template>
 
