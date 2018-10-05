@@ -375,8 +375,8 @@
           */
           if( this.cityFilter != '' && this.processCafeInCityFilter( this.cafe, this.cityFilter ) ){
             cityPassed = true;
-          }else{
-            cityPassed = false;
+          }else if( this.cityFilter == '' ){
+            cityPassed = true;
           }
 
           /*
