@@ -168,7 +168,7 @@
           <span class="filters-header">City</span>
           <select v-model="cityFilter">
             <option value=""></option>
-            <option v-for="city in cities" v-bind:value="city.id">{{ city.name }}</option>
+            <option v-for="city in cities" v-bind:value="city.id">{{ city.name }}, {{ city.state }}</option>
           </select>
         </div>
       </div>

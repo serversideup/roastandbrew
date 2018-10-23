@@ -23,7 +23,7 @@ class CitiesController extends Controller
   | Description:    Get all cities
   */
   public function getCities(){
-    $cities = City::all();
+    $cities = City::orderBy('name', 'asc')->get();
 
     return response()->json( $cities );
   }
