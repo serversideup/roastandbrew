@@ -3,3 +3,8 @@
 /app/Photos
 Homestead.yaml
 .env
+
+#Ignoring private docker files
+docker-compose.base.yml
+docker-compose.ci.yml
+docker-compose.dev.yml
