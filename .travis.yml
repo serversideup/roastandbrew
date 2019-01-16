@@ -11,7 +11,7 @@ before_install:
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash scripts/deploy.sh
+  script: bash deploy/deploy.sh
   on:
     branch: master
 notifications:
